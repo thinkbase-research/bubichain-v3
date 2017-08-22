@@ -1,0 +1,65 @@
+{
+    "db": {
+        "account_path": "data/account.db",
+        "ledger_path": "data/ledger.db",
+        "keyvalue_path": "data/keyvalue.db",
+        "tmp_path": "tmp"
+      },
+    "monitor": {
+        "connect_address": "127.0.0.1:4053", 
+		"disk_path":"/,/mnt/"
+    },
+    "p2p":{
+        "network_id":1,
+        "address":"a0021ead9c8f4e30200aed9d3bfe89f7cf8e2300133d09",
+        "node_private_key":"8983f237c4d9c34f29da45d56fa5dc7ffc2eab8d69897bd31d0a5eaa93a7b2f90a3d243e3ee7d743f48deb20e39134b74b761e37fa325522ae54a318cf5e2ba1194a2ed329aeb551084f86ca01536240",
+        "ssl":{
+            "chain_file":"config/entity.crt",
+            "private_key_file":"config/entity_privkey.pem",
+            "private_password":"42001df2a1f54974baa38073eae2ee53",
+            "dhparam_file":"config/dh2048.pem",
+            "verify_file":"config/ca.crt"
+        },
+        "consensus_network":{
+	    "heartbeat_interval":60,
+            "listen_port":6333,
+            "target_peer_connection":50,
+            "known_peers":[
+                "127.0.0.1:6333"
+            ]
+        }
+    },
+    "webserver":{
+        "listen_addresses":"0.0.0.0:29333",
+        "remote_authorized":false
+    },
+    "wsserver":{
+        "listen_address":"0.0.0.0:7053"
+    },
+    "ledger":{
+        "genesis_account":"a0017bb37115637686a4efd6fabe8bfd74d695c3616515",
+        "hash_type":1,// 0 : SHA256 1: SM3
+        "max_trans_per_ledger":1000,
+        "max_ledger_per_message":5,
+        "max_trans_in_memory":2000,
+        "max_apply_ledger_per_round":3
+    },
+    "logger":{
+        "path":"log/bubi.log",
+        "dest":"FILE|STDOUT|STDERR",
+        "level":"TRACE|INFO|WARNING|ERROR|FATAL",
+        "time_capacity":1,
+        "size_capacity":10,
+        "expire_days":10
+    },
+    "validation":{
+        "type":"pbft",
+        "address":"a0024740b934765287b16113adc6bb285d72c124d9e3c1",
+        "node_private_key":"44b9aad4310804fd528d1e73da1d093abc09b5cbbaa85ff6e60e51d408a856565efd9c1f9f899c125c11d8c021b3935c935c3078cf739a765e0b2c6c9b9156feaaa4984fd2811f4eb07610029f55c44d",
+        "close_interval":3,
+        "validators":[
+            "a0024740b934765287b16113adc6bb285d72c124d9e3c1",
+            "a002c5199f9dd53b009ca8f54e1921b0ebee1cb60de2b9"
+        ]
+    }
+}
