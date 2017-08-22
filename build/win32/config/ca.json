@@ -1,0 +1,28 @@
+{
+	"root" : {
+		"file_name" : "ca",
+		"common_name" : "bubi",
+		"email" : "hr@bubi.cn",
+		"domain" : "www.bubi.cn",
+		"days" : 3650,
+		"private_password" : "42001df2a1f54974baa38073eae2ee53"
+	},
+	"entity" :
+	{
+		"root_private_file" : "ca.pem",
+		"root_ca_file" : "ca.crt",
+		"root_private_password" : "42001df2a1f54974baa38073eae2ee53",
+		"request_file" : "entity.csr",
+		"days" : 365,
+		"ca_enable" : true
+	},
+	"logger" :
+	{
+		"path" : "log/bubi.log",
+		"dest" : "FILE|STDOUT|STDERR",
+		"level" : "INFO|WARNING|ERROR|FATAL",
+		"time_capacity" : 1,
+		"size_capacity" : 10,
+		"expire_days" : 5
+	}
+}

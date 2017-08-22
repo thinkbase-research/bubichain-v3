@@ -1,0 +1,74 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides:          bubi
+# Required-Start:    $remote_fs $time
+# Required-Stop:     umountnfs $time
+# X-Stop-After:      sendsigs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: bubi server
+# Description:      block-chain based server 
+#                     
+#                  
+### END INIT INFO
+
+# Quick start-stop-daemon example, derived from Debian /etc/init.d/ssh
+set -e
+
+#!/bin/bash
+install_dir=/usr/local/bubichain
+script_dir=/usr/local/bubichain/scripts
+
+
+NAME=bubi
+PIDFILE=$script_dir/$NAME.pid
+#This is the command to be run, give the full pathname
+DAEMON=$install_dir/bin/bubi
+DAEMON_OPTS=""
+
+export PATH="${PATH:+$PATH:}/usr/sbin:/sbin"
+
+start(){
+        echo "Starting "$NAME "..."
+		ulimit -c unlimited
+		ulimit -n 65535
+		echo echo "${install_dir}/coredump/core.%p.%u.%g.%s.%t.%e"> /proc/sys/kernel/core_pattern 
+	    $script_dir/start-stop-daemon -S --oknodo --background  -m -p $PIDFILE --exec $DAEMON -- $DAEMON_OPTS
+        echo "."
+}
+
+stop(){
+        echo "Stopping "$NAME "..."
+	    $script_dir/start-stop-daemon --stop --oknodo -p $PIDFILE
+        echo "."
+}
+status(){
+	var=$(ps -ef|grep -w $DAEMON |grep -v grep | wc -l);	
+	if [ $var != 0 ];
+	then
+	echo "bubi is running";
+	else
+	echo "bubi is not running";
+	fi
+}
+
+case "$1" in
+  start)
+	start
+	;;
+  stop)
+	stop
+	;;
+  restart)
+		stop 
+		start
+	;;
+  status)
+	status
+	;;
+  *)
+	echo "Usage: "$1" {start|stop|restart|status}"
+	exit 1
+esac
+
+exit 0
