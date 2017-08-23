@@ -15,8 +15,10 @@ sudo apt-get install cmake
 sudo apt-get install libbz2-dev
 ```
 - 编译
+```bash
 cd bubichain-v3
 make
+```
 
 生成的可执行文件目录：bubichain-v3/bin
 
@@ -28,8 +30,10 @@ make
 Windows 部署与 Linux 下部署基本类似，本示例以 Linux 为准。
 
 ### Linux下的安装步骤
+```bash
 cd bubichain-v3
 make install
+```
 
 服务将安装在/usr/local/bubichain/目录下
 
