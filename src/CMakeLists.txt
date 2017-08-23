@@ -43,17 +43,9 @@ link_directories(
     ${LIBRARY_OUTPUT_PATH}
 )
 
-if(${CMAKE_SIZEOF_VOID_P} EQUAL 8)
-    set(LIB_MYSQL libmysqlclient_x64.a)
-else(${CMAKE_SIZEOF_VOID_P} EQUAL 8)
-    set(LIB_MYSQL libmysqlclient_x86.a)
-endif(${CMAKE_SIZEOF_VOID_P} EQUAL 8)
-
-message(STATUS "mysql version is: ${LIB_MYSQL}")
-
 set(BUBI_DEPENDS_LIBS
     libprotobuf.a librocksdb.a libpcreposix.a libpcrecpp.a libpcre.a libjson.a 
-    libssl.a libcrypto.a libz.a libbz2.a ${LIB_MYSQL}
+    libssl.a libcrypto.a libz.a libbz2.a
 )
 
 add_subdirectory(3rd/http)
