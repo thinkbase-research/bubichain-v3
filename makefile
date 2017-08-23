@@ -1,11 +1,14 @@
-default_target:release
-
-.PHONY:release debug
-release:
-	cd build/linux && cmake -DCMAKE_INSTALL_PREFIX=/usr/local ../../src && make
-
-debug:
-	cd build/linux && cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=/root/dyz ../../src && make
+.PHONY:all
+all:
+	cd build/linux; \
+	cmake \
+	    -DSVNVERSION=$(bubi_version) \
+	    -DCMAKE_BUILD_TYPE=Debug \
+	    -DCMAKE_C_FLAGS="-O2 -Wall" \
+	    -DCMAKE_CXX_FLAGS="-O2 -Wall" \
+	    -DCMAKE_VERBOSE_MAKEFILE=ON \
+	    ../../src; \
+	make
 
 .PHONY:clean_all clean clean_build clean_3rd
 clean_all:clean clean_build clean_3rd
