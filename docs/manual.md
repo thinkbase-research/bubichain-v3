@@ -15,14 +15,10 @@ sudo apt-get install cmake
 sudo apt-get install libbz2-dev
 ```
 - 编译
+cd bubichain-v3
+make
 
-```bash
-cd bubichain
-chmod + x ./autogen.sh
-./autogen.sh
-./configure
-```
-生成的可执行文件目录：src/main/bubi
+生成的可执行文件目录：bubichain-v3/bin
 
 ### Windows
 - 安装 Visual Studio Ulimate 2013
@@ -30,6 +26,12 @@ chmod + x ./autogen.sh
 
 ## __部署__
 Windows 部署与 Linux 下部署基本类似，本示例以 Linux 为准。
+
+### Linux下的安装步骤
+cd bubichain-v3
+make install
+
+服务将安装在/usr/local/bubichain/目录下
 
 ### __目录结构__
 
@@ -41,28 +43,6 @@ Windows 部署与 Linux 下部署基本类似，本示例以 Linux 为准。
 | script | 启停脚本目录
 | log | 运行日志存储目录
 
-
-### __节点部署__
-- 在 /usr/local 下创建 bubichain 文件夹
-- 在 bubichain 下根据目录结构创建相应文件夹
-- 把可执行文件添加到 bubichain/bin 目录下
-- 把源码目录下build/win32/config/bubi.json拷贝到 bubichain/config 目录下
-- 把运行脚本 deploy/bubi 和 deploy/bubid 添加到 bubichain/script 目录下
-- 注册 service 服务
-
-```bash
-sudo ln -s /usr/local/bubichain/scripts/bubi /etc/init.d/bubi 
-```
-
-- 设置开机启动
-
-```bash
-sudo ln -s -f /etc/init.d/bubi /etc/rc1.d/S99bubi								
-sudo ln -s -f /etc/init.d/bubi /etc/rc2.d/S99bubi								
-sudo ln -s -f /etc/init.d/bubi /etc/rc3.d/S99bubi								
-sudo ln -s -f /etc/init.d/bubi /etc/rc4.d/S99bubi								
-sudo ln -s -f /etc/init.d/bubi /etc/rc5.d/S99bubi	
- ```
 ### __运行__
 
 ```bash
