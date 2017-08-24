@@ -1,6 +1,6 @@
 #bubi daemon module CmakeLists.txt
 
-set(DEAMON_DEPENDS_LIB libssl.a libcrypto.a)
+set(DEAMON_DEPENDS_LIB ssl crypto)
 
 # -- bubi_bubid -- #
 set(BIN_BUBI_ID bubid)

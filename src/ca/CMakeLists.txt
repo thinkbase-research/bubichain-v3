@@ -1,7 +1,7 @@
 #bubi ca module CmakeLists.txt -- bubi_ca
 
 set(BIN_BUBI_CA bubi_ca)
-set(CA_DEPENDS_LIBS libbubi_common.a libbubi_utils.a ${BUBI_DEPENDS_LIBS})
+set(CA_DEPENDS_LIBS bubi_common bubi_utils ${BUBI_DEPENDS_LIBS})
 
 #automaticall get src file in specifical dir
 aux_source_directory(${BUBI_SRC_DIR}/ca/ CA_SRC)
