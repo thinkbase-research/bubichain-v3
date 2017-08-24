@@ -6,7 +6,7 @@ set(DEAMON_DEPENDS_LIB ssl crypto)
 set(BIN_BUBI_ID bubid)
 
 add_executable(${BIN_BUBI_ID} bubi/main.cpp)
-target_link_libraries(${BIN_BUBI_ID} ${DEAMON_DEPENDS_LIB} ${BUBI_LINKER_FLAGS})
+target_link_libraries(${BIN_BUBI_ID} -Wl,-dn ${DEAMON_DEPENDS_LIB} ${BUBI_LINKER_FLAGS})
 
 target_compile_options(${BIN_BUBI_ID}
     PUBLIC -std=c++11 
