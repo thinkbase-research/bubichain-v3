@@ -15,15 +15,8 @@ set(APP_BUBI_SRC
     ../monitor/system_manager.cpp
 )
 
-set(INNER_LIBS
-    libbubi_glue.a libbubi_ledger.a libbubi_consensus.a libbubi_overlay.a libbubi_common.a
-    libbubi_utils.a libbubi_proto.a libbubi_http.a libbubi_ed25519.a
-)
-
-set(V8_LIBS
-    libv8_base.a libv8_libbase.a libv8_external_snapshot.a libv8_libplatform.a
-    libv8_libsampler.a libicui18n.a libicuuc.a libinspector.a
-)
+set(INNER_LIBS bubi_glue bubi_ledger bubi_consensus bubi_overlay bubi_common bubi_utils bubi_proto bubi_http bubi_ed25519)
+set(V8_LIBS v8_base v8_libbase v8_external_snapshot v8_libplatform v8_libsampler icui18n icuuc inspector)
 
 #generate executable file
 add_executable(${APP_BUBI} ${APP_BUBI_SRC})

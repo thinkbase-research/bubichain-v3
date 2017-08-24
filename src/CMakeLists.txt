@@ -11,7 +11,7 @@ set(LIBRARY_OUTPUT_PATH ${BUBI_ROOT_DIR}/lib)
 set(EXECUTABLE_OUTPUT_PATH ${BUBI_ROOT_DIR}/bin)
 set(BUBI_LINKER_FLAGS "-static-libstdc++ -static-libgcc -lpthread -lrt -ldl")
 
-execute_process(COMMAND make all -f CMakeFile WORKING_DIRECTORY ${BUBI_SRC_DIR}/3rd)
+execute_process(COMMAND make all -j8 WORKING_DIRECTORY ${BUBI_SRC_DIR}/3rd)
 
 include_directories(
     ${BUBI_SRC_DIR}
@@ -43,10 +43,7 @@ link_directories(
     ${LIBRARY_OUTPUT_PATH}
 )
 
-set(BUBI_DEPENDS_LIBS
-    libprotobuf.a librocksdb.a libpcreposix.a libpcrecpp.a libpcre.a libjson.a 
-    libssl.a libcrypto.a libz.a libbz2.a
-)
+set(BUBI_DEPENDS_LIBS protobuf rocksdb pcreposix pcrecpp pcre json ssl crypto z bz2)
 
 add_subdirectory(3rd/http)
 add_subdirectory(3rd/ed25519-donna)

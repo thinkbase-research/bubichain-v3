@@ -7,7 +7,7 @@ set(MONITOR_SRC
 )
 
 set(MONITOR_DEPENDS_LIB
-    libbubi_common.a libbubi_utils.a libbubi_proto.a libcurl.a ${BUBI_DEPENDS_LIBS}
+    bubi_common bubi_utils bubi_proto curl ${BUBI_DEPENDS_LIBS}
 )
 
 #generate executable file

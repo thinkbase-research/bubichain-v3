@@ -27,20 +27,16 @@ CURL_PATH = curl
 GTEST = gtest/gtest.a
 GTEST_PATH = gtest
 
-ED25519_DONNA = ed25519-donna/libbubi_ed25519.a
-ED25519_DONNA_PATH = ed25519-donna
-
-LIBHTTP = http/libbubi_http.a
-LIBHTTP_PATH = http
-
 PCRE = pcre-8.39/.libs/libpcre.a
 PCRE_PATH = pcre-8.39
+
+CUR_DIR = $(shell pwd)
 
 #default libraries target list
 $(MONGOC): \
     $(LIBBSON)
 
-all: \
+all:add_permission\
     $(ROCKSDB) \
     $(PROTOBUF) \
     $(LIBSSL) \
@@ -48,11 +44,18 @@ all: \
     $(LIBBZ2) \
     $(LIBZ) \
     $(JSONCPP) \
-    $(ED25519_DONNA) \
-    $(LIBHTTP) \
     $(PCRE) \
 	$(CURL) \
 	$(GTEST)
+
+.PHONY:add_permission
+add_permission:
+	chmod +x ./protobuf/autogen.sh; \
+	chmod +x ./jsoncpp/automake.sh; \
+	chmod +x ./rocksdb/build_tools/*; \
+	chmod +x ./jdk/bin/*; \
+	chmod +x ./jdk/jre/bin/*; \
+	chmod +x ./sqlite/configure
 
 #sub target 
 $(ROCKSDB):
@@ -70,11 +73,7 @@ $(LIBZ) :
 $(JSONCPP) :
 	@echo "*************building jsoncpp now***************" && cd $(JSONCPP_PATH) && ./automake.sh
 $(CURL):
-	@echo "**************building curl now***************" && cd $(CURL_PATH) && chmod +x configure && ./configure --disable-ldap --disable-ldaps --without-librtmp && $(MAKE)
-$(ED25519_DONNA):
-	@echo "**************building ed25519 now***************" && cd $(ED25519_DONNA_PATH) && $(MAKE)
-$(LIBHTTP):
-	@echo "**************building http now***************" && cd $(LIBHTTP_PATH) && $(MAKE)
+	-@echo "**************building curl now***************" && cd $(CURL_PATH) && chmod +x configure && ./configure --disable-ldap --disable-ldaps --without-librtmp --with-ssl = $(CUR_DIR)/openssl && $(MAKE)
 $(PCRE):
 	@echo "***************building pcre now****************" && cd $(PCRE_PATH) && autoreconf -f -i && chmod +x configure && ./configure && $(MAKE)
 $(GTEST):
@@ -92,8 +91,6 @@ clean_3rd: \
     LIBZ_clean \
     JSONCPP_clean \
 	CURL_clean \
-	ED25519_DONNA_clean \
-	LIBHTTP_clean \
 	PCRE_clean \
 	GTEST_clean 
     
@@ -114,10 +111,6 @@ LIBZ_clean:
 	@echo "******************Cleaning rocksdb now*************" && cd $(LIBZ_PATH) && make clean
 CURL_clean:
 	@echo "******************Cleaning curl now*************" && cd $(CURL_PATH) && make clean
-ED25519_DONNA_clean:
-	@echo "******************Cleaning ed25519 now*************" && cd $(ED25519_DONNA_PATH) && make clean
-LIBHTTP_clean:
-	@echo "******************Cleaning http now*************" && cd $(LIBHTTP_PATH) && make clean
 PCRE_clean:
 	@echo "******************Cleaning pcre now*************" && cd $(PCRE_PATH) && make clean
 GTEST_clean:

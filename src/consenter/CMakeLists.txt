@@ -14,9 +14,9 @@ set(CONSENTER_BUBI_SRC
     ../monitor/system_manager.cpp
 )
 set(CONSENTER_DEPENDS_LIBS
-    libbubi_glue.a libbubi_ledger.a libbubi_consensus.a libbubi_overlay.a
-    libbubi_common.a libbubi_utils.a libbubi_proto.a libbubi_http.a
-    libbubi_ed25519.a liblibzmq.a ${BUBI_DEPENDS_LIBS}
+    bubi_glue bubi_ledger bubi_consensus bubi_overlay
+    bubi_common bubi_utils bubi_proto bubi_http
+    bubi_ed25519 zmq ${BUBI_DEPENDS_LIBS}
 )
 
 #generate executable file
