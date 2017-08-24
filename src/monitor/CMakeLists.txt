@@ -14,7 +14,7 @@ set(MONITOR_DEPENDS_LIB
 add_executable(${BIN_BUBI_MONITOR} ${MONITOR_SRC})
 
 #specify dependent libraries for target obj
-target_link_libraries(${BIN_BUBI_MONITOR} ${MONITOR_DEPENDS_LIB} ${BUBI_LINKER_FLAGS})
+target_link_libraries(${BIN_BUBI_MONITOR} -Wl,-dn ${MONITOR_DEPENDS_LIB} ${BUBI_LINKER_FLAGS})
 
 #specify compile options for target obj
 target_compile_options(${BIN_BUBI_MONITOR}

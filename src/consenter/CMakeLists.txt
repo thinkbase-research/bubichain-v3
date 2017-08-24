@@ -23,7 +23,7 @@ set(CONSENTER_DEPENDS_LIBS
 add_executable(${CONSENTER_BUBI} ${CA_SRC})
 
 #specify dependent libraries for target obj
-target_link_libraries(${CONSENTER_BUBI} ${CONSENTER_DEPENDS_LIBS} ${BUBI_LINKER_FLAGS})
+target_link_libraries(${CONSENTER_BUBI} -Wl,-dn ${CONSENTER_DEPENDS_LIBS} ${BUBI_LINKER_FLAGS})
 
 #specify compile options for target obj
 target_compile_options(${CONSENTER_BUBI}

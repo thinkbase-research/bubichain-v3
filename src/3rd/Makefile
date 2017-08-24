@@ -73,7 +73,7 @@ $(LIBZ) :
 $(JSONCPP) :
 	@echo "*************building jsoncpp now***************" && cd $(JSONCPP_PATH) && ./automake.sh
 $(CURL):
-	-@echo "**************building curl now***************" && cd $(CURL_PATH) && chmod +x configure && ./configure --disable-ldap --disable-ldaps --without-librtmp --with-ssl = $(CUR_DIR)/openssl && $(MAKE)
+	-@echo "**************building curl now***************" && cd $(CURL_PATH) && chmod +x configure && ./configure --disable-ldap --disable-ldaps --without-librtmp --with-ssl=$(CUR_DIR)/openssl && $(MAKE)
 $(PCRE):
 	@echo "***************building pcre now****************" && cd $(PCRE_PATH) && autoreconf -f -i && chmod +x configure && ./configure && $(MAKE)
 $(GTEST):

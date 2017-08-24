@@ -10,7 +10,7 @@ aux_source_directory(${BUBI_SRC_DIR}/ca/ CA_SRC)
 add_executable(${BIN_BUBI_CA} ${CA_SRC})
 
 #specify dependent libraries for target obj
-target_link_libraries(${BIN_BUBI_CA} ${CA_DEPENDS_LIBS} ${BUBI_LINKER_FLAGS})
+target_link_libraries(${BIN_BUBI_CA} -Wl,-dn ${CA_DEPENDS_LIBS} ${BUBI_LINKER_FLAGS})
 
 #specify compile options for target obj
 target_compile_options(${BIN_BUBI_CA}
