@@ -49,7 +49,8 @@ namespace bubi {
 		//validations
 		protocol::ValidatorSet validations;
 
-		//public key
+		//hardfork point
+		std::set<std::string> hardfork_points_;
 
 		//for ledger upgrade
 		LedgerUpgrade ledger_upgrade_;

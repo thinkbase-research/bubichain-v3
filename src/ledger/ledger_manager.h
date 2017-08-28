@@ -66,6 +66,8 @@ namespace bubi {
 		virtual void OnSlowTimer(int64_t current_time) override;
 		virtual void GetModuleStatus(Json::Value &data);
 
+		static void CreateHardforkLedger();
+
 	public:
 		utils::Mutex gmutex_;
 
@@ -84,8 +86,8 @@ namespace bubi {
 
 		bool CreateGenesisAccount();
 
-		void ValidatorsSet(std::shared_ptr<WRITE_BATCH> batch,const protocol::ValidatorSet& validators);
-		bool ValidatorsGet(const std::string& hash, protocol::ValidatorSet& vlidators_set);
+		static void ValidatorsSet(std::shared_ptr<WRITE_BATCH> batch, const protocol::ValidatorSet& validators);
+		static bool ValidatorsGet(const std::string& hash, protocol::ValidatorSet& vlidators_set);
 		
 		LedgerFrm::pointer last_closed_ledger_;
 		protocol::ValidatorSet validators_;

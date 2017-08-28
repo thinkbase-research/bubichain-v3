@@ -63,6 +63,7 @@ namespace bubi {
 	const char *General::VALIDATORS = "validators";
 	const char *General::PEERS_TABLE = "peers";
 	const char *General::LAST_TX_HASHS = "last_tx_hashs";
+	const char *General::LAST_PROOF = "last_proof";
 
 	const char *General::CONSENSUS_PREFIX = "consensus";
 

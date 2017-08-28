@@ -120,7 +120,10 @@ int main(int argc, char *argv[]){
 		}
 
 		bubi::Storage &storage = bubi::Storage::Instance();
-		LOG_INFO("%s,%s", config.db_configure_.keyvalue_db_path_.c_str(), config.db_configure_.rational_db_type_.c_str());
+		LOG_INFO("keyvalue(%s),account(%s),ledger(%s)", 
+			config.db_configure_.keyvalue_db_path_.c_str(),
+			config.db_configure_.account_db_path_.c_str(),
+			config.db_configure_.ledger_db_path_.c_str());
 
 		if (!bubi::g_enable_ || !storage.Initialize(config.db_configure_, arg.drop_db_)) {
 			LOG_ERROR("Initialize db failed");
@@ -128,6 +131,11 @@ int main(int argc, char *argv[]){
 		}
 		bubiAtExit.Push(std::bind(&bubi::Storage::Exit, &storage));
 		LOG_INFO("Initialize db successful");
+
+		if (arg.drop_db_) {
+			LOG_INFO("Drop db successfully");
+			return 1;
+		} 
 		
 		if ( arg.clear_consensus_status_ ){
 			bubi::Pbft::ClearStatus();
@@ -135,7 +143,8 @@ int main(int argc, char *argv[]){
 			return 1;
 		}
 
-		if (arg.CompleteDbTask(bubi::Storage::Instance().keyvalue_db())){
+		if (arg.create_hardfork_) {
+			bubi::LedgerManager::CreateHardforkLedger();
 			return 1;
 		}
 

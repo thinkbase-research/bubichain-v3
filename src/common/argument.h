@@ -29,10 +29,10 @@ namespace bubi {
 		bool peer_addr_;
 		bool del_peer_addr_;
 		bool clear_consensus_status_;
+		bool create_hardfork_;
 
 		bool Parse(int argc, char *argv[]);
 		void Usage();
-		bool CompleteDbTask( KeyValueDb *key_db);
 		void ShowHardwareAddress();
 		void ShowNodeId(int argc, char *argv[]);
 		void RequestCert(int argc, char *argv[]);

@@ -89,6 +89,14 @@ namespace bubi {
 			return false;
 		}
 
+		//load proof
+		Storage::Instance().ledger_db()->Get(General::LAST_PROOF, proof_);
+
+		//update consensus configure
+		Global::Instance().GetIoService().post([this]() {
+			GlueManager::Instance().UpdateValidators(validators_, proof_);
+		});
+
 		std::string account_tree_hash = lclheader.account_tree_hash();
 		if (account_tree_hash != tree_->GetRootHash()) {
 			LOG_ERROR("ledger account_tree_hash(%s)!=account_root_hash(%s)",
@@ -184,13 +192,11 @@ namespace bubi {
 		return lcl_header_;
 	}
 
-	void LedgerManager::ValidatorsSet(std::shared_ptr<WRITE_BATCH> batch, const protocol::ValidatorSet& validators){
+	void LedgerManager::ValidatorsSet(std::shared_ptr<WRITE_BATCH> batch, const protocol::ValidatorSet& validators) {
 		//should be recode ?
 		std::string hash = HashWrapper::Crypto(validators.SerializeAsString());
 		batch->Put(utils::String::Format("validators-%s", utils::String::BinToHexString(hash).c_str()), validators.SerializeAsString());
-
 	}
-
 
 	bool LedgerManager::ValidatorsGet(const std::string& hash, protocol::ValidatorSet& vlidators_set){
 		std::string key = utils::String::Format("validators-%s", utils::String::BinToHexString(hash).c_str());
@@ -199,7 +205,7 @@ namespace bubi {
 		if (!db->Get(key, str)){
 			return false;
 		}
-		return validators_.ParseFromString(str);
+		return vlidators_set.ParseFromString(str);
 	}
 
 	bool LedgerManager::CreateGenesisAccount() {
@@ -250,12 +256,6 @@ namespace bubi {
 		batch->Put(bubi::General::KEY_GENE_ACCOUNT, Configure::Instance().ledger_configure_.genesis_account_);
 		ValidatorsSet(batch, validators_);
 		
-		protocol::ValidatorSet validators;
-		validators.CopyFrom(validators_);
-		Global::Instance().GetIoService().post([validators]() {
-			GlueManager::Instance().UpdateValidators(validators, "");
-		}); 
-
 		WRITE_BATCH batch_ledger;
 		if (!last_closed_ledger_->AddToDb(batch_ledger)) {
 			BUBI_EXIT("AddToDb failed");
@@ -267,6 +267,145 @@ namespace bubi {
 
 		return true;
 	}
+
+	//warn
+	void LedgerManager::CreateHardforkLedger() {
+		LOG_INFO("Are you sure to create hardfork ledger? Press y to continue.");
+		char ch;
+		std::cin >> ch;
+		if (ch != 'y') {
+			LOG_INFO("Do nothing.");
+			return;
+		}
+
+		//get last ledger
+		do {
+			HashWrapper::SetLedgerHashType(Configure::Instance().ledger_configure_.hash_type_);
+			KeyValueDb *account_db = Storage::Instance().account_db();
+
+			//load max seq
+			std::string str_max_seq;
+			account_db->Get(General::KEY_LEDGER_SEQ, str_max_seq);
+			int64_t seq_kvdb = utils::String::Stoi64(str_max_seq);
+			LOG_INFO("Max closed ledger seq=" FMT_I64, seq_kvdb);
+
+			//load ledger from db
+			protocol::LedgerHeader last_closed_ledger_hdr;
+			bubi::KeyValueDb *ledger_db = bubi::Storage::Instance().ledger_db();
+			std::string ledger_header;
+			if (ledger_db->Get(ComposePrefix(General::LEDGER_PREFIX, seq_kvdb), ledger_header) <= 0) {
+				LOG_ERROR("Load ledger from db failed, error(%s)", ledger_db->error_desc().c_str());
+				break;
+			}
+			if (!last_closed_ledger_hdr.ParseFromString(ledger_header)) {
+				LOG_ERROR("Parse last closed ledger failed");
+				break;
+			}
+
+			//load validators
+			protocol::ValidatorSet validator_set;
+			ValidatorsGet(last_closed_ledger_hdr.validators_hash(), validator_set);
+
+			//load proof
+			std::string str_proof;
+			account_db->Get(General::LAST_PROOF, str_proof);
+
+			//this validator 
+			PrivateKey private_key(Configure::Instance().validation_configure_.node_privatekey_);
+			std::string this_node_address = private_key.GetBase16Address();
+
+			//compose the new ledger
+			protocol::Ledger ledger;
+			protocol::LedgerHeader *header = ledger.mutable_header();
+			protocol::ConsensusValue request;
+			protocol::LedgerUpgrade *ledger_upgrade = request.mutable_ledger_upgrade();
+			//for validators
+			for (int32_t i = 0; i < validator_set.validators_size(); i++) {
+				ledger_upgrade->add_del_validators(validator_set.validators(i));
+			}
+			ledger_upgrade->add_add_validators(this_node_address);
+			protocol::ValidatorSet new_validator_set;
+			new_validator_set.add_validators(this_node_address);
+
+			request.set_previous_ledger_hash(last_closed_ledger_hdr.hash());
+			request.set_close_time(last_closed_ledger_hdr.close_time() + utils::MICRO_UNITS_PER_SEC);
+			request.set_ledger_seq(last_closed_ledger_hdr.seq() + 1);
+			request.set_previous_proof(str_proof);
+			std::string consensus_value_hash = HashWrapper::Crypto(request.SerializeAsString());
+		
+			header->set_previous_hash(last_closed_ledger_hdr.hash());
+			header->set_seq(request.ledger_seq());
+			header->set_close_time(request.close_time());
+			header->set_consensus_value_hash(consensus_value_hash);
+			header->set_version(last_closed_ledger_hdr.version());
+			header->set_tx_count(last_closed_ledger_hdr.tx_count());
+			header->set_account_tree_hash(last_closed_ledger_hdr.account_tree_hash());
+
+			std::string validators_hash = HashWrapper::Crypto(new_validator_set.SerializeAsString());
+			header->set_validators_hash(validators_hash);
+
+			header->set_hash("");
+			header->set_hash(HashWrapper::Crypto(ledger.SerializeAsString()));
+
+			std::shared_ptr<WRITE_BATCH> batch = std::make_shared<WRITE_BATCH>();
+			batch->Put(bubi::General::KEY_LEDGER_SEQ, utils::String::ToString(header->seq()));
+
+			//for new proof, new pbft commit self
+			do {
+				protocol::PbftProof old_proof;
+				if (!old_proof.ParseFromString(str_proof) ) {
+					LOG_ERROR("Parse old proof failed");
+					return;
+				}
+				if (old_proof.commits_size() == 0) {
+					LOG_ERROR("Old proof commit is empty");
+					return;
+				} 
+				const protocol::PbftEnv &old_env = old_proof.commits(0);
+				const protocol::Pbft &old_pbft = old_env.pbft();
+				const protocol::PbftCommit &old_pbft_commit = old_pbft.commit();
+
+				protocol::PbftProof new_proof;
+				protocol::PbftEnv *env = new_proof.add_commits();
+				protocol::Pbft *pbft = env->mutable_pbft();
+				pbft->set_round_number(1);
+				pbft->set_type(protocol::PBFT_TYPE_COMMIT);
+				protocol::PbftCommit *preprepare = pbft->mutable_commit();
+				preprepare->set_view_number(old_pbft_commit.view_number());
+				preprepare->set_replica_id(0);
+				preprepare->set_sequence(old_pbft_commit.sequence() + 1);
+				preprepare->set_value_digest(consensus_value_hash);
+
+				protocol::Signature *sig = env->mutable_signature();
+				sig->set_public_key(private_key.GetBase16PublicKey());
+				sig->set_sign_data(private_key.Sign(pbft->SerializeAsString()));
+
+				batch->Put(bubi::General::LAST_PROOF, new_proof.SerializeAsString());
+			} while (false);
+
+			ValidatorsSet(batch, new_validator_set);
+
+			//write ledger db
+			WRITE_BATCH batch_ledger;
+			batch_ledger.Put(bubi::General::KEY_LEDGER_SEQ, utils::String::ToString(header->seq()));
+			batch_ledger.Put(ComposePrefix(General::LEDGER_PREFIX, header->seq()), header->SerializeAsString());
+			batch_ledger.Put(ComposePrefix(General::CONSENSUS_VALUE_PREFIX, header->seq()), request.SerializeAsString());
+			if (!ledger_db->WriteBatch(batch_ledger)) {
+				BUBI_EXIT("Write ledger and transaction failed(%s)", ledger_db->error_desc().c_str());
+			}
+
+			//write acount db
+			if (!Storage::Instance().account_db()->WriteBatch(*batch)) {
+				BUBI_EXIT("Write account batch failed, %s", Storage::Instance().account_db()->error_desc().c_str());
+			}
+
+			LOG_INFO("Create hard fork ledger successful, seq(" FMT_I64 "), consensus value hash(%s)", 
+				header->seq(),
+				utils::String::BinToHexString(header->consensus_value_hash()).c_str());
+
+		} while (false);
+	}
+
 
 	bool LedgerManager::ConsensusValueFromDB(int64_t seq, protocol::ConsensusValue& consensus_value){
 		KeyValueDb *ledger_db = Storage::Instance().ledger_db();
@@ -335,7 +474,6 @@ namespace bubi {
 
 			return false;
 		}
-		proof_ = proof;
 
 		closing_ledger_ = std::make_shared<LedgerFrm>();
 
@@ -392,20 +530,23 @@ namespace bubi {
 		LOG_INFO("%s", Proto2Json(closing_ledger_->GetProtoHeader()).toStyledString().c_str());
 
 		int64_t ledger_seq = closing_ledger_->GetProtoHeader().seq();
-		std::shared_ptr<WRITE_BATCH> batch = tree_->batch_;
-		batch->Put(bubi::General::KEY_LEDGER_SEQ, utils::String::Format(FMT_I64, ledger_seq));
-		ValidatorsSet(batch, new_set);
+		std::shared_ptr<WRITE_BATCH> account_db_batch = tree_->batch_;
+		account_db_batch->Put(bubi::General::KEY_LEDGER_SEQ, utils::String::Format(FMT_I64, ledger_seq));
+		ValidatorsSet(account_db_batch, new_set);
 		validators_ = new_set;
 
-		//consensus value
-		WRITE_BATCH ledger_db;
-		ledger_db.Put(ComposePrefix(General::CONSENSUS_VALUE_PREFIX, consensus_value.ledger_seq()), consensus_value.SerializeAsString());
+		account_db_batch->Put(bubi::General::LAST_PROOF, proof);
+		proof_ = proof;
 
-		if (!closing_ledger_->AddToDb(ledger_db)) {
+		//consensus value
+		WRITE_BATCH ledger_db_batch;
+		ledger_db_batch.Put(ComposePrefix(General::CONSENSUS_VALUE_PREFIX, consensus_value.ledger_seq()), consensus_value.SerializeAsString());
+
+		if (!closing_ledger_->AddToDb(ledger_db_batch)) {
 			BUBI_EXIT("AddToDb failed");
 		}
 
-		if (!Storage::Instance().account_db()->WriteBatch(*batch)) {
+		if (!Storage::Instance().account_db()->WriteBatch(*account_db_batch)) {
 			BUBI_EXIT("Write batch failed: %s", Storage::Instance().account_db()->error_desc().c_str());
 		}
 

@@ -49,6 +49,14 @@ namespace bubi {
 			ledger_upgrade_.ConfNewVersion(General::LEDGER_VERSION);
 		}
 
+		//init hardfork points
+		const utils::StringList &conf_hardfork_points = Configure::Instance().ledger_configure_.hardfork_points_;
+		for (utils::StringList::const_iterator iter = conf_hardfork_points.begin();
+			iter != conf_hardfork_points.end();
+			iter++) {
+			hardfork_points_.insert(utils::String::HexStringToBin(*iter));
+		}
+
 		StatusModule::RegisterModule(this);
 		TimerNotify::RegisterModule(this);
 		StartLedgerCloseTimer();
@@ -121,7 +129,7 @@ namespace bubi {
 
 		//get previous block proof
 		std::string proof;
-		Storage::Instance().keyvalue_db()->Get("last_proof", proof);
+		Storage::Instance().account_db()->Get(General::LAST_PROOF, proof);
 
 		protocol::ConsensusValue propose_value;
 		*propose_value.mutable_txset() = txset.GetRaw();
@@ -289,9 +297,6 @@ namespace bubi {
 
 		TransactionSetFrm txset_frm(request.txset());
 
-		//temp save the proof 
-		Storage::Instance().keyvalue_db()->Put("last_proof", proof);
-
 		//temp upgrade the validator, need done by ledger manager
 
 		//write to db
@@ -304,7 +309,7 @@ namespace bubi {
 
 		int64_t time_use = utils::Timestamp::HighResolution() - time_start;
 
-		//delete the cache
+		//delete the cache 
 		size_t ret1 = RemoveTxset(txset_frm);
 
 		//delete the upgrade ledger
@@ -350,9 +355,13 @@ namespace bubi {
 				proto_value.ledger_seq() - 1);
 			return false;
 		}
-
+		
+		//if it exist in hardfork point, we ignore the proof
+		std::string consensus_value_hash = HashWrapper::Crypto(consensus_value);
+		std::set<std::string>::const_iterator iter = hardfork_points_.find(consensus_value_hash);
 		return CheckValueHelper(proto_value) == Consensus::CHECK_VALUE_VALID &&
-			consensus_->CheckProof(set, HashWrapper::Crypto(consensus_value), proof);
+			(consensus_->CheckProof(set, HashWrapper::Crypto(consensus_value), proof)
+			|| iter != hardfork_points_.end());
 	}
 
 	int32_t GlueManager::CheckValue(const std::string &value) {
@@ -424,29 +433,8 @@ namespace bubi {
 				}
 			}
 
-			//check the add validator exist
-			std::set<std::string> duplicate_set;
 			std::set<std::string> current_validator;
 			for (int32_t i = 0; i < set.validators_size(); i++) current_validator.insert(set.validators(i));
-			for (int32_t i = 0; i < upgrade.add_validators_size(); i++) {
-				std::string item = upgrade.add_validators(i);
-				if (!PublicKey::IsAddressValid(item)) {
-					LOG_ERROR("Check command failed, the address(%s) not valid", item.c_str());
-					return Consensus::CHECK_VALUE_MAYVALID;
-				}
-
-				if (current_validator.find(item) != current_validator.end()) {
-					LOG_ERROR("Check value failed, the address(%s) exist in current validators", item.c_str());
-					return Consensus::CHECK_VALUE_MAYVALID;
-				}
-
-				if (duplicate_set.find(item) != duplicate_set.end()) {
-					LOG_ERROR("Check value failed, the address(%s) duplicated in upgrade object", item.c_str());
-					return Consensus::CHECK_VALUE_MAYVALID;
-				}
-				duplicate_set.insert(item);
-			}
-
 			//check the del validator set
 			for (int32_t i = 0; i < upgrade.del_validators_size(); i++) {
 				std::string item = upgrade.del_validators(i);
@@ -459,12 +447,22 @@ namespace bubi {
 					LOG_ERROR("Check value failed, the del address (%s) not exist in current validators", item.c_str());
 					return Consensus::CHECK_VALUE_MAYVALID;
 				}
+				current_validator.erase(item);
+			}
 
-				if (duplicate_set.find(item) != duplicate_set.end()) {
-					LOG_ERROR("Check value failed, the del address(%s) duplicated in upgrade object", item.c_str());
+			//check the add validator exist
+			for (int32_t i = 0; i < upgrade.add_validators_size(); i++) {
+				std::string item = upgrade.add_validators(i);
+				if (!PublicKey::IsAddressValid(item)) {
+					LOG_ERROR("Check command failed, the address(%s) not valid", item.c_str());
 					return Consensus::CHECK_VALUE_MAYVALID;
 				}
-				duplicate_set.insert(item);
+
+				if (current_validator.find(item) != current_validator.end()) {
+					LOG_ERROR("Check value failed, the address(%s) exist in current validators", item.c_str());
+					return Consensus::CHECK_VALUE_MAYVALID;
+				}
+				current_validator.insert(item);
 			}
 		}
 
@@ -493,9 +491,11 @@ namespace bubi {
 				return Consensus::CHECK_VALUE_MAYVALID;
 			}
 
-			if (!consensus_->CheckProof(set, lcl.consensus_value_hash(), consensus_value.previous_proof())) {
-				LOG_ERROR("Check value failed, proof not valid");
-				return Consensus::CHECK_VALUE_MAYVALID;
+			//check if the consensus value hash is forked
+			std::set<std::string>::const_iterator iter = hardfork_points_.find(lcl.consensus_value_hash());
+			if (iter == hardfork_points_.end() && !consensus_->CheckProof(set, lcl.consensus_value_hash(), consensus_value.previous_proof())) {
+					LOG_ERROR("Check value failed, proof not valid");
+					return Consensus::CHECK_VALUE_MAYVALID;
 			}
 		}
 
