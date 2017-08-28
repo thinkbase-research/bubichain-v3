@@ -65,6 +65,7 @@ namespace bubi {
 		const static char *CONSENSUS_VALUE_PREFIX;
 		const static char *PEERS_TABLE;
 		const static char *LAST_TX_HASHS;
+		const static char *LAST_PROOF;
 
 		const static int ACCOUNT_LENGTH_MAX = 40;
 

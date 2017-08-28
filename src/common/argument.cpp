@@ -19,9 +19,13 @@ limitations under the License.
 namespace bubi {
 	bool g_enable_ = true;
 	Argument::Argument() :
-		help_modle_(false), drop_db_(false),
-		update_(false), peer_addr_(false),
-		del_peer_addr_(false), clear_consensus_status_(false) {}
+		help_modle_(false),
+		drop_db_(false),
+		update_(false), 
+		peer_addr_(false),
+		del_peer_addr_(false), 
+		clear_consensus_status_(false),
+		create_hardfork_(false){}
 	Argument::~Argument() {}
 
 	bool Argument::Parse(int argc, char *argv[]) {
@@ -67,6 +71,9 @@ namespace bubi {
 			}
 			else if (s == "--clear-consensus-status") {
 				clear_consensus_status_ = true;
+			}
+			else if (s == "--create-hardfork") {
+				create_hardfork_ = true;
 			}
 			else if (s == "--version") {
 				printf("%s\n", General::BUBI_VERSION);
@@ -170,16 +177,9 @@ namespace bubi {
 			"  --sm3-hex                       generate sm3 hash from hex format \n"
 			"  --aes-crypto                    crypto \n"
 			"  --version                       display version information\n"
+			"  --create-hardfork               create hard fork ledger\n"
 			"  --help                          display this help\n"
 			);
-	}
-
-	bool Argument::CompleteDbTask( KeyValueDb *key_db) {
-		if (drop_db_) {
-			return true;
-		}
-
-		return false;
 	}
 
 	void Argument::ShowNodeId(int argc, char *argv[]) {
