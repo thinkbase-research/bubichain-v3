@@ -4,7 +4,6 @@ all:
 	cmake \
 	    -DSVNVERSION=$(bubi_version) \
 	    -DCMAKE_BUILD_TYPE=Debug \
-	    -DCMAKE_CXX_FLAGS="-O2" \
 	    -DCMAKE_VERBOSE_MAKEFILE=ON \
 	    ../../src; \
 	make

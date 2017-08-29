@@ -15154,44 +15154,67 @@ public final class Chain {
 
   }
 
-  public interface TransactionTriggerOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:protocol.TransactionTrigger)
+  public interface TriggerOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:protocol.Trigger)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;</code>
+     * <code>optional .protocol.Trigger.TransactionType transaction_type = 1;</code>
      */
     int getTransactionTypeValue();
     /**
-     * <code>optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;</code>
+     * <code>optional .protocol.Trigger.TransactionType transaction_type = 1;</code>
      */
-    cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.TransactionType getTransactionType();
+    cn.bubi.blockchain.adapter3.Chain.Trigger.TransactionType getTransactionType();
 
     /**
+     * <pre>
+     *如果是特定区块触发的（暂时未提供）
+     * </pre>
+     *
      * <code>optional int64 ledger_seq = 2;</code>
      */
     long getLedgerSeq();
 
     /**
-     * <code>optional bytes transaction_hash = 3;</code>
+     * <pre>
+     *如果是交易触发的
+     * </pre>
+     *
+     * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
      */
-    com.google.protobuf.ByteString getTransactionHash();
+    boolean hasTransaction();
+    /**
+     * <pre>
+     *如果是交易触发的
+     * </pre>
+     *
+     * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
+     */
+    cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger getTransaction();
+    /**
+     * <pre>
+     *如果是交易触发的
+     * </pre>
+     *
+     * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
+     */
+    cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTriggerOrBuilder getTransactionOrBuilder();
   }
   /**
-   * Protobuf type {@code protocol.TransactionTrigger}
+   * Protobuf type {@code protocol.Trigger}
    */
-  public  static final class TransactionTrigger extends
+  public  static final class Trigger extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:protocol.TransactionTrigger)
-      TransactionTriggerOrBuilder {
-    // Use TransactionTrigger.newBuilder() to construct.
-    private TransactionTrigger(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      // @@protoc_insertion_point(message_implements:protocol.Trigger)
+      TriggerOrBuilder {
+    // Use Trigger.newBuilder() to construct.
+    private Trigger(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private TransactionTrigger() {
+    private Trigger() {
       transactionType_ = 0;
       ledgerSeq_ = 0L;
-      transactionHash_ = com.google.protobuf.ByteString.EMPTY;
     }
 
     @java.lang.Override
@@ -15199,7 +15222,7 @@ public final class Chain {
     getUnknownFields() {
       return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
     }
-    private TransactionTrigger(
+    private Trigger(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -15231,8 +15254,16 @@ public final class Chain {
               break;
             }
             case 26: {
+              cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.Builder subBuilder = null;
+              if (transaction_ != null) {
+                subBuilder = transaction_.toBuilder();
+              }
+              transaction_ = input.readMessage(cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(transaction_);
+                transaction_ = subBuilder.buildPartial();
+              }
 
-              transactionHash_ = input.readBytes();
               break;
             }
           }
@@ -15248,18 +15279,18 @@ public final class Chain {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_TransactionTrigger_descriptor;
+      return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_Trigger_descriptor;
     }
 
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_TransactionTrigger_fieldAccessorTable
+      return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_Trigger_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.class, cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.Builder.class);
+              cn.bubi.blockchain.adapter3.Chain.Trigger.class, cn.bubi.blockchain.adapter3.Chain.Trigger.Builder.class);
     }
 
     /**
-     * Protobuf enum {@code protocol.TransactionTrigger.TransactionType}
+     * Protobuf enum {@code protocol.Trigger.TransactionType}
      */
     public enum TransactionType
         implements com.google.protobuf.ProtocolMessageEnum {
@@ -15330,7 +15361,7 @@ public final class Chain {
       }
       public static final com.google.protobuf.Descriptors.EnumDescriptor
           getDescriptor() {
-        return cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.getDescriptor().getEnumTypes().get(0);
+        return cn.bubi.blockchain.adapter3.Chain.Trigger.getDescriptor().getEnumTypes().get(0);
       }
 
       private static final TransactionType[] VALUES = values();
@@ -15353,41 +15384,565 @@ public final class Chain {
         this.value = value;
       }
 
-      // @@protoc_insertion_point(enum_scope:protocol.TransactionTrigger.TransactionType)
+      // @@protoc_insertion_point(enum_scope:protocol.Trigger.TransactionType)
+    }
+
+    public interface OperationTriggerOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:protocol.Trigger.OperationTrigger)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>optional bytes hash = 1;</code>
+       */
+      com.google.protobuf.ByteString getHash();
+
+      /**
+       * <code>optional int64 index = 2;</code>
+       */
+      long getIndex();
+    }
+    /**
+     * Protobuf type {@code protocol.Trigger.OperationTrigger}
+     */
+    public  static final class OperationTrigger extends
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:protocol.Trigger.OperationTrigger)
+        OperationTriggerOrBuilder {
+      // Use OperationTrigger.newBuilder() to construct.
+      private OperationTrigger(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
+      }
+      private OperationTrigger() {
+        hash_ = com.google.protobuf.ByteString.EMPTY;
+        index_ = 0L;
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      }
+      private OperationTrigger(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        int mutable_bitField0_ = 0;
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!input.skipField(tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+
+                hash_ = input.readBytes();
+                break;
+              }
+              case 16: {
+
+                index_ = input.readInt64();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e).setUnfinishedMessage(this);
+        } finally {
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_Trigger_OperationTrigger_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_Trigger_OperationTrigger_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.class, cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.Builder.class);
+      }
+
+      public static final int HASH_FIELD_NUMBER = 1;
+      private com.google.protobuf.ByteString hash_;
+      /**
+       * <code>optional bytes hash = 1;</code>
+       */
+      public com.google.protobuf.ByteString getHash() {
+        return hash_;
+      }
+
+      public static final int INDEX_FIELD_NUMBER = 2;
+      private long index_;
+      /**
+       * <code>optional int64 index = 2;</code>
+       */
+      public long getIndex() {
+        return index_;
+      }
+
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        if (!hash_.isEmpty()) {
+          output.writeBytes(1, hash_);
+        }
+        if (index_ != 0L) {
+          output.writeInt64(2, index_);
+        }
+      }
+
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (!hash_.isEmpty()) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, hash_);
+        }
+        if (index_ != 0L) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeInt64Size(2, index_);
+        }
+        memoizedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger)) {
+          return super.equals(obj);
+        }
+        cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger other = (cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger) obj;
+
+        boolean result = true;
+        result = result && getHash()
+            .equals(other.getHash());
+        result = result && (getIndex()
+            == other.getIndex());
+        return result;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (37 * hash) + HASH_FIELD_NUMBER;
+        hash = (53 * hash) + getHash().hashCode();
+        hash = (37 * hash) + INDEX_FIELD_NUMBER;
+        hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+            getIndex());
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+      public static cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code protocol.Trigger.OperationTrigger}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:protocol.Trigger.OperationTrigger)
+          cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTriggerOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_Trigger_OperationTrigger_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_Trigger_OperationTrigger_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.class, cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.Builder.class);
+        }
+
+        // Construct using cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessageV3
+                  .alwaysUseFieldBuilders) {
+          }
+        }
+        public Builder clear() {
+          super.clear();
+          hash_ = com.google.protobuf.ByteString.EMPTY;
+
+          index_ = 0L;
+
+          return this;
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_Trigger_OperationTrigger_descriptor;
+        }
+
+        public cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger getDefaultInstanceForType() {
+          return cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.getDefaultInstance();
+        }
+
+        public cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger build() {
+          cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger buildPartial() {
+          cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger result = new cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger(this);
+          result.hash_ = hash_;
+          result.index_ = index_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder clone() {
+          return (Builder) super.clone();
+        }
+        public Builder setField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            Object value) {
+          return (Builder) super.setField(field, value);
+        }
+        public Builder clearField(
+            com.google.protobuf.Descriptors.FieldDescriptor field) {
+          return (Builder) super.clearField(field);
+        }
+        public Builder clearOneof(
+            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+          return (Builder) super.clearOneof(oneof);
+        }
+        public Builder setRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            int index, Object value) {
+          return (Builder) super.setRepeatedField(field, index, value);
+        }
+        public Builder addRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            Object value) {
+          return (Builder) super.addRepeatedField(field, value);
+        }
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger) {
+            return mergeFrom((cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger other) {
+          if (other == cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.getDefaultInstance()) return this;
+          if (other.getHash() != com.google.protobuf.ByteString.EMPTY) {
+            setHash(other.getHash());
+          }
+          if (other.getIndex() != 0L) {
+            setIndex(other.getIndex());
+          }
+          onChanged();
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger) e.getUnfinishedMessage();
+            throw e.unwrapIOException();
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+
+        private com.google.protobuf.ByteString hash_ = com.google.protobuf.ByteString.EMPTY;
+        /**
+         * <code>optional bytes hash = 1;</code>
+         */
+        public com.google.protobuf.ByteString getHash() {
+          return hash_;
+        }
+        /**
+         * <code>optional bytes hash = 1;</code>
+         */
+        public Builder setHash(com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          hash_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional bytes hash = 1;</code>
+         */
+        public Builder clearHash() {
+          
+          hash_ = getDefaultInstance().getHash();
+          onChanged();
+          return this;
+        }
+
+        private long index_ ;
+        /**
+         * <code>optional int64 index = 2;</code>
+         */
+        public long getIndex() {
+          return index_;
+        }
+        /**
+         * <code>optional int64 index = 2;</code>
+         */
+        public Builder setIndex(long value) {
+          
+          index_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional int64 index = 2;</code>
+         */
+        public Builder clearIndex() {
+          
+          index_ = 0L;
+          onChanged();
+          return this;
+        }
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:protocol.Trigger.OperationTrigger)
+      }
+
+      // @@protoc_insertion_point(class_scope:protocol.Trigger.OperationTrigger)
+      private static final cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger();
+      }
+
+      public static cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<OperationTrigger>
+          PARSER = new com.google.protobuf.AbstractParser<OperationTrigger>() {
+        public OperationTrigger parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+            return new OperationTrigger(input, extensionRegistry);
+        }
+      };
+
+      public static com.google.protobuf.Parser<OperationTrigger> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<OperationTrigger> getParserForType() {
+        return PARSER;
+      }
+
+      public cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
     }
 
     public static final int TRANSACTION_TYPE_FIELD_NUMBER = 1;
     private int transactionType_;
     /**
-     * <code>optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;</code>
+     * <code>optional .protocol.Trigger.TransactionType transaction_type = 1;</code>
      */
     public int getTransactionTypeValue() {
       return transactionType_;
     }
     /**
-     * <code>optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;</code>
+     * <code>optional .protocol.Trigger.TransactionType transaction_type = 1;</code>
      */
-    public cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.TransactionType getTransactionType() {
-      cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.TransactionType result = cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.TransactionType.valueOf(transactionType_);
-      return result == null ? cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.TransactionType.UNRECOGNIZED : result;
+    public cn.bubi.blockchain.adapter3.Chain.Trigger.TransactionType getTransactionType() {
+      cn.bubi.blockchain.adapter3.Chain.Trigger.TransactionType result = cn.bubi.blockchain.adapter3.Chain.Trigger.TransactionType.valueOf(transactionType_);
+      return result == null ? cn.bubi.blockchain.adapter3.Chain.Trigger.TransactionType.UNRECOGNIZED : result;
     }
 
     public static final int LEDGER_SEQ_FIELD_NUMBER = 2;
     private long ledgerSeq_;
     /**
+     * <pre>
+     *如果是特定区块触发的（暂时未提供）
+     * </pre>
+     *
      * <code>optional int64 ledger_seq = 2;</code>
      */
     public long getLedgerSeq() {
       return ledgerSeq_;
     }
 
-    public static final int TRANSACTION_HASH_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString transactionHash_;
+    public static final int TRANSACTION_FIELD_NUMBER = 3;
+    private cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger transaction_;
     /**
-     * <code>optional bytes transaction_hash = 3;</code>
+     * <pre>
+     *如果是交易触发的
+     * </pre>
+     *
+     * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
      */
-    public com.google.protobuf.ByteString getTransactionHash() {
-      return transactionHash_;
+    public boolean hasTransaction() {
+      return transaction_ != null;
+    }
+    /**
+     * <pre>
+     *如果是交易触发的
+     * </pre>
+     *
+     * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
+     */
+    public cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger getTransaction() {
+      return transaction_ == null ? cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.getDefaultInstance() : transaction_;
+    }
+    /**
+     * <pre>
+     *如果是交易触发的
+     * </pre>
+     *
+     * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
+     */
+    public cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTriggerOrBuilder getTransactionOrBuilder() {
+      return getTransaction();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -15402,14 +15957,14 @@ public final class Chain {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (transactionType_ != cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.TransactionType.NORMAL_TRANSACTION.getNumber()) {
+      if (transactionType_ != cn.bubi.blockchain.adapter3.Chain.Trigger.TransactionType.NORMAL_TRANSACTION.getNumber()) {
         output.writeEnum(1, transactionType_);
       }
       if (ledgerSeq_ != 0L) {
         output.writeInt64(2, ledgerSeq_);
       }
-      if (!transactionHash_.isEmpty()) {
-        output.writeBytes(3, transactionHash_);
+      if (transaction_ != null) {
+        output.writeMessage(3, getTransaction());
       }
     }
 
@@ -15418,7 +15973,7 @@ public final class Chain {
       if (size != -1) return size;
 
       size = 0;
-      if (transactionType_ != cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.TransactionType.NORMAL_TRANSACTION.getNumber()) {
+      if (transactionType_ != cn.bubi.blockchain.adapter3.Chain.Trigger.TransactionType.NORMAL_TRANSACTION.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, transactionType_);
       }
@@ -15426,9 +15981,9 @@ public final class Chain {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, ledgerSeq_);
       }
-      if (!transactionHash_.isEmpty()) {
+      if (transaction_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(3, transactionHash_);
+          .computeMessageSize(3, getTransaction());
       }
       memoizedSize = size;
       return size;
@@ -15440,17 +15995,20 @@ public final class Chain {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof cn.bubi.blockchain.adapter3.Chain.TransactionTrigger)) {
+      if (!(obj instanceof cn.bubi.blockchain.adapter3.Chain.Trigger)) {
         return super.equals(obj);
       }
-      cn.bubi.blockchain.adapter3.Chain.TransactionTrigger other = (cn.bubi.blockchain.adapter3.Chain.TransactionTrigger) obj;
+      cn.bubi.blockchain.adapter3.Chain.Trigger other = (cn.bubi.blockchain.adapter3.Chain.Trigger) obj;
 
       boolean result = true;
       result = result && transactionType_ == other.transactionType_;
       result = result && (getLedgerSeq()
           == other.getLedgerSeq());
-      result = result && getTransactionHash()
-          .equals(other.getTransactionHash());
+      result = result && (hasTransaction() == other.hasTransaction());
+      if (hasTransaction()) {
+        result = result && getTransaction()
+            .equals(other.getTransaction());
+      }
       return result;
     }
 
@@ -15466,65 +16024,67 @@ public final class Chain {
       hash = (37 * hash) + LEDGER_SEQ_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getLedgerSeq());
-      hash = (37 * hash) + TRANSACTION_HASH_FIELD_NUMBER;
-      hash = (53 * hash) + getTransactionHash().hashCode();
+      if (hasTransaction()) {
+        hash = (37 * hash) + TRANSACTION_FIELD_NUMBER;
+        hash = (53 * hash) + getTransaction().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static cn.bubi.blockchain.adapter3.Chain.TransactionTrigger parseFrom(
+    public static cn.bubi.blockchain.adapter3.Chain.Trigger parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static cn.bubi.blockchain.adapter3.Chain.TransactionTrigger parseFrom(
+    public static cn.bubi.blockchain.adapter3.Chain.Trigger parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static cn.bubi.blockchain.adapter3.Chain.TransactionTrigger parseFrom(byte[] data)
+    public static cn.bubi.blockchain.adapter3.Chain.Trigger parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static cn.bubi.blockchain.adapter3.Chain.TransactionTrigger parseFrom(
+    public static cn.bubi.blockchain.adapter3.Chain.Trigger parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static cn.bubi.blockchain.adapter3.Chain.TransactionTrigger parseFrom(java.io.InputStream input)
+    public static cn.bubi.blockchain.adapter3.Chain.Trigger parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static cn.bubi.blockchain.adapter3.Chain.TransactionTrigger parseFrom(
+    public static cn.bubi.blockchain.adapter3.Chain.Trigger parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static cn.bubi.blockchain.adapter3.Chain.TransactionTrigger parseDelimitedFrom(java.io.InputStream input)
+    public static cn.bubi.blockchain.adapter3.Chain.Trigger parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static cn.bubi.blockchain.adapter3.Chain.TransactionTrigger parseDelimitedFrom(
+    public static cn.bubi.blockchain.adapter3.Chain.Trigger parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static cn.bubi.blockchain.adapter3.Chain.TransactionTrigger parseFrom(
+    public static cn.bubi.blockchain.adapter3.Chain.Trigger parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static cn.bubi.blockchain.adapter3.Chain.TransactionTrigger parseFrom(
+    public static cn.bubi.blockchain.adapter3.Chain.Trigger parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -15536,7 +16096,7 @@ public final class Chain {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(cn.bubi.blockchain.adapter3.Chain.TransactionTrigger prototype) {
+    public static Builder newBuilder(cn.bubi.blockchain.adapter3.Chain.Trigger prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() {
@@ -15551,25 +16111,25 @@ public final class Chain {
       return builder;
     }
     /**
-     * Protobuf type {@code protocol.TransactionTrigger}
+     * Protobuf type {@code protocol.Trigger}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:protocol.TransactionTrigger)
-        cn.bubi.blockchain.adapter3.Chain.TransactionTriggerOrBuilder {
+        // @@protoc_insertion_point(builder_implements:protocol.Trigger)
+        cn.bubi.blockchain.adapter3.Chain.TriggerOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_TransactionTrigger_descriptor;
+        return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_Trigger_descriptor;
       }
 
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_TransactionTrigger_fieldAccessorTable
+        return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_Trigger_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.class, cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.Builder.class);
+                cn.bubi.blockchain.adapter3.Chain.Trigger.class, cn.bubi.blockchain.adapter3.Chain.Trigger.Builder.class);
       }
 
-      // Construct using cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.newBuilder()
+      // Construct using cn.bubi.blockchain.adapter3.Chain.Trigger.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -15590,33 +16150,41 @@ public final class Chain {
 
         ledgerSeq_ = 0L;
 
-        transactionHash_ = com.google.protobuf.ByteString.EMPTY;
-
+        if (transactionBuilder_ == null) {
+          transaction_ = null;
+        } else {
+          transaction_ = null;
+          transactionBuilder_ = null;
+        }
         return this;
       }
 
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_TransactionTrigger_descriptor;
+        return cn.bubi.blockchain.adapter3.Chain.internal_static_protocol_Trigger_descriptor;
       }
 
-      public cn.bubi.blockchain.adapter3.Chain.TransactionTrigger getDefaultInstanceForType() {
-        return cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.getDefaultInstance();
+      public cn.bubi.blockchain.adapter3.Chain.Trigger getDefaultInstanceForType() {
+        return cn.bubi.blockchain.adapter3.Chain.Trigger.getDefaultInstance();
       }
 
-      public cn.bubi.blockchain.adapter3.Chain.TransactionTrigger build() {
-        cn.bubi.blockchain.adapter3.Chain.TransactionTrigger result = buildPartial();
+      public cn.bubi.blockchain.adapter3.Chain.Trigger build() {
+        cn.bubi.blockchain.adapter3.Chain.Trigger result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
         return result;
       }
 
-      public cn.bubi.blockchain.adapter3.Chain.TransactionTrigger buildPartial() {
-        cn.bubi.blockchain.adapter3.Chain.TransactionTrigger result = new cn.bubi.blockchain.adapter3.Chain.TransactionTrigger(this);
+      public cn.bubi.blockchain.adapter3.Chain.Trigger buildPartial() {
+        cn.bubi.blockchain.adapter3.Chain.Trigger result = new cn.bubi.blockchain.adapter3.Chain.Trigger(this);
         result.transactionType_ = transactionType_;
         result.ledgerSeq_ = ledgerSeq_;
-        result.transactionHash_ = transactionHash_;
+        if (transactionBuilder_ == null) {
+          result.transaction_ = transaction_;
+        } else {
+          result.transaction_ = transactionBuilder_.build();
+        }
         onBuilt();
         return result;
       }
@@ -15648,24 +16216,24 @@ public final class Chain {
         return (Builder) super.addRepeatedField(field, value);
       }
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof cn.bubi.blockchain.adapter3.Chain.TransactionTrigger) {
-          return mergeFrom((cn.bubi.blockchain.adapter3.Chain.TransactionTrigger)other);
+        if (other instanceof cn.bubi.blockchain.adapter3.Chain.Trigger) {
+          return mergeFrom((cn.bubi.blockchain.adapter3.Chain.Trigger)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(cn.bubi.blockchain.adapter3.Chain.TransactionTrigger other) {
-        if (other == cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.getDefaultInstance()) return this;
+      public Builder mergeFrom(cn.bubi.blockchain.adapter3.Chain.Trigger other) {
+        if (other == cn.bubi.blockchain.adapter3.Chain.Trigger.getDefaultInstance()) return this;
         if (other.transactionType_ != 0) {
           setTransactionTypeValue(other.getTransactionTypeValue());
         }
         if (other.getLedgerSeq() != 0L) {
           setLedgerSeq(other.getLedgerSeq());
         }
-        if (other.getTransactionHash() != com.google.protobuf.ByteString.EMPTY) {
-          setTransactionHash(other.getTransactionHash());
+        if (other.hasTransaction()) {
+          mergeTransaction(other.getTransaction());
         }
         onChanged();
         return this;
@@ -15679,11 +16247,11 @@ public final class Chain {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        cn.bubi.blockchain.adapter3.Chain.TransactionTrigger parsedMessage = null;
+        cn.bubi.blockchain.adapter3.Chain.Trigger parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (cn.bubi.blockchain.adapter3.Chain.TransactionTrigger) e.getUnfinishedMessage();
+          parsedMessage = (cn.bubi.blockchain.adapter3.Chain.Trigger) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -15695,13 +16263,13 @@ public final class Chain {
 
       private int transactionType_ = 0;
       /**
-       * <code>optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;</code>
+       * <code>optional .protocol.Trigger.TransactionType transaction_type = 1;</code>
        */
       public int getTransactionTypeValue() {
         return transactionType_;
       }
       /**
-       * <code>optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;</code>
+       * <code>optional .protocol.Trigger.TransactionType transaction_type = 1;</code>
        */
       public Builder setTransactionTypeValue(int value) {
         transactionType_ = value;
@@ -15709,16 +16277,16 @@ public final class Chain {
         return this;
       }
       /**
-       * <code>optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;</code>
+       * <code>optional .protocol.Trigger.TransactionType transaction_type = 1;</code>
        */
-      public cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.TransactionType getTransactionType() {
-        cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.TransactionType result = cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.TransactionType.valueOf(transactionType_);
-        return result == null ? cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.TransactionType.UNRECOGNIZED : result;
+      public cn.bubi.blockchain.adapter3.Chain.Trigger.TransactionType getTransactionType() {
+        cn.bubi.blockchain.adapter3.Chain.Trigger.TransactionType result = cn.bubi.blockchain.adapter3.Chain.Trigger.TransactionType.valueOf(transactionType_);
+        return result == null ? cn.bubi.blockchain.adapter3.Chain.Trigger.TransactionType.UNRECOGNIZED : result;
       }
       /**
-       * <code>optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;</code>
+       * <code>optional .protocol.Trigger.TransactionType transaction_type = 1;</code>
        */
-      public Builder setTransactionType(cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.TransactionType value) {
+      public Builder setTransactionType(cn.bubi.blockchain.adapter3.Chain.Trigger.TransactionType value) {
         if (value == null) {
           throw new NullPointerException();
         }
@@ -15728,7 +16296,7 @@ public final class Chain {
         return this;
       }
       /**
-       * <code>optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;</code>
+       * <code>optional .protocol.Trigger.TransactionType transaction_type = 1;</code>
        */
       public Builder clearTransactionType() {
         
@@ -15739,12 +16307,20 @@ public final class Chain {
 
       private long ledgerSeq_ ;
       /**
+       * <pre>
+       *如果是特定区块触发的（暂时未提供）
+       * </pre>
+       *
        * <code>optional int64 ledger_seq = 2;</code>
        */
       public long getLedgerSeq() {
         return ledgerSeq_;
       }
       /**
+       * <pre>
+       *如果是特定区块触发的（暂时未提供）
+       * </pre>
+       *
        * <code>optional int64 ledger_seq = 2;</code>
        */
       public Builder setLedgerSeq(long value) {
@@ -15754,6 +16330,10 @@ public final class Chain {
         return this;
       }
       /**
+       * <pre>
+       *如果是特定区块触发的（暂时未提供）
+       * </pre>
+       *
        * <code>optional int64 ledger_seq = 2;</code>
        */
       public Builder clearLedgerSeq() {
@@ -15763,33 +16343,157 @@ public final class Chain {
         return this;
       }
 
-      private com.google.protobuf.ByteString transactionHash_ = com.google.protobuf.ByteString.EMPTY;
+      private cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger transaction_ = null;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger, cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.Builder, cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTriggerOrBuilder> transactionBuilder_;
       /**
-       * <code>optional bytes transaction_hash = 3;</code>
+       * <pre>
+       *如果是交易触发的
+       * </pre>
+       *
+       * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
        */
-      public com.google.protobuf.ByteString getTransactionHash() {
-        return transactionHash_;
+      public boolean hasTransaction() {
+        return transactionBuilder_ != null || transaction_ != null;
       }
       /**
-       * <code>optional bytes transaction_hash = 3;</code>
+       * <pre>
+       *如果是交易触发的
+       * </pre>
+       *
+       * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
        */
-      public Builder setTransactionHash(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        transactionHash_ = value;
-        onChanged();
+      public cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger getTransaction() {
+        if (transactionBuilder_ == null) {
+          return transaction_ == null ? cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.getDefaultInstance() : transaction_;
+        } else {
+          return transactionBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       *如果是交易触发的
+       * </pre>
+       *
+       * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
+       */
+      public Builder setTransaction(cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger value) {
+        if (transactionBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          transaction_ = value;
+          onChanged();
+        } else {
+          transactionBuilder_.setMessage(value);
+        }
+
         return this;
       }
       /**
-       * <code>optional bytes transaction_hash = 3;</code>
+       * <pre>
+       *如果是交易触发的
+       * </pre>
+       *
+       * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
        */
-      public Builder clearTransactionHash() {
+      public Builder setTransaction(
+          cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.Builder builderForValue) {
+        if (transactionBuilder_ == null) {
+          transaction_ = builderForValue.build();
+          onChanged();
+        } else {
+          transactionBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       *如果是交易触发的
+       * </pre>
+       *
+       * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
+       */
+      public Builder mergeTransaction(cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger value) {
+        if (transactionBuilder_ == null) {
+          if (transaction_ != null) {
+            transaction_ =
+              cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.newBuilder(transaction_).mergeFrom(value).buildPartial();
+          } else {
+            transaction_ = value;
+          }
+          onChanged();
+        } else {
+          transactionBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       *如果是交易触发的
+       * </pre>
+       *
+       * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
+       */
+      public Builder clearTransaction() {
+        if (transactionBuilder_ == null) {
+          transaction_ = null;
+          onChanged();
+        } else {
+          transaction_ = null;
+          transactionBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       *如果是交易触发的
+       * </pre>
+       *
+       * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
+       */
+      public cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.Builder getTransactionBuilder() {
         
-        transactionHash_ = getDefaultInstance().getTransactionHash();
         onChanged();
-        return this;
+        return getTransactionFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       *如果是交易触发的
+       * </pre>
+       *
+       * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
+       */
+      public cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTriggerOrBuilder getTransactionOrBuilder() {
+        if (transactionBuilder_ != null) {
+          return transactionBuilder_.getMessageOrBuilder();
+        } else {
+          return transaction_ == null ?
+              cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.getDefaultInstance() : transaction_;
+        }
+      }
+      /**
+       * <pre>
+       *如果是交易触发的
+       * </pre>
+       *
+       * <code>optional .protocol.Trigger.OperationTrigger transaction = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger, cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.Builder, cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTriggerOrBuilder> 
+          getTransactionFieldBuilder() {
+        if (transactionBuilder_ == null) {
+          transactionBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger, cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTrigger.Builder, cn.bubi.blockchain.adapter3.Chain.Trigger.OperationTriggerOrBuilder>(
+                  getTransaction(),
+                  getParentForChildren(),
+                  isClean());
+          transaction_ = null;
+        }
+        return transactionBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -15802,39 +16506,39 @@ public final class Chain {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:protocol.TransactionTrigger)
+      // @@protoc_insertion_point(builder_scope:protocol.Trigger)
     }
 
-    // @@protoc_insertion_point(class_scope:protocol.TransactionTrigger)
-    private static final cn.bubi.blockchain.adapter3.Chain.TransactionTrigger DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:protocol.Trigger)
+    private static final cn.bubi.blockchain.adapter3.Chain.Trigger DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new cn.bubi.blockchain.adapter3.Chain.TransactionTrigger();
+      DEFAULT_INSTANCE = new cn.bubi.blockchain.adapter3.Chain.Trigger();
     }
 
-    public static cn.bubi.blockchain.adapter3.Chain.TransactionTrigger getDefaultInstance() {
+    public static cn.bubi.blockchain.adapter3.Chain.Trigger getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<TransactionTrigger>
-        PARSER = new com.google.protobuf.AbstractParser<TransactionTrigger>() {
-      public TransactionTrigger parsePartialFrom(
+    private static final com.google.protobuf.Parser<Trigger>
+        PARSER = new com.google.protobuf.AbstractParser<Trigger>() {
+      public Trigger parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-          return new TransactionTrigger(input, extensionRegistry);
+          return new Trigger(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<TransactionTrigger> parser() {
+    public static com.google.protobuf.Parser<Trigger> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<TransactionTrigger> getParserForType() {
+    public com.google.protobuf.Parser<Trigger> getParserForType() {
       return PARSER;
     }
 
-    public cn.bubi.blockchain.adapter3.Chain.TransactionTrigger getDefaultInstanceForType() {
+    public cn.bubi.blockchain.adapter3.Chain.Trigger getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -15882,17 +16586,17 @@ public final class Chain {
         int index);
 
     /**
-     * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+     * <code>optional .protocol.Trigger trigger = 3;</code>
      */
     boolean hasTrigger();
     /**
-     * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+     * <code>optional .protocol.Trigger trigger = 3;</code>
      */
-    cn.bubi.blockchain.adapter3.Chain.TransactionTrigger getTrigger();
+    cn.bubi.blockchain.adapter3.Chain.Trigger getTrigger();
     /**
-     * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+     * <code>optional .protocol.Trigger trigger = 3;</code>
      */
-    cn.bubi.blockchain.adapter3.Chain.TransactionTriggerOrBuilder getTriggerOrBuilder();
+    cn.bubi.blockchain.adapter3.Chain.TriggerOrBuilder getTriggerOrBuilder();
   }
   /**
    * Protobuf type {@code protocol.TransactionEnv}
@@ -15957,11 +16661,11 @@ public final class Chain {
               break;
             }
             case 26: {
-              cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.Builder subBuilder = null;
+              cn.bubi.blockchain.adapter3.Chain.Trigger.Builder subBuilder = null;
               if (trigger_ != null) {
                 subBuilder = trigger_.toBuilder();
               }
-              trigger_ = input.readMessage(cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.parser(), extensionRegistry);
+              trigger_ = input.readMessage(cn.bubi.blockchain.adapter3.Chain.Trigger.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(trigger_);
                 trigger_ = subBuilder.buildPartial();
@@ -16053,23 +16757,23 @@ public final class Chain {
     }
 
     public static final int TRIGGER_FIELD_NUMBER = 3;
-    private cn.bubi.blockchain.adapter3.Chain.TransactionTrigger trigger_;
+    private cn.bubi.blockchain.adapter3.Chain.Trigger trigger_;
     /**
-     * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+     * <code>optional .protocol.Trigger trigger = 3;</code>
      */
     public boolean hasTrigger() {
       return trigger_ != null;
     }
     /**
-     * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+     * <code>optional .protocol.Trigger trigger = 3;</code>
      */
-    public cn.bubi.blockchain.adapter3.Chain.TransactionTrigger getTrigger() {
-      return trigger_ == null ? cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.getDefaultInstance() : trigger_;
+    public cn.bubi.blockchain.adapter3.Chain.Trigger getTrigger() {
+      return trigger_ == null ? cn.bubi.blockchain.adapter3.Chain.Trigger.getDefaultInstance() : trigger_;
     }
     /**
-     * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+     * <code>optional .protocol.Trigger trigger = 3;</code>
      */
-    public cn.bubi.blockchain.adapter3.Chain.TransactionTriggerOrBuilder getTriggerOrBuilder() {
+    public cn.bubi.blockchain.adapter3.Chain.TriggerOrBuilder getTriggerOrBuilder() {
       return getTrigger();
     }
 
@@ -16801,29 +17505,29 @@ public final class Chain {
         return signaturesBuilder_;
       }
 
-      private cn.bubi.blockchain.adapter3.Chain.TransactionTrigger trigger_ = null;
+      private cn.bubi.blockchain.adapter3.Chain.Trigger trigger_ = null;
       private com.google.protobuf.SingleFieldBuilderV3<
-          cn.bubi.blockchain.adapter3.Chain.TransactionTrigger, cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.Builder, cn.bubi.blockchain.adapter3.Chain.TransactionTriggerOrBuilder> triggerBuilder_;
+          cn.bubi.blockchain.adapter3.Chain.Trigger, cn.bubi.blockchain.adapter3.Chain.Trigger.Builder, cn.bubi.blockchain.adapter3.Chain.TriggerOrBuilder> triggerBuilder_;
       /**
-       * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+       * <code>optional .protocol.Trigger trigger = 3;</code>
        */
       public boolean hasTrigger() {
         return triggerBuilder_ != null || trigger_ != null;
       }
       /**
-       * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+       * <code>optional .protocol.Trigger trigger = 3;</code>
        */
-      public cn.bubi.blockchain.adapter3.Chain.TransactionTrigger getTrigger() {
+      public cn.bubi.blockchain.adapter3.Chain.Trigger getTrigger() {
         if (triggerBuilder_ == null) {
-          return trigger_ == null ? cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.getDefaultInstance() : trigger_;
+          return trigger_ == null ? cn.bubi.blockchain.adapter3.Chain.Trigger.getDefaultInstance() : trigger_;
         } else {
           return triggerBuilder_.getMessage();
         }
       }
       /**
-       * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+       * <code>optional .protocol.Trigger trigger = 3;</code>
        */
-      public Builder setTrigger(cn.bubi.blockchain.adapter3.Chain.TransactionTrigger value) {
+      public Builder setTrigger(cn.bubi.blockchain.adapter3.Chain.Trigger value) {
         if (triggerBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -16837,10 +17541,10 @@ public final class Chain {
         return this;
       }
       /**
-       * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+       * <code>optional .protocol.Trigger trigger = 3;</code>
        */
       public Builder setTrigger(
-          cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.Builder builderForValue) {
+          cn.bubi.blockchain.adapter3.Chain.Trigger.Builder builderForValue) {
         if (triggerBuilder_ == null) {
           trigger_ = builderForValue.build();
           onChanged();
@@ -16851,13 +17555,13 @@ public final class Chain {
         return this;
       }
       /**
-       * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+       * <code>optional .protocol.Trigger trigger = 3;</code>
        */
-      public Builder mergeTrigger(cn.bubi.blockchain.adapter3.Chain.TransactionTrigger value) {
+      public Builder mergeTrigger(cn.bubi.blockchain.adapter3.Chain.Trigger value) {
         if (triggerBuilder_ == null) {
           if (trigger_ != null) {
             trigger_ =
-              cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.newBuilder(trigger_).mergeFrom(value).buildPartial();
+              cn.bubi.blockchain.adapter3.Chain.Trigger.newBuilder(trigger_).mergeFrom(value).buildPartial();
           } else {
             trigger_ = value;
           }
@@ -16869,7 +17573,7 @@ public final class Chain {
         return this;
       }
       /**
-       * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+       * <code>optional .protocol.Trigger trigger = 3;</code>
        */
       public Builder clearTrigger() {
         if (triggerBuilder_ == null) {
@@ -16883,33 +17587,33 @@ public final class Chain {
         return this;
       }
       /**
-       * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+       * <code>optional .protocol.Trigger trigger = 3;</code>
        */
-      public cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.Builder getTriggerBuilder() {
+      public cn.bubi.blockchain.adapter3.Chain.Trigger.Builder getTriggerBuilder() {
         
         onChanged();
         return getTriggerFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+       * <code>optional .protocol.Trigger trigger = 3;</code>
        */
-      public cn.bubi.blockchain.adapter3.Chain.TransactionTriggerOrBuilder getTriggerOrBuilder() {
+      public cn.bubi.blockchain.adapter3.Chain.TriggerOrBuilder getTriggerOrBuilder() {
         if (triggerBuilder_ != null) {
           return triggerBuilder_.getMessageOrBuilder();
         } else {
           return trigger_ == null ?
-              cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.getDefaultInstance() : trigger_;
+              cn.bubi.blockchain.adapter3.Chain.Trigger.getDefaultInstance() : trigger_;
         }
       }
       /**
-       * <code>optional .protocol.TransactionTrigger trigger = 3;</code>
+       * <code>optional .protocol.Trigger trigger = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          cn.bubi.blockchain.adapter3.Chain.TransactionTrigger, cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.Builder, cn.bubi.blockchain.adapter3.Chain.TransactionTriggerOrBuilder> 
+          cn.bubi.blockchain.adapter3.Chain.Trigger, cn.bubi.blockchain.adapter3.Chain.Trigger.Builder, cn.bubi.blockchain.adapter3.Chain.TriggerOrBuilder> 
           getTriggerFieldBuilder() {
         if (triggerBuilder_ == null) {
           triggerBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              cn.bubi.blockchain.adapter3.Chain.TransactionTrigger, cn.bubi.blockchain.adapter3.Chain.TransactionTrigger.Builder, cn.bubi.blockchain.adapter3.Chain.TransactionTriggerOrBuilder>(
+              cn.bubi.blockchain.adapter3.Chain.Trigger, cn.bubi.blockchain.adapter3.Chain.Trigger.Builder, cn.bubi.blockchain.adapter3.Chain.TriggerOrBuilder>(
                   getTrigger(),
                   getParentForChildren(),
                   isClean());
@@ -23079,10 +23783,15 @@ public final class Chain {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_protocol_Signer_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_protocol_TransactionTrigger_descriptor;
+    internal_static_protocol_Trigger_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_protocol_TransactionTrigger_fieldAccessorTable;
+      internal_static_protocol_Trigger_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_protocol_Trigger_OperationTrigger_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_protocol_Trigger_OperationTrigger_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_protocol_TransactionEnv_descriptor;
   private static final 
@@ -23188,40 +23897,41 @@ public final class Chain {
       "ion\022\020\n\010metadata\030\005 \001(\014\"%\n\005Limit\022\013\n\007UNKNOW" +
       "N\020\000\022\017\n\nOPERATIONS\020\350\007\"O\n\006Signer\022\017\n\007addres" +
       "s\030\001 \001(\t\022\016\n\006weight\030\002 \001(\003\"$\n\005Limit\022\017\n\013SIGN" +
-      "ER_NONE\020\000\022\n\n\006SIGNER\020d\"\317\001\n\022TransactionTri" +
-      "gger\022F\n\020transaction_type\030\001 \001(\0162,.protoco" +
-      "l.TransactionTrigger.TransactionType\022\022\n\n" +
-      "ledger_seq\030\002 \001(\003\022\030\n\020transaction_hash\030\003 \001",
-      "(\014\"C\n\017TransactionType\022\026\n\022NORMAL_TRANSACT" +
-      "ION\020\000\022\030\n\024CONTRACT_TRANSACTION\020\001\"\224\001\n\016Tran" +
-      "sactionEnv\022*\n\013transaction\030\001 \001(\0132\025.protoc" +
-      "ol.Transaction\022\'\n\nsignatures\030\002 \003(\0132\023.pro" +
-      "tocol.Signature\022-\n\007trigger\030\003 \001(\0132\034.proto" +
-      "col.TransactionTrigger\"\230\001\n\023TransactionEn" +
-      "vStore\0221\n\017transaction_env\030\001 \001(\0132\030.protoc" +
-      "ol.TransactionEnv\022\022\n\nerror_code\030\002 \001(\005\022\022\n" +
-      "\nerror_desc\030\003 \001(\t\022\022\n\nledger_seq\030\004 \001(\003\022\022\n" +
-      "\nclose_time\030\005 \001(\003\":\n\021TransactionEnvSet\022%",
-      "\n\003txs\030\002 \003(\0132\030.protocol.TransactionEnv\"\313\001" +
-      "\n\016ConsensusValue\022*\n\005txset\030\001 \001(\0132\033.protoc" +
-      "ol.TransactionEnvSet\022\022\n\nclose_time\030\002 \001(\003" +
-      "\022\026\n\016previous_proof\030\003 \001(\014\022\022\n\nledger_seq\030\004" +
-      " \001(\003\022\034\n\024previous_ledger_hash\030\005 \001(\014\022/\n\016le" +
-      "dger_upgrade\030\006 \001(\0132\027.protocol.LedgerUpgr" +
-      "ade\"f\n\025TransactionEnvWrapper\0221\n\017transact" +
-      "ion_env\030\001 \001(\0132\030.protocol.TransactionEnv\022" +
-      "\032\n\022suggest_ledger_seq\030\002 \001(\003\"j\n\010Contract\022" +
-      "-\n\004type\030\001 \001(\0162\037.protocol.Contract.Contra",
-      "ctType\022\017\n\007payload\030\002 \001(\t\"\036\n\014ContractType\022" +
-      "\016\n\nJAVASCRIPT\020\000\"\244\001\n\026OperationCreateAccou" +
-      "nt\022\024\n\014dest_address\030\001 \001(\t\022$\n\010contract\030\002 \001" +
-      "(\0132\022.protocol.Contract\022(\n\004priv\030\003 \001(\0132\032.p" +
-      "rotocol.AccountPrivilege\022$\n\tmetadatas\030\004 " +
-      "\003(\0132\021.protocol.KeyPair\"C\n\024OperationSetMe" +
-      "tadata\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\022\017\n\007ve" +
-      "rsion\030\003 \001(\003*#\n\005Limit\022\013\n\007UNKNOWN\020\000\022\r\n\tSIG" +
-      "NATURE\020dB\035\n\033cn.bubi.blockchain.adapter3b" +
-      "\006proto3"
+      "ER_NONE\020\000\022\n\n\006SIGNER\020d\"\211\002\n\007Trigger\022;\n\020tra" +
+      "nsaction_type\030\001 \001(\0162!.protocol.Trigger.T" +
+      "ransactionType\022\022\n\nledger_seq\030\002 \001(\003\0227\n\013tr" +
+      "ansaction\030\003 \001(\0132\".protocol.Trigger.Opera",
+      "tionTrigger\032/\n\020OperationTrigger\022\014\n\004hash\030" +
+      "\001 \001(\014\022\r\n\005index\030\002 \001(\003\"C\n\017TransactionType\022" +
+      "\026\n\022NORMAL_TRANSACTION\020\000\022\030\n\024CONTRACT_TRAN" +
+      "SACTION\020\001\"\211\001\n\016TransactionEnv\022*\n\013transact" +
+      "ion\030\001 \001(\0132\025.protocol.Transaction\022\'\n\nsign" +
+      "atures\030\002 \003(\0132\023.protocol.Signature\022\"\n\007tri" +
+      "gger\030\003 \001(\0132\021.protocol.Trigger\"\230\001\n\023Transa" +
+      "ctionEnvStore\0221\n\017transaction_env\030\001 \001(\0132\030" +
+      ".protocol.TransactionEnv\022\022\n\nerror_code\030\002" +
+      " \001(\005\022\022\n\nerror_desc\030\003 \001(\t\022\022\n\nledger_seq\030\004",
+      " \001(\003\022\022\n\nclose_time\030\005 \001(\003\":\n\021TransactionE" +
+      "nvSet\022%\n\003txs\030\002 \003(\0132\030.protocol.Transactio" +
+      "nEnv\"\313\001\n\016ConsensusValue\022*\n\005txset\030\001 \001(\0132\033" +
+      ".protocol.TransactionEnvSet\022\022\n\nclose_tim" +
+      "e\030\002 \001(\003\022\026\n\016previous_proof\030\003 \001(\014\022\022\n\nledge" +
+      "r_seq\030\004 \001(\003\022\034\n\024previous_ledger_hash\030\005 \001(" +
+      "\014\022/\n\016ledger_upgrade\030\006 \001(\0132\027.protocol.Led" +
+      "gerUpgrade\"f\n\025TransactionEnvWrapper\0221\n\017t" +
+      "ransaction_env\030\001 \001(\0132\030.protocol.Transact" +
+      "ionEnv\022\032\n\022suggest_ledger_seq\030\002 \001(\003\"j\n\010Co",
+      "ntract\022-\n\004type\030\001 \001(\0162\037.protocol.Contract" +
+      ".ContractType\022\017\n\007payload\030\002 \001(\t\"\036\n\014Contra" +
+      "ctType\022\016\n\nJAVASCRIPT\020\000\"\244\001\n\026OperationCrea" +
+      "teAccount\022\024\n\014dest_address\030\001 \001(\t\022$\n\010contr" +
+      "act\030\002 \001(\0132\022.protocol.Contract\022(\n\004priv\030\003 " +
+      "\001(\0132\032.protocol.AccountPrivilege\022$\n\tmetad" +
+      "atas\030\004 \003(\0132\021.protocol.KeyPair\"C\n\024Operati" +
+      "onSetMetadata\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(" +
+      "\t\022\017\n\007version\030\003 \001(\003*#\n\005Limit\022\013\n\007UNKNOWN\020\000" +
+      "\022\r\n\tSIGNATURE\020dB\035\n\033cn.bubi.blockchain.ad",
+      "apter3b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -23332,12 +24042,18 @@ public final class Chain {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_Signer_descriptor,
         new java.lang.String[] { "Address", "Weight", });
-    internal_static_protocol_TransactionTrigger_descriptor =
+    internal_static_protocol_Trigger_descriptor =
       getDescriptor().getMessageTypes().get(16);
-    internal_static_protocol_TransactionTrigger_fieldAccessorTable = new
+    internal_static_protocol_Trigger_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_protocol_TransactionTrigger_descriptor,
-        new java.lang.String[] { "TransactionType", "LedgerSeq", "TransactionHash", });
+        internal_static_protocol_Trigger_descriptor,
+        new java.lang.String[] { "TransactionType", "LedgerSeq", "Transaction", });
+    internal_static_protocol_Trigger_OperationTrigger_descriptor =
+      internal_static_protocol_Trigger_descriptor.getNestedTypes().get(0);
+    internal_static_protocol_Trigger_OperationTrigger_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_protocol_Trigger_OperationTrigger_descriptor,
+        new java.lang.String[] { "Hash", "Index", });
     internal_static_protocol_TransactionEnv_descriptor =
       getDescriptor().getMessageTypes().get(17);
     internal_static_protocol_TransactionEnv_fieldAccessorTable = new

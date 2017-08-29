@@ -58,6 +58,7 @@ namespace bubi {
 		int64_t id_;
 		protocol::Ledger ledger_;
 	public:
+		std::shared_ptr<protocol::ConsensusValue> value_;
 		std::vector<TransactionFrm::pointer> apply_tx_frms_;
 		std::string sql_;
 		std::shared_ptr<Environment> environment_;
