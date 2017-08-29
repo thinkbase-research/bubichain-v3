@@ -53,8 +53,6 @@ add_permission:
 	chmod +x ./protobuf/autogen.sh; \
 	chmod +x ./jsoncpp/automake.sh; \
 	chmod +x ./rocksdb/build_tools/*; \
-	chmod +x ./jdk/bin/*; \
-	chmod +x ./jdk/jre/bin/*; \
 	chmod +x ./sqlite/configure
 
 #sub target 

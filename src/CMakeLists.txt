@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
 project(bubi)
+add_compile_options("-g")
 add_definitions(-DSVNVERSION=\"${SVNVERSION}\")
 message(STATUS "-DSVNVERSION="${SVNVERSION})
 
@@ -15,7 +16,6 @@ execute_process(COMMAND make all -j8 WORKING_DIRECTORY ${BUBI_SRC_DIR}/3rd)
 
 include_directories(
     ${BUBI_SRC_DIR}
-    ${BUBI_SRC_DIR}/3rd/basic/include/mysql
     ${BUBI_SRC_DIR}/3rd/basic/include/v8
     ${BUBI_SRC_DIR}/3rd/protobuf/src
     ${BUBI_SRC_DIR}/3rd/jsoncpp/include
@@ -59,16 +59,10 @@ add_subdirectory(daemon)
 add_subdirectory(monitor)
 add_subdirectory(main)
 
-set(SADK_SO libSADK_Standard.so)
 set(BUBI_SCRIPTS ${BUBI_ROOT_DIR}/deploy)
 install(
     PROGRAMS ${BUBI_SCRIPTS}/bubi ${BUBI_SCRIPTS}/bubid ${BUBI_SCRIPTS}/start-stop-daemon
     DESTINATION ${BUBICHAIN}/scripts
-)
-
-install(
-    FILES ${BUBI_SRC_DIR}/3rd/basic/lib/${SADK_SO}.3.4.0.3
-    DESTINATION ${BUBICHAIN}/cfca
 )
 
 install(
@@ -102,8 +96,6 @@ file(APPEND ${SUPPLEMENT} "\tsudo ln -s -f /etc/init.d/bubid /etc/rc2.d/S50bubid
 file(APPEND ${SUPPLEMENT} "\tsudo ln -s -f /etc/init.d/bubid /etc/rc3.d/S50bubid;\\\n")
 file(APPEND ${SUPPLEMENT} "\tsudo ln -s -f /etc/init.d/bubid /etc/rc4.d/S50bubid;\\\n")
 file(APPEND ${SUPPLEMENT} "\tsudo ln -s -f /etc/init.d/bubid /etc/rc5.d/S50bubid;\\\n")
-file(APPEND ${SUPPLEMENT}
-    "\tsudo ln -s ${FIX_DIR}/cfca/${SADK_SO}.3.4.0.3 ${FIX_DIR}/bin/${SADK_SO}\n")
 
 file(APPEND ${SUPPLEMENT} "\nuninstall:\n")
 file(APPEND ${SUPPLEMENT} "\trm -f /etc/rc1.d/S99bubi;\\\n")
