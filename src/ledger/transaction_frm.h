@@ -28,6 +28,7 @@ namespace bubi {
 
 	class OperationFrm;
 	class AccountEntry;
+	class LedgerFrm;
 	class TransactionFrm {
 	public:
 		typedef std::shared_ptr<bubi::TransactionFrm> pointer;
@@ -35,12 +36,11 @@ namespace bubi {
 		std::set<std::string> involved_accounts_;
 		std::vector<protocol::TransactionEnvStore> instructions_;
 		std::shared_ptr<Environment> environment_;
-		pointer previous;
 	public:
 		//only valid when the transaction belongs to a txset
 		TransactionFrm();
+		TransactionFrm(const protocol::TransactionEnv &env, std::shared_ptr<Environment> environment = nullptr);
 		
-		TransactionFrm(const protocol::TransactionEnv &env, pointer parent = nullptr);
 		virtual ~TransactionFrm();
 		
 		static bool AccountFromDB(const std::string &address, AccountFrm::pointer &account_ptr);
@@ -70,7 +70,7 @@ namespace bubi {
 
 		bool CheckTimeout(int64_t expire_time);
 
-		bool Apply(std::shared_ptr<protocol::LedgerHeader> header, bool bool_contract = false);
+		bool Apply(LedgerFrm* ledger_frm, bool bool_contract = false);
 
 		protocol::TransactionEnv &GetProtoTxEnv() {
 			return transaction_env_;
@@ -82,13 +82,10 @@ namespace bubi {
 
 		bool ValidForApply();
 
-		//nonce increase, it's self add to storage
-		void SelfCommit();
-
-		void AllCommit();
-
 		uint64_t apply_time_;
 		Result result_;	
+		int32_t processing_operation_;
+		LedgerFrm* ledger_;
 	private:		
 		protocol::TransactionEnv transaction_env_;
 		std::string hash_;
@@ -96,7 +93,7 @@ namespace bubi {
 		std::string data_;
 		std::string full_data_;
 		std::set<std::string> valid_signature_;
-		std::shared_ptr<protocol::LedgerHeader> header_;
+		
 		int64_t incoming_time_;
 	};
 };

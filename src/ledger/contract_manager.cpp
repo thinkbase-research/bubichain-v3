@@ -21,9 +21,13 @@ limitations under the License.
 namespace bubi{
 
 	std::map<std::string, std::string> ContractManager::jslib_sources;
-	const std::string ContractManager::sender_key_ = "sender";
-	const std::string ContractManager::contractor_key_ = "thisAddress";
+	const std::string ContractManager::sender_name_ = "sender";
+	const std::string ContractManager::this_address_ = "thisAddress";
 	const char* ContractManager::main_name_ = "main";
+	const std::string ContractManager::trigger_tx_name_ = "trigger";
+	const std::string ContractManager::trigger_tx_index_name_ = "triggerIndex";
+	const std::string ContractManager::this_header_name_ = "consensusValue";
+
 	v8::Platform* ContractManager::platform_ = nullptr;
 	v8::Isolate::CreateParams ContractManager::create_params_;
 	ContractManager* ContractManager::executing_contract_ = nullptr;
@@ -173,12 +177,30 @@ namespace bubi{
 		v8::Handle<v8::Context> context = v8::Context::New(isolate_, NULL, templ);
 		v8::Context::Scope context_scope(context);
 
+		
 		auto string_sender = v8::String::NewFromUtf8(isolate_, "", v8::NewStringType::kNormal).ToLocalChecked();
-		context->Global()->Set(context, v8::String::NewFromUtf8(isolate_, sender_key_.c_str(), v8::NewStringType::kNormal).ToLocalChecked(), string_sender);
+		context->Global()->Set(context, v8::String::NewFromUtf8(isolate_, sender_name_.c_str(), v8::NewStringType::kNormal).ToLocalChecked(), string_sender);
+
 
 		auto string_contractor = v8::String::NewFromUtf8(isolate_, "", v8::NewStringType::kNormal).ToLocalChecked();
-		context->Global()->Set(context, v8::String::NewFromUtf8(isolate_, contractor_key_.c_str(), v8::NewStringType::kNormal).ToLocalChecked(), string_contractor);
+		context->Global()->Set(context, v8::String::NewFromUtf8(isolate_, this_address_.c_str(), v8::NewStringType::kNormal).ToLocalChecked(), string_contractor);
 
+		auto str_json_v8 = v8::String::NewFromUtf8(isolate_, "{}", v8::NewStringType::kNormal).ToLocalChecked();
+		auto tx_v8 = v8::JSON::Parse(str_json_v8);
+		context->Global()->Set(context,
+			v8::String::NewFromUtf8(isolate_, trigger_tx_name_.c_str(), v8::NewStringType::kNormal).ToLocalChecked(),
+			tx_v8);
+
+		v8::Local<v8::Integer> index_v8 = v8::Int32::New(isolate_, 0);
+		context->Global()->Set(context,
+			v8::String::NewFromUtf8(isolate_, trigger_tx_index_name_.c_str(), v8::NewStringType::kNormal).ToLocalChecked(),
+			index_v8);
+
+		auto v8_consensus_value = v8::String::NewFromUtf8(isolate_, "{}", v8::NewStringType::kNormal).ToLocalChecked();
+		auto v8HeadJson = v8::JSON::Parse(v8_consensus_value);
+		context->Global()->Set(context,
+			v8::String::NewFromUtf8(isolate_, this_header_name_.c_str(), v8::NewStringType::kNormal).ToLocalChecked(),
+			v8HeadJson);
 
 		v8::Local<v8::String> v8src = v8::String::NewFromUtf8(isolate_, code.c_str());
 		v8::Local<v8::Script> compiled_script;
@@ -215,10 +237,15 @@ namespace bubi{
 		return true;
 	}
 
-	bool ContractManager::Execute(const std::string& src, const std::string &input,
-		const std::string& token, const std::string& sender){
-
-
+	bool ContractManager::Execute(const std::string& code, 
+		const std::string &input,
+		const std::string& token,
+		const std::string& sender, 
+		const std::string& trigger_tx, 
+		int32_t index,
+		const std::string& consensus_value,
+		std::string& error_msg)
+	{
 		v8::Isolate::Scope isolate_scope(isolate_);
 
 		v8::HandleScope handle_scope(isolate_);
@@ -236,12 +263,34 @@ namespace bubi{
 		context->SetSecurityToken(vtoken);
 
 		auto string_sender = v8::String::NewFromUtf8(isolate_, sender.c_str(), v8::NewStringType::kNormal).ToLocalChecked();
-		context->Global()->Set(context, v8::String::NewFromUtf8(isolate_, sender_key_.c_str(), v8::NewStringType::kNormal).ToLocalChecked(), string_sender);
+		context->Global()->Set(context,
+			v8::String::NewFromUtf8(isolate_, sender_name_.c_str(), v8::NewStringType::kNormal).ToLocalChecked(),
+			string_sender);
 
 		auto string_contractor = v8::String::NewFromUtf8(isolate_, token.c_str(), v8::NewStringType::kNormal).ToLocalChecked();
-		context->Global()->Set(context, v8::String::NewFromUtf8(isolate_, contractor_key_.c_str(), v8::NewStringType::kNormal).ToLocalChecked(), string_contractor);
+		context->Global()->Set(context,
+			v8::String::NewFromUtf8(isolate_, this_address_.c_str(), v8::NewStringType::kNormal).ToLocalChecked(),
+			string_contractor);
 
-		v8::Local<v8::String> v8src = v8::String::NewFromUtf8(isolate_, src.c_str());
+
+		auto str_json_v8 = v8::String::NewFromUtf8(isolate_, trigger_tx.c_str(), v8::NewStringType::kNormal).ToLocalChecked();
+		auto tx_v8 = v8::JSON::Parse(str_json_v8);
+		context->Global()->Set(context,
+			v8::String::NewFromUtf8(isolate_, trigger_tx_name_.c_str(), v8::NewStringType::kNormal).ToLocalChecked(),
+			tx_v8);
+
+		v8::Local<v8::Integer> index_v8 = v8::Int32::New(isolate_, index);
+		context->Global()->Set(context,
+			v8::String::NewFromUtf8(isolate_, trigger_tx_index_name_.c_str(), v8::NewStringType::kNormal).ToLocalChecked(),
+			index_v8);
+
+		auto v8_consensus_value = v8::String::NewFromUtf8(isolate_, consensus_value.c_str(), v8::NewStringType::kNormal).ToLocalChecked();
+		auto v8HeadJson = v8::JSON::Parse(v8_consensus_value);
+		context->Global()->Set(context,
+			v8::String::NewFromUtf8(isolate_, this_header_name_.c_str(), v8::NewStringType::kNormal).ToLocalChecked(),
+			v8HeadJson);
+
+		v8::Local<v8::String> v8src = v8::String::NewFromUtf8(isolate_, code.c_str());
 		v8::Local<v8::Script> compiled_script;
 
 		auto back = executing_contract_;
@@ -249,13 +298,13 @@ namespace bubi{
 		{
 			executing_contract_ = this;
 			if (!v8::Script::Compile(context, v8src).ToLocal(&compiled_script)){
-				ReportException(isolate_, &try_catch);
+				error_msg = ReportException(isolate_, &try_catch);
 				break;
 			}
 
 			v8::Local<v8::Value> result;
 			if (!compiled_script->Run(context).ToLocal(&result)){
-				ReportException(isolate_, &try_catch);
+				error_msg = ReportException(isolate_, &try_catch);
 				break;
 			}
 
@@ -280,7 +329,7 @@ namespace bubi{
 
 			v8::Local<v8::Value> callresult;
 			if (!process->Call(context, context->Global(), argc, argv).ToLocal(&callresult)){
-				ReportException(isolate_, &try_catch);
+				error_msg = ReportException(isolate_, &try_catch);
 				break;
 			}
 
@@ -401,7 +450,7 @@ namespace bubi{
 
 
 			bubi::AccountFrm::pointer account_frm = nullptr;
-			auto environment = LedgerManager::Instance().execute_transaction_->environment_;
+			auto environment = LedgerManager::Instance().transaction_stack_.top()->environment_;
 			if (!environment->GetEntry(address, account_frm)){
 				break;
 			}
@@ -448,7 +497,7 @@ namespace bubi{
 			std::string key = ToCString(v8::String::Utf8Value(args[1]));
 
 			bubi::AccountFrm::pointer account_frm = nullptr;
-			auto environment = LedgerManager::Instance().execute_transaction_->environment_;
+			auto environment = LedgerManager::Instance().transaction_stack_.top()->environment_;
 			if (!environment->GetEntry(address, account_frm)){
 				break;
 			}
@@ -504,7 +553,7 @@ namespace bubi{
 			protocol::OperationSetMetadata proto_setmetadata;
 			Json2Proto(json, proto_setmetadata);
 			ope->mutable_set_metadata()->CopyFrom(proto_setmetadata);
-			DoTransaction(txenv);
+			LedgerManager::Instance().DoTransaction(txenv);
 			args.GetReturnValue().Set(true);
 			return;
 		} while (false);
@@ -533,7 +582,7 @@ namespace bubi{
 
 			bubi::AccountFrm::pointer account_frm = nullptr;
 
-			auto environment = LedgerManager::Instance().execute_transaction_->environment_;
+			auto environment = LedgerManager::Instance().transaction_stack_.top()->environment_;
 			if (!environment->GetEntry(address, account_frm))
 				break;
 
@@ -596,7 +645,7 @@ namespace bubi{
 			protocol::TransactionEnv env;
 			env.mutable_transaction()->CopyFrom(transaction);
 
-			if (!DoTransaction(env)){
+			if (!LedgerManager::Instance().DoTransaction(env)){
 				break;
 			}
 
@@ -638,7 +687,7 @@ namespace bubi{
 		//
 		auto context = args.GetIsolate()->GetCurrentContext();
 		auto sender = args.GetIsolate()->GetCurrentContext()->Global()->Get(context,
-			v8::String::NewFromUtf8(args.GetIsolate(), sender_key_.c_str(), v8::NewStringType::kNormal).ToLocalChecked()).ToLocalChecked();
+			v8::String::NewFromUtf8(args.GetIsolate(), sender_name_.c_str(), v8::NewStringType::kNormal).ToLocalChecked()).ToLocalChecked();
 		v8::String::Utf8Value utf8_sender(sender->ToString());
 		//
 		v8::String::Utf8Value utf8value(str);
@@ -703,26 +752,25 @@ namespace bubi{
 		return static_cast<ContractManager*>(ptr);
 	}
 
-	bool ContractManager::DoTransaction(protocol::TransactionEnv& env){
-		auto back = LedgerManager::Instance().execute_transaction_;
-		std::shared_ptr<AccountFrm> source_account;
-		back->environment_->GetEntry(env.transaction().source_address(), source_account);
-		env.mutable_transaction()->set_nonce(source_account->GetAccountNonce() + 1);
-		auto txfrm = std::make_shared<bubi::TransactionFrm >(env, back);
-		LedgerManager::Instance().execute_transaction_ = txfrm;
+	//bool ContractManager::DoTransaction(protocol::TransactionEnv& env){
+	//	auto back = LedgerManager::Instance().transaction_stack_.second;
+	//	std::shared_ptr<AccountFrm> source_account;
+	//	back->environment_->GetEntry(env.transaction().source_address(), source_account);
+	//	env.mutable_transaction()->set_nonce(source_account->GetAccountNonce() + 1);
+	//	auto txfrm = std::make_shared<bubi::TransactionFrm >(env);
+	//	//LedgerManager::Instance().execute_transaction_.second = txfrm;
 
+	//	auto header = std::make_shared<protocol::LedgerHeader>(LedgerManager::Instance().closing_ledger_->GetProtoHeader());
 
-		auto header = std::make_shared<protocol::LedgerHeader>(LedgerManager::Instance().closing_ledger_->GetProtoHeader());
+	//	if (txfrm->ValidForParameter()){
+	//		txfrm->Apply(header, true);
+	//	}
 
-		if (txfrm->ValidForParameter()){
-			txfrm->Apply(header, true);
-		}
+	//	if (txfrm->GetResult().code() == protocol::ERRCODE_SUCCESS){
+	//		txfrm->AllCommit();
+	//	}
 
-		if (txfrm->GetResult().code() == protocol::ERRCODE_SUCCESS){
-			txfrm->AllCommit();
-		}
-
-		LedgerManager::Instance().execute_transaction_ = back;
-		return txfrm->GetResult().code() == protocol::ERRCODE_SUCCESS;
-	}
+	//	//LedgerManager::Instance().execute_transaction_.second = back;
+	//	return txfrm->GetResult().code() == protocol::ERRCODE_SUCCESS;
+	//}
 }

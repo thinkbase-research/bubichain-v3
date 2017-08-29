@@ -141,14 +141,20 @@ message Signer {
 		 int64 weight = 2;
 }
 
-message TransactionTrigger{
+message Trigger{
 	enum TransactionType{
 		NORMAL_TRANSACTION	 = 0;
 		CONTRACT_TRANSACTION = 1;
 	};
+
+	message OperationTrigger{
+		bytes hash = 1;
+		int64 index = 2;
+	}
 	TransactionType transaction_type = 1;
-	int64 ledger_seq = 2;
-	bytes transaction_hash = 3;
+	int64 ledger_seq = 2;  //如果是特定区块触发的（暂时未提供）
+	OperationTrigger transaction = 3;  //如果是交易触发的
+	
 }
 
 enum Limit{
@@ -161,7 +167,7 @@ message TransactionEnv {
 
 	repeated Signature signatures 	= 2;
 
-	TransactionTrigger trigger = 3;
+	Trigger trigger = 3;
 }
 
 
@@ -198,7 +204,7 @@ message Contract{
 		JAVASCRIPT = 0;
 	}
 	ContractType type = 1; //合约类型
-	string payload = 2;		//合约内容
+	string payload = 2;		//合约内容,js 代码
 }
 
 //创建账户
