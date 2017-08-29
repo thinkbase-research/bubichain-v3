@@ -35,6 +35,7 @@ message LedgerHeader
 	int64	version 			    = 7;
 	int64	tx_count 				= 8;
 	bytes   validators_hash = 9;	// hash
+	string	reserve = 10;
 }
 
 message Ledger{
@@ -130,6 +131,8 @@ message Transaction {
 		repeated Operation operations = 4;
 
 		bytes metadata = 5;
+
+		int64  fee = 6;
 }
 
 message Signer {
@@ -213,6 +216,7 @@ message OperationCreateAccount{
 	Contract contract = 2;
 	AccountPrivilege priv = 3;
 	repeated KeyPair metadatas = 4;	
+	int64	init_balance = 5;
 }
 
 
