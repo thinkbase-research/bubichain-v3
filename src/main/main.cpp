@@ -198,14 +198,6 @@ int main(int argc, char *argv[]){
 		bubiAtExit.Push(std::bind(&bubi::PeerManager::Exit, &p2p));
 		LOG_INFO("Initialize peer network successful");
 
-		bubi::MonitorManager &monitor_manager = bubi::MonitorManager::Instance();
-		if (!bubi::g_enable_ || !monitor_manager.Initialize()) {
-			LOG_ERROR("Initialize monitor manager failed");
-			break;
-		}
-		bubiAtExit.Push(std::bind(&bubi::MonitorManager::Exit, &monitor_manager));
-		LOG_INFO("Initialize monitor manager successful");
-
 		bubi::SlowTimer &slow_timer = bubi::SlowTimer::Instance();
 		if (!bubi::g_enable_ || !slow_timer.Initialize(1)){
 			LOG_ERROR_ERRNO("Initialize slow timer failed", STD_ERR_CODE, STD_ERR_DESC);
@@ -229,6 +221,14 @@ int main(int argc, char *argv[]){
 		}
 		bubiAtExit.Push(std::bind(&bubi::WebServer::Exit, &web_server));
 		LOG_INFO("Initialize web server successful");
+		
+		bubi::MonitorManager &monitor_manager = bubi::MonitorManager::Instance();
+		if (!bubi::g_enable_ || !monitor_manager.Initialize()) {
+			LOG_ERROR("Initialize monitor manager failed");
+			break;
+		}
+		bubiAtExit.Push(std::bind(&bubi::MonitorManager::Exit, &monitor_manager));
+		LOG_INFO("Initialize monitor manager successful");
 
 		bubi::ContractManager::Initialize(argc, argv);
 		//bubi::ContractManager &contract_manager = bubi::LedgerManager::Instance().contract_manager_;
@@ -253,6 +253,7 @@ int main(int argc, char *argv[]){
 	bubi::PeerManager::ExitInstance();
 	bubi::WebSocketServer::ExitInstance();
 	bubi::WebServer::ExitInstance();
+	bubi::MonitorManager::ExitInstance();
 	cfca::CFCA::ExitInstance();
 	bubi::Configure::ExitInstance();
 	bubi::Global::ExitInstance();

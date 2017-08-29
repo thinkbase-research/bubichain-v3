@@ -28,6 +28,7 @@ namespace bubi {
 		last_connect_time_ = 0;
 		check_alert_interval_ = connect_interval_ = 5 * utils::MICRO_UNITS_PER_SEC;
 		last_connect_time_ = 0;
+		is_connected_ = false;
 
 		request_methods_[monitor::MONITOR_MSGTYPE_REGISTER] = std::bind(&MonitorManager::OnMonitorRegister, this, std::placeholders::_1, std::placeholders::_2);
 		request_methods_[monitor::MONITOR_MSGTYPE_BUBI] = std::bind(&MonitorManager::OnBubiStatus, this, std::placeholders::_1, std::placeholders::_2);
@@ -67,7 +68,7 @@ namespace bubi {
 	}
 
 	void MonitorManager::Run(utils::Thread *thread) {
-		Start(bubi::Configure::Instance().wsserver_configure_.listen_address_);
+		Start(utils::InetAddress::None());
 	}
 
 	bool MonitorManager::OnConnectOpen(Connection *conn) {
@@ -257,7 +258,7 @@ namespace bubi {
 			bool bret = true;
 			std::error_code ignore_ec;
 			Connection *monitor = GetClientConnection();
-			if (!monitor->SendRequest(monitor::MONITOR_MSGTYPE_ALERT, alert_status.SerializeAsString(), ignore_ec)) {
+			if (monitor != NULL && !monitor->SendRequest(monitor::MONITOR_MSGTYPE_ALERT, alert_status.SerializeAsString(), ignore_ec)) {
 				bret = false;
 				LOG_ERROR("Send alert status from ip(%s) failed (%d:%s)", monitor->GetPeerAddress().ToIpPort().c_str(),
 					ignore_ec.value(), ignore_ec.message().c_str());
