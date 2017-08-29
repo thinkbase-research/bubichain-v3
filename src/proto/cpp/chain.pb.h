@@ -62,7 +62,8 @@ class TransactionEnv;
 class TransactionEnvSet;
 class TransactionEnvStore;
 class TransactionEnvWrapper;
-class TransactionTrigger;
+class Trigger;
+class Trigger_OperationTrigger;
 
 enum Operation_Type {
   Operation_Type_UNKNOWN = 0,
@@ -133,26 +134,26 @@ inline bool Signer_Limit_Parse(
   return ::google::protobuf::internal::ParseNamedEnum<Signer_Limit>(
     Signer_Limit_descriptor(), name, value);
 }
-enum TransactionTrigger_TransactionType {
-  TransactionTrigger_TransactionType_NORMAL_TRANSACTION = 0,
-  TransactionTrigger_TransactionType_CONTRACT_TRANSACTION = 1,
-  TransactionTrigger_TransactionType_TransactionTrigger_TransactionType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  TransactionTrigger_TransactionType_TransactionTrigger_TransactionType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
+enum Trigger_TransactionType {
+  Trigger_TransactionType_NORMAL_TRANSACTION = 0,
+  Trigger_TransactionType_CONTRACT_TRANSACTION = 1,
+  Trigger_TransactionType_Trigger_TransactionType_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
+  Trigger_TransactionType_Trigger_TransactionType_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
 };
-bool TransactionTrigger_TransactionType_IsValid(int value);
-const TransactionTrigger_TransactionType TransactionTrigger_TransactionType_TransactionType_MIN = TransactionTrigger_TransactionType_NORMAL_TRANSACTION;
-const TransactionTrigger_TransactionType TransactionTrigger_TransactionType_TransactionType_MAX = TransactionTrigger_TransactionType_CONTRACT_TRANSACTION;
-const int TransactionTrigger_TransactionType_TransactionType_ARRAYSIZE = TransactionTrigger_TransactionType_TransactionType_MAX + 1;
+bool Trigger_TransactionType_IsValid(int value);
+const Trigger_TransactionType Trigger_TransactionType_TransactionType_MIN = Trigger_TransactionType_NORMAL_TRANSACTION;
+const Trigger_TransactionType Trigger_TransactionType_TransactionType_MAX = Trigger_TransactionType_CONTRACT_TRANSACTION;
+const int Trigger_TransactionType_TransactionType_ARRAYSIZE = Trigger_TransactionType_TransactionType_MAX + 1;
 
-const ::google::protobuf::EnumDescriptor* TransactionTrigger_TransactionType_descriptor();
-inline const ::std::string& TransactionTrigger_TransactionType_Name(TransactionTrigger_TransactionType value) {
+const ::google::protobuf::EnumDescriptor* Trigger_TransactionType_descriptor();
+inline const ::std::string& Trigger_TransactionType_Name(Trigger_TransactionType value) {
   return ::google::protobuf::internal::NameOfEnum(
-    TransactionTrigger_TransactionType_descriptor(), value);
+    Trigger_TransactionType_descriptor(), value);
 }
-inline bool TransactionTrigger_TransactionType_Parse(
-    const ::std::string& name, TransactionTrigger_TransactionType* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<TransactionTrigger_TransactionType>(
-    TransactionTrigger_TransactionType_descriptor(), name, value);
+inline bool Trigger_TransactionType_Parse(
+    const ::std::string& name, Trigger_TransactionType* value) {
+  return ::google::protobuf::internal::ParseNamedEnum<Trigger_TransactionType>(
+    Trigger_TransactionType_descriptor(), name, value);
 }
 enum Contract_ContractType {
   Contract_ContractType_JAVASCRIPT = 0,
@@ -2085,32 +2086,32 @@ class Signer : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
 };
 // -------------------------------------------------------------------
 
-class TransactionTrigger : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protocol.TransactionTrigger) */ {
+class Trigger_OperationTrigger : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protocol.Trigger.OperationTrigger) */ {
  public:
-  TransactionTrigger();
-  virtual ~TransactionTrigger();
+  Trigger_OperationTrigger();
+  virtual ~Trigger_OperationTrigger();
 
-  TransactionTrigger(const TransactionTrigger& from);
+  Trigger_OperationTrigger(const Trigger_OperationTrigger& from);
 
-  inline TransactionTrigger& operator=(const TransactionTrigger& from) {
+  inline Trigger_OperationTrigger& operator=(const Trigger_OperationTrigger& from) {
     CopyFrom(from);
     return *this;
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const TransactionTrigger& default_instance();
+  static const Trigger_OperationTrigger& default_instance();
 
-  void Swap(TransactionTrigger* other);
+  void Swap(Trigger_OperationTrigger* other);
 
   // implements Message ----------------------------------------------
 
-  inline TransactionTrigger* New() const { return New(NULL); }
+  inline Trigger_OperationTrigger* New() const { return New(NULL); }
 
-  TransactionTrigger* New(::google::protobuf::Arena* arena) const;
+  Trigger_OperationTrigger* New(::google::protobuf::Arena* arena) const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const TransactionTrigger& from);
-  void MergeFrom(const TransactionTrigger& from);
+  void CopyFrom(const Trigger_OperationTrigger& from);
+  void MergeFrom(const Trigger_OperationTrigger& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -2129,7 +2130,7 @@ class TransactionTrigger : public ::google::protobuf::Message /* @@protoc_insert
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const;
-  void InternalSwap(TransactionTrigger* other);
+  void InternalSwap(Trigger_OperationTrigger* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return _internal_metadata_.arena();
@@ -2143,39 +2144,135 @@ class TransactionTrigger : public ::google::protobuf::Message /* @@protoc_insert
 
   // nested types ----------------------------------------------------
 
-  typedef TransactionTrigger_TransactionType TransactionType;
+  // accessors -------------------------------------------------------
+
+  // optional bytes hash = 1;
+  void clear_hash();
+  static const int kHashFieldNumber = 1;
+  const ::std::string& hash() const;
+  void set_hash(const ::std::string& value);
+  void set_hash(const char* value);
+  void set_hash(const void* value, size_t size);
+  ::std::string* mutable_hash();
+  ::std::string* release_hash();
+  void set_allocated_hash(::std::string* hash);
+
+  // optional int64 index = 2;
+  void clear_index();
+  static const int kIndexFieldNumber = 2;
+  ::google::protobuf::int64 index() const;
+  void set_index(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:protocol.Trigger.OperationTrigger)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  bool _is_default_instance_;
+  ::google::protobuf::internal::ArenaStringPtr hash_;
+  ::google::protobuf::int64 index_;
+  mutable int _cached_size_;
+  friend void  protobuf_AddDesc_chain_2eproto();
+  friend void protobuf_AssignDesc_chain_2eproto();
+  friend void protobuf_ShutdownFile_chain_2eproto();
+
+  void InitAsDefaultInstance();
+  static Trigger_OperationTrigger* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class Trigger : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:protocol.Trigger) */ {
+ public:
+  Trigger();
+  virtual ~Trigger();
+
+  Trigger(const Trigger& from);
+
+  inline Trigger& operator=(const Trigger& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Trigger& default_instance();
+
+  void Swap(Trigger* other);
+
+  // implements Message ----------------------------------------------
+
+  inline Trigger* New() const { return New(NULL); }
+
+  Trigger* New(::google::protobuf::Arena* arena) const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const Trigger& from);
+  void MergeFrom(const Trigger& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
+    return InternalSerializeWithCachedSizesToArray(false, output);
+  }
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  void InternalSwap(Trigger* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return _internal_metadata_.arena();
+  }
+  inline void* MaybeArenaPtr() const {
+    return _internal_metadata_.raw_arena_ptr();
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef Trigger_OperationTrigger OperationTrigger;
+
+  typedef Trigger_TransactionType TransactionType;
   static const TransactionType NORMAL_TRANSACTION =
-    TransactionTrigger_TransactionType_NORMAL_TRANSACTION;
+    Trigger_TransactionType_NORMAL_TRANSACTION;
   static const TransactionType CONTRACT_TRANSACTION =
-    TransactionTrigger_TransactionType_CONTRACT_TRANSACTION;
+    Trigger_TransactionType_CONTRACT_TRANSACTION;
   static inline bool TransactionType_IsValid(int value) {
-    return TransactionTrigger_TransactionType_IsValid(value);
+    return Trigger_TransactionType_IsValid(value);
   }
   static const TransactionType TransactionType_MIN =
-    TransactionTrigger_TransactionType_TransactionType_MIN;
+    Trigger_TransactionType_TransactionType_MIN;
   static const TransactionType TransactionType_MAX =
-    TransactionTrigger_TransactionType_TransactionType_MAX;
+    Trigger_TransactionType_TransactionType_MAX;
   static const int TransactionType_ARRAYSIZE =
-    TransactionTrigger_TransactionType_TransactionType_ARRAYSIZE;
+    Trigger_TransactionType_TransactionType_ARRAYSIZE;
   static inline const ::google::protobuf::EnumDescriptor*
   TransactionType_descriptor() {
-    return TransactionTrigger_TransactionType_descriptor();
+    return Trigger_TransactionType_descriptor();
   }
   static inline const ::std::string& TransactionType_Name(TransactionType value) {
-    return TransactionTrigger_TransactionType_Name(value);
+    return Trigger_TransactionType_Name(value);
   }
   static inline bool TransactionType_Parse(const ::std::string& name,
       TransactionType* value) {
-    return TransactionTrigger_TransactionType_Parse(name, value);
+    return Trigger_TransactionType_Parse(name, value);
   }
 
   // accessors -------------------------------------------------------
 
-  // optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;
+  // optional .protocol.Trigger.TransactionType transaction_type = 1;
   void clear_transaction_type();
   static const int kTransactionTypeFieldNumber = 1;
-  ::protocol::TransactionTrigger_TransactionType transaction_type() const;
-  void set_transaction_type(::protocol::TransactionTrigger_TransactionType value);
+  ::protocol::Trigger_TransactionType transaction_type() const;
+  void set_transaction_type(::protocol::Trigger_TransactionType value);
 
   // optional int64 ledger_seq = 2;
   void clear_ledger_seq();
@@ -2183,24 +2280,22 @@ class TransactionTrigger : public ::google::protobuf::Message /* @@protoc_insert
   ::google::protobuf::int64 ledger_seq() const;
   void set_ledger_seq(::google::protobuf::int64 value);
 
-  // optional bytes transaction_hash = 3;
-  void clear_transaction_hash();
-  static const int kTransactionHashFieldNumber = 3;
-  const ::std::string& transaction_hash() const;
-  void set_transaction_hash(const ::std::string& value);
-  void set_transaction_hash(const char* value);
-  void set_transaction_hash(const void* value, size_t size);
-  ::std::string* mutable_transaction_hash();
-  ::std::string* release_transaction_hash();
-  void set_allocated_transaction_hash(::std::string* transaction_hash);
+  // optional .protocol.Trigger.OperationTrigger transaction = 3;
+  bool has_transaction() const;
+  void clear_transaction();
+  static const int kTransactionFieldNumber = 3;
+  const ::protocol::Trigger_OperationTrigger& transaction() const;
+  ::protocol::Trigger_OperationTrigger* mutable_transaction();
+  ::protocol::Trigger_OperationTrigger* release_transaction();
+  void set_allocated_transaction(::protocol::Trigger_OperationTrigger* transaction);
 
-  // @@protoc_insertion_point(class_scope:protocol.TransactionTrigger)
+  // @@protoc_insertion_point(class_scope:protocol.Trigger)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
   ::google::protobuf::int64 ledger_seq_;
-  ::google::protobuf::internal::ArenaStringPtr transaction_hash_;
+  ::protocol::Trigger_OperationTrigger* transaction_;
   int transaction_type_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_chain_2eproto();
@@ -2208,7 +2303,7 @@ class TransactionTrigger : public ::google::protobuf::Message /* @@protoc_insert
   friend void protobuf_ShutdownFile_chain_2eproto();
 
   void InitAsDefaultInstance();
-  static TransactionTrigger* default_instance_;
+  static Trigger* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -2293,14 +2388,14 @@ class TransactionEnv : public ::google::protobuf::Message /* @@protoc_insertion_
   const ::google::protobuf::RepeatedPtrField< ::protocol::Signature >&
       signatures() const;
 
-  // optional .protocol.TransactionTrigger trigger = 3;
+  // optional .protocol.Trigger trigger = 3;
   bool has_trigger() const;
   void clear_trigger();
   static const int kTriggerFieldNumber = 3;
-  const ::protocol::TransactionTrigger& trigger() const;
-  ::protocol::TransactionTrigger* mutable_trigger();
-  ::protocol::TransactionTrigger* release_trigger();
-  void set_allocated_trigger(::protocol::TransactionTrigger* trigger);
+  const ::protocol::Trigger& trigger() const;
+  ::protocol::Trigger* mutable_trigger();
+  ::protocol::Trigger* release_trigger();
+  void set_allocated_trigger(::protocol::Trigger* trigger);
 
   // @@protoc_insertion_point(class_scope:protocol.TransactionEnv)
  private:
@@ -2309,7 +2404,7 @@ class TransactionEnv : public ::google::protobuf::Message /* @@protoc_insertion_
   bool _is_default_instance_;
   ::protocol::Transaction* transaction_;
   ::google::protobuf::RepeatedPtrField< ::protocol::Signature > signatures_;
-  ::protocol::TransactionTrigger* trigger_;
+  ::protocol::Trigger* trigger_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_chain_2eproto();
   friend void protobuf_AssignDesc_chain_2eproto();
@@ -5057,78 +5152,134 @@ inline void Signer::set_weight(::google::protobuf::int64 value) {
 
 // -------------------------------------------------------------------
 
-// TransactionTrigger
+// Trigger_OperationTrigger
 
-// optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;
-inline void TransactionTrigger::clear_transaction_type() {
-  transaction_type_ = 0;
+// optional bytes hash = 1;
+inline void Trigger_OperationTrigger::clear_hash() {
+  hash_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::protocol::TransactionTrigger_TransactionType TransactionTrigger::transaction_type() const {
-  // @@protoc_insertion_point(field_get:protocol.TransactionTrigger.transaction_type)
-  return static_cast< ::protocol::TransactionTrigger_TransactionType >(transaction_type_);
+inline const ::std::string& Trigger_OperationTrigger::hash() const {
+  // @@protoc_insertion_point(field_get:protocol.Trigger.OperationTrigger.hash)
+  return hash_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void TransactionTrigger::set_transaction_type(::protocol::TransactionTrigger_TransactionType value) {
+inline void Trigger_OperationTrigger::set_hash(const ::std::string& value) {
   
-  transaction_type_ = value;
-  // @@protoc_insertion_point(field_set:protocol.TransactionTrigger.transaction_type)
+  hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:protocol.Trigger.OperationTrigger.hash)
 }
-
-// optional int64 ledger_seq = 2;
-inline void TransactionTrigger::clear_ledger_seq() {
-  ledger_seq_ = GOOGLE_LONGLONG(0);
-}
-inline ::google::protobuf::int64 TransactionTrigger::ledger_seq() const {
-  // @@protoc_insertion_point(field_get:protocol.TransactionTrigger.ledger_seq)
-  return ledger_seq_;
-}
-inline void TransactionTrigger::set_ledger_seq(::google::protobuf::int64 value) {
+inline void Trigger_OperationTrigger::set_hash(const char* value) {
   
-  ledger_seq_ = value;
-  // @@protoc_insertion_point(field_set:protocol.TransactionTrigger.ledger_seq)
+  hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:protocol.Trigger.OperationTrigger.hash)
 }
-
-// optional bytes transaction_hash = 3;
-inline void TransactionTrigger::clear_transaction_hash() {
-  transaction_hash_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& TransactionTrigger::transaction_hash() const {
-  // @@protoc_insertion_point(field_get:protocol.TransactionTrigger.transaction_hash)
-  return transaction_hash_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void TransactionTrigger::set_transaction_hash(const ::std::string& value) {
+inline void Trigger_OperationTrigger::set_hash(const void* value, size_t size) {
   
-  transaction_hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:protocol.TransactionTrigger.transaction_hash)
-}
-inline void TransactionTrigger::set_transaction_hash(const char* value) {
-  
-  transaction_hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:protocol.TransactionTrigger.transaction_hash)
-}
-inline void TransactionTrigger::set_transaction_hash(const void* value, size_t size) {
-  
-  transaction_hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:protocol.TransactionTrigger.transaction_hash)
+  // @@protoc_insertion_point(field_set_pointer:protocol.Trigger.OperationTrigger.hash)
 }
-inline ::std::string* TransactionTrigger::mutable_transaction_hash() {
+inline ::std::string* Trigger_OperationTrigger::mutable_hash() {
   
-  // @@protoc_insertion_point(field_mutable:protocol.TransactionTrigger.transaction_hash)
-  return transaction_hash_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:protocol.Trigger.OperationTrigger.hash)
+  return hash_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* TransactionTrigger::release_transaction_hash() {
-  // @@protoc_insertion_point(field_release:protocol.TransactionTrigger.transaction_hash)
+inline ::std::string* Trigger_OperationTrigger::release_hash() {
+  // @@protoc_insertion_point(field_release:protocol.Trigger.OperationTrigger.hash)
   
-  return transaction_hash_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return hash_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void TransactionTrigger::set_allocated_transaction_hash(::std::string* transaction_hash) {
-  if (transaction_hash != NULL) {
+inline void Trigger_OperationTrigger::set_allocated_hash(::std::string* hash) {
+  if (hash != NULL) {
     
   } else {
     
   }
-  transaction_hash_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), transaction_hash);
-  // @@protoc_insertion_point(field_set_allocated:protocol.TransactionTrigger.transaction_hash)
+  hash_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), hash);
+  // @@protoc_insertion_point(field_set_allocated:protocol.Trigger.OperationTrigger.hash)
+}
+
+// optional int64 index = 2;
+inline void Trigger_OperationTrigger::clear_index() {
+  index_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Trigger_OperationTrigger::index() const {
+  // @@protoc_insertion_point(field_get:protocol.Trigger.OperationTrigger.index)
+  return index_;
+}
+inline void Trigger_OperationTrigger::set_index(::google::protobuf::int64 value) {
+  
+  index_ = value;
+  // @@protoc_insertion_point(field_set:protocol.Trigger.OperationTrigger.index)
+}
+
+// -------------------------------------------------------------------
+
+// Trigger
+
+// optional .protocol.Trigger.TransactionType transaction_type = 1;
+inline void Trigger::clear_transaction_type() {
+  transaction_type_ = 0;
+}
+inline ::protocol::Trigger_TransactionType Trigger::transaction_type() const {
+  // @@protoc_insertion_point(field_get:protocol.Trigger.transaction_type)
+  return static_cast< ::protocol::Trigger_TransactionType >(transaction_type_);
+}
+inline void Trigger::set_transaction_type(::protocol::Trigger_TransactionType value) {
+  
+  transaction_type_ = value;
+  // @@protoc_insertion_point(field_set:protocol.Trigger.transaction_type)
+}
+
+// optional int64 ledger_seq = 2;
+inline void Trigger::clear_ledger_seq() {
+  ledger_seq_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Trigger::ledger_seq() const {
+  // @@protoc_insertion_point(field_get:protocol.Trigger.ledger_seq)
+  return ledger_seq_;
+}
+inline void Trigger::set_ledger_seq(::google::protobuf::int64 value) {
+  
+  ledger_seq_ = value;
+  // @@protoc_insertion_point(field_set:protocol.Trigger.ledger_seq)
+}
+
+// optional .protocol.Trigger.OperationTrigger transaction = 3;
+inline bool Trigger::has_transaction() const {
+  return !_is_default_instance_ && transaction_ != NULL;
+}
+inline void Trigger::clear_transaction() {
+  if (GetArenaNoVirtual() == NULL && transaction_ != NULL) delete transaction_;
+  transaction_ = NULL;
+}
+inline const ::protocol::Trigger_OperationTrigger& Trigger::transaction() const {
+  // @@protoc_insertion_point(field_get:protocol.Trigger.transaction)
+  return transaction_ != NULL ? *transaction_ : *default_instance_->transaction_;
+}
+inline ::protocol::Trigger_OperationTrigger* Trigger::mutable_transaction() {
+  
+  if (transaction_ == NULL) {
+    transaction_ = new ::protocol::Trigger_OperationTrigger;
+  }
+  // @@protoc_insertion_point(field_mutable:protocol.Trigger.transaction)
+  return transaction_;
+}
+inline ::protocol::Trigger_OperationTrigger* Trigger::release_transaction() {
+  // @@protoc_insertion_point(field_release:protocol.Trigger.transaction)
+  
+  ::protocol::Trigger_OperationTrigger* temp = transaction_;
+  transaction_ = NULL;
+  return temp;
+}
+inline void Trigger::set_allocated_transaction(::protocol::Trigger_OperationTrigger* transaction) {
+  delete transaction_;
+  transaction_ = transaction;
+  if (transaction) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:protocol.Trigger.transaction)
 }
 
 // -------------------------------------------------------------------
@@ -5203,7 +5354,7 @@ TransactionEnv::signatures() const {
   return signatures_;
 }
 
-// optional .protocol.TransactionTrigger trigger = 3;
+// optional .protocol.Trigger trigger = 3;
 inline bool TransactionEnv::has_trigger() const {
   return !_is_default_instance_ && trigger_ != NULL;
 }
@@ -5211,26 +5362,26 @@ inline void TransactionEnv::clear_trigger() {
   if (GetArenaNoVirtual() == NULL && trigger_ != NULL) delete trigger_;
   trigger_ = NULL;
 }
-inline const ::protocol::TransactionTrigger& TransactionEnv::trigger() const {
+inline const ::protocol::Trigger& TransactionEnv::trigger() const {
   // @@protoc_insertion_point(field_get:protocol.TransactionEnv.trigger)
   return trigger_ != NULL ? *trigger_ : *default_instance_->trigger_;
 }
-inline ::protocol::TransactionTrigger* TransactionEnv::mutable_trigger() {
+inline ::protocol::Trigger* TransactionEnv::mutable_trigger() {
   
   if (trigger_ == NULL) {
-    trigger_ = new ::protocol::TransactionTrigger;
+    trigger_ = new ::protocol::Trigger;
   }
   // @@protoc_insertion_point(field_mutable:protocol.TransactionEnv.trigger)
   return trigger_;
 }
-inline ::protocol::TransactionTrigger* TransactionEnv::release_trigger() {
+inline ::protocol::Trigger* TransactionEnv::release_trigger() {
   // @@protoc_insertion_point(field_release:protocol.TransactionEnv.trigger)
   
-  ::protocol::TransactionTrigger* temp = trigger_;
+  ::protocol::Trigger* temp = trigger_;
   trigger_ = NULL;
   return temp;
 }
-inline void TransactionEnv::set_allocated_trigger(::protocol::TransactionTrigger* trigger) {
+inline void TransactionEnv::set_allocated_trigger(::protocol::Trigger* trigger) {
   delete trigger_;
   trigger_ = trigger;
   if (trigger) {
@@ -6026,6 +6177,8 @@ inline void OperationSetMetadata::set_version(::google::protobuf::int64 value) {
 
 // -------------------------------------------------------------------
 
+// -------------------------------------------------------------------
+
 
 // @@protoc_insertion_point(namespace_scope)
 
@@ -6050,10 +6203,10 @@ template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::protocol::Signer_Limit>() {
   return ::protocol::Signer_Limit_descriptor();
 }
-template <> struct is_proto_enum< ::protocol::TransactionTrigger_TransactionType> : ::google::protobuf::internal::true_type {};
+template <> struct is_proto_enum< ::protocol::Trigger_TransactionType> : ::google::protobuf::internal::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::protocol::TransactionTrigger_TransactionType>() {
-  return ::protocol::TransactionTrigger_TransactionType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::protocol::Trigger_TransactionType>() {
+  return ::protocol::Trigger_TransactionType_descriptor();
 }
 template <> struct is_proto_enum< ::protocol::Contract_ContractType> : ::google::protobuf::internal::true_type {};
 template <>

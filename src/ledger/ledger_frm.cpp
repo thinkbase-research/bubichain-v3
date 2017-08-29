@@ -119,35 +119,31 @@ namespace bubi {
 
 	bool LedgerFrm::Apply(const protocol::ConsensusValue& request)
 	{
-		std::shared_ptr<protocol::LedgerHeader> pheader = std::make_shared<protocol::LedgerHeader>(ledger_.header());
+		value_ = std::make_shared<protocol::ConsensusValue>(request);
 		uint32_t success_count = 0;
 		environment_ = std::make_shared<Environment>();
 
-		TransactionFrm::pointer gtx = std::make_shared<TransactionFrm>();
-		gtx->environment_ = environment_;
-
 		for (int i = 0; i < request.txset().txs_size(); i++) {
-			auto tx = request.txset().txs(i);
-			TransactionFrm::pointer tx_frm = std::make_shared<TransactionFrm>(tx, gtx);
-			LedgerManager::Instance().execute_transaction_ = tx_frm;
+			auto txproto = request.txset().txs(i);
+			TransactionFrm::pointer tx_frm = std::make_shared<TransactionFrm>(txproto, environment_);
+			LedgerManager::Instance().transaction_stack_.push(tx_frm);
 
 			if (!tx_frm->ValidForApply()){
 				continue;
 			}
 
-			if (!tx_frm->Apply(pheader)){
+			if (!tx_frm->Apply(this)){
 				LOG_ERROR("transaction(%s) apply failed. %s",
 					utils::String::BinToHexString(tx_frm->GetContentHash()).c_str(), tx_frm->GetResult().desc().c_str());
 			}
 			else{
-				tx_frm->AllCommit();
+				tx_frm->environment_->Commit();
 			}
-			success_count++;			
 			apply_tx_frms_.push_back(tx_frm);
-			ledger_.add_transaction_envs()->CopyFrom(tx);
+			ledger_.add_transaction_envs()->CopyFrom(txproto);
+			LedgerManager::Instance().transaction_stack_.pop();
 		}
 
-		//GlueManager::Instance().NotifyErrTx(tmp_tx_frms_);
 		return true;
 	}
 

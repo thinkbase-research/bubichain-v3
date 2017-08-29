@@ -850,4 +850,66 @@ namespace bubi {
 
 		return ret;
 	}
+
+	bool LedgerManager::DoTransaction(protocol::TransactionEnv& env){
+
+		auto back = transaction_stack_.top();
+		
+		std::shared_ptr<AccountFrm> source_account;
+		
+		back->environment_->GetEntry(env.transaction().source_address(), source_account);
+		
+		env.mutable_transaction()->set_nonce(source_account->GetAccountNonce() + 1);
+		
+		auto header = std::make_shared<protocol::LedgerHeader>(LedgerManager::Instance().closing_ledger_->GetProtoHeader());
+
+		auto txfrm = std::make_shared<bubi::TransactionFrm >(env);
+
+		do 
+		{
+			if (transaction_stack_.size() > General::CONTRACT_MAX_RECURSIVE_DEPTH){
+				txfrm->result_.set_code(protocol::ERRCODE_CONTRACT_TOO_MANY_RECURSION);
+				break;
+			}
+
+			if (ContractManager::executing_contract_){
+				auto executing = ContractManager::executing_contract_;
+				executing->tx_do_count_++;
+				if (executing->tx_do_count_ > General::CONTRACT_TRANSACTION_LIMIT){
+					txfrm->result_.set_code(protocol::ERRCODE_CONTRACT_TOO_MANY_TRANSACTIONS);
+					break;
+				}
+			}
+
+			transaction_stack_.push(txfrm);
+			if (txfrm->ValidForParameter()){
+				txfrm->Apply(LedgerManager::Instance().closing_ledger_.get(), true);
+			}
+
+			protocol::TransactionEnvStore tx_store;
+			tx_store.mutable_transaction_env()->CopyFrom(txfrm->GetProtoTxEnv());
+			auto trigger = tx_store.mutable_transaction_env()->mutable_trigger();
+			trigger->mutable_transaction()->set_hash(back->GetContentHash());
+			trigger->mutable_transaction()->set_index(back->processing_operation_);
+			back->instructions_.push_back(tx_store);
+
+			if (txfrm->GetResult().code() == protocol::ERRCODE_SUCCESS){
+				back->instructions_.insert(back->instructions_.end(), txfrm->instructions_.begin(), txfrm->instructions_.end());
+			}
+			transaction_stack_.pop();
+
+			return txfrm->GetResult().code() == protocol::ERRCODE_SUCCESS;
+		} while (false);
+
+
+		//
+		protocol::TransactionEnvStore tx_store;
+		tx_store.mutable_transaction_env()->CopyFrom(txfrm->GetProtoTxEnv());
+		auto trigger = tx_store.mutable_transaction_env()->mutable_trigger();
+		trigger->mutable_transaction()->set_hash(back->GetContentHash());
+		trigger->mutable_transaction()->set_index(back->processing_operation_);
+		back->instructions_.push_back(tx_store);
+		//
+		return false;		
+	}
 }

@@ -18,8 +18,8 @@ limitations under the License.
 
 
 namespace bubi {
-	OperationFrm::OperationFrm(const protocol::Operation &operation, TransactionFrm* tran) :
-		operation_(operation), transaction_(tran) {}
+	OperationFrm::OperationFrm(const protocol::Operation &operation, TransactionFrm* tran, int32_t index) :
+		operation_(operation), transaction_(tran), index_(index) {}
 
 	OperationFrm::~OperationFrm() {}
 
@@ -483,13 +483,20 @@ namespace bubi {
 			if (!javascript.empty()){
 				ContractManager manager;
 	
+				std::string trigger_str = Proto2Json(transaction_->GetTransactionEnv()).toStyledString();
+				std::string err_msg;
 				if (!manager.Execute(javascript,
 					payment.input(),
 					payment.dest_address(),
-					source_account_->GetAccountAddress()))
+					source_account_->GetAccountAddress(),
+					trigger_str,
+					index_,
+					Proto2Json(*(transaction_->ledger_->value_)).toFastString(),
+					err_msg
+					))
 				{
 					result_.set_code(protocol::ERRCODE_CONTRACT_EXECUTE_FAIL);
-					result_.set_desc("Execute contract fail");
+					result_.set_desc(err_msg);
 					break;
 				}
 			}
@@ -590,21 +597,26 @@ namespace bubi {
 					));
 				break;
 			}
-			int new_balance = proto_source_account.balance() - ope.amount();
+			int64_t new_balance = proto_source_account.balance() - ope.amount();
 			proto_source_account.set_balance(new_balance);
 			proto_dest_account.set_balance(proto_dest_account.balance() + ope.amount());
-
+			
 			std::string javascript = dest_account_ptr->GetProtoAccount().contract().payload();
 			if (!javascript.empty()){
 				ContractManager manager;
-
+				std::string trigger_str = Proto2Json(transaction_->GetTransactionEnv()).toStyledString();
+				std::string err_msg;
 				if (!manager.Execute(javascript,
 					ope.input(),
 					ope.dest_address(),
-					source_account_->GetAccountAddress()))
+					source_account_->GetAccountAddress(),
+					trigger_str,
+					index_,
+					Proto2Json(*(transaction_->ledger_->value_)).toFastString(),
+					err_msg))
 				{
 					result_.set_code(protocol::ERRCODE_CONTRACT_EXECUTE_FAIL);
-					result_.set_desc("Execute contract fail");
+					result_.set_desc(err_msg);
 					break;
 				}
 			}
