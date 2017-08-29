@@ -431,6 +431,12 @@ namespace bubi {
 			}
 			else {
 				int64_t amount = asset_e.amount() + ope.amount();
+				if (amount < asset_e.amount() || amount < ope.amount())
+				{
+					result_.set_code(protocol::ERRCODE_ACCOUNT_ASSET_AMOUNT_TOO_LARGE);
+					result_.set_desc(utils::String::Format("IssueAsset asset(%s:%s) overflow(" FMT_I64 " " FMT_I64 ")", ap.issuer().c_str(), ap.code().c_str(), asset_e.amount(), ope.amount()));
+					break;
+				}
 				asset_e.set_amount(amount);
 				source_account_->SetAsset(asset_e);
 			}
@@ -474,6 +480,12 @@ namespace bubi {
 				}
 				else {
 					int64_t receiver_amount = dest_asset_ptr.amount() + payment.asset().amount();
+					if (receiver_amount < dest_asset_ptr.amount() || receiver_amount < payment.asset().amount())
+					{
+						result_.set_code(protocol::ERRCODE_ACCOUNT_ASSET_AMOUNT_TOO_LARGE);
+						result_.set_desc(utils::String::Format("Payment asset(%s:%s) overflow(" FMT_I64 " " FMT_I64 ")", ap.issuer().c_str(), ap.code().c_str(), dest_asset_ptr.amount(), payment.asset().amount()));
+						break;
+					}
 					dest_asset_ptr.set_amount(receiver_amount);
 					dest_account->SetAsset(dest_asset_ptr);
 				}
