@@ -69,7 +69,6 @@ int main(int argc, char *argv[]){
 			break;
 		}
 		bubiAtExit.Push(std::bind(&utils::Daemon::Exit, &daemon));
-		LOG_INFO("Initialize daemon successful");
 
 		bubi::Configure &config = bubi::Configure::Instance();
 		std::string config_path = bubi::General::CONFIG_FILE;
@@ -81,7 +80,6 @@ int main(int argc, char *argv[]){
 			LOG_STD_ERRNO("Load configure failed", STD_ERR_CODE, STD_ERR_DESC);
 			break;
 		}
-		LOG_INFO("Load configure successful");
 
 		std::string log_path = config.logger_configure_.path_;
 		if (!utils::File::IsAbsolute(log_path)){
@@ -96,6 +94,8 @@ int main(int argc, char *argv[]){
 			break;
 		}
 		bubiAtExit.Push(std::bind(&utils::Logger::Exit, &logger));
+		LOG_INFO("Initialize daemon successful");
+		LOG_INFO("Load configure successful");
 		LOG_INFO("Initialize logger successful");
 
 		// end run command
