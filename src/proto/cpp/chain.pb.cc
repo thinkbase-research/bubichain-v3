@@ -170,7 +170,7 @@ void protobuf_AssignDesc_chain_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Asset, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Asset, _is_default_instance_));
   LedgerHeader_descriptor_ = file->message_type(3);
-  static const int LedgerHeader_offsets_[9] = {
+  static const int LedgerHeader_offsets_[10] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LedgerHeader, seq_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LedgerHeader, hash_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LedgerHeader, previous_hash_),
@@ -180,6 +180,7 @@ void protobuf_AssignDesc_chain_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LedgerHeader, version_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LedgerHeader, tx_count_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LedgerHeader, validators_hash_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LedgerHeader, reserve_),
   };
   LedgerHeader_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -366,12 +367,13 @@ void protobuf_AssignDesc_chain_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(OperationSetThreshold, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(OperationSetThreshold, _is_default_instance_));
   Transaction_descriptor_ = file->message_type(14);
-  static const int Transaction_offsets_[5] = {
+  static const int Transaction_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Transaction, source_address_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Transaction, nonce_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Transaction, expr_condition_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Transaction, operations_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Transaction, metadata_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Transaction, fee_),
   };
   Transaction_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -541,11 +543,12 @@ void protobuf_AssignDesc_chain_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Contract, _is_default_instance_));
   Contract_ContractType_descriptor_ = Contract_descriptor_->enum_type(0);
   OperationCreateAccount_descriptor_ = file->message_type(23);
-  static const int OperationCreateAccount_offsets_[4] = {
+  static const int OperationCreateAccount_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(OperationCreateAccount, dest_address_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(OperationCreateAccount, contract_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(OperationCreateAccount, priv_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(OperationCreateAccount, metadatas_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(OperationCreateAccount, init_balance_),
   };
   OperationCreateAccount_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -717,89 +720,90 @@ void protobuf_AddDesc_chain_2eproto() {
     "ntract\022\017\n\007balance\030\007 \001(\003\"-\n\rAssetProperty"
     "\022\016\n\006issuer\030\001 \001(\t\022\014\n\004code\030\002 \001(\t\"B\n\005Asset\022"
     ")\n\010property\030\001 \001(\0132\027.protocol.AssetProper"
-    "ty\022\016\n\006amount\030\002 \001(\003\"\311\001\n\014LedgerHeader\022\013\n\003s"
+    "ty\022\016\n\006amount\030\002 \001(\003\"\332\001\n\014LedgerHeader\022\013\n\003s"
     "eq\030\001 \001(\003\022\014\n\004hash\030\002 \001(\014\022\025\n\rprevious_hash\030"
     "\003 \001(\014\022\031\n\021account_tree_hash\030\004 \001(\014\022\022\n\nclos"
     "e_time\030\005 \001(\003\022\034\n\024consensus_value_hash\030\006 \001"
     "(\014\022\017\n\007version\030\007 \001(\003\022\020\n\010tx_count\030\010 \001(\003\022\027\n"
-    "\017validators_hash\030\t \001(\014\"d\n\006Ledger\022&\n\006head"
-    "er\030\001 \001(\0132\026.protocol.LedgerHeader\0222\n\020tran"
-    "saction_envs\030\002 \003(\0132\030.protocol.Transactio"
-    "nEnv\"W\n\020OperationPayment\022\024\n\014dest_address"
-    "\030\001 \001(\t\022\036\n\005asset\030\002 \001(\0132\017.protocol.Asset\022\r"
-    "\n\005input\030\003 \001(\t\"S\n\026OperationTypeThreshold\022"
-    "&\n\004type\030\001 \001(\0162\030.protocol.Operation.Type\022"
-    "\021\n\tthreshold\030\002 \001(\003\"|\n\020AccountPrivilege\022\025"
-    "\n\rmaster_weight\030\001 \001(\003\022!\n\007signers\030\002 \003(\0132\020"
-    ".protocol.Signer\022.\n\nthresholds\030\003 \001(\0132\032.p"
-    "rotocol.AccountThreshold\"c\n\020AccountThres"
-    "hold\022\024\n\014tx_threshold\030\001 \001(\003\0229\n\017type_thres"
-    "holds\030\002 \003(\0132 .protocol.OperationTypeThre"
-    "shold\"3\n\023OperationIssueAsset\022\014\n\004code\030\001 \001"
-    "(\t\022\016\n\006amount\030\002 \001(\003\"G\n\020OperationPayCoin\022\024"
-    "\n\014dest_address\030\001 \001(\t\022\016\n\006amount\030\002 \001(\003\022\r\n\005"
-    "input\030\003 \001(\t\"T\n\030OperationSetSignerWeight\022"
-    "\025\n\rmaster_weight\030\001 \001(\003\022!\n\007signers\030\002 \003(\0132"
-    "\020.protocol.Signer\"\375\004\n\tOperation\022&\n\004type\030"
-    "\001 \001(\0162\030.protocol.Operation.Type\022\026\n\016sourc"
-    "e_address\030\002 \001(\t\022\020\n\010metadata\030\003 \001(\014\022\026\n\016exp"
-    "r_condition\030\004 \001(\t\0228\n\016create_account\030\005 \001("
-    "\0132 .protocol.OperationCreateAccount\0222\n\013i"
-    "ssue_asset\030\006 \001(\0132\035.protocol.OperationIss"
-    "ueAsset\022+\n\007payment\030\007 \001(\0132\032.protocol.Oper"
-    "ationPayment\0224\n\014set_metadata\030\t \001(\0132\036.pro"
-    "tocol.OperationSetMetadata\022=\n\021set_signer"
-    "_weight\030\n \001(\0132\".protocol.OperationSetSig"
-    "nerWeight\0226\n\rset_threshold\030\013 \001(\0132\037.proto"
-    "col.OperationSetThreshold\022,\n\010pay_coin\030\014 "
-    "\001(\0132\032.protocol.OperationPayCoin\"\217\001\n\004Type"
-    "\022\013\n\007UNKNOWN\020\000\022\022\n\016CREATE_ACCOUNT\020\001\022\017\n\013ISS"
-    "UE_ASSET\020\002\022\013\n\007PAYMENT\020\003\022\020\n\014SET_METADATA\020"
-    "\004\022\025\n\021SET_SIGNER_WEIGHT\020\005\022\021\n\rSET_THRESHOL"
-    "D\020\006\022\014\n\010PAY_COIN\020\007\"h\n\025OperationSetThresho"
-    "ld\022\024\n\014tx_threshold\030\001 \001(\003\0229\n\017type_thresho"
-    "lds\030\004 \003(\0132 .protocol.OperationTypeThresh"
-    "old\"\256\001\n\013Transaction\022\026\n\016source_address\030\001 "
-    "\001(\t\022\r\n\005nonce\030\002 \001(\003\022\026\n\016expr_condition\030\003 \001"
-    "(\t\022\'\n\noperations\030\004 \003(\0132\023.protocol.Operat"
-    "ion\022\020\n\010metadata\030\005 \001(\014\"%\n\005Limit\022\013\n\007UNKNOW"
-    "N\020\000\022\017\n\nOPERATIONS\020\350\007\"O\n\006Signer\022\017\n\007addres"
-    "s\030\001 \001(\t\022\016\n\006weight\030\002 \001(\003\"$\n\005Limit\022\017\n\013SIGN"
-    "ER_NONE\020\000\022\n\n\006SIGNER\020d\"\211\002\n\007Trigger\022;\n\020tra"
-    "nsaction_type\030\001 \001(\0162!.protocol.Trigger.T"
-    "ransactionType\022\022\n\nledger_seq\030\002 \001(\003\0227\n\013tr"
-    "ansaction\030\003 \001(\0132\".protocol.Trigger.Opera"
-    "tionTrigger\032/\n\020OperationTrigger\022\014\n\004hash\030"
-    "\001 \001(\014\022\r\n\005index\030\002 \001(\003\"C\n\017TransactionType\022"
-    "\026\n\022NORMAL_TRANSACTION\020\000\022\030\n\024CONTRACT_TRAN"
-    "SACTION\020\001\"\211\001\n\016TransactionEnv\022*\n\013transact"
-    "ion\030\001 \001(\0132\025.protocol.Transaction\022\'\n\nsign"
-    "atures\030\002 \003(\0132\023.protocol.Signature\022\"\n\007tri"
-    "gger\030\003 \001(\0132\021.protocol.Trigger\"\230\001\n\023Transa"
-    "ctionEnvStore\0221\n\017transaction_env\030\001 \001(\0132\030"
-    ".protocol.TransactionEnv\022\022\n\nerror_code\030\002"
-    " \001(\005\022\022\n\nerror_desc\030\003 \001(\t\022\022\n\nledger_seq\030\004"
-    " \001(\003\022\022\n\nclose_time\030\005 \001(\003\":\n\021TransactionE"
-    "nvSet\022%\n\003txs\030\002 \003(\0132\030.protocol.Transactio"
-    "nEnv\"\313\001\n\016ConsensusValue\022*\n\005txset\030\001 \001(\0132\033"
-    ".protocol.TransactionEnvSet\022\022\n\nclose_tim"
-    "e\030\002 \001(\003\022\026\n\016previous_proof\030\003 \001(\014\022\022\n\nledge"
-    "r_seq\030\004 \001(\003\022\034\n\024previous_ledger_hash\030\005 \001("
-    "\014\022/\n\016ledger_upgrade\030\006 \001(\0132\027.protocol.Led"
-    "gerUpgrade\"f\n\025TransactionEnvWrapper\0221\n\017t"
-    "ransaction_env\030\001 \001(\0132\030.protocol.Transact"
-    "ionEnv\022\032\n\022suggest_ledger_seq\030\002 \001(\003\"j\n\010Co"
-    "ntract\022-\n\004type\030\001 \001(\0162\037.protocol.Contract"
-    ".ContractType\022\017\n\007payload\030\002 \001(\t\"\036\n\014Contra"
-    "ctType\022\016\n\nJAVASCRIPT\020\000\"\244\001\n\026OperationCrea"
-    "teAccount\022\024\n\014dest_address\030\001 \001(\t\022$\n\010contr"
-    "act\030\002 \001(\0132\022.protocol.Contract\022(\n\004priv\030\003 "
-    "\001(\0132\032.protocol.AccountPrivilege\022$\n\tmetad"
-    "atas\030\004 \003(\0132\021.protocol.KeyPair\"C\n\024Operati"
-    "onSetMetadata\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001("
-    "\t\022\017\n\007version\030\003 \001(\003*#\n\005Limit\022\013\n\007UNKNOWN\020\000"
-    "\022\r\n\tSIGNATURE\020dB\035\n\033cn.bubi.blockchain.ad"
-    "apter3b\006proto3", 3614);
+    "\017validators_hash\030\t \001(\014\022\017\n\007reserve\030\n \001(\t\""
+    "d\n\006Ledger\022&\n\006header\030\001 \001(\0132\026.protocol.Led"
+    "gerHeader\0222\n\020transaction_envs\030\002 \003(\0132\030.pr"
+    "otocol.TransactionEnv\"W\n\020OperationPaymen"
+    "t\022\024\n\014dest_address\030\001 \001(\t\022\036\n\005asset\030\002 \001(\0132\017"
+    ".protocol.Asset\022\r\n\005input\030\003 \001(\t\"S\n\026Operat"
+    "ionTypeThreshold\022&\n\004type\030\001 \001(\0162\030.protoco"
+    "l.Operation.Type\022\021\n\tthreshold\030\002 \001(\003\"|\n\020A"
+    "ccountPrivilege\022\025\n\rmaster_weight\030\001 \001(\003\022!"
+    "\n\007signers\030\002 \003(\0132\020.protocol.Signer\022.\n\nthr"
+    "esholds\030\003 \001(\0132\032.protocol.AccountThreshol"
+    "d\"c\n\020AccountThreshold\022\024\n\014tx_threshold\030\001 "
+    "\001(\003\0229\n\017type_thresholds\030\002 \003(\0132 .protocol."
+    "OperationTypeThreshold\"3\n\023OperationIssue"
+    "Asset\022\014\n\004code\030\001 \001(\t\022\016\n\006amount\030\002 \001(\003\"G\n\020O"
+    "perationPayCoin\022\024\n\014dest_address\030\001 \001(\t\022\016\n"
+    "\006amount\030\002 \001(\003\022\r\n\005input\030\003 \001(\t\"T\n\030Operatio"
+    "nSetSignerWeight\022\025\n\rmaster_weight\030\001 \001(\003\022"
+    "!\n\007signers\030\002 \003(\0132\020.protocol.Signer\"\375\004\n\tO"
+    "peration\022&\n\004type\030\001 \001(\0162\030.protocol.Operat"
+    "ion.Type\022\026\n\016source_address\030\002 \001(\t\022\020\n\010meta"
+    "data\030\003 \001(\014\022\026\n\016expr_condition\030\004 \001(\t\0228\n\016cr"
+    "eate_account\030\005 \001(\0132 .protocol.OperationC"
+    "reateAccount\0222\n\013issue_asset\030\006 \001(\0132\035.prot"
+    "ocol.OperationIssueAsset\022+\n\007payment\030\007 \001("
+    "\0132\032.protocol.OperationPayment\0224\n\014set_met"
+    "adata\030\t \001(\0132\036.protocol.OperationSetMetad"
+    "ata\022=\n\021set_signer_weight\030\n \001(\0132\".protoco"
+    "l.OperationSetSignerWeight\0226\n\rset_thresh"
+    "old\030\013 \001(\0132\037.protocol.OperationSetThresho"
+    "ld\022,\n\010pay_coin\030\014 \001(\0132\032.protocol.Operatio"
+    "nPayCoin\"\217\001\n\004Type\022\013\n\007UNKNOWN\020\000\022\022\n\016CREATE"
+    "_ACCOUNT\020\001\022\017\n\013ISSUE_ASSET\020\002\022\013\n\007PAYMENT\020\003"
+    "\022\020\n\014SET_METADATA\020\004\022\025\n\021SET_SIGNER_WEIGHT\020"
+    "\005\022\021\n\rSET_THRESHOLD\020\006\022\014\n\010PAY_COIN\020\007\"h\n\025Op"
+    "erationSetThreshold\022\024\n\014tx_threshold\030\001 \001("
+    "\003\0229\n\017type_thresholds\030\004 \003(\0132 .protocol.Op"
+    "erationTypeThreshold\"\273\001\n\013Transaction\022\026\n\016"
+    "source_address\030\001 \001(\t\022\r\n\005nonce\030\002 \001(\003\022\026\n\016e"
+    "xpr_condition\030\003 \001(\t\022\'\n\noperations\030\004 \003(\0132"
+    "\023.protocol.Operation\022\020\n\010metadata\030\005 \001(\014\022\013"
+    "\n\003fee\030\006 \001(\003\"%\n\005Limit\022\013\n\007UNKNOWN\020\000\022\017\n\nOPE"
+    "RATIONS\020\350\007\"O\n\006Signer\022\017\n\007address\030\001 \001(\t\022\016\n"
+    "\006weight\030\002 \001(\003\"$\n\005Limit\022\017\n\013SIGNER_NONE\020\000\022"
+    "\n\n\006SIGNER\020d\"\211\002\n\007Trigger\022;\n\020transaction_t"
+    "ype\030\001 \001(\0162!.protocol.Trigger.Transaction"
+    "Type\022\022\n\nledger_seq\030\002 \001(\003\0227\n\013transaction\030"
+    "\003 \001(\0132\".protocol.Trigger.OperationTrigge"
+    "r\032/\n\020OperationTrigger\022\014\n\004hash\030\001 \001(\014\022\r\n\005i"
+    "ndex\030\002 \001(\003\"C\n\017TransactionType\022\026\n\022NORMAL_"
+    "TRANSACTION\020\000\022\030\n\024CONTRACT_TRANSACTION\020\001\""
+    "\211\001\n\016TransactionEnv\022*\n\013transaction\030\001 \001(\0132"
+    "\025.protocol.Transaction\022\'\n\nsignatures\030\002 \003"
+    "(\0132\023.protocol.Signature\022\"\n\007trigger\030\003 \001(\013"
+    "2\021.protocol.Trigger\"\230\001\n\023TransactionEnvSt"
+    "ore\0221\n\017transaction_env\030\001 \001(\0132\030.protocol."
+    "TransactionEnv\022\022\n\nerror_code\030\002 \001(\005\022\022\n\ner"
+    "ror_desc\030\003 \001(\t\022\022\n\nledger_seq\030\004 \001(\003\022\022\n\ncl"
+    "ose_time\030\005 \001(\003\":\n\021TransactionEnvSet\022%\n\003t"
+    "xs\030\002 \003(\0132\030.protocol.TransactionEnv\"\313\001\n\016C"
+    "onsensusValue\022*\n\005txset\030\001 \001(\0132\033.protocol."
+    "TransactionEnvSet\022\022\n\nclose_time\030\002 \001(\003\022\026\n"
+    "\016previous_proof\030\003 \001(\014\022\022\n\nledger_seq\030\004 \001("
+    "\003\022\034\n\024previous_ledger_hash\030\005 \001(\014\022/\n\016ledge"
+    "r_upgrade\030\006 \001(\0132\027.protocol.LedgerUpgrade"
+    "\"f\n\025TransactionEnvWrapper\0221\n\017transaction"
+    "_env\030\001 \001(\0132\030.protocol.TransactionEnv\022\032\n\022"
+    "suggest_ledger_seq\030\002 \001(\003\"j\n\010Contract\022-\n\004"
+    "type\030\001 \001(\0162\037.protocol.Contract.ContractT"
+    "ype\022\017\n\007payload\030\002 \001(\t\"\036\n\014ContractType\022\016\n\n"
+    "JAVASCRIPT\020\000\"\272\001\n\026OperationCreateAccount\022"
+    "\024\n\014dest_address\030\001 \001(\t\022$\n\010contract\030\002 \001(\0132"
+    "\022.protocol.Contract\022(\n\004priv\030\003 \001(\0132\032.prot"
+    "ocol.AccountPrivilege\022$\n\tmetadatas\030\004 \003(\013"
+    "2\021.protocol.KeyPair\022\024\n\014init_balance\030\005 \001("
+    "\003\"C\n\024OperationSetMetadata\022\013\n\003key\030\001 \001(\t\022\r"
+    "\n\005value\030\002 \001(\t\022\017\n\007version\030\003 \001(\003*#\n\005Limit\022"
+    "\013\n\007UNKNOWN\020\000\022\r\n\tSIGNATURE\020dB\035\n\033cn.bubi.b"
+    "lockchain.adapter3b\006proto3", 3666);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "chain.proto", &protobuf_RegisterTypes);
   Account::default_instance_ = new Account();
@@ -2315,6 +2319,7 @@ const int LedgerHeader::kConsensusValueHashFieldNumber;
 const int LedgerHeader::kVersionFieldNumber;
 const int LedgerHeader::kTxCountFieldNumber;
 const int LedgerHeader::kValidatorsHashFieldNumber;
+const int LedgerHeader::kReserveFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 LedgerHeader::LedgerHeader()
@@ -2348,6 +2353,7 @@ void LedgerHeader::SharedCtor() {
   version_ = GOOGLE_LONGLONG(0);
   tx_count_ = GOOGLE_LONGLONG(0);
   validators_hash_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  reserve_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 LedgerHeader::~LedgerHeader() {
@@ -2361,6 +2367,7 @@ void LedgerHeader::SharedDtor() {
   account_tree_hash_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   consensus_value_hash_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   validators_hash_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  reserve_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
@@ -2416,6 +2423,7 @@ void LedgerHeader::Clear() {
   close_time_ = GOOGLE_LONGLONG(0);
   consensus_value_hash_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   validators_hash_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  reserve_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 
 #undef ZR_HELPER_
 #undef ZR_
@@ -2552,6 +2560,23 @@ bool LedgerHeader::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(82)) goto parse_reserve;
+        break;
+      }
+
+      // optional string reserve = 10;
+      case 10: {
+        if (tag == 82) {
+         parse_reserve:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_reserve()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->reserve().data(), this->reserve().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "protocol.LedgerHeader.reserve"));
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -2630,6 +2655,16 @@ void LedgerHeader::SerializeWithCachedSizes(
       9, this->validators_hash(), output);
   }
 
+  // optional string reserve = 10;
+  if (this->reserve().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->reserve().data(), this->reserve().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "protocol.LedgerHeader.reserve");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      10, this->reserve(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:protocol.LedgerHeader)
 }
 
@@ -2689,6 +2724,17 @@ void LedgerHeader::SerializeWithCachedSizes(
     target =
       ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
         9, this->validators_hash(), target);
+  }
+
+  // optional string reserve = 10;
+  if (this->reserve().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->reserve().data(), this->reserve().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "protocol.LedgerHeader.reserve");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        10, this->reserve(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:protocol.LedgerHeader)
@@ -2762,6 +2808,13 @@ int LedgerHeader::ByteSize() const {
         this->validators_hash());
   }
 
+  // optional string reserve = 10;
+  if (this->reserve().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->reserve());
+  }
+
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = total_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
@@ -2822,6 +2875,10 @@ void LedgerHeader::MergeFrom(const LedgerHeader& from) {
 
     validators_hash_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.validators_hash_);
   }
+  if (from.reserve().size() > 0) {
+
+    reserve_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.reserve_);
+  }
 }
 
 void LedgerHeader::CopyFrom(const ::google::protobuf::Message& from) {
@@ -2857,6 +2914,7 @@ void LedgerHeader::InternalSwap(LedgerHeader* other) {
   std::swap(version_, other->version_);
   std::swap(tx_count_, other->tx_count_);
   validators_hash_.Swap(&other->validators_hash_);
+  reserve_.Swap(&other->reserve_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -3146,6 +3204,50 @@ void LedgerHeader::clear_validators_hash() {
   }
   validators_hash_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), validators_hash);
   // @@protoc_insertion_point(field_set_allocated:protocol.LedgerHeader.validators_hash)
+}
+
+// optional string reserve = 10;
+void LedgerHeader::clear_reserve() {
+  reserve_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ const ::std::string& LedgerHeader::reserve() const {
+  // @@protoc_insertion_point(field_get:protocol.LedgerHeader.reserve)
+  return reserve_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void LedgerHeader::set_reserve(const ::std::string& value) {
+  
+  reserve_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:protocol.LedgerHeader.reserve)
+}
+ void LedgerHeader::set_reserve(const char* value) {
+  
+  reserve_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:protocol.LedgerHeader.reserve)
+}
+ void LedgerHeader::set_reserve(const char* value, size_t size) {
+  
+  reserve_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:protocol.LedgerHeader.reserve)
+}
+ ::std::string* LedgerHeader::mutable_reserve() {
+  
+  // @@protoc_insertion_point(field_mutable:protocol.LedgerHeader.reserve)
+  return reserve_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ ::std::string* LedgerHeader::release_reserve() {
+  // @@protoc_insertion_point(field_release:protocol.LedgerHeader.reserve)
+  
+  return reserve_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+ void LedgerHeader::set_allocated_reserve(::std::string* reserve) {
+  if (reserve != NULL) {
+    
+  } else {
+    
+  }
+  reserve_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), reserve);
+  // @@protoc_insertion_point(field_set_allocated:protocol.LedgerHeader.reserve)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -7508,6 +7610,7 @@ const int Transaction::kNonceFieldNumber;
 const int Transaction::kExprConditionFieldNumber;
 const int Transaction::kOperationsFieldNumber;
 const int Transaction::kMetadataFieldNumber;
+const int Transaction::kFeeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Transaction::Transaction()
@@ -7536,6 +7639,7 @@ void Transaction::SharedCtor() {
   nonce_ = GOOGLE_LONGLONG(0);
   expr_condition_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   metadata_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  fee_ = GOOGLE_LONGLONG(0);
 }
 
 Transaction::~Transaction() {
@@ -7582,6 +7686,7 @@ void Transaction::Clear() {
   nonce_ = GOOGLE_LONGLONG(0);
   expr_condition_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   metadata_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  fee_ = GOOGLE_LONGLONG(0);
   operations_.Clear();
 }
 
@@ -7669,6 +7774,21 @@ bool Transaction::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(48)) goto parse_fee;
+        break;
+      }
+
+      // optional int64 fee = 6;
+      case 6: {
+        if (tag == 48) {
+         parse_fee:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &fee_)));
+
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -7734,6 +7854,11 @@ void Transaction::SerializeWithCachedSizes(
       5, this->metadata(), output);
   }
 
+  // optional int64 fee = 6;
+  if (this->fee() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(6, this->fee(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:protocol.Transaction)
 }
 
@@ -7781,6 +7906,11 @@ void Transaction::SerializeWithCachedSizes(
         5, this->metadata(), target);
   }
 
+  // optional int64 fee = 6;
+  if (this->fee() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(6, this->fee(), target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:protocol.Transaction)
   return target;
 }
@@ -7815,6 +7945,13 @@ int Transaction::ByteSize() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::BytesSize(
         this->metadata());
+  }
+
+  // optional int64 fee = 6;
+  if (this->fee() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->fee());
   }
 
   // repeated .protocol.Operation operations = 4;
@@ -7869,6 +8006,9 @@ void Transaction::MergeFrom(const Transaction& from) {
 
     metadata_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.metadata_);
   }
+  if (from.fee() != 0) {
+    set_fee(from.fee());
+  }
 }
 
 void Transaction::CopyFrom(const ::google::protobuf::Message& from) {
@@ -7900,6 +8040,7 @@ void Transaction::InternalSwap(Transaction* other) {
   expr_condition_.Swap(&other->expr_condition_);
   operations_.UnsafeArenaSwap(&other->operations_);
   metadata_.Swap(&other->metadata_);
+  std::swap(fee_, other->fee_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -8089,6 +8230,20 @@ void Transaction::clear_metadata() {
   }
   metadata_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), metadata);
   // @@protoc_insertion_point(field_set_allocated:protocol.Transaction.metadata)
+}
+
+// optional int64 fee = 6;
+void Transaction::clear_fee() {
+  fee_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 Transaction::fee() const {
+  // @@protoc_insertion_point(field_get:protocol.Transaction.fee)
+  return fee_;
+}
+ void Transaction::set_fee(::google::protobuf::int64 value) {
+  
+  fee_ = value;
+  // @@protoc_insertion_point(field_set:protocol.Transaction.fee)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -11699,6 +11854,7 @@ const int OperationCreateAccount::kDestAddressFieldNumber;
 const int OperationCreateAccount::kContractFieldNumber;
 const int OperationCreateAccount::kPrivFieldNumber;
 const int OperationCreateAccount::kMetadatasFieldNumber;
+const int OperationCreateAccount::kInitBalanceFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 OperationCreateAccount::OperationCreateAccount()
@@ -11728,6 +11884,7 @@ void OperationCreateAccount::SharedCtor() {
   dest_address_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   contract_ = NULL;
   priv_ = NULL;
+  init_balance_ = GOOGLE_LONGLONG(0);
 }
 
 OperationCreateAccount::~OperationCreateAccount() {
@@ -11775,6 +11932,7 @@ void OperationCreateAccount::Clear() {
   contract_ = NULL;
   if (GetArenaNoVirtual() == NULL && priv_ != NULL) delete priv_;
   priv_ = NULL;
+  init_balance_ = GOOGLE_LONGLONG(0);
   metadatas_.Clear();
 }
 
@@ -11843,6 +12001,21 @@ bool OperationCreateAccount::MergePartialFromCodedStream(
         }
         if (input->ExpectTag(34)) goto parse_loop_metadatas;
         input->UnsafeDecrementRecursionDepth();
+        if (input->ExpectTag(40)) goto parse_init_balance;
+        break;
+      }
+
+      // optional int64 init_balance = 5;
+      case 5: {
+        if (tag == 40) {
+         parse_init_balance:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &init_balance_)));
+
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -11899,6 +12072,11 @@ void OperationCreateAccount::SerializeWithCachedSizes(
       4, this->metadatas(i), output);
   }
 
+  // optional int64 init_balance = 5;
+  if (this->init_balance() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(5, this->init_balance(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:protocol.OperationCreateAccount)
 }
 
@@ -11937,6 +12115,11 @@ void OperationCreateAccount::SerializeWithCachedSizes(
         4, this->metadatas(i), false, target);
   }
 
+  // optional int64 init_balance = 5;
+  if (this->init_balance() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(5, this->init_balance(), target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:protocol.OperationCreateAccount)
   return target;
 }
@@ -11964,6 +12147,13 @@ int OperationCreateAccount::ByteSize() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->priv_);
+  }
+
+  // optional int64 init_balance = 5;
+  if (this->init_balance() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->init_balance());
   }
 
   // repeated .protocol.KeyPair metadatas = 4;
@@ -12013,6 +12203,9 @@ void OperationCreateAccount::MergeFrom(const OperationCreateAccount& from) {
   if (from.has_priv()) {
     mutable_priv()->::protocol::AccountPrivilege::MergeFrom(from.priv());
   }
+  if (from.init_balance() != 0) {
+    set_init_balance(from.init_balance());
+  }
 }
 
 void OperationCreateAccount::CopyFrom(const ::google::protobuf::Message& from) {
@@ -12043,6 +12236,7 @@ void OperationCreateAccount::InternalSwap(OperationCreateAccount* other) {
   std::swap(contract_, other->contract_);
   std::swap(priv_, other->priv_);
   metadatas_.UnsafeArenaSwap(&other->metadatas_);
+  std::swap(init_balance_, other->init_balance_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -12206,6 +12400,20 @@ const ::google::protobuf::RepeatedPtrField< ::protocol::KeyPair >&
 OperationCreateAccount::metadatas() const {
   // @@protoc_insertion_point(field_list:protocol.OperationCreateAccount.metadatas)
   return metadatas_;
+}
+
+// optional int64 init_balance = 5;
+void OperationCreateAccount::clear_init_balance() {
+  init_balance_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 OperationCreateAccount::init_balance() const {
+  // @@protoc_insertion_point(field_get:protocol.OperationCreateAccount.init_balance)
+  return init_balance_;
+}
+ void OperationCreateAccount::set_init_balance(::google::protobuf::int64 value) {
+  
+  init_balance_ = value;
+  // @@protoc_insertion_point(field_set:protocol.OperationCreateAccount.init_balance)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

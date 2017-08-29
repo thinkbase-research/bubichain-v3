@@ -673,6 +673,17 @@ class LedgerHeader : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::std::string* release_validators_hash();
   void set_allocated_validators_hash(::std::string* validators_hash);
 
+  // optional string reserve = 10;
+  void clear_reserve();
+  static const int kReserveFieldNumber = 10;
+  const ::std::string& reserve() const;
+  void set_reserve(const ::std::string& value);
+  void set_reserve(const char* value);
+  void set_reserve(const char* value, size_t size);
+  ::std::string* mutable_reserve();
+  ::std::string* release_reserve();
+  void set_allocated_reserve(::std::string* reserve);
+
   // @@protoc_insertion_point(class_scope:protocol.LedgerHeader)
  private:
 
@@ -687,6 +698,7 @@ class LedgerHeader : public ::google::protobuf::Message /* @@protoc_insertion_po
   ::google::protobuf::int64 version_;
   ::google::protobuf::int64 tx_count_;
   ::google::protobuf::internal::ArenaStringPtr validators_hash_;
+  ::google::protobuf::internal::ArenaStringPtr reserve_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_chain_2eproto();
   friend void protobuf_AssignDesc_chain_2eproto();
@@ -1946,6 +1958,12 @@ class Transaction : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::std::string* release_metadata();
   void set_allocated_metadata(::std::string* metadata);
 
+  // optional int64 fee = 6;
+  void clear_fee();
+  static const int kFeeFieldNumber = 6;
+  ::google::protobuf::int64 fee() const;
+  void set_fee(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:protocol.Transaction)
  private:
 
@@ -1956,6 +1974,7 @@ class Transaction : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::google::protobuf::internal::ArenaStringPtr expr_condition_;
   ::google::protobuf::RepeatedPtrField< ::protocol::Operation > operations_;
   ::google::protobuf::internal::ArenaStringPtr metadata_;
+  ::google::protobuf::int64 fee_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_chain_2eproto();
   friend void protobuf_AssignDesc_chain_2eproto();
@@ -3065,6 +3084,12 @@ class OperationCreateAccount : public ::google::protobuf::Message /* @@protoc_in
   const ::google::protobuf::RepeatedPtrField< ::protocol::KeyPair >&
       metadatas() const;
 
+  // optional int64 init_balance = 5;
+  void clear_init_balance();
+  static const int kInitBalanceFieldNumber = 5;
+  ::google::protobuf::int64 init_balance() const;
+  void set_init_balance(::google::protobuf::int64 value);
+
   // @@protoc_insertion_point(class_scope:protocol.OperationCreateAccount)
  private:
 
@@ -3074,6 +3099,7 @@ class OperationCreateAccount : public ::google::protobuf::Message /* @@protoc_in
   ::protocol::Contract* contract_;
   ::protocol::AccountPrivilege* priv_;
   ::google::protobuf::RepeatedPtrField< ::protocol::KeyPair > metadatas_;
+  ::google::protobuf::int64 init_balance_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_chain_2eproto();
   friend void protobuf_AssignDesc_chain_2eproto();
@@ -3858,6 +3884,50 @@ inline void LedgerHeader::set_allocated_validators_hash(::std::string* validator
   }
   validators_hash_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), validators_hash);
   // @@protoc_insertion_point(field_set_allocated:protocol.LedgerHeader.validators_hash)
+}
+
+// optional string reserve = 10;
+inline void LedgerHeader::clear_reserve() {
+  reserve_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& LedgerHeader::reserve() const {
+  // @@protoc_insertion_point(field_get:protocol.LedgerHeader.reserve)
+  return reserve_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void LedgerHeader::set_reserve(const ::std::string& value) {
+  
+  reserve_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:protocol.LedgerHeader.reserve)
+}
+inline void LedgerHeader::set_reserve(const char* value) {
+  
+  reserve_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:protocol.LedgerHeader.reserve)
+}
+inline void LedgerHeader::set_reserve(const char* value, size_t size) {
+  
+  reserve_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:protocol.LedgerHeader.reserve)
+}
+inline ::std::string* LedgerHeader::mutable_reserve() {
+  
+  // @@protoc_insertion_point(field_mutable:protocol.LedgerHeader.reserve)
+  return reserve_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* LedgerHeader::release_reserve() {
+  // @@protoc_insertion_point(field_release:protocol.LedgerHeader.reserve)
+  
+  return reserve_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void LedgerHeader::set_allocated_reserve(::std::string* reserve) {
+  if (reserve != NULL) {
+    
+  } else {
+    
+  }
+  reserve_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), reserve);
+  // @@protoc_insertion_point(field_set_allocated:protocol.LedgerHeader.reserve)
 }
 
 // -------------------------------------------------------------------
@@ -5088,6 +5158,20 @@ inline void Transaction::set_allocated_metadata(::std::string* metadata) {
   // @@protoc_insertion_point(field_set_allocated:protocol.Transaction.metadata)
 }
 
+// optional int64 fee = 6;
+inline void Transaction::clear_fee() {
+  fee_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Transaction::fee() const {
+  // @@protoc_insertion_point(field_get:protocol.Transaction.fee)
+  return fee_;
+}
+inline void Transaction::set_fee(::google::protobuf::int64 value) {
+  
+  fee_ = value;
+  // @@protoc_insertion_point(field_set:protocol.Transaction.fee)
+}
+
 // -------------------------------------------------------------------
 
 // Signer
@@ -6020,6 +6104,20 @@ inline const ::google::protobuf::RepeatedPtrField< ::protocol::KeyPair >&
 OperationCreateAccount::metadatas() const {
   // @@protoc_insertion_point(field_list:protocol.OperationCreateAccount.metadatas)
   return metadatas_;
+}
+
+// optional int64 init_balance = 5;
+inline void OperationCreateAccount::clear_init_balance() {
+  init_balance_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 OperationCreateAccount::init_balance() const {
+  // @@protoc_insertion_point(field_get:protocol.OperationCreateAccount.init_balance)
+  return init_balance_;
+}
+inline void OperationCreateAccount::set_init_balance(::google::protobuf::int64 value) {
+  
+  init_balance_ = value;
+  // @@protoc_insertion_point(field_set:protocol.OperationCreateAccount.init_balance)
 }
 
 // -------------------------------------------------------------------

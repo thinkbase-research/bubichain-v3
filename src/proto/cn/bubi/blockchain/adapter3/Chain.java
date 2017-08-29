@@ -2639,6 +2639,16 @@ public final class Chain {
      * <code>optional bytes validators_hash = 9;</code>
      */
     com.google.protobuf.ByteString getValidatorsHash();
+
+    /**
+     * <code>optional string reserve = 10;</code>
+     */
+    java.lang.String getReserve();
+    /**
+     * <code>optional string reserve = 10;</code>
+     */
+    com.google.protobuf.ByteString
+        getReserveBytes();
   }
   /**
    * Protobuf type {@code protocol.LedgerHeader}
@@ -2661,6 +2671,7 @@ public final class Chain {
       version_ = 0L;
       txCount_ = 0L;
       validatorsHash_ = com.google.protobuf.ByteString.EMPTY;
+      reserve_ = "";
     }
 
     @java.lang.Override
@@ -2731,6 +2742,12 @@ public final class Chain {
             case 74: {
 
               validatorsHash_ = input.readBytes();
+              break;
+            }
+            case 82: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              reserve_ = s;
               break;
             }
           }
@@ -2841,6 +2858,40 @@ public final class Chain {
       return validatorsHash_;
     }
 
+    public static final int RESERVE_FIELD_NUMBER = 10;
+    private volatile java.lang.Object reserve_;
+    /**
+     * <code>optional string reserve = 10;</code>
+     */
+    public java.lang.String getReserve() {
+      java.lang.Object ref = reserve_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        reserve_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string reserve = 10;</code>
+     */
+    public com.google.protobuf.ByteString
+        getReserveBytes() {
+      java.lang.Object ref = reserve_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        reserve_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -2879,6 +2930,9 @@ public final class Chain {
       }
       if (!validatorsHash_.isEmpty()) {
         output.writeBytes(9, validatorsHash_);
+      }
+      if (!getReserveBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 10, reserve_);
       }
     }
 
@@ -2923,6 +2977,9 @@ public final class Chain {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(9, validatorsHash_);
       }
+      if (!getReserveBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(10, reserve_);
+      }
       memoizedSize = size;
       return size;
     }
@@ -2957,6 +3014,8 @@ public final class Chain {
           == other.getTxCount());
       result = result && getValidatorsHash()
           .equals(other.getValidatorsHash());
+      result = result && getReserve()
+          .equals(other.getReserve());
       return result;
     }
 
@@ -2989,6 +3048,8 @@ public final class Chain {
           getTxCount());
       hash = (37 * hash) + VALIDATORS_HASH_FIELD_NUMBER;
       hash = (53 * hash) + getValidatorsHash().hashCode();
+      hash = (37 * hash) + RESERVE_FIELD_NUMBER;
+      hash = (53 * hash) + getReserve().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -3125,6 +3186,8 @@ public final class Chain {
 
         validatorsHash_ = com.google.protobuf.ByteString.EMPTY;
 
+        reserve_ = "";
+
         return this;
       }
 
@@ -3156,6 +3219,7 @@ public final class Chain {
         result.version_ = version_;
         result.txCount_ = txCount_;
         result.validatorsHash_ = validatorsHash_;
+        result.reserve_ = reserve_;
         onBuilt();
         return result;
       }
@@ -3223,6 +3287,10 @@ public final class Chain {
         }
         if (other.getValidatorsHash() != com.google.protobuf.ByteString.EMPTY) {
           setValidatorsHash(other.getValidatorsHash());
+        }
+        if (!other.getReserve().isEmpty()) {
+          reserve_ = other.reserve_;
+          onChanged();
         }
         onChanged();
         return this;
@@ -3507,6 +3575,75 @@ public final class Chain {
       public Builder clearValidatorsHash() {
         
         validatorsHash_ = getDefaultInstance().getValidatorsHash();
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object reserve_ = "";
+      /**
+       * <code>optional string reserve = 10;</code>
+       */
+      public java.lang.String getReserve() {
+        java.lang.Object ref = reserve_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          reserve_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string reserve = 10;</code>
+       */
+      public com.google.protobuf.ByteString
+          getReserveBytes() {
+        java.lang.Object ref = reserve_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          reserve_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string reserve = 10;</code>
+       */
+      public Builder setReserve(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        reserve_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string reserve = 10;</code>
+       */
+      public Builder clearReserve() {
+        
+        reserve_ = getDefaultInstance().getReserve();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string reserve = 10;</code>
+       */
+      public Builder setReserveBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        reserve_ = value;
         onChanged();
         return this;
       }
@@ -13306,6 +13443,11 @@ public final class Chain {
      * <code>optional bytes metadata = 5;</code>
      */
     com.google.protobuf.ByteString getMetadata();
+
+    /**
+     * <code>optional int64 fee = 6;</code>
+     */
+    long getFee();
   }
   /**
    * Protobuf type {@code protocol.Transaction}
@@ -13324,6 +13466,7 @@ public final class Chain {
       exprCondition_ = "";
       operations_ = java.util.Collections.emptyList();
       metadata_ = com.google.protobuf.ByteString.EMPTY;
+      fee_ = 0L;
     }
 
     @java.lang.Override
@@ -13380,6 +13523,11 @@ public final class Chain {
             case 42: {
 
               metadata_ = input.readBytes();
+              break;
+            }
+            case 48: {
+
+              fee_ = input.readInt64();
               break;
             }
           }
@@ -13628,6 +13776,15 @@ public final class Chain {
       return metadata_;
     }
 
+    public static final int FEE_FIELD_NUMBER = 6;
+    private long fee_;
+    /**
+     * <code>optional int64 fee = 6;</code>
+     */
+    public long getFee() {
+      return fee_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -13655,6 +13812,9 @@ public final class Chain {
       if (!metadata_.isEmpty()) {
         output.writeBytes(5, metadata_);
       }
+      if (fee_ != 0L) {
+        output.writeInt64(6, fee_);
+      }
     }
 
     public int getSerializedSize() {
@@ -13679,6 +13839,10 @@ public final class Chain {
       if (!metadata_.isEmpty()) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(5, metadata_);
+      }
+      if (fee_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, fee_);
       }
       memoizedSize = size;
       return size;
@@ -13706,6 +13870,8 @@ public final class Chain {
           .equals(other.getOperationsList());
       result = result && getMetadata()
           .equals(other.getMetadata());
+      result = result && (getFee()
+          == other.getFee());
       return result;
     }
 
@@ -13729,6 +13895,9 @@ public final class Chain {
       }
       hash = (37 * hash) + METADATA_FIELD_NUMBER;
       hash = (53 * hash) + getMetadata().hashCode();
+      hash = (37 * hash) + FEE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getFee());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -13862,6 +14031,8 @@ public final class Chain {
         }
         metadata_ = com.google.protobuf.ByteString.EMPTY;
 
+        fee_ = 0L;
+
         return this;
       }
 
@@ -13899,6 +14070,7 @@ public final class Chain {
           result.operations_ = operationsBuilder_.build();
         }
         result.metadata_ = metadata_;
+        result.fee_ = fee_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -13980,6 +14152,9 @@ public final class Chain {
         }
         if (other.getMetadata() != com.google.protobuf.ByteString.EMPTY) {
           setMetadata(other.getMetadata());
+        }
+        if (other.getFee() != 0L) {
+          setFee(other.getFee());
         }
         onChanged();
         return this;
@@ -14437,6 +14612,32 @@ public final class Chain {
       public Builder clearMetadata() {
         
         metadata_ = getDefaultInstance().getMetadata();
+        onChanged();
+        return this;
+      }
+
+      private long fee_ ;
+      /**
+       * <code>optional int64 fee = 6;</code>
+       */
+      public long getFee() {
+        return fee_;
+      }
+      /**
+       * <code>optional int64 fee = 6;</code>
+       */
+      public Builder setFee(long value) {
+        
+        fee_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 fee = 6;</code>
+       */
+      public Builder clearFee() {
+        
+        fee_ = 0L;
         onChanged();
         return this;
       }
@@ -20974,7 +21175,7 @@ public final class Chain {
 
     /**
      * <pre>
-     *合约内容
+     *合约内容,js 代码
      * </pre>
      *
      * <code>optional string payload = 2;</code>
@@ -20982,7 +21183,7 @@ public final class Chain {
     java.lang.String getPayload();
     /**
      * <pre>
-     *合约内容
+     *合约内容,js 代码
      * </pre>
      *
      * <code>optional string payload = 2;</code>
@@ -21183,7 +21384,7 @@ public final class Chain {
     private volatile java.lang.Object payload_;
     /**
      * <pre>
-     *合约内容
+     *合约内容,js 代码
      * </pre>
      *
      * <code>optional string payload = 2;</code>
@@ -21202,7 +21403,7 @@ public final class Chain {
     }
     /**
      * <pre>
-     *合约内容
+     *合约内容,js 代码
      * </pre>
      *
      * <code>optional string payload = 2;</code>
@@ -21573,7 +21774,7 @@ public final class Chain {
       private java.lang.Object payload_ = "";
       /**
        * <pre>
-       *合约内容
+       *合约内容,js 代码
        * </pre>
        *
        * <code>optional string payload = 2;</code>
@@ -21592,7 +21793,7 @@ public final class Chain {
       }
       /**
        * <pre>
-       *合约内容
+       *合约内容,js 代码
        * </pre>
        *
        * <code>optional string payload = 2;</code>
@@ -21612,7 +21813,7 @@ public final class Chain {
       }
       /**
        * <pre>
-       *合约内容
+       *合约内容,js 代码
        * </pre>
        *
        * <code>optional string payload = 2;</code>
@@ -21629,7 +21830,7 @@ public final class Chain {
       }
       /**
        * <pre>
-       *合约内容
+       *合约内容,js 代码
        * </pre>
        *
        * <code>optional string payload = 2;</code>
@@ -21642,7 +21843,7 @@ public final class Chain {
       }
       /**
        * <pre>
-       *合约内容
+       *合约内容,js 代码
        * </pre>
        *
        * <code>optional string payload = 2;</code>
@@ -21770,6 +21971,11 @@ public final class Chain {
      */
     cn.bubi.blockchain.adapter3.Common.KeyPairOrBuilder getMetadatasOrBuilder(
         int index);
+
+    /**
+     * <code>optional int64 init_balance = 5;</code>
+     */
+    long getInitBalance();
   }
   /**
    * <pre>
@@ -21789,6 +21995,7 @@ public final class Chain {
     private OperationCreateAccount() {
       destAddress_ = "";
       metadatas_ = java.util.Collections.emptyList();
+      initBalance_ = 0L;
     }
 
     @java.lang.Override
@@ -21855,6 +22062,11 @@ public final class Chain {
               }
               metadatas_.add(
                   input.readMessage(cn.bubi.blockchain.adapter3.Common.KeyPair.parser(), extensionRegistry));
+              break;
+            }
+            case 40: {
+
+              initBalance_ = input.readInt64();
               break;
             }
           }
@@ -21995,6 +22207,15 @@ public final class Chain {
       return metadatas_.get(index);
     }
 
+    public static final int INIT_BALANCE_FIELD_NUMBER = 5;
+    private long initBalance_;
+    /**
+     * <code>optional int64 init_balance = 5;</code>
+     */
+    public long getInitBalance() {
+      return initBalance_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -22019,6 +22240,9 @@ public final class Chain {
       for (int i = 0; i < metadatas_.size(); i++) {
         output.writeMessage(4, metadatas_.get(i));
       }
+      if (initBalance_ != 0L) {
+        output.writeInt64(5, initBalance_);
+      }
     }
 
     public int getSerializedSize() {
@@ -22040,6 +22264,10 @@ public final class Chain {
       for (int i = 0; i < metadatas_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, metadatas_.get(i));
+      }
+      if (initBalance_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, initBalance_);
       }
       memoizedSize = size;
       return size;
@@ -22071,6 +22299,8 @@ public final class Chain {
       }
       result = result && getMetadatasList()
           .equals(other.getMetadatasList());
+      result = result && (getInitBalance()
+          == other.getInitBalance());
       return result;
     }
 
@@ -22095,6 +22325,9 @@ public final class Chain {
         hash = (37 * hash) + METADATAS_FIELD_NUMBER;
         hash = (53 * hash) + getMetadatasList().hashCode();
       }
+      hash = (37 * hash) + INIT_BALANCE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getInitBalance());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -22238,6 +22471,8 @@ public final class Chain {
         } else {
           metadatasBuilder_.clear();
         }
+        initBalance_ = 0L;
+
         return this;
       }
 
@@ -22282,6 +22517,7 @@ public final class Chain {
         } else {
           result.metadatas_ = metadatasBuilder_.build();
         }
+        result.initBalance_ = initBalance_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -22359,6 +22595,9 @@ public final class Chain {
               metadatasBuilder_.addAllMessages(other.metadatas_);
             }
           }
+        }
+        if (other.getInitBalance() != 0L) {
+          setInitBalance(other.getInitBalance());
         }
         onChanged();
         return this;
@@ -22928,6 +23167,32 @@ public final class Chain {
           metadatas_ = null;
         }
         return metadatasBuilder_;
+      }
+
+      private long initBalance_ ;
+      /**
+       * <code>optional int64 init_balance = 5;</code>
+       */
+      public long getInitBalance() {
+        return initBalance_;
+      }
+      /**
+       * <code>optional int64 init_balance = 5;</code>
+       */
+      public Builder setInitBalance(long value) {
+        
+        initBalance_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int64 init_balance = 5;</code>
+       */
+      public Builder clearInitBalance() {
+        
+        initBalance_ = 0L;
+        onChanged();
+        return this;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -23849,89 +24114,90 @@ public final class Chain {
       "ntract\022\017\n\007balance\030\007 \001(\003\"-\n\rAssetProperty" +
       "\022\016\n\006issuer\030\001 \001(\t\022\014\n\004code\030\002 \001(\t\"B\n\005Asset\022" +
       ")\n\010property\030\001 \001(\0132\027.protocol.AssetProper" +
-      "ty\022\016\n\006amount\030\002 \001(\003\"\311\001\n\014LedgerHeader\022\013\n\003s" +
+      "ty\022\016\n\006amount\030\002 \001(\003\"\332\001\n\014LedgerHeader\022\013\n\003s" +
       "eq\030\001 \001(\003\022\014\n\004hash\030\002 \001(\014\022\025\n\rprevious_hash\030",
       "\003 \001(\014\022\031\n\021account_tree_hash\030\004 \001(\014\022\022\n\nclos" +
       "e_time\030\005 \001(\003\022\034\n\024consensus_value_hash\030\006 \001" +
       "(\014\022\017\n\007version\030\007 \001(\003\022\020\n\010tx_count\030\010 \001(\003\022\027\n" +
-      "\017validators_hash\030\t \001(\014\"d\n\006Ledger\022&\n\006head" +
-      "er\030\001 \001(\0132\026.protocol.LedgerHeader\0222\n\020tran" +
-      "saction_envs\030\002 \003(\0132\030.protocol.Transactio" +
-      "nEnv\"W\n\020OperationPayment\022\024\n\014dest_address" +
-      "\030\001 \001(\t\022\036\n\005asset\030\002 \001(\0132\017.protocol.Asset\022\r" +
-      "\n\005input\030\003 \001(\t\"S\n\026OperationTypeThreshold\022" +
-      "&\n\004type\030\001 \001(\0162\030.protocol.Operation.Type\022",
-      "\021\n\tthreshold\030\002 \001(\003\"|\n\020AccountPrivilege\022\025" +
-      "\n\rmaster_weight\030\001 \001(\003\022!\n\007signers\030\002 \003(\0132\020" +
-      ".protocol.Signer\022.\n\nthresholds\030\003 \001(\0132\032.p" +
-      "rotocol.AccountThreshold\"c\n\020AccountThres" +
-      "hold\022\024\n\014tx_threshold\030\001 \001(\003\0229\n\017type_thres" +
-      "holds\030\002 \003(\0132 .protocol.OperationTypeThre" +
-      "shold\"3\n\023OperationIssueAsset\022\014\n\004code\030\001 \001" +
-      "(\t\022\016\n\006amount\030\002 \001(\003\"G\n\020OperationPayCoin\022\024" +
-      "\n\014dest_address\030\001 \001(\t\022\016\n\006amount\030\002 \001(\003\022\r\n\005" +
-      "input\030\003 \001(\t\"T\n\030OperationSetSignerWeight\022",
-      "\025\n\rmaster_weight\030\001 \001(\003\022!\n\007signers\030\002 \003(\0132" +
-      "\020.protocol.Signer\"\375\004\n\tOperation\022&\n\004type\030" +
-      "\001 \001(\0162\030.protocol.Operation.Type\022\026\n\016sourc" +
-      "e_address\030\002 \001(\t\022\020\n\010metadata\030\003 \001(\014\022\026\n\016exp" +
-      "r_condition\030\004 \001(\t\0228\n\016create_account\030\005 \001(" +
-      "\0132 .protocol.OperationCreateAccount\0222\n\013i" +
-      "ssue_asset\030\006 \001(\0132\035.protocol.OperationIss" +
-      "ueAsset\022+\n\007payment\030\007 \001(\0132\032.protocol.Oper" +
-      "ationPayment\0224\n\014set_metadata\030\t \001(\0132\036.pro" +
-      "tocol.OperationSetMetadata\022=\n\021set_signer",
-      "_weight\030\n \001(\0132\".protocol.OperationSetSig" +
-      "nerWeight\0226\n\rset_threshold\030\013 \001(\0132\037.proto" +
-      "col.OperationSetThreshold\022,\n\010pay_coin\030\014 " +
-      "\001(\0132\032.protocol.OperationPayCoin\"\217\001\n\004Type" +
-      "\022\013\n\007UNKNOWN\020\000\022\022\n\016CREATE_ACCOUNT\020\001\022\017\n\013ISS" +
-      "UE_ASSET\020\002\022\013\n\007PAYMENT\020\003\022\020\n\014SET_METADATA\020" +
-      "\004\022\025\n\021SET_SIGNER_WEIGHT\020\005\022\021\n\rSET_THRESHOL" +
-      "D\020\006\022\014\n\010PAY_COIN\020\007\"h\n\025OperationSetThresho" +
-      "ld\022\024\n\014tx_threshold\030\001 \001(\003\0229\n\017type_thresho" +
-      "lds\030\004 \003(\0132 .protocol.OperationTypeThresh",
-      "old\"\256\001\n\013Transaction\022\026\n\016source_address\030\001 " +
-      "\001(\t\022\r\n\005nonce\030\002 \001(\003\022\026\n\016expr_condition\030\003 \001" +
-      "(\t\022\'\n\noperations\030\004 \003(\0132\023.protocol.Operat" +
-      "ion\022\020\n\010metadata\030\005 \001(\014\"%\n\005Limit\022\013\n\007UNKNOW" +
-      "N\020\000\022\017\n\nOPERATIONS\020\350\007\"O\n\006Signer\022\017\n\007addres" +
-      "s\030\001 \001(\t\022\016\n\006weight\030\002 \001(\003\"$\n\005Limit\022\017\n\013SIGN" +
-      "ER_NONE\020\000\022\n\n\006SIGNER\020d\"\211\002\n\007Trigger\022;\n\020tra" +
-      "nsaction_type\030\001 \001(\0162!.protocol.Trigger.T" +
-      "ransactionType\022\022\n\nledger_seq\030\002 \001(\003\0227\n\013tr" +
-      "ansaction\030\003 \001(\0132\".protocol.Trigger.Opera",
-      "tionTrigger\032/\n\020OperationTrigger\022\014\n\004hash\030" +
-      "\001 \001(\014\022\r\n\005index\030\002 \001(\003\"C\n\017TransactionType\022" +
-      "\026\n\022NORMAL_TRANSACTION\020\000\022\030\n\024CONTRACT_TRAN" +
-      "SACTION\020\001\"\211\001\n\016TransactionEnv\022*\n\013transact" +
-      "ion\030\001 \001(\0132\025.protocol.Transaction\022\'\n\nsign" +
-      "atures\030\002 \003(\0132\023.protocol.Signature\022\"\n\007tri" +
-      "gger\030\003 \001(\0132\021.protocol.Trigger\"\230\001\n\023Transa" +
-      "ctionEnvStore\0221\n\017transaction_env\030\001 \001(\0132\030" +
-      ".protocol.TransactionEnv\022\022\n\nerror_code\030\002" +
-      " \001(\005\022\022\n\nerror_desc\030\003 \001(\t\022\022\n\nledger_seq\030\004",
-      " \001(\003\022\022\n\nclose_time\030\005 \001(\003\":\n\021TransactionE" +
-      "nvSet\022%\n\003txs\030\002 \003(\0132\030.protocol.Transactio" +
-      "nEnv\"\313\001\n\016ConsensusValue\022*\n\005txset\030\001 \001(\0132\033" +
-      ".protocol.TransactionEnvSet\022\022\n\nclose_tim" +
-      "e\030\002 \001(\003\022\026\n\016previous_proof\030\003 \001(\014\022\022\n\nledge" +
-      "r_seq\030\004 \001(\003\022\034\n\024previous_ledger_hash\030\005 \001(" +
-      "\014\022/\n\016ledger_upgrade\030\006 \001(\0132\027.protocol.Led" +
-      "gerUpgrade\"f\n\025TransactionEnvWrapper\0221\n\017t" +
-      "ransaction_env\030\001 \001(\0132\030.protocol.Transact" +
-      "ionEnv\022\032\n\022suggest_ledger_seq\030\002 \001(\003\"j\n\010Co",
-      "ntract\022-\n\004type\030\001 \001(\0162\037.protocol.Contract" +
-      ".ContractType\022\017\n\007payload\030\002 \001(\t\"\036\n\014Contra" +
-      "ctType\022\016\n\nJAVASCRIPT\020\000\"\244\001\n\026OperationCrea" +
-      "teAccount\022\024\n\014dest_address\030\001 \001(\t\022$\n\010contr" +
-      "act\030\002 \001(\0132\022.protocol.Contract\022(\n\004priv\030\003 " +
-      "\001(\0132\032.protocol.AccountPrivilege\022$\n\tmetad" +
-      "atas\030\004 \003(\0132\021.protocol.KeyPair\"C\n\024Operati" +
-      "onSetMetadata\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(" +
-      "\t\022\017\n\007version\030\003 \001(\003*#\n\005Limit\022\013\n\007UNKNOWN\020\000" +
-      "\022\r\n\tSIGNATURE\020dB\035\n\033cn.bubi.blockchain.ad",
-      "apter3b\006proto3"
+      "\017validators_hash\030\t \001(\014\022\017\n\007reserve\030\n \001(\t\"" +
+      "d\n\006Ledger\022&\n\006header\030\001 \001(\0132\026.protocol.Led" +
+      "gerHeader\0222\n\020transaction_envs\030\002 \003(\0132\030.pr" +
+      "otocol.TransactionEnv\"W\n\020OperationPaymen" +
+      "t\022\024\n\014dest_address\030\001 \001(\t\022\036\n\005asset\030\002 \001(\0132\017" +
+      ".protocol.Asset\022\r\n\005input\030\003 \001(\t\"S\n\026Operat" +
+      "ionTypeThreshold\022&\n\004type\030\001 \001(\0162\030.protoco",
+      "l.Operation.Type\022\021\n\tthreshold\030\002 \001(\003\"|\n\020A" +
+      "ccountPrivilege\022\025\n\rmaster_weight\030\001 \001(\003\022!" +
+      "\n\007signers\030\002 \003(\0132\020.protocol.Signer\022.\n\nthr" +
+      "esholds\030\003 \001(\0132\032.protocol.AccountThreshol" +
+      "d\"c\n\020AccountThreshold\022\024\n\014tx_threshold\030\001 " +
+      "\001(\003\0229\n\017type_thresholds\030\002 \003(\0132 .protocol." +
+      "OperationTypeThreshold\"3\n\023OperationIssue" +
+      "Asset\022\014\n\004code\030\001 \001(\t\022\016\n\006amount\030\002 \001(\003\"G\n\020O" +
+      "perationPayCoin\022\024\n\014dest_address\030\001 \001(\t\022\016\n" +
+      "\006amount\030\002 \001(\003\022\r\n\005input\030\003 \001(\t\"T\n\030Operatio",
+      "nSetSignerWeight\022\025\n\rmaster_weight\030\001 \001(\003\022" +
+      "!\n\007signers\030\002 \003(\0132\020.protocol.Signer\"\375\004\n\tO" +
+      "peration\022&\n\004type\030\001 \001(\0162\030.protocol.Operat" +
+      "ion.Type\022\026\n\016source_address\030\002 \001(\t\022\020\n\010meta" +
+      "data\030\003 \001(\014\022\026\n\016expr_condition\030\004 \001(\t\0228\n\016cr" +
+      "eate_account\030\005 \001(\0132 .protocol.OperationC" +
+      "reateAccount\0222\n\013issue_asset\030\006 \001(\0132\035.prot" +
+      "ocol.OperationIssueAsset\022+\n\007payment\030\007 \001(" +
+      "\0132\032.protocol.OperationPayment\0224\n\014set_met" +
+      "adata\030\t \001(\0132\036.protocol.OperationSetMetad",
+      "ata\022=\n\021set_signer_weight\030\n \001(\0132\".protoco" +
+      "l.OperationSetSignerWeight\0226\n\rset_thresh" +
+      "old\030\013 \001(\0132\037.protocol.OperationSetThresho" +
+      "ld\022,\n\010pay_coin\030\014 \001(\0132\032.protocol.Operatio" +
+      "nPayCoin\"\217\001\n\004Type\022\013\n\007UNKNOWN\020\000\022\022\n\016CREATE" +
+      "_ACCOUNT\020\001\022\017\n\013ISSUE_ASSET\020\002\022\013\n\007PAYMENT\020\003" +
+      "\022\020\n\014SET_METADATA\020\004\022\025\n\021SET_SIGNER_WEIGHT\020" +
+      "\005\022\021\n\rSET_THRESHOLD\020\006\022\014\n\010PAY_COIN\020\007\"h\n\025Op" +
+      "erationSetThreshold\022\024\n\014tx_threshold\030\001 \001(" +
+      "\003\0229\n\017type_thresholds\030\004 \003(\0132 .protocol.Op",
+      "erationTypeThreshold\"\273\001\n\013Transaction\022\026\n\016" +
+      "source_address\030\001 \001(\t\022\r\n\005nonce\030\002 \001(\003\022\026\n\016e" +
+      "xpr_condition\030\003 \001(\t\022\'\n\noperations\030\004 \003(\0132" +
+      "\023.protocol.Operation\022\020\n\010metadata\030\005 \001(\014\022\013" +
+      "\n\003fee\030\006 \001(\003\"%\n\005Limit\022\013\n\007UNKNOWN\020\000\022\017\n\nOPE" +
+      "RATIONS\020\350\007\"O\n\006Signer\022\017\n\007address\030\001 \001(\t\022\016\n" +
+      "\006weight\030\002 \001(\003\"$\n\005Limit\022\017\n\013SIGNER_NONE\020\000\022" +
+      "\n\n\006SIGNER\020d\"\211\002\n\007Trigger\022;\n\020transaction_t" +
+      "ype\030\001 \001(\0162!.protocol.Trigger.Transaction" +
+      "Type\022\022\n\nledger_seq\030\002 \001(\003\0227\n\013transaction\030",
+      "\003 \001(\0132\".protocol.Trigger.OperationTrigge" +
+      "r\032/\n\020OperationTrigger\022\014\n\004hash\030\001 \001(\014\022\r\n\005i" +
+      "ndex\030\002 \001(\003\"C\n\017TransactionType\022\026\n\022NORMAL_" +
+      "TRANSACTION\020\000\022\030\n\024CONTRACT_TRANSACTION\020\001\"" +
+      "\211\001\n\016TransactionEnv\022*\n\013transaction\030\001 \001(\0132" +
+      "\025.protocol.Transaction\022\'\n\nsignatures\030\002 \003" +
+      "(\0132\023.protocol.Signature\022\"\n\007trigger\030\003 \001(\013" +
+      "2\021.protocol.Trigger\"\230\001\n\023TransactionEnvSt" +
+      "ore\0221\n\017transaction_env\030\001 \001(\0132\030.protocol." +
+      "TransactionEnv\022\022\n\nerror_code\030\002 \001(\005\022\022\n\ner",
+      "ror_desc\030\003 \001(\t\022\022\n\nledger_seq\030\004 \001(\003\022\022\n\ncl" +
+      "ose_time\030\005 \001(\003\":\n\021TransactionEnvSet\022%\n\003t" +
+      "xs\030\002 \003(\0132\030.protocol.TransactionEnv\"\313\001\n\016C" +
+      "onsensusValue\022*\n\005txset\030\001 \001(\0132\033.protocol." +
+      "TransactionEnvSet\022\022\n\nclose_time\030\002 \001(\003\022\026\n" +
+      "\016previous_proof\030\003 \001(\014\022\022\n\nledger_seq\030\004 \001(" +
+      "\003\022\034\n\024previous_ledger_hash\030\005 \001(\014\022/\n\016ledge" +
+      "r_upgrade\030\006 \001(\0132\027.protocol.LedgerUpgrade" +
+      "\"f\n\025TransactionEnvWrapper\0221\n\017transaction" +
+      "_env\030\001 \001(\0132\030.protocol.TransactionEnv\022\032\n\022",
+      "suggest_ledger_seq\030\002 \001(\003\"j\n\010Contract\022-\n\004" +
+      "type\030\001 \001(\0162\037.protocol.Contract.ContractT" +
+      "ype\022\017\n\007payload\030\002 \001(\t\"\036\n\014ContractType\022\016\n\n" +
+      "JAVASCRIPT\020\000\"\272\001\n\026OperationCreateAccount\022" +
+      "\024\n\014dest_address\030\001 \001(\t\022$\n\010contract\030\002 \001(\0132" +
+      "\022.protocol.Contract\022(\n\004priv\030\003 \001(\0132\032.prot" +
+      "ocol.AccountPrivilege\022$\n\tmetadatas\030\004 \003(\013" +
+      "2\021.protocol.KeyPair\022\024\n\014init_balance\030\005 \001(" +
+      "\003\"C\n\024OperationSetMetadata\022\013\n\003key\030\001 \001(\t\022\r" +
+      "\n\005value\030\002 \001(\t\022\017\n\007version\030\003 \001(\003*#\n\005Limit\022",
+      "\013\n\007UNKNOWN\020\000\022\r\n\tSIGNATURE\020dB\035\n\033cn.bubi.b" +
+      "lockchain.adapter3b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -23969,7 +24235,7 @@ public final class Chain {
     internal_static_protocol_LedgerHeader_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_LedgerHeader_descriptor,
-        new java.lang.String[] { "Seq", "Hash", "PreviousHash", "AccountTreeHash", "CloseTime", "ConsensusValueHash", "Version", "TxCount", "ValidatorsHash", });
+        new java.lang.String[] { "Seq", "Hash", "PreviousHash", "AccountTreeHash", "CloseTime", "ConsensusValueHash", "Version", "TxCount", "ValidatorsHash", "Reserve", });
     internal_static_protocol_Ledger_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_protocol_Ledger_fieldAccessorTable = new
@@ -24035,7 +24301,7 @@ public final class Chain {
     internal_static_protocol_Transaction_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_Transaction_descriptor,
-        new java.lang.String[] { "SourceAddress", "Nonce", "ExprCondition", "Operations", "Metadata", });
+        new java.lang.String[] { "SourceAddress", "Nonce", "ExprCondition", "Operations", "Metadata", "Fee", });
     internal_static_protocol_Signer_descriptor =
       getDescriptor().getMessageTypes().get(15);
     internal_static_protocol_Signer_fieldAccessorTable = new
@@ -24095,7 +24361,7 @@ public final class Chain {
     internal_static_protocol_OperationCreateAccount_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_protocol_OperationCreateAccount_descriptor,
-        new java.lang.String[] { "DestAddress", "Contract", "Priv", "Metadatas", });
+        new java.lang.String[] { "DestAddress", "Contract", "Priv", "Metadatas", "InitBalance", });
     internal_static_protocol_OperationSetMetadata_descriptor =
       getDescriptor().getMessageTypes().get(24);
     internal_static_protocol_OperationSetMetadata_fieldAccessorTable = new
