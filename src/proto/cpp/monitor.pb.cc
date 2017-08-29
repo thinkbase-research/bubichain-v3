@@ -24,9 +24,6 @@ namespace {
 const ::google::protobuf::Descriptor* BubiAttack_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   BubiAttack_reflection_ = NULL;
-const ::google::protobuf::Descriptor* Threshold_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  Threshold_reflection_ = NULL;
 const ::google::protobuf::Descriptor* Hello_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Hello_reflection_ = NULL;
@@ -66,16 +63,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* SystemStatus_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   SystemStatus_reflection_ = NULL;
-const ::google::protobuf::Descriptor* AlertState_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  AlertState_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* AlertState_ALERT_TYPE_descriptor_ = NULL;
 const ::google::protobuf::Descriptor* AlertStatus_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   AlertStatus_reflection_ = NULL;
-const ::google::protobuf::Descriptor* ChainAlertMessage_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  ChainAlertMessage_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* MONITOR_MESSAGE_TYPE_descriptor_ = NULL;
 const ::google::protobuf::EnumDescriptor* MONITOR_ERROR_descriptor_ = NULL;
 
@@ -105,28 +95,7 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(BubiAttack),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BubiAttack, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BubiAttack, _is_default_instance_));
-  Threshold_descriptor_ = file->message_type(1);
-  static const int Threshold_offsets_[7] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Threshold, cpu_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Threshold, memory_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Threshold, disk_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Threshold, consensus_timeout_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Threshold, bubi_timeout_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Threshold, monitor_timeout_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Threshold, bubi_attack_),
-  };
-  Threshold_reflection_ =
-    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      Threshold_descriptor_,
-      Threshold::default_instance_,
-      Threshold_offsets_,
-      -1,
-      -1,
-      -1,
-      sizeof(Threshold),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Threshold, _internal_metadata_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Threshold, _is_default_instance_));
-  Hello_descriptor_ = file->message_type(2);
+  Hello_descriptor_ = file->message_type(1);
   static const int Hello_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Hello, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Hello, blockchain_version_),
@@ -144,13 +113,12 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(Hello),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Hello, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Hello, _is_default_instance_));
-  Register_descriptor_ = file->message_type(3);
-  static const int Register_offsets_[5] = {
+  Register_descriptor_ = file->message_type(2);
+  static const int Register_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Register, rand_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Register, session_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Register, version_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Register, timestamp_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Register, threshold_),
   };
   Register_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -163,7 +131,7 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(Register),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Register, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Register, _is_default_instance_));
-  ErrorMessage_descriptor_ = file->message_type(4);
+  ErrorMessage_descriptor_ = file->message_type(3);
   static const int ErrorMessage_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ErrorMessage, error_code_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ErrorMessage, desception_),
@@ -180,7 +148,7 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(ErrorMessage),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ErrorMessage, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ErrorMessage, _is_default_instance_));
-  Peer_descriptor_ = file->message_type(5);
+  Peer_descriptor_ = file->message_type(4);
   static const int Peer_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Peer, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Peer, delay_),
@@ -198,7 +166,7 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(Peer),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Peer, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Peer, _is_default_instance_));
-  GlueManager_descriptor_ = file->message_type(6);
+  GlueManager_descriptor_ = file->message_type(5);
   static const int GlueManager_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GlueManager, system_current_time_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GlueManager, process_uptime_),
@@ -215,7 +183,7 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(GlueManager),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GlueManager, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GlueManager, _is_default_instance_));
-  PeerManager_descriptor_ = file->message_type(7);
+  PeerManager_descriptor_ = file->message_type(6);
   static const int PeerManager_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PeerManager, peer_id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PeerManager, peer_),
@@ -231,7 +199,7 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(PeerManager),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PeerManager, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(PeerManager, _is_default_instance_));
-  BubiStatus_descriptor_ = file->message_type(8);
+  BubiStatus_descriptor_ = file->message_type(7);
   static const int BubiStatus_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BubiStatus, glue_manager_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BubiStatus, peer_manager_),
@@ -247,7 +215,7 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(BubiStatus),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BubiStatus, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BubiStatus, _is_default_instance_));
-  LedgerStatus_descriptor_ = file->message_type(9);
+  LedgerStatus_descriptor_ = file->message_type(8);
   static const int LedgerStatus_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LedgerStatus, ledger_header_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LedgerStatus, transaction_size_),
@@ -265,7 +233,7 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(LedgerStatus),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LedgerStatus, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LedgerStatus, _is_default_instance_));
-  SystemProperty_descriptor_ = file->message_type(10);
+  SystemProperty_descriptor_ = file->message_type(9);
   static const int SystemProperty_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SystemProperty, host_name_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SystemProperty, os_version_),
@@ -283,7 +251,7 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(SystemProperty),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SystemProperty, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SystemProperty, _is_default_instance_));
-  SystemResource_descriptor_ = file->message_type(11);
+  SystemResource_descriptor_ = file->message_type(10);
   static const int SystemResource_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SystemResource, available_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SystemResource, total_),
@@ -301,7 +269,7 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(SystemResource),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SystemResource, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SystemResource, _is_default_instance_));
-  Partition_descriptor_ = file->message_type(12);
+  Partition_descriptor_ = file->message_type(11);
   static const int Partition_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Partition, total_bytes_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Partition, partition_),
@@ -317,7 +285,7 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(Partition),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Partition, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Partition, _is_default_instance_));
-  CPU_descriptor_ = file->message_type(13);
+  CPU_descriptor_ = file->message_type(12);
   static const int CPU_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CPU, usedpercent_),
   };
@@ -332,7 +300,7 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(CPU),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CPU, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CPU, _is_default_instance_));
-  SystemStatus_descriptor_ = file->message_type(14);
+  SystemStatus_descriptor_ = file->message_type(13);
   static const int SystemStatus_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SystemStatus, property_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SystemStatus, memory_),
@@ -350,28 +318,11 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(SystemStatus),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SystemStatus, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SystemStatus, _is_default_instance_));
-  AlertState_descriptor_ = file->message_type(15);
-  static const int AlertState_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AlertState, alert_state_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AlertState, value_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AlertState, description_),
-  };
-  AlertState_reflection_ =
-    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      AlertState_descriptor_,
-      AlertState::default_instance_,
-      AlertState_offsets_,
-      -1,
-      -1,
-      -1,
-      sizeof(AlertState),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AlertState, _internal_metadata_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AlertState, _is_default_instance_));
-  AlertState_ALERT_TYPE_descriptor_ = AlertState_descriptor_->enum_type(0);
-  AlertStatus_descriptor_ = file->message_type(16);
-  static const int AlertStatus_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AlertStatus, timestamp_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AlertStatus, alert_state_),
+  AlertStatus_descriptor_ = file->message_type(14);
+  static const int AlertStatus_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AlertStatus, ledger_sequence_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AlertStatus, node_id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AlertStatus, system_),
   };
   AlertStatus_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
@@ -384,23 +335,6 @@ void protobuf_AssignDesc_monitor_2eproto() {
       sizeof(AlertStatus),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AlertStatus, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(AlertStatus, _is_default_instance_));
-  ChainAlertMessage_descriptor_ = file->message_type(17);
-  static const int ChainAlertMessage_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChainAlertMessage, ledger_sequence_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChainAlertMessage, node_id_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChainAlertMessage, system_),
-  };
-  ChainAlertMessage_reflection_ =
-    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      ChainAlertMessage_descriptor_,
-      ChainAlertMessage::default_instance_,
-      ChainAlertMessage_offsets_,
-      -1,
-      -1,
-      -1,
-      sizeof(ChainAlertMessage),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChainAlertMessage, _internal_metadata_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ChainAlertMessage, _is_default_instance_));
   MONITOR_MESSAGE_TYPE_descriptor_ = file->enum_type(0);
   MONITOR_ERROR_descriptor_ = file->enum_type(1);
 }
@@ -418,8 +352,6 @@ void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       BubiAttack_descriptor_, &BubiAttack::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      Threshold_descriptor_, &Threshold::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       Hello_descriptor_, &Hello::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -447,11 +379,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       SystemStatus_descriptor_, &SystemStatus::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      AlertState_descriptor_, &AlertState::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       AlertStatus_descriptor_, &AlertStatus::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      ChainAlertMessage_descriptor_, &ChainAlertMessage::default_instance());
 }
 
 }  // namespace
@@ -459,8 +387,6 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void protobuf_ShutdownFile_monitor_2eproto() {
   delete BubiAttack::default_instance_;
   delete BubiAttack_reflection_;
-  delete Threshold::default_instance_;
-  delete Threshold_reflection_;
   delete Hello::default_instance_;
   delete Hello_reflection_;
   delete Register::default_instance_;
@@ -487,12 +413,8 @@ void protobuf_ShutdownFile_monitor_2eproto() {
   delete CPU_reflection_;
   delete SystemStatus::default_instance_;
   delete SystemStatus_reflection_;
-  delete AlertState::default_instance_;
-  delete AlertState_reflection_;
   delete AlertStatus::default_instance_;
   delete AlertStatus_reflection_;
-  delete ChainAlertMessage::default_instance_;
-  delete ChainAlertMessage_reflection_;
 }
 
 void protobuf_AddDesc_monitor_2eproto() GOOGLE_ATTRIBUTE_COLD;
@@ -506,72 +428,60 @@ void protobuf_AddDesc_monitor_2eproto() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\rmonitor.proto\022\007monitor\032\013chain.proto\"B\n"
     "\nBubiAttack\022\030\n\020bubi_attack_time\030\001 \001(\r\022\032\n"
-    "\022bubi_attack_counts\030\002 \001(\r\"\252\001\n\tThreshold\022"
-    "\013\n\003cpu\030\001 \001(\002\022\016\n\006memory\030\002 \001(\002\022\014\n\004disk\030\003 \001"
-    "(\002\022\031\n\021consensus_timeout\030\004 \001(\r\022\024\n\014bubi_ti"
-    "meout\030\005 \001(\r\022\027\n\017monitor_timeout\030\006 \001(\r\022(\n\013"
-    "bubi_attack\030\007 \001(\0132\023.monitor.BubiAttack\"X"
-    "\n\005Hello\022\n\n\002id\030\001 \001(\t\022\032\n\022blockchain_versio"
-    "n\030\002 \001(\t\022\024\n\014data_version\030\003 \001(\003\022\021\n\ttimesta"
-    "mp\030\004 \001(\003\"z\n\010Register\022\017\n\007rand_id\030\001 \001(\t\022\022\n"
-    "\nsession_id\030\002 \001(\t\022\017\n\007version\030\003 \001(\t\022\021\n\tti"
-    "mestamp\030\004 \001(\003\022%\n\tthreshold\030\005 \001(\0132\022.monit"
-    "or.Threshold\"a\n\014ErrorMessage\022*\n\nerror_co"
-    "de\030\001 \001(\0162\026.monitor.MONITOR_ERROR\022\022\n\ndesc"
-    "eption\030\002 \001(\t\022\021\n\ttimestamp\030\003 \001(\003\"E\n\004Peer\022"
-    "\n\n\002id\030\001 \001(\t\022\r\n\005delay\030\002 \001(\003\022\016\n\006active\030\003 \001"
-    "(\010\022\022\n\nip_address\030\004 \001(\t\"Y\n\013GlueManager\022\033\n"
-    "\023system_current_time\030\001 \001(\t\022\026\n\016process_up"
-    "time\030\002 \001(\t\022\025\n\rsystem_uptime\030\003 \001(\t\";\n\013Pee"
-    "rManager\022\017\n\007peer_id\030\001 \001(\t\022\033\n\004peer\030\002 \003(\0132"
-    "\r.monitor.Peer\"d\n\nBubiStatus\022*\n\014glue_man"
-    "ager\030\001 \001(\0132\024.monitor.GlueManager\022*\n\014peer"
-    "_manager\030\002 \001(\0132\024.monitor.PeerManager\"\201\001\n"
-    "\014LedgerStatus\022-\n\rledger_header\030\001 \001(\0132\026.p"
-    "rotocol.LedgerHeader\022\030\n\020transaction_size"
-    "\030\002 \001(\003\022\025\n\raccount_count\030\003 \001(\003\022\021\n\ttimesta"
-    "mp\030\004 \001(\003\"]\n\016SystemProperty\022\021\n\thost_name\030"
-    "\001 \001(\t\022\022\n\nos_version\030\002 \001(\t\022\024\n\014startup_tim"
-    "e\030\003 \001(\003\022\016\n\006os_bit\030\004 \001(\t\"\\\n\016SystemResourc"
-    "e\022\021\n\tavailable\030\001 \001(\003\022\r\n\005total\030\002 \001(\003\022\023\n\013u"
-    "sedPercent\030\003 \001(\001\022\023\n\013description\030\004 \001(\t\"L\n"
-    "\tPartition\022\023\n\013total_bytes\030\001 \001(\003\022*\n\tparti"
-    "tion\030\002 \003(\0132\027.monitor.SystemResource\"\032\n\003C"
-    "PU\022\023\n\013usedPercent\030\001 \001(\001\"\245\001\n\014SystemStatus"
-    "\022)\n\010property\030\001 \001(\0132\027.monitor.SystemPrope"
-    "rty\022\'\n\006memory\030\002 \001(\0132\027.monitor.SystemReso"
-    "urce\022\031\n\003cpu\030\003 \001(\0132\014.monitor.CPU\022&\n\nparti"
-    "tions\030\004 \001(\0132\022.monitor.Partition\"\231\001\n\nAler"
-    "tState\0223\n\013alert_state\030\001 \001(\0162\036.monitor.Al"
-    "ertState.ALERT_TYPE\022\r\n\005value\030\002 \001(\001\022\023\n\013de"
-    "scription\030\003 \001(\t\"2\n\nALERT_TYPE\022\010\n\004NONE\020\000\022"
-    "\r\n\tNOWARNING\020\001\022\013\n\007WARNING\020\002\"J\n\013AlertStat"
-    "us\022\021\n\ttimestamp\030\001 \001(\003\022(\n\013alert_state\030\002 \003"
-    "(\0132\023.monitor.AlertState\"d\n\021ChainAlertMes"
-    "sage\022\027\n\017ledger_sequence\030\002 \001(\003\022\017\n\007node_id"
-    "\030\003 \001(\t\022%\n\006system\030\004 \001(\0132\025.monitor.SystemS"
-    "tatus*\264\002\n\024MONITOR_MESSAGE_TYPE\022\030\n\024MONITO"
-    "R_MSGTYPE_NONE\020\000\022\031\n\025MONITOR_MSGTYPE_HELL"
-    "O\020\036\022\034\n\030MONITOR_MSGTYPE_REGISTER\020\037\022\030\n\024MON"
-    "ITOR_MSGTYPE_BUBI\020 \022\032\n\026MONITOR_MSGTYPE_L"
-    "EDGER\020!\022\032\n\026MONITOR_MSGTYPE_SYSTEM\020\"\022\031\n\025M"
-    "ONITOR_MSGTYPE_ALERT\020#\022\032\n\026MONITOR_MSGTYP"
-    "E_NOTICE\020$\022%\n!MONITOR_MSGTYPE_ACCOUNT_EX"
-    "CEPTION\020%\022\031\n\025MONITOR_MSGTYPE_ERROR\020\'*\322\002\n"
-    "\rMONITOR_ERROR\022\032\n\026MONITOR_INTERNAL_ERROR"
-    "\020\000\022\035\n\031MONITOR_MESSAGE_NOT_EXIST\020\001\022\035\n\031MON"
-    "ITOR_MISSING_PARAMETER\020\002\022\030\n\024MONITOR_ID_N"
-    "OT_EXIST\020\003\022\033\n\027MONITOR_ID_ALREAD_EXIST\020\004\022"
-    "\032\n\026MONITOR_CENTER_INVALID\020\005\022\031\n\025MONITOR_A"
-    "GENT_INVALID\020\006\022\025\n\021MONITOR_NOT_LOGIN\020\007\022\036\n"
-    "\032MONITOR_BUBI_MESSAGE_ERROR\020\010\022 \n\034MONITOR"
-    "_SYSTEM_MESSAGE_ERROR\020\t\022 \n\034MONITOR_LEDGE"
-    "R_MESSAGE_ERROR\020\nB\035\n\033cn.bubi.blockchain."
-    "adapter3b\006proto3", 2536);
+    "\022bubi_attack_counts\030\002 \001(\r\"X\n\005Hello\022\n\n\002id"
+    "\030\001 \001(\t\022\032\n\022blockchain_version\030\002 \001(\t\022\024\n\014da"
+    "ta_version\030\003 \001(\003\022\021\n\ttimestamp\030\004 \001(\003\"S\n\010R"
+    "egister\022\017\n\007rand_id\030\001 \001(\t\022\022\n\nsession_id\030\002"
+    " \001(\t\022\017\n\007version\030\003 \001(\t\022\021\n\ttimestamp\030\004 \001(\003"
+    "\"a\n\014ErrorMessage\022*\n\nerror_code\030\001 \001(\0162\026.m"
+    "onitor.MONITOR_ERROR\022\022\n\ndesception\030\002 \001(\t"
+    "\022\021\n\ttimestamp\030\003 \001(\003\"E\n\004Peer\022\n\n\002id\030\001 \001(\t\022"
+    "\r\n\005delay\030\002 \001(\003\022\016\n\006active\030\003 \001(\010\022\022\n\nip_add"
+    "ress\030\004 \001(\t\"Y\n\013GlueManager\022\033\n\023system_curr"
+    "ent_time\030\001 \001(\t\022\026\n\016process_uptime\030\002 \001(\t\022\025"
+    "\n\rsystem_uptime\030\003 \001(\t\";\n\013PeerManager\022\017\n\007"
+    "peer_id\030\001 \001(\t\022\033\n\004peer\030\002 \003(\0132\r.monitor.Pe"
+    "er\"d\n\nBubiStatus\022*\n\014glue_manager\030\001 \001(\0132\024"
+    ".monitor.GlueManager\022*\n\014peer_manager\030\002 \001"
+    "(\0132\024.monitor.PeerManager\"\201\001\n\014LedgerStatu"
+    "s\022-\n\rledger_header\030\001 \001(\0132\026.protocol.Ledg"
+    "erHeader\022\030\n\020transaction_size\030\002 \001(\003\022\025\n\rac"
+    "count_count\030\003 \001(\003\022\021\n\ttimestamp\030\004 \001(\003\"]\n\016"
+    "SystemProperty\022\021\n\thost_name\030\001 \001(\t\022\022\n\nos_"
+    "version\030\002 \001(\t\022\024\n\014startup_time\030\003 \001(\003\022\016\n\006o"
+    "s_bit\030\004 \001(\t\"\\\n\016SystemResource\022\021\n\tavailab"
+    "le\030\001 \001(\003\022\r\n\005total\030\002 \001(\003\022\023\n\013usedPercent\030\003"
+    " \001(\001\022\023\n\013description\030\004 \001(\t\"L\n\tPartition\022\023"
+    "\n\013total_bytes\030\001 \001(\003\022*\n\tpartition\030\002 \003(\0132\027"
+    ".monitor.SystemResource\"\032\n\003CPU\022\023\n\013usedPe"
+    "rcent\030\001 \001(\001\"\245\001\n\014SystemStatus\022)\n\010property"
+    "\030\001 \001(\0132\027.monitor.SystemProperty\022\'\n\006memor"
+    "y\030\002 \001(\0132\027.monitor.SystemResource\022\031\n\003cpu\030"
+    "\003 \001(\0132\014.monitor.CPU\022&\n\npartitions\030\004 \001(\0132"
+    "\022.monitor.Partition\"^\n\013AlertStatus\022\027\n\017le"
+    "dger_sequence\030\002 \001(\003\022\017\n\007node_id\030\003 \001(\t\022%\n\006"
+    "system\030\004 \001(\0132\025.monitor.SystemStatus*\264\002\n\024"
+    "MONITOR_MESSAGE_TYPE\022\030\n\024MONITOR_MSGTYPE_"
+    "NONE\020\000\022\031\n\025MONITOR_MSGTYPE_HELLO\020\036\022\034\n\030MON"
+    "ITOR_MSGTYPE_REGISTER\020\037\022\030\n\024MONITOR_MSGTY"
+    "PE_BUBI\020 \022\032\n\026MONITOR_MSGTYPE_LEDGER\020!\022\032\n"
+    "\026MONITOR_MSGTYPE_SYSTEM\020\"\022\031\n\025MONITOR_MSG"
+    "TYPE_ALERT\020#\022\032\n\026MONITOR_MSGTYPE_NOTICE\020$"
+    "\022%\n!MONITOR_MSGTYPE_ACCOUNT_EXCEPTION\020%\022"
+    "\031\n\025MONITOR_MSGTYPE_ERROR\020\'*\322\002\n\rMONITOR_E"
+    "RROR\022\032\n\026MONITOR_INTERNAL_ERROR\020\000\022\035\n\031MONI"
+    "TOR_MESSAGE_NOT_EXIST\020\001\022\035\n\031MONITOR_MISSI"
+    "NG_PARAMETER\020\002\022\030\n\024MONITOR_ID_NOT_EXIST\020\003"
+    "\022\033\n\027MONITOR_ID_ALREAD_EXIST\020\004\022\032\n\026MONITOR"
+    "_CENTER_INVALID\020\005\022\031\n\025MONITOR_AGENT_INVAL"
+    "ID\020\006\022\025\n\021MONITOR_NOT_LOGIN\020\007\022\036\n\032MONITOR_B"
+    "UBI_MESSAGE_ERROR\020\010\022 \n\034MONITOR_SYSTEM_ME"
+    "SSAGE_ERROR\020\t\022 \n\034MONITOR_LEDGER_MESSAGE_"
+    "ERROR\020\nB\035\n\033cn.bubi.blockchain.adapter3b\006"
+    "proto3", 2086);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "monitor.proto", &protobuf_RegisterTypes);
   BubiAttack::default_instance_ = new BubiAttack();
-  Threshold::default_instance_ = new Threshold();
   Hello::default_instance_ = new Hello();
   Register::default_instance_ = new Register();
   ErrorMessage::default_instance_ = new ErrorMessage();
@@ -585,11 +495,8 @@ void protobuf_AddDesc_monitor_2eproto() {
   Partition::default_instance_ = new Partition();
   CPU::default_instance_ = new CPU();
   SystemStatus::default_instance_ = new SystemStatus();
-  AlertState::default_instance_ = new AlertState();
   AlertStatus::default_instance_ = new AlertStatus();
-  ChainAlertMessage::default_instance_ = new ChainAlertMessage();
   BubiAttack::default_instance_->InitAsDefaultInstance();
-  Threshold::default_instance_->InitAsDefaultInstance();
   Hello::default_instance_->InitAsDefaultInstance();
   Register::default_instance_->InitAsDefaultInstance();
   ErrorMessage::default_instance_->InitAsDefaultInstance();
@@ -603,9 +510,7 @@ void protobuf_AddDesc_monitor_2eproto() {
   Partition::default_instance_->InitAsDefaultInstance();
   CPU::default_instance_->InitAsDefaultInstance();
   SystemStatus::default_instance_->InitAsDefaultInstance();
-  AlertState::default_instance_->InitAsDefaultInstance();
   AlertStatus::default_instance_->InitAsDefaultInstance();
-  ChainAlertMessage::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_monitor_2eproto);
 }
 
@@ -967,599 +872,6 @@ void BubiAttack::clear_bubi_attack_counts() {
   
   bubi_attack_counts_ = value;
   // @@protoc_insertion_point(field_set:monitor.BubiAttack.bubi_attack_counts)
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
-
-// ===================================================================
-
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Threshold::kCpuFieldNumber;
-const int Threshold::kMemoryFieldNumber;
-const int Threshold::kDiskFieldNumber;
-const int Threshold::kConsensusTimeoutFieldNumber;
-const int Threshold::kBubiTimeoutFieldNumber;
-const int Threshold::kMonitorTimeoutFieldNumber;
-const int Threshold::kBubiAttackFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-Threshold::Threshold()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:monitor.Threshold)
-}
-
-void Threshold::InitAsDefaultInstance() {
-  _is_default_instance_ = true;
-  bubi_attack_ = const_cast< ::monitor::BubiAttack*>(&::monitor::BubiAttack::default_instance());
-}
-
-Threshold::Threshold(const Threshold& from)
-  : ::google::protobuf::Message(),
-    _internal_metadata_(NULL) {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:monitor.Threshold)
-}
-
-void Threshold::SharedCtor() {
-    _is_default_instance_ = false;
-  _cached_size_ = 0;
-  cpu_ = 0;
-  memory_ = 0;
-  disk_ = 0;
-  consensus_timeout_ = 0u;
-  bubi_timeout_ = 0u;
-  monitor_timeout_ = 0u;
-  bubi_attack_ = NULL;
-}
-
-Threshold::~Threshold() {
-  // @@protoc_insertion_point(destructor:monitor.Threshold)
-  SharedDtor();
-}
-
-void Threshold::SharedDtor() {
-  if (this != default_instance_) {
-    delete bubi_attack_;
-  }
-}
-
-void Threshold::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* Threshold::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return Threshold_descriptor_;
-}
-
-const Threshold& Threshold::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_monitor_2eproto();
-  return *default_instance_;
-}
-
-Threshold* Threshold::default_instance_ = NULL;
-
-Threshold* Threshold::New(::google::protobuf::Arena* arena) const {
-  Threshold* n = new Threshold;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void Threshold::Clear() {
-// @@protoc_insertion_point(message_clear_start:monitor.Threshold)
-#if defined(__clang__)
-#define ZR_HELPER_(f) \
-  _Pragma("clang diagnostic push") \
-  _Pragma("clang diagnostic ignored \"-Winvalid-offsetof\"") \
-  __builtin_offsetof(Threshold, f) \
-  _Pragma("clang diagnostic pop")
-#else
-#define ZR_HELPER_(f) reinterpret_cast<char*>(\
-  &reinterpret_cast<Threshold*>(16)->f)
-#endif
-
-#define ZR_(first, last) do {\
-  ::memset(&first, 0,\
-           ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
-} while (0)
-
-  ZR_(cpu_, monitor_timeout_);
-  if (GetArenaNoVirtual() == NULL && bubi_attack_ != NULL) delete bubi_attack_;
-  bubi_attack_ = NULL;
-
-#undef ZR_HELPER_
-#undef ZR_
-
-}
-
-bool Threshold::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:monitor.Threshold)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional float cpu = 1;
-      case 1: {
-        if (tag == 13) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &cpu_)));
-
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(21)) goto parse_memory;
-        break;
-      }
-
-      // optional float memory = 2;
-      case 2: {
-        if (tag == 21) {
-         parse_memory:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &memory_)));
-
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(29)) goto parse_disk;
-        break;
-      }
-
-      // optional float disk = 3;
-      case 3: {
-        if (tag == 29) {
-         parse_disk:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &disk_)));
-
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(32)) goto parse_consensus_timeout;
-        break;
-      }
-
-      // optional uint32 consensus_timeout = 4;
-      case 4: {
-        if (tag == 32) {
-         parse_consensus_timeout:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &consensus_timeout_)));
-
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(40)) goto parse_bubi_timeout;
-        break;
-      }
-
-      // optional uint32 bubi_timeout = 5;
-      case 5: {
-        if (tag == 40) {
-         parse_bubi_timeout:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &bubi_timeout_)));
-
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(48)) goto parse_monitor_timeout;
-        break;
-      }
-
-      // optional uint32 monitor_timeout = 6;
-      case 6: {
-        if (tag == 48) {
-         parse_monitor_timeout:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &monitor_timeout_)));
-
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(58)) goto parse_bubi_attack;
-        break;
-      }
-
-      // optional .monitor.BubiAttack bubi_attack = 7;
-      case 7: {
-        if (tag == 58) {
-         parse_bubi_attack:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_bubi_attack()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:monitor.Threshold)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:monitor.Threshold)
-  return false;
-#undef DO_
-}
-
-void Threshold::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:monitor.Threshold)
-  // optional float cpu = 1;
-  if (this->cpu() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->cpu(), output);
-  }
-
-  // optional float memory = 2;
-  if (this->memory() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->memory(), output);
-  }
-
-  // optional float disk = 3;
-  if (this->disk() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->disk(), output);
-  }
-
-  // optional uint32 consensus_timeout = 4;
-  if (this->consensus_timeout() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->consensus_timeout(), output);
-  }
-
-  // optional uint32 bubi_timeout = 5;
-  if (this->bubi_timeout() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(5, this->bubi_timeout(), output);
-  }
-
-  // optional uint32 monitor_timeout = 6;
-  if (this->monitor_timeout() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(6, this->monitor_timeout(), output);
-  }
-
-  // optional .monitor.BubiAttack bubi_attack = 7;
-  if (this->has_bubi_attack()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, *this->bubi_attack_, output);
-  }
-
-  // @@protoc_insertion_point(serialize_end:monitor.Threshold)
-}
-
-::google::protobuf::uint8* Threshold::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:monitor.Threshold)
-  // optional float cpu = 1;
-  if (this->cpu() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->cpu(), target);
-  }
-
-  // optional float memory = 2;
-  if (this->memory() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->memory(), target);
-  }
-
-  // optional float disk = 3;
-  if (this->disk() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->disk(), target);
-  }
-
-  // optional uint32 consensus_timeout = 4;
-  if (this->consensus_timeout() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(4, this->consensus_timeout(), target);
-  }
-
-  // optional uint32 bubi_timeout = 5;
-  if (this->bubi_timeout() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(5, this->bubi_timeout(), target);
-  }
-
-  // optional uint32 monitor_timeout = 6;
-  if (this->monitor_timeout() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(6, this->monitor_timeout(), target);
-  }
-
-  // optional .monitor.BubiAttack bubi_attack = 7;
-  if (this->has_bubi_attack()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        7, *this->bubi_attack_, false, target);
-  }
-
-  // @@protoc_insertion_point(serialize_to_array_end:monitor.Threshold)
-  return target;
-}
-
-int Threshold::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:monitor.Threshold)
-  int total_size = 0;
-
-  // optional float cpu = 1;
-  if (this->cpu() != 0) {
-    total_size += 1 + 4;
-  }
-
-  // optional float memory = 2;
-  if (this->memory() != 0) {
-    total_size += 1 + 4;
-  }
-
-  // optional float disk = 3;
-  if (this->disk() != 0) {
-    total_size += 1 + 4;
-  }
-
-  // optional uint32 consensus_timeout = 4;
-  if (this->consensus_timeout() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->consensus_timeout());
-  }
-
-  // optional uint32 bubi_timeout = 5;
-  if (this->bubi_timeout() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->bubi_timeout());
-  }
-
-  // optional uint32 monitor_timeout = 6;
-  if (this->monitor_timeout() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
-        this->monitor_timeout());
-  }
-
-  // optional .monitor.BubiAttack bubi_attack = 7;
-  if (this->has_bubi_attack()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->bubi_attack_);
-  }
-
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void Threshold::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:monitor.Threshold)
-  if (GOOGLE_PREDICT_FALSE(&from == this)) {
-    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
-  }
-  const Threshold* source = 
-      ::google::protobuf::internal::DynamicCastToGenerated<const Threshold>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:monitor.Threshold)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:monitor.Threshold)
-    MergeFrom(*source);
-  }
-}
-
-void Threshold::MergeFrom(const Threshold& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:monitor.Threshold)
-  if (GOOGLE_PREDICT_FALSE(&from == this)) {
-    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
-  }
-  if (from.cpu() != 0) {
-    set_cpu(from.cpu());
-  }
-  if (from.memory() != 0) {
-    set_memory(from.memory());
-  }
-  if (from.disk() != 0) {
-    set_disk(from.disk());
-  }
-  if (from.consensus_timeout() != 0) {
-    set_consensus_timeout(from.consensus_timeout());
-  }
-  if (from.bubi_timeout() != 0) {
-    set_bubi_timeout(from.bubi_timeout());
-  }
-  if (from.monitor_timeout() != 0) {
-    set_monitor_timeout(from.monitor_timeout());
-  }
-  if (from.has_bubi_attack()) {
-    mutable_bubi_attack()->::monitor::BubiAttack::MergeFrom(from.bubi_attack());
-  }
-}
-
-void Threshold::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:monitor.Threshold)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void Threshold::CopyFrom(const Threshold& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:monitor.Threshold)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool Threshold::IsInitialized() const {
-
-  return true;
-}
-
-void Threshold::Swap(Threshold* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void Threshold::InternalSwap(Threshold* other) {
-  std::swap(cpu_, other->cpu_);
-  std::swap(memory_, other->memory_);
-  std::swap(disk_, other->disk_);
-  std::swap(consensus_timeout_, other->consensus_timeout_);
-  std::swap(bubi_timeout_, other->bubi_timeout_);
-  std::swap(monitor_timeout_, other->monitor_timeout_);
-  std::swap(bubi_attack_, other->bubi_attack_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata Threshold::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = Threshold_descriptor_;
-  metadata.reflection = Threshold_reflection_;
-  return metadata;
-}
-
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// Threshold
-
-// optional float cpu = 1;
-void Threshold::clear_cpu() {
-  cpu_ = 0;
-}
- float Threshold::cpu() const {
-  // @@protoc_insertion_point(field_get:monitor.Threshold.cpu)
-  return cpu_;
-}
- void Threshold::set_cpu(float value) {
-  
-  cpu_ = value;
-  // @@protoc_insertion_point(field_set:monitor.Threshold.cpu)
-}
-
-// optional float memory = 2;
-void Threshold::clear_memory() {
-  memory_ = 0;
-}
- float Threshold::memory() const {
-  // @@protoc_insertion_point(field_get:monitor.Threshold.memory)
-  return memory_;
-}
- void Threshold::set_memory(float value) {
-  
-  memory_ = value;
-  // @@protoc_insertion_point(field_set:monitor.Threshold.memory)
-}
-
-// optional float disk = 3;
-void Threshold::clear_disk() {
-  disk_ = 0;
-}
- float Threshold::disk() const {
-  // @@protoc_insertion_point(field_get:monitor.Threshold.disk)
-  return disk_;
-}
- void Threshold::set_disk(float value) {
-  
-  disk_ = value;
-  // @@protoc_insertion_point(field_set:monitor.Threshold.disk)
-}
-
-// optional uint32 consensus_timeout = 4;
-void Threshold::clear_consensus_timeout() {
-  consensus_timeout_ = 0u;
-}
- ::google::protobuf::uint32 Threshold::consensus_timeout() const {
-  // @@protoc_insertion_point(field_get:monitor.Threshold.consensus_timeout)
-  return consensus_timeout_;
-}
- void Threshold::set_consensus_timeout(::google::protobuf::uint32 value) {
-  
-  consensus_timeout_ = value;
-  // @@protoc_insertion_point(field_set:monitor.Threshold.consensus_timeout)
-}
-
-// optional uint32 bubi_timeout = 5;
-void Threshold::clear_bubi_timeout() {
-  bubi_timeout_ = 0u;
-}
- ::google::protobuf::uint32 Threshold::bubi_timeout() const {
-  // @@protoc_insertion_point(field_get:monitor.Threshold.bubi_timeout)
-  return bubi_timeout_;
-}
- void Threshold::set_bubi_timeout(::google::protobuf::uint32 value) {
-  
-  bubi_timeout_ = value;
-  // @@protoc_insertion_point(field_set:monitor.Threshold.bubi_timeout)
-}
-
-// optional uint32 monitor_timeout = 6;
-void Threshold::clear_monitor_timeout() {
-  monitor_timeout_ = 0u;
-}
- ::google::protobuf::uint32 Threshold::monitor_timeout() const {
-  // @@protoc_insertion_point(field_get:monitor.Threshold.monitor_timeout)
-  return monitor_timeout_;
-}
- void Threshold::set_monitor_timeout(::google::protobuf::uint32 value) {
-  
-  monitor_timeout_ = value;
-  // @@protoc_insertion_point(field_set:monitor.Threshold.monitor_timeout)
-}
-
-// optional .monitor.BubiAttack bubi_attack = 7;
-bool Threshold::has_bubi_attack() const {
-  return !_is_default_instance_ && bubi_attack_ != NULL;
-}
-void Threshold::clear_bubi_attack() {
-  if (GetArenaNoVirtual() == NULL && bubi_attack_ != NULL) delete bubi_attack_;
-  bubi_attack_ = NULL;
-}
-const ::monitor::BubiAttack& Threshold::bubi_attack() const {
-  // @@protoc_insertion_point(field_get:monitor.Threshold.bubi_attack)
-  return bubi_attack_ != NULL ? *bubi_attack_ : *default_instance_->bubi_attack_;
-}
-::monitor::BubiAttack* Threshold::mutable_bubi_attack() {
-  
-  if (bubi_attack_ == NULL) {
-    bubi_attack_ = new ::monitor::BubiAttack;
-  }
-  // @@protoc_insertion_point(field_mutable:monitor.Threshold.bubi_attack)
-  return bubi_attack_;
-}
-::monitor::BubiAttack* Threshold::release_bubi_attack() {
-  // @@protoc_insertion_point(field_release:monitor.Threshold.bubi_attack)
-  
-  ::monitor::BubiAttack* temp = bubi_attack_;
-  bubi_attack_ = NULL;
-  return temp;
-}
-void Threshold::set_allocated_bubi_attack(::monitor::BubiAttack* bubi_attack) {
-  delete bubi_attack_;
-  bubi_attack_ = bubi_attack;
-  if (bubi_attack) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:monitor.Threshold.bubi_attack)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -2078,7 +1390,6 @@ const int Register::kRandIdFieldNumber;
 const int Register::kSessionIdFieldNumber;
 const int Register::kVersionFieldNumber;
 const int Register::kTimestampFieldNumber;
-const int Register::kThresholdFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 Register::Register()
@@ -2089,7 +1400,6 @@ Register::Register()
 
 void Register::InitAsDefaultInstance() {
   _is_default_instance_ = true;
-  threshold_ = const_cast< ::monitor::Threshold*>(&::monitor::Threshold::default_instance());
 }
 
 Register::Register(const Register& from)
@@ -2108,7 +1418,6 @@ void Register::SharedCtor() {
   session_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   version_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   timestamp_ = GOOGLE_LONGLONG(0);
-  threshold_ = NULL;
 }
 
 Register::~Register() {
@@ -2121,7 +1430,6 @@ void Register::SharedDtor() {
   session_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   version_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
-    delete threshold_;
   }
 }
 
@@ -2156,8 +1464,6 @@ void Register::Clear() {
   session_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   version_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   timestamp_ = GOOGLE_LONGLONG(0);
-  if (GetArenaNoVirtual() == NULL && threshold_ != NULL) delete threshold_;
-  threshold_ = NULL;
 }
 
 bool Register::MergePartialFromCodedStream(
@@ -2231,19 +1537,6 @@ bool Register::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(42)) goto parse_threshold;
-        break;
-      }
-
-      // optional .monitor.Threshold threshold = 5;
-      case 5: {
-        if (tag == 42) {
-         parse_threshold:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-               input, mutable_threshold()));
-        } else {
-          goto handle_unusual;
-        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -2307,12 +1600,6 @@ void Register::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(4, this->timestamp(), output);
   }
 
-  // optional .monitor.Threshold threshold = 5;
-  if (this->has_threshold()) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, *this->threshold_, output);
-  }
-
   // @@protoc_insertion_point(serialize_end:monitor.Register)
 }
 
@@ -2357,13 +1644,6 @@ void Register::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(4, this->timestamp(), target);
   }
 
-  // optional .monitor.Threshold threshold = 5;
-  if (this->has_threshold()) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        5, *this->threshold_, false, target);
-  }
-
   // @@protoc_insertion_point(serialize_to_array_end:monitor.Register)
   return target;
 }
@@ -2398,13 +1678,6 @@ int Register::ByteSize() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::Int64Size(
         this->timestamp());
-  }
-
-  // optional .monitor.Threshold threshold = 5;
-  if (this->has_threshold()) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        *this->threshold_);
   }
 
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
@@ -2450,9 +1723,6 @@ void Register::MergeFrom(const Register& from) {
   if (from.timestamp() != 0) {
     set_timestamp(from.timestamp());
   }
-  if (from.has_threshold()) {
-    mutable_threshold()->::monitor::Threshold::MergeFrom(from.threshold());
-  }
 }
 
 void Register::CopyFrom(const ::google::protobuf::Message& from) {
@@ -2483,7 +1753,6 @@ void Register::InternalSwap(Register* other) {
   session_id_.Swap(&other->session_id_);
   version_.Swap(&other->version_);
   std::swap(timestamp_, other->timestamp_);
-  std::swap(threshold_, other->threshold_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -2643,44 +1912,6 @@ void Register::clear_timestamp() {
   
   timestamp_ = value;
   // @@protoc_insertion_point(field_set:monitor.Register.timestamp)
-}
-
-// optional .monitor.Threshold threshold = 5;
-bool Register::has_threshold() const {
-  return !_is_default_instance_ && threshold_ != NULL;
-}
-void Register::clear_threshold() {
-  if (GetArenaNoVirtual() == NULL && threshold_ != NULL) delete threshold_;
-  threshold_ = NULL;
-}
-const ::monitor::Threshold& Register::threshold() const {
-  // @@protoc_insertion_point(field_get:monitor.Register.threshold)
-  return threshold_ != NULL ? *threshold_ : *default_instance_->threshold_;
-}
-::monitor::Threshold* Register::mutable_threshold() {
-  
-  if (threshold_ == NULL) {
-    threshold_ = new ::monitor::Threshold;
-  }
-  // @@protoc_insertion_point(field_mutable:monitor.Register.threshold)
-  return threshold_;
-}
-::monitor::Threshold* Register::release_threshold() {
-  // @@protoc_insertion_point(field_release:monitor.Register.threshold)
-  
-  ::monitor::Threshold* temp = threshold_;
-  threshold_ = NULL;
-  return temp;
-}
-void Register::set_allocated_threshold(::monitor::Threshold* threshold) {
-  delete threshold_;
-  threshold_ = threshold;
-  if (threshold) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:monitor.Register.threshold)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -7257,422 +6488,10 @@ void SystemStatus::set_allocated_partitions(::monitor::Partition* partitions) {
 
 // ===================================================================
 
-const ::google::protobuf::EnumDescriptor* AlertState_ALERT_TYPE_descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return AlertState_ALERT_TYPE_descriptor_;
-}
-bool AlertState_ALERT_TYPE_IsValid(int value) {
-  switch(value) {
-    case 0:
-    case 1:
-    case 2:
-      return true;
-    default:
-      return false;
-  }
-}
-
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const AlertState_ALERT_TYPE AlertState::NONE;
-const AlertState_ALERT_TYPE AlertState::NOWARNING;
-const AlertState_ALERT_TYPE AlertState::WARNING;
-const AlertState_ALERT_TYPE AlertState::ALERT_TYPE_MIN;
-const AlertState_ALERT_TYPE AlertState::ALERT_TYPE_MAX;
-const int AlertState::ALERT_TYPE_ARRAYSIZE;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int AlertState::kAlertStateFieldNumber;
-const int AlertState::kValueFieldNumber;
-const int AlertState::kDescriptionFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-AlertState::AlertState()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:monitor.AlertState)
-}
-
-void AlertState::InitAsDefaultInstance() {
-  _is_default_instance_ = true;
-}
-
-AlertState::AlertState(const AlertState& from)
-  : ::google::protobuf::Message(),
-    _internal_metadata_(NULL) {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:monitor.AlertState)
-}
-
-void AlertState::SharedCtor() {
-    _is_default_instance_ = false;
-  ::google::protobuf::internal::GetEmptyString();
-  _cached_size_ = 0;
-  alert_state_ = 0;
-  value_ = 0;
-  description_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-
-AlertState::~AlertState() {
-  // @@protoc_insertion_point(destructor:monitor.AlertState)
-  SharedDtor();
-}
-
-void AlertState::SharedDtor() {
-  description_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != default_instance_) {
-  }
-}
-
-void AlertState::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* AlertState::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return AlertState_descriptor_;
-}
-
-const AlertState& AlertState::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_monitor_2eproto();
-  return *default_instance_;
-}
-
-AlertState* AlertState::default_instance_ = NULL;
-
-AlertState* AlertState::New(::google::protobuf::Arena* arena) const {
-  AlertState* n = new AlertState;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void AlertState::Clear() {
-// @@protoc_insertion_point(message_clear_start:monitor.AlertState)
-  alert_state_ = 0;
-  value_ = 0;
-  description_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-
-bool AlertState::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:monitor.AlertState)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .monitor.AlertState.ALERT_TYPE alert_state = 1;
-      case 1: {
-        if (tag == 8) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          set_alert_state(static_cast< ::monitor::AlertState_ALERT_TYPE >(value));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(17)) goto parse_value;
-        break;
-      }
-
-      // optional double value = 2;
-      case 2: {
-        if (tag == 17) {
-         parse_value:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   double, ::google::protobuf::internal::WireFormatLite::TYPE_DOUBLE>(
-                 input, &value_)));
-
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(26)) goto parse_description;
-        break;
-      }
-
-      // optional string description = 3;
-      case 3: {
-        if (tag == 26) {
-         parse_description:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_description()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->description().data(), this->description().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "monitor.AlertState.description"));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:monitor.AlertState)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:monitor.AlertState)
-  return false;
-#undef DO_
-}
-
-void AlertState::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:monitor.AlertState)
-  // optional .monitor.AlertState.ALERT_TYPE alert_state = 1;
-  if (this->alert_state() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteEnum(
-      1, this->alert_state(), output);
-  }
-
-  // optional double value = 2;
-  if (this->value() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteDouble(2, this->value(), output);
-  }
-
-  // optional string description = 3;
-  if (this->description().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->description().data(), this->description().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "monitor.AlertState.description");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->description(), output);
-  }
-
-  // @@protoc_insertion_point(serialize_end:monitor.AlertState)
-}
-
-::google::protobuf::uint8* AlertState::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:monitor.AlertState)
-  // optional .monitor.AlertState.ALERT_TYPE alert_state = 1;
-  if (this->alert_state() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
-      1, this->alert_state(), target);
-  }
-
-  // optional double value = 2;
-  if (this->value() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteDoubleToArray(2, this->value(), target);
-  }
-
-  // optional string description = 3;
-  if (this->description().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->description().data(), this->description().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "monitor.AlertState.description");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->description(), target);
-  }
-
-  // @@protoc_insertion_point(serialize_to_array_end:monitor.AlertState)
-  return target;
-}
-
-int AlertState::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:monitor.AlertState)
-  int total_size = 0;
-
-  // optional .monitor.AlertState.ALERT_TYPE alert_state = 1;
-  if (this->alert_state() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::EnumSize(this->alert_state());
-  }
-
-  // optional double value = 2;
-  if (this->value() != 0) {
-    total_size += 1 + 8;
-  }
-
-  // optional string description = 3;
-  if (this->description().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->description());
-  }
-
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void AlertState::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:monitor.AlertState)
-  if (GOOGLE_PREDICT_FALSE(&from == this)) {
-    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
-  }
-  const AlertState* source = 
-      ::google::protobuf::internal::DynamicCastToGenerated<const AlertState>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:monitor.AlertState)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:monitor.AlertState)
-    MergeFrom(*source);
-  }
-}
-
-void AlertState::MergeFrom(const AlertState& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:monitor.AlertState)
-  if (GOOGLE_PREDICT_FALSE(&from == this)) {
-    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
-  }
-  if (from.alert_state() != 0) {
-    set_alert_state(from.alert_state());
-  }
-  if (from.value() != 0) {
-    set_value(from.value());
-  }
-  if (from.description().size() > 0) {
-
-    description_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.description_);
-  }
-}
-
-void AlertState::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:monitor.AlertState)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void AlertState::CopyFrom(const AlertState& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:monitor.AlertState)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool AlertState::IsInitialized() const {
-
-  return true;
-}
-
-void AlertState::Swap(AlertState* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void AlertState::InternalSwap(AlertState* other) {
-  std::swap(alert_state_, other->alert_state_);
-  std::swap(value_, other->value_);
-  description_.Swap(&other->description_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata AlertState::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = AlertState_descriptor_;
-  metadata.reflection = AlertState_reflection_;
-  return metadata;
-}
-
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// AlertState
-
-// optional .monitor.AlertState.ALERT_TYPE alert_state = 1;
-void AlertState::clear_alert_state() {
-  alert_state_ = 0;
-}
- ::monitor::AlertState_ALERT_TYPE AlertState::alert_state() const {
-  // @@protoc_insertion_point(field_get:monitor.AlertState.alert_state)
-  return static_cast< ::monitor::AlertState_ALERT_TYPE >(alert_state_);
-}
- void AlertState::set_alert_state(::monitor::AlertState_ALERT_TYPE value) {
-  
-  alert_state_ = value;
-  // @@protoc_insertion_point(field_set:monitor.AlertState.alert_state)
-}
-
-// optional double value = 2;
-void AlertState::clear_value() {
-  value_ = 0;
-}
- double AlertState::value() const {
-  // @@protoc_insertion_point(field_get:monitor.AlertState.value)
-  return value_;
-}
- void AlertState::set_value(double value) {
-  
-  value_ = value;
-  // @@protoc_insertion_point(field_set:monitor.AlertState.value)
-}
-
-// optional string description = 3;
-void AlertState::clear_description() {
-  description_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
- const ::std::string& AlertState::description() const {
-  // @@protoc_insertion_point(field_get:monitor.AlertState.description)
-  return description_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
- void AlertState::set_description(const ::std::string& value) {
-  
-  description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:monitor.AlertState.description)
-}
- void AlertState::set_description(const char* value) {
-  
-  description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:monitor.AlertState.description)
-}
- void AlertState::set_description(const char* value, size_t size) {
-  
-  description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:monitor.AlertState.description)
-}
- ::std::string* AlertState::mutable_description() {
-  
-  // @@protoc_insertion_point(field_mutable:monitor.AlertState.description)
-  return description_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
- ::std::string* AlertState::release_description() {
-  // @@protoc_insertion_point(field_release:monitor.AlertState.description)
-  
-  return description_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
- void AlertState::set_allocated_description(::std::string* description) {
-  if (description != NULL) {
-    
-  } else {
-    
-  }
-  description_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), description);
-  // @@protoc_insertion_point(field_set_allocated:monitor.AlertState.description)
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
-
-// ===================================================================
-
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int AlertStatus::kTimestampFieldNumber;
-const int AlertStatus::kAlertStateFieldNumber;
+const int AlertStatus::kLedgerSequenceFieldNumber;
+const int AlertStatus::kNodeIdFieldNumber;
+const int AlertStatus::kSystemFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 AlertStatus::AlertStatus()
@@ -7683,6 +6502,7 @@ AlertStatus::AlertStatus()
 
 void AlertStatus::InitAsDefaultInstance() {
   _is_default_instance_ = true;
+  system_ = const_cast< ::monitor::SystemStatus*>(&::monitor::SystemStatus::default_instance());
 }
 
 AlertStatus::AlertStatus(const AlertStatus& from)
@@ -7695,8 +6515,11 @@ AlertStatus::AlertStatus(const AlertStatus& from)
 
 void AlertStatus::SharedCtor() {
     _is_default_instance_ = false;
+  ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
-  timestamp_ = GOOGLE_LONGLONG(0);
+  ledger_sequence_ = GOOGLE_LONGLONG(0);
+  node_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  system_ = NULL;
 }
 
 AlertStatus::~AlertStatus() {
@@ -7705,7 +6528,9 @@ AlertStatus::~AlertStatus() {
 }
 
 void AlertStatus::SharedDtor() {
+  node_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
+    delete system_;
   }
 }
 
@@ -7736,8 +6561,10 @@ AlertStatus* AlertStatus::New(::google::protobuf::Arena* arena) const {
 
 void AlertStatus::Clear() {
 // @@protoc_insertion_point(message_clear_start:monitor.AlertStatus)
-  timestamp_ = GOOGLE_LONGLONG(0);
-  alert_state_.Clear();
+  ledger_sequence_ = GOOGLE_LONGLONG(0);
+  node_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (GetArenaNoVirtual() == NULL && system_ != NULL) delete system_;
+  system_ = NULL;
 }
 
 bool AlertStatus::MergePartialFromCodedStream(
@@ -7745,325 +6572,6 @@ bool AlertStatus::MergePartialFromCodedStream(
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:monitor.AlertStatus)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional int64 timestamp = 1;
-      case 1: {
-        if (tag == 8) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &timestamp_)));
-
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(18)) goto parse_alert_state;
-        break;
-      }
-
-      // repeated .monitor.AlertState alert_state = 2;
-      case 2: {
-        if (tag == 18) {
-         parse_alert_state:
-          DO_(input->IncrementRecursionDepth());
-         parse_loop_alert_state:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
-                input, add_alert_state()));
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(18)) goto parse_loop_alert_state;
-        input->UnsafeDecrementRecursionDepth();
-        if (input->ExpectAtEnd()) goto success;
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:monitor.AlertStatus)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:monitor.AlertStatus)
-  return false;
-#undef DO_
-}
-
-void AlertStatus::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:monitor.AlertStatus)
-  // optional int64 timestamp = 1;
-  if (this->timestamp() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->timestamp(), output);
-  }
-
-  // repeated .monitor.AlertState alert_state = 2;
-  for (unsigned int i = 0, n = this->alert_state_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, this->alert_state(i), output);
-  }
-
-  // @@protoc_insertion_point(serialize_end:monitor.AlertStatus)
-}
-
-::google::protobuf::uint8* AlertStatus::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:monitor.AlertStatus)
-  // optional int64 timestamp = 1;
-  if (this->timestamp() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->timestamp(), target);
-  }
-
-  // repeated .monitor.AlertState alert_state = 2;
-  for (unsigned int i = 0, n = this->alert_state_size(); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        2, this->alert_state(i), false, target);
-  }
-
-  // @@protoc_insertion_point(serialize_to_array_end:monitor.AlertStatus)
-  return target;
-}
-
-int AlertStatus::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:monitor.AlertStatus)
-  int total_size = 0;
-
-  // optional int64 timestamp = 1;
-  if (this->timestamp() != 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int64Size(
-        this->timestamp());
-  }
-
-  // repeated .monitor.AlertState alert_state = 2;
-  total_size += 1 * this->alert_state_size();
-  for (int i = 0; i < this->alert_state_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->alert_state(i));
-  }
-
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void AlertStatus::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:monitor.AlertStatus)
-  if (GOOGLE_PREDICT_FALSE(&from == this)) {
-    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
-  }
-  const AlertStatus* source = 
-      ::google::protobuf::internal::DynamicCastToGenerated<const AlertStatus>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:monitor.AlertStatus)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:monitor.AlertStatus)
-    MergeFrom(*source);
-  }
-}
-
-void AlertStatus::MergeFrom(const AlertStatus& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:monitor.AlertStatus)
-  if (GOOGLE_PREDICT_FALSE(&from == this)) {
-    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
-  }
-  alert_state_.MergeFrom(from.alert_state_);
-  if (from.timestamp() != 0) {
-    set_timestamp(from.timestamp());
-  }
-}
-
-void AlertStatus::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:monitor.AlertStatus)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void AlertStatus::CopyFrom(const AlertStatus& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:monitor.AlertStatus)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool AlertStatus::IsInitialized() const {
-
-  return true;
-}
-
-void AlertStatus::Swap(AlertStatus* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void AlertStatus::InternalSwap(AlertStatus* other) {
-  std::swap(timestamp_, other->timestamp_);
-  alert_state_.UnsafeArenaSwap(&other->alert_state_);
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata AlertStatus::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = AlertStatus_descriptor_;
-  metadata.reflection = AlertStatus_reflection_;
-  return metadata;
-}
-
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// AlertStatus
-
-// optional int64 timestamp = 1;
-void AlertStatus::clear_timestamp() {
-  timestamp_ = GOOGLE_LONGLONG(0);
-}
- ::google::protobuf::int64 AlertStatus::timestamp() const {
-  // @@protoc_insertion_point(field_get:monitor.AlertStatus.timestamp)
-  return timestamp_;
-}
- void AlertStatus::set_timestamp(::google::protobuf::int64 value) {
-  
-  timestamp_ = value;
-  // @@protoc_insertion_point(field_set:monitor.AlertStatus.timestamp)
-}
-
-// repeated .monitor.AlertState alert_state = 2;
-int AlertStatus::alert_state_size() const {
-  return alert_state_.size();
-}
-void AlertStatus::clear_alert_state() {
-  alert_state_.Clear();
-}
-const ::monitor::AlertState& AlertStatus::alert_state(int index) const {
-  // @@protoc_insertion_point(field_get:monitor.AlertStatus.alert_state)
-  return alert_state_.Get(index);
-}
-::monitor::AlertState* AlertStatus::mutable_alert_state(int index) {
-  // @@protoc_insertion_point(field_mutable:monitor.AlertStatus.alert_state)
-  return alert_state_.Mutable(index);
-}
-::monitor::AlertState* AlertStatus::add_alert_state() {
-  // @@protoc_insertion_point(field_add:monitor.AlertStatus.alert_state)
-  return alert_state_.Add();
-}
-::google::protobuf::RepeatedPtrField< ::monitor::AlertState >*
-AlertStatus::mutable_alert_state() {
-  // @@protoc_insertion_point(field_mutable_list:monitor.AlertStatus.alert_state)
-  return &alert_state_;
-}
-const ::google::protobuf::RepeatedPtrField< ::monitor::AlertState >&
-AlertStatus::alert_state() const {
-  // @@protoc_insertion_point(field_list:monitor.AlertStatus.alert_state)
-  return alert_state_;
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
-
-// ===================================================================
-
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ChainAlertMessage::kLedgerSequenceFieldNumber;
-const int ChainAlertMessage::kNodeIdFieldNumber;
-const int ChainAlertMessage::kSystemFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-ChainAlertMessage::ChainAlertMessage()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:monitor.ChainAlertMessage)
-}
-
-void ChainAlertMessage::InitAsDefaultInstance() {
-  _is_default_instance_ = true;
-  system_ = const_cast< ::monitor::SystemStatus*>(&::monitor::SystemStatus::default_instance());
-}
-
-ChainAlertMessage::ChainAlertMessage(const ChainAlertMessage& from)
-  : ::google::protobuf::Message(),
-    _internal_metadata_(NULL) {
-  SharedCtor();
-  MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:monitor.ChainAlertMessage)
-}
-
-void ChainAlertMessage::SharedCtor() {
-    _is_default_instance_ = false;
-  ::google::protobuf::internal::GetEmptyString();
-  _cached_size_ = 0;
-  ledger_sequence_ = GOOGLE_LONGLONG(0);
-  node_id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  system_ = NULL;
-}
-
-ChainAlertMessage::~ChainAlertMessage() {
-  // @@protoc_insertion_point(destructor:monitor.ChainAlertMessage)
-  SharedDtor();
-}
-
-void ChainAlertMessage::SharedDtor() {
-  node_id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != default_instance_) {
-    delete system_;
-  }
-}
-
-void ChainAlertMessage::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* ChainAlertMessage::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return ChainAlertMessage_descriptor_;
-}
-
-const ChainAlertMessage& ChainAlertMessage::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_monitor_2eproto();
-  return *default_instance_;
-}
-
-ChainAlertMessage* ChainAlertMessage::default_instance_ = NULL;
-
-ChainAlertMessage* ChainAlertMessage::New(::google::protobuf::Arena* arena) const {
-  ChainAlertMessage* n = new ChainAlertMessage;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void ChainAlertMessage::Clear() {
-// @@protoc_insertion_point(message_clear_start:monitor.ChainAlertMessage)
-  ledger_sequence_ = GOOGLE_LONGLONG(0);
-  node_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (GetArenaNoVirtual() == NULL && system_ != NULL) delete system_;
-  system_ = NULL;
-}
-
-bool ChainAlertMessage::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:monitor.ChainAlertMessage)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -8092,7 +6600,7 @@ bool ChainAlertMessage::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
             this->node_id().data(), this->node_id().length(),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "monitor.ChainAlertMessage.node_id"));
+            "monitor.AlertStatus.node_id"));
         } else {
           goto handle_unusual;
         }
@@ -8126,17 +6634,17 @@ bool ChainAlertMessage::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:monitor.ChainAlertMessage)
+  // @@protoc_insertion_point(parse_success:monitor.AlertStatus)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:monitor.ChainAlertMessage)
+  // @@protoc_insertion_point(parse_failure:monitor.AlertStatus)
   return false;
 #undef DO_
 }
 
-void ChainAlertMessage::SerializeWithCachedSizes(
+void AlertStatus::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:monitor.ChainAlertMessage)
+  // @@protoc_insertion_point(serialize_start:monitor.AlertStatus)
   // optional int64 ledger_sequence = 2;
   if (this->ledger_sequence() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->ledger_sequence(), output);
@@ -8147,7 +6655,7 @@ void ChainAlertMessage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->node_id().data(), this->node_id().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "monitor.ChainAlertMessage.node_id");
+      "monitor.AlertStatus.node_id");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->node_id(), output);
   }
@@ -8158,12 +6666,12 @@ void ChainAlertMessage::SerializeWithCachedSizes(
       4, *this->system_, output);
   }
 
-  // @@protoc_insertion_point(serialize_end:monitor.ChainAlertMessage)
+  // @@protoc_insertion_point(serialize_end:monitor.AlertStatus)
 }
 
-::google::protobuf::uint8* ChainAlertMessage::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* AlertStatus::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:monitor.ChainAlertMessage)
+  // @@protoc_insertion_point(serialize_to_array_start:monitor.AlertStatus)
   // optional int64 ledger_sequence = 2;
   if (this->ledger_sequence() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->ledger_sequence(), target);
@@ -8174,7 +6682,7 @@ void ChainAlertMessage::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
       this->node_id().data(), this->node_id().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "monitor.ChainAlertMessage.node_id");
+      "monitor.AlertStatus.node_id");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->node_id(), target);
@@ -8187,12 +6695,12 @@ void ChainAlertMessage::SerializeWithCachedSizes(
         4, *this->system_, false, target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:monitor.ChainAlertMessage)
+  // @@protoc_insertion_point(serialize_to_array_end:monitor.AlertStatus)
   return target;
 }
 
-int ChainAlertMessage::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:monitor.ChainAlertMessage)
+int AlertStatus::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:monitor.AlertStatus)
   int total_size = 0;
 
   // optional int64 ledger_sequence = 2;
@@ -8222,25 +6730,25 @@ int ChainAlertMessage::ByteSize() const {
   return total_size;
 }
 
-void ChainAlertMessage::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:monitor.ChainAlertMessage)
+void AlertStatus::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:monitor.AlertStatus)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-  const ChainAlertMessage* source = 
-      ::google::protobuf::internal::DynamicCastToGenerated<const ChainAlertMessage>(
+  const AlertStatus* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const AlertStatus>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:monitor.ChainAlertMessage)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:monitor.AlertStatus)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:monitor.ChainAlertMessage)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:monitor.AlertStatus)
     MergeFrom(*source);
   }
 }
 
-void ChainAlertMessage::MergeFrom(const ChainAlertMessage& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:monitor.ChainAlertMessage)
+void AlertStatus::MergeFrom(const AlertStatus& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:monitor.AlertStatus)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
@@ -8256,30 +6764,30 @@ void ChainAlertMessage::MergeFrom(const ChainAlertMessage& from) {
   }
 }
 
-void ChainAlertMessage::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:monitor.ChainAlertMessage)
+void AlertStatus::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:monitor.AlertStatus)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void ChainAlertMessage::CopyFrom(const ChainAlertMessage& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:monitor.ChainAlertMessage)
+void AlertStatus::CopyFrom(const AlertStatus& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:monitor.AlertStatus)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool ChainAlertMessage::IsInitialized() const {
+bool AlertStatus::IsInitialized() const {
 
   return true;
 }
 
-void ChainAlertMessage::Swap(ChainAlertMessage* other) {
+void AlertStatus::Swap(AlertStatus* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void ChainAlertMessage::InternalSwap(ChainAlertMessage* other) {
+void AlertStatus::InternalSwap(AlertStatus* other) {
   std::swap(ledger_sequence_, other->ledger_sequence_);
   node_id_.Swap(&other->node_id_);
   std::swap(system_, other->system_);
@@ -8287,103 +6795,103 @@ void ChainAlertMessage::InternalSwap(ChainAlertMessage* other) {
   std::swap(_cached_size_, other->_cached_size_);
 }
 
-::google::protobuf::Metadata ChainAlertMessage::GetMetadata() const {
+::google::protobuf::Metadata AlertStatus::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = ChainAlertMessage_descriptor_;
-  metadata.reflection = ChainAlertMessage_reflection_;
+  metadata.descriptor = AlertStatus_descriptor_;
+  metadata.reflection = AlertStatus_reflection_;
   return metadata;
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// ChainAlertMessage
+// AlertStatus
 
 // optional int64 ledger_sequence = 2;
-void ChainAlertMessage::clear_ledger_sequence() {
+void AlertStatus::clear_ledger_sequence() {
   ledger_sequence_ = GOOGLE_LONGLONG(0);
 }
- ::google::protobuf::int64 ChainAlertMessage::ledger_sequence() const {
-  // @@protoc_insertion_point(field_get:monitor.ChainAlertMessage.ledger_sequence)
+ ::google::protobuf::int64 AlertStatus::ledger_sequence() const {
+  // @@protoc_insertion_point(field_get:monitor.AlertStatus.ledger_sequence)
   return ledger_sequence_;
 }
- void ChainAlertMessage::set_ledger_sequence(::google::protobuf::int64 value) {
+ void AlertStatus::set_ledger_sequence(::google::protobuf::int64 value) {
   
   ledger_sequence_ = value;
-  // @@protoc_insertion_point(field_set:monitor.ChainAlertMessage.ledger_sequence)
+  // @@protoc_insertion_point(field_set:monitor.AlertStatus.ledger_sequence)
 }
 
 // optional string node_id = 3;
-void ChainAlertMessage::clear_node_id() {
+void AlertStatus::clear_node_id() {
   node_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- const ::std::string& ChainAlertMessage::node_id() const {
-  // @@protoc_insertion_point(field_get:monitor.ChainAlertMessage.node_id)
+ const ::std::string& AlertStatus::node_id() const {
+  // @@protoc_insertion_point(field_get:monitor.AlertStatus.node_id)
   return node_id_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void ChainAlertMessage::set_node_id(const ::std::string& value) {
+ void AlertStatus::set_node_id(const ::std::string& value) {
   
   node_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:monitor.ChainAlertMessage.node_id)
+  // @@protoc_insertion_point(field_set:monitor.AlertStatus.node_id)
 }
- void ChainAlertMessage::set_node_id(const char* value) {
+ void AlertStatus::set_node_id(const char* value) {
   
   node_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:monitor.ChainAlertMessage.node_id)
+  // @@protoc_insertion_point(field_set_char:monitor.AlertStatus.node_id)
 }
- void ChainAlertMessage::set_node_id(const char* value, size_t size) {
+ void AlertStatus::set_node_id(const char* value, size_t size) {
   
   node_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:monitor.ChainAlertMessage.node_id)
+  // @@protoc_insertion_point(field_set_pointer:monitor.AlertStatus.node_id)
 }
- ::std::string* ChainAlertMessage::mutable_node_id() {
+ ::std::string* AlertStatus::mutable_node_id() {
   
-  // @@protoc_insertion_point(field_mutable:monitor.ChainAlertMessage.node_id)
+  // @@protoc_insertion_point(field_mutable:monitor.AlertStatus.node_id)
   return node_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- ::std::string* ChainAlertMessage::release_node_id() {
-  // @@protoc_insertion_point(field_release:monitor.ChainAlertMessage.node_id)
+ ::std::string* AlertStatus::release_node_id() {
+  // @@protoc_insertion_point(field_release:monitor.AlertStatus.node_id)
   
   return node_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void ChainAlertMessage::set_allocated_node_id(::std::string* node_id) {
+ void AlertStatus::set_allocated_node_id(::std::string* node_id) {
   if (node_id != NULL) {
     
   } else {
     
   }
   node_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), node_id);
-  // @@protoc_insertion_point(field_set_allocated:monitor.ChainAlertMessage.node_id)
+  // @@protoc_insertion_point(field_set_allocated:monitor.AlertStatus.node_id)
 }
 
 // optional .monitor.SystemStatus system = 4;
-bool ChainAlertMessage::has_system() const {
+bool AlertStatus::has_system() const {
   return !_is_default_instance_ && system_ != NULL;
 }
-void ChainAlertMessage::clear_system() {
+void AlertStatus::clear_system() {
   if (GetArenaNoVirtual() == NULL && system_ != NULL) delete system_;
   system_ = NULL;
 }
-const ::monitor::SystemStatus& ChainAlertMessage::system() const {
-  // @@protoc_insertion_point(field_get:monitor.ChainAlertMessage.system)
+const ::monitor::SystemStatus& AlertStatus::system() const {
+  // @@protoc_insertion_point(field_get:monitor.AlertStatus.system)
   return system_ != NULL ? *system_ : *default_instance_->system_;
 }
-::monitor::SystemStatus* ChainAlertMessage::mutable_system() {
+::monitor::SystemStatus* AlertStatus::mutable_system() {
   
   if (system_ == NULL) {
     system_ = new ::monitor::SystemStatus;
   }
-  // @@protoc_insertion_point(field_mutable:monitor.ChainAlertMessage.system)
+  // @@protoc_insertion_point(field_mutable:monitor.AlertStatus.system)
   return system_;
 }
-::monitor::SystemStatus* ChainAlertMessage::release_system() {
-  // @@protoc_insertion_point(field_release:monitor.ChainAlertMessage.system)
+::monitor::SystemStatus* AlertStatus::release_system() {
+  // @@protoc_insertion_point(field_release:monitor.AlertStatus.system)
   
   ::monitor::SystemStatus* temp = system_;
   system_ = NULL;
   return temp;
 }
-void ChainAlertMessage::set_allocated_system(::monitor::SystemStatus* system) {
+void AlertStatus::set_allocated_system(::monitor::SystemStatus* system) {
   delete system_;
   system_ = system;
   if (system) {
@@ -8391,7 +6899,7 @@ void ChainAlertMessage::set_allocated_system(::monitor::SystemStatus* system) {
   } else {
     
   }
-  // @@protoc_insertion_point(field_set_allocated:monitor.ChainAlertMessage.system)
+  // @@protoc_insertion_point(field_set_allocated:monitor.AlertStatus.system)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

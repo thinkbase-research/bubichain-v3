@@ -21,7 +21,6 @@ limitations under the License.
 namespace bubi {
 	class WebSocketServer :public utils::Singleton<WebSocketServer>,
 		public StatusModule,
-		public TimerNotify,
 		public Network,
 		public utils::Runnable {
 		friend class utils::Singleton<bubi::WebSocketServer>;
@@ -35,41 +34,23 @@ namespace bubi {
 		bool Initialize(WsServerConfigure & ws_server_configure);
 		bool Exit();
 
-		virtual void OnTimer(int64_t current_time) override;
-		virtual void OnSlowTimer(int64_t current_time) override;
-
 		// Handlers
 		bool OnChainHello(protocol::WsMessage &message, int64_t conn_id);
 		bool OnChainPeerMessage(protocol::WsMessage &message, int64_t conn_id);
 		bool OnSubmitTransaction(protocol::WsMessage &message, int64_t conn_id);
 
-		bool OnBubiStatus(protocol::WsMessage &message, int64_t conn_id);
-		bool OnLedgerStatus(protocol::WsMessage &message, int64_t conn_id);
-		bool OnSystemStatus(protocol::WsMessage &message, int64_t conn_id);
-		bool OnAlertStatus(protocol::WsMessage &message, int64_t conn_id);
-
-		bool SendMonitor(int64_t type, const std::string &data);
 		void BroadcastMsg(int64_t type, const std::string &data);
 		void BroadcastChainTxMsg(const std::string &hash, const std::string &source_address, Result result, protocol::ChainTxStatus_TxStatus status);
 
-		bool GetBubiStatus(monitor::BubiStatus &bubi_status);
 		virtual void GetModuleStatus(Json::Value &data);
 	protected:
 		virtual void Run(utils::Thread *thread) override;
 
-		virtual void OnDisconnect(Connection *conn);
-		virtual bool OnConnectOpen(Connection *conn);
-
 	private:
-
-		bool init_;
-		bool is_connected_;
 		utils::Thread *thread_ptr_;
 
 		uint64_t last_connect_time_;
 		uint64_t connect_interval_;
-
-		SystemManager system_manager_;
 	};
 }
 

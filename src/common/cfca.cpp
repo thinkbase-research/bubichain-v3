@@ -303,22 +303,27 @@ namespace cfca {
 			LOG_ERROR("error: 0x%08x, 证书链不完整", error_code);
 			break;
 		case 0xA0072021:
-			LOG_ERROR("error: 0x%08x, 无效的证书用途", error_code);
+			LOG_ERROR("error: 0x%08x, 证书链不完整", error_code);
+			//LOG_ERROR("error: 0x%08x, 无效的证书用途", error_code);
 			break;
 		case 0xA0071101:
-			LOG_ERROR("error: 0x%08x, 数据大小超过最大限制", error_code);
+			LOG_ERROR("error: 0x%08x, 证书链不完整", error_code);
+			//LOG_ERROR("error: 0x%08x, 数据大小超过最大限制", error_code);
 			break;
 		case 0xA0071102:
-			LOG_ERROR("error: 0x%08x, 递归深度超过最大限制", error_code);
+			LOG_ERROR("error: 0x%08x, 证书链不完整", error_code);
+			//LOG_ERROR("error: 0x%08x, 递归深度超过最大限制", error_code);
 			break;
 		case 0xA0071103:
-			LOG_ERROR("error: 0x%08x, SM2文件证书解析错误", error_code);
+			LOG_ERROR("error: 0x%08x, 证书链不完整", error_code);
+			//LOG_ERROR("error: 0x%08x, SM2文件证书解析错误", error_code);
 			break;
 		case 0xA0071104:
 			LOG_ERROR("error: 0x%08x, 无效的PKCS#7签名格式", error_code);
 			break;
 		case 0xA0071105:
-			LOG_ERROR("error: 0x%08x, 无效的数字信封格式", error_code);
+			LOG_ERROR("error: 0x%08x, 证书链不完整", error_code);
+			//LOG_ERROR("error: 0x%08x, 无效的数字信封格式", error_code);
 			break;
 		case 0xA0071106:
 			LOG_ERROR("error: 0x%08x, 未找到匹配的SM2解密证书", error_code);

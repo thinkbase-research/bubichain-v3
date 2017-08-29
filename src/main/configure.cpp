@@ -175,16 +175,19 @@ namespace bubi {
 	}
 
 	MonitorConfigure::MonitorConfigure() {
-		connect_address_ = "127.0.0.1:4053";
+		center_ = "127.0.0.1:4053";
 		disk_path_ = "/";
+		enabled_ = false;
 	}
 
 	MonitorConfigure::~MonitorConfigure() {
 	}
 
 	bool MonitorConfigure::Load(const Json::Value &value) {
-		Configure::GetValue(value, "connect_address", connect_address_);
+		Configure::GetValue(value, "id", id_);
+		Configure::GetValue(value, "center", center_);
 		Configure::GetValue(value, "disk_path", disk_path_);
+		Configure::GetValue(value, "enabled", enabled_);
 		return true;
 	}
 

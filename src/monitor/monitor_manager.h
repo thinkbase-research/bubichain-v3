@@ -14,38 +14,67 @@ limitations under the License.
 #ifndef MONITOR_MANAGER_H_
 #define MONITOR_MANAGER_H_
 
-#include <utils/singleton.h>
-#include <utils/net.h>
-#include <common/general.h>
+#include <proto/cpp/chain.pb.h>
+#include <common/network.h>
+#include <monitor/system_manager.h>
 
-namespace monitor {
-	class MonitorNetwork;
-	class MonitorManager : 
-		public utils::Singleton<MonitorManager>, 
-		utils::Runnable,
-		public bubi::TimerNotify {
-		friend class utils::Singleton<MonitorManager>;
-
+namespace bubi {
+	class MonitorManager :public utils::Singleton<MonitorManager>,
+		public StatusModule,
+		public TimerNotify,
+		public Network,
+		public utils::Runnable {
+		friend class utils::Singleton<bubi::MonitorManager>;
 	public:
 		MonitorManager();
 		~MonitorManager();
 
-		bool Initialize(char *serial_num = NULL, bool cert_enabled = false);
+		
+		//virtual bool Send(const ZMQTaskType type, const std::string& buf);
+
+		bool Initialize();
 		bool Exit();
 
-		virtual void OnTimer(int64_t current_time) override {};
-		virtual void OnSlowTimer(int64_t current_time);
+		virtual void OnTimer(int64_t current_time) override;
+		virtual void OnSlowTimer(int64_t current_time) override;
+		virtual void GetModuleStatus(Json::Value &data);
 
+		bool SendMonitor(int64_t type, const std::string &data);
+		
+	protected:
 		virtual void Run(utils::Thread *thread) override;
 
-		inline MonitorNetwork *GetMonitorNetwork() {
-			return monitor_network_;
-		}
+	private:
+		virtual bool OnConnectOpen(Connection *conn);
+		virtual void OnDisconnect(Connection *conn);
+		virtual bubi::Connection *CreateConnectObject(bubi::server *server_h, bubi::client *client_,
+			bubi::tls_server *tls_server_h, bubi::tls_client *tls_client_h,
+			bubi::connection_hdl con, const std::string &uri, int64_t id);
+
+		// Handlers
+		bool OnMonitorRegister(protocol::WsMessage &message, int64_t conn_id);
+		bool OnBubiStatus(protocol::WsMessage &message, int64_t conn_id);
+		bool OnLedgerStatus(protocol::WsMessage &message, int64_t conn_id);
+		bool OnSystemStatus(protocol::WsMessage &message, int64_t conn_id);
+
+		bool GetBubiStatus(monitor::BubiStatus &bubi_status);
+		Connection * GetClientConnection();
 
 	private:
-		MonitorNetwork *monitor_network_;
+
+		bool init_;
+		bool is_connected_;
 		utils::Thread *thread_ptr_;
-		std::string serial_num_;
+
+		std::string monitor_id_;
+
+		uint64_t last_connect_time_;
+		uint64_t connect_interval_;
+
+		uint64_t check_alert_interval_;
+		uint64_t last_alert_time_;
+
+		SystemManager system_manager_;
 	};
 }
 
