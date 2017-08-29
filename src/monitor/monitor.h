@@ -18,7 +18,7 @@ limitations under the License.
 #include <proto/cpp/overlay.pb.h>
 #include <common/network.h>
 
-namespace monitor {
+namespace bubi {
 	typedef std::shared_ptr<protocol::WsMessage> WsMessagePointer;
 
 	class Monitor : public bubi::Connection {

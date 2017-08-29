@@ -22,16 +22,6 @@ message BubiAttack {
 	uint32 bubi_attack_counts = 2;
 }
 
-message Threshold {
-	float cpu = 1;
-	float memory = 2;
-	float disk = 3;
-	uint32 consensus_timeout = 4;
-	uint32 bubi_timeout = 5;
-	uint32 monitor_timeout = 6;
-	BubiAttack bubi_attack = 7;
-}
-
 message Hello {
 	string id = 1;
 	string blockchain_version = 2;
@@ -44,7 +34,6 @@ message Register {
 	string session_id = 2;
 	string version = 3;
 	int64 timestamp = 4;
-	Threshold threshold = 5;
 }
 
 message ErrorMessage {
@@ -113,23 +102,7 @@ message SystemStatus {
 	Partition partitions = 4;
 }
 
-message AlertState {
-	enum ALERT_TYPE{
-		NONE = 0;
-		NOWARNING = 1;
-		WARNING = 2;
-	}
-	ALERT_TYPE alert_state = 1;
-	double value = 2;
-	string description = 3;
-}
-
 message AlertStatus {
-	int64 timestamp = 1;
-	repeated AlertState alert_state = 2;
-}
-
-message ChainAlertMessage {
 	int64 ledger_sequence = 2;
 	string node_id = 3;
 	SystemStatus system = 4;

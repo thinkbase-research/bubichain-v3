@@ -14,7 +14,7 @@ limitations under the License.
 #include <common/general.h>
 #include "monitor.h"
 
-namespace monitor {
+namespace bubi {
 	Monitor::Monitor(bubi::server *server_h, bubi::client *client_h, bubi::tls_server *tls_server_h, bubi::tls_client *tls_client_h,
 		bubi::connection_hdl con, const std::string &uri, int64_t id) : 
 		Connection(server_h, client_h, tls_server_h, tls_client_h, con, uri, id), active_time_(0){
