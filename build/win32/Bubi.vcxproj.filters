@@ -120,6 +120,9 @@
     <ClCompile Include="..\..\src\glue\ledger_upgrade.cpp">
       <Filter>glue</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\src\monitor\monitor_manager.cpp">
+      <Filter>monitor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\overlay\peer_manager.h">
@@ -205,6 +208,9 @@
     </ClInclude>
     <ClInclude Include="..\..\src\glue\ledger_upgrade.h">
       <Filter>glue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\monitor\monitor_manager.h">
+      <Filter>monitor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

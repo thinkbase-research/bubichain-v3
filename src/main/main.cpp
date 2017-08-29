@@ -26,6 +26,7 @@ limitations under the License.
 #include <api/web_server.h>
 #include <api/websocket_server.h>
 #include <ledger/contract_manager.h>
+#include <monitor/monitor_manager.h>
 #include "configure.h"
 
 void RunLoop();
@@ -47,6 +48,7 @@ int main(int argc, char *argv[]){
 	bubi::GlueManager::InitInstance();
 	bubi::WebSocketServer::InitInstance();
 	bubi::WebServer::InitInstance();
+	bubi::MonitorManager::InitInstance();
 	//bubi::ContractManager::InitInstance();
 
 	bubi::Argument arg;
@@ -195,6 +197,14 @@ int main(int argc, char *argv[]){
 		}
 		bubiAtExit.Push(std::bind(&bubi::PeerManager::Exit, &p2p));
 		LOG_INFO("Initialize peer network successful");
+
+		bubi::MonitorManager &monitor_manager = bubi::MonitorManager::Instance();
+		if (!bubi::g_enable_ || !monitor_manager.Initialize()) {
+			LOG_ERROR("Initialize monitor manager failed");
+			break;
+		}
+		bubiAtExit.Push(std::bind(&bubi::MonitorManager::Exit, &monitor_manager));
+		LOG_INFO("Initialize monitor manager successful");
 
 		bubi::SlowTimer &slow_timer = bubi::SlowTimer::Instance();
 		if (!bubi::g_enable_ || !slow_timer.Initialize(1)){

@@ -14,6 +14,7 @@ limitations under the License.
 #include <overlay/peer_manager.h>
 #include <glue/glue_manager.h>
 #include <api/websocket_server.h>
+#include <monitor/monitor_manager.h>
 #include "ledger_manager.h"
 #include "contract_manager.h"
 
@@ -590,7 +591,7 @@ namespace bubi {
 		ledger_status.set_transaction_size(0);
 		ledger_status.set_account_count(0);
 		ledger_status.set_timestamp(utils::Timestamp::HighResolution());
-		bubi::WebSocketServer::Instance().SendMonitor(monitor::MONITOR_MSGTYPE_LEDGER, ledger_status.SerializeAsString());
+		MonitorManager::Instance().SendMonitor(monitor::MONITOR_MSGTYPE_LEDGER, ledger_status.SerializeAsString());
 		return true;
 	}
 
