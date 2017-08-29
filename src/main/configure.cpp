@@ -196,6 +196,15 @@ namespace bubi {
 	Configure::~Configure() {}
 
 	bool Configure::LoadFromJson(const Json::Value &values){
+		if (!values.isMember("db") ||
+			!values.isMember("logger") ||
+			!values.isMember("p2p") ||
+			!values.isMember("ledger") ||
+			!values.isMember("validation")) {
+			LOG_STD_ERR("Some configuration not exist");
+			return false;
+		}
+
 		db_configure_.Load(values["db"]);
 		logger_configure_.Load(values["logger"]);
 		p2p_configure_.Load(values["p2p"]);
