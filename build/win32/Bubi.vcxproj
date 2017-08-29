@@ -26,6 +26,7 @@
     <ClCompile Include="..\..\src\ledger\trie.cpp" />
     <ClCompile Include="..\..\src\main\configure.cpp" />
     <ClCompile Include="..\..\src\monitor\monitor.cpp" />
+    <ClCompile Include="..\..\src\monitor\monitor_manager.cpp" />
     <ClCompile Include="..\..\src\monitor\system_manager.cpp" />
     <ClCompile Include="..\..\src\overlay\peer.cpp" />
     <ClCompile Include="..\..\src\overlay\peer_network.cpp" />
@@ -56,6 +57,7 @@
     <ClInclude Include="..\..\src\ledger\trie.h" />
     <ClInclude Include="..\..\src\main\configure.h" />
     <ClInclude Include="..\..\src\monitor\monitor.h" />
+    <ClInclude Include="..\..\src\monitor\monitor_manager.h" />
     <ClInclude Include="..\..\src\monitor\system_manager.h" />
     <ClInclude Include="..\..\src\overlay\peer.h" />
     <ClInclude Include="..\..\src\overlay\peer_network.h" />
@@ -161,13 +163,6 @@
       <AdditionalLibraryDirectories>../../src/3rd/basic/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <StackReserveSize>5000000</StackReserveSize>
     </Link>
-    <PostBuildEvent>
-      <Command>cp dbin\bubi.exe ..\win32_9334\dbin\bubi.exe
-cp dbin\bubi.exe ..\win32_9335\dbin\bubi.exe
-cp dbin\bubi.exe ..\win32_9336\dbin\bubi.exe
-
-</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>

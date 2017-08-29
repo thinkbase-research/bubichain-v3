@@ -112,8 +112,10 @@ namespace bubi {
 		MonitorConfigure();
 		~MonitorConfigure();
 
-		std::string connect_address_;
+		std::string id_;
+		std::string center_;
 		std::string disk_path_;
+		bool enabled_;
 		bool Load(const Json::Value &value);
 	};
 

@@ -11,11 +11,9 @@ set(APP_BUBI_SRC
     ../api/web_server_command.cpp
     ../api/web_server_helper.cpp
     ../api/websocket_server.cpp
-    ../monitor/monitor.cpp
-    ../monitor/system_manager.cpp
 )
 
-set(INNER_LIBS bubi_glue bubi_ledger bubi_consensus bubi_overlay bubi_common bubi_utils bubi_proto bubi_http bubi_ed25519)
+set(INNER_LIBS bubi_glue bubi_ledger bubi_consensus bubi_overlay bubi_common bubi_utils bubi_proto bubi_http bubi_ed25519 bubi_monitor)
 set(V8_LIBS v8_base v8_libbase v8_external_snapshot v8_libplatform v8_libsampler icui18n icuuc inspector)
 
 #generate executable file

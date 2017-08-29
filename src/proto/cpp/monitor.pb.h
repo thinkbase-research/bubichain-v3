@@ -38,12 +38,10 @@ void protobuf_AddDesc_monitor_2eproto();
 void protobuf_AssignDesc_monitor_2eproto();
 void protobuf_ShutdownFile_monitor_2eproto();
 
-class AlertState;
 class AlertStatus;
 class BubiAttack;
 class BubiStatus;
 class CPU;
-class ChainAlertMessage;
 class ErrorMessage;
 class GlueManager;
 class Hello;
@@ -55,30 +53,7 @@ class Register;
 class SystemProperty;
 class SystemResource;
 class SystemStatus;
-class Threshold;
 
-enum AlertState_ALERT_TYPE {
-  AlertState_ALERT_TYPE_NONE = 0,
-  AlertState_ALERT_TYPE_NOWARNING = 1,
-  AlertState_ALERT_TYPE_WARNING = 2,
-  AlertState_ALERT_TYPE_AlertState_ALERT_TYPE_INT_MIN_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32min,
-  AlertState_ALERT_TYPE_AlertState_ALERT_TYPE_INT_MAX_SENTINEL_DO_NOT_USE_ = ::google::protobuf::kint32max
-};
-bool AlertState_ALERT_TYPE_IsValid(int value);
-const AlertState_ALERT_TYPE AlertState_ALERT_TYPE_ALERT_TYPE_MIN = AlertState_ALERT_TYPE_NONE;
-const AlertState_ALERT_TYPE AlertState_ALERT_TYPE_ALERT_TYPE_MAX = AlertState_ALERT_TYPE_WARNING;
-const int AlertState_ALERT_TYPE_ALERT_TYPE_ARRAYSIZE = AlertState_ALERT_TYPE_ALERT_TYPE_MAX + 1;
-
-const ::google::protobuf::EnumDescriptor* AlertState_ALERT_TYPE_descriptor();
-inline const ::std::string& AlertState_ALERT_TYPE_Name(AlertState_ALERT_TYPE value) {
-  return ::google::protobuf::internal::NameOfEnum(
-    AlertState_ALERT_TYPE_descriptor(), value);
-}
-inline bool AlertState_ALERT_TYPE_Parse(
-    const ::std::string& name, AlertState_ALERT_TYPE* value) {
-  return ::google::protobuf::internal::ParseNamedEnum<AlertState_ALERT_TYPE>(
-    AlertState_ALERT_TYPE_descriptor(), name, value);
-}
 enum MONITOR_MESSAGE_TYPE {
   MONITOR_MSGTYPE_NONE = 0,
   MONITOR_MSGTYPE_HELLO = 30,
@@ -226,133 +201,6 @@ class BubiAttack : public ::google::protobuf::Message /* @@protoc_insertion_poin
 
   void InitAsDefaultInstance();
   static BubiAttack* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class Threshold : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:monitor.Threshold) */ {
- public:
-  Threshold();
-  virtual ~Threshold();
-
-  Threshold(const Threshold& from);
-
-  inline Threshold& operator=(const Threshold& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const Threshold& default_instance();
-
-  void Swap(Threshold* other);
-
-  // implements Message ----------------------------------------------
-
-  inline Threshold* New() const { return New(NULL); }
-
-  Threshold* New(::google::protobuf::Arena* arena) const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const Threshold& from);
-  void MergeFrom(const Threshold& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
-    return InternalSerializeWithCachedSizesToArray(false, output);
-  }
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  void InternalSwap(Threshold* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _internal_metadata_.arena();
-  }
-  inline void* MaybeArenaPtr() const {
-    return _internal_metadata_.raw_arena_ptr();
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // optional float cpu = 1;
-  void clear_cpu();
-  static const int kCpuFieldNumber = 1;
-  float cpu() const;
-  void set_cpu(float value);
-
-  // optional float memory = 2;
-  void clear_memory();
-  static const int kMemoryFieldNumber = 2;
-  float memory() const;
-  void set_memory(float value);
-
-  // optional float disk = 3;
-  void clear_disk();
-  static const int kDiskFieldNumber = 3;
-  float disk() const;
-  void set_disk(float value);
-
-  // optional uint32 consensus_timeout = 4;
-  void clear_consensus_timeout();
-  static const int kConsensusTimeoutFieldNumber = 4;
-  ::google::protobuf::uint32 consensus_timeout() const;
-  void set_consensus_timeout(::google::protobuf::uint32 value);
-
-  // optional uint32 bubi_timeout = 5;
-  void clear_bubi_timeout();
-  static const int kBubiTimeoutFieldNumber = 5;
-  ::google::protobuf::uint32 bubi_timeout() const;
-  void set_bubi_timeout(::google::protobuf::uint32 value);
-
-  // optional uint32 monitor_timeout = 6;
-  void clear_monitor_timeout();
-  static const int kMonitorTimeoutFieldNumber = 6;
-  ::google::protobuf::uint32 monitor_timeout() const;
-  void set_monitor_timeout(::google::protobuf::uint32 value);
-
-  // optional .monitor.BubiAttack bubi_attack = 7;
-  bool has_bubi_attack() const;
-  void clear_bubi_attack();
-  static const int kBubiAttackFieldNumber = 7;
-  const ::monitor::BubiAttack& bubi_attack() const;
-  ::monitor::BubiAttack* mutable_bubi_attack();
-  ::monitor::BubiAttack* release_bubi_attack();
-  void set_allocated_bubi_attack(::monitor::BubiAttack* bubi_attack);
-
-  // @@protoc_insertion_point(class_scope:monitor.Threshold)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  bool _is_default_instance_;
-  float cpu_;
-  float memory_;
-  float disk_;
-  ::google::protobuf::uint32 consensus_timeout_;
-  ::google::protobuf::uint32 bubi_timeout_;
-  ::google::protobuf::uint32 monitor_timeout_;
-  ::monitor::BubiAttack* bubi_attack_;
-  mutable int _cached_size_;
-  friend void  protobuf_AddDesc_monitor_2eproto();
-  friend void protobuf_AssignDesc_monitor_2eproto();
-  friend void protobuf_ShutdownFile_monitor_2eproto();
-
-  void InitAsDefaultInstance();
-  static Threshold* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -568,15 +416,6 @@ class Register : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::google::protobuf::int64 timestamp() const;
   void set_timestamp(::google::protobuf::int64 value);
 
-  // optional .monitor.Threshold threshold = 5;
-  bool has_threshold() const;
-  void clear_threshold();
-  static const int kThresholdFieldNumber = 5;
-  const ::monitor::Threshold& threshold() const;
-  ::monitor::Threshold* mutable_threshold();
-  ::monitor::Threshold* release_threshold();
-  void set_allocated_threshold(::monitor::Threshold* threshold);
-
   // @@protoc_insertion_point(class_scope:monitor.Register)
  private:
 
@@ -586,7 +425,6 @@ class Register : public ::google::protobuf::Message /* @@protoc_insertion_point(
   ::google::protobuf::internal::ArenaStringPtr session_id_;
   ::google::protobuf::internal::ArenaStringPtr version_;
   ::google::protobuf::int64 timestamp_;
-  ::monitor::Threshold* threshold_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_monitor_2eproto();
   friend void protobuf_AssignDesc_monitor_2eproto();
@@ -1741,135 +1579,6 @@ class SystemStatus : public ::google::protobuf::Message /* @@protoc_insertion_po
 };
 // -------------------------------------------------------------------
 
-class AlertState : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:monitor.AlertState) */ {
- public:
-  AlertState();
-  virtual ~AlertState();
-
-  AlertState(const AlertState& from);
-
-  inline AlertState& operator=(const AlertState& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const AlertState& default_instance();
-
-  void Swap(AlertState* other);
-
-  // implements Message ----------------------------------------------
-
-  inline AlertState* New() const { return New(NULL); }
-
-  AlertState* New(::google::protobuf::Arena* arena) const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const AlertState& from);
-  void MergeFrom(const AlertState& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
-    return InternalSerializeWithCachedSizesToArray(false, output);
-  }
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  void InternalSwap(AlertState* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _internal_metadata_.arena();
-  }
-  inline void* MaybeArenaPtr() const {
-    return _internal_metadata_.raw_arena_ptr();
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  typedef AlertState_ALERT_TYPE ALERT_TYPE;
-  static const ALERT_TYPE NONE =
-    AlertState_ALERT_TYPE_NONE;
-  static const ALERT_TYPE NOWARNING =
-    AlertState_ALERT_TYPE_NOWARNING;
-  static const ALERT_TYPE WARNING =
-    AlertState_ALERT_TYPE_WARNING;
-  static inline bool ALERT_TYPE_IsValid(int value) {
-    return AlertState_ALERT_TYPE_IsValid(value);
-  }
-  static const ALERT_TYPE ALERT_TYPE_MIN =
-    AlertState_ALERT_TYPE_ALERT_TYPE_MIN;
-  static const ALERT_TYPE ALERT_TYPE_MAX =
-    AlertState_ALERT_TYPE_ALERT_TYPE_MAX;
-  static const int ALERT_TYPE_ARRAYSIZE =
-    AlertState_ALERT_TYPE_ALERT_TYPE_ARRAYSIZE;
-  static inline const ::google::protobuf::EnumDescriptor*
-  ALERT_TYPE_descriptor() {
-    return AlertState_ALERT_TYPE_descriptor();
-  }
-  static inline const ::std::string& ALERT_TYPE_Name(ALERT_TYPE value) {
-    return AlertState_ALERT_TYPE_Name(value);
-  }
-  static inline bool ALERT_TYPE_Parse(const ::std::string& name,
-      ALERT_TYPE* value) {
-    return AlertState_ALERT_TYPE_Parse(name, value);
-  }
-
-  // accessors -------------------------------------------------------
-
-  // optional .monitor.AlertState.ALERT_TYPE alert_state = 1;
-  void clear_alert_state();
-  static const int kAlertStateFieldNumber = 1;
-  ::monitor::AlertState_ALERT_TYPE alert_state() const;
-  void set_alert_state(::monitor::AlertState_ALERT_TYPE value);
-
-  // optional double value = 2;
-  void clear_value();
-  static const int kValueFieldNumber = 2;
-  double value() const;
-  void set_value(double value);
-
-  // optional string description = 3;
-  void clear_description();
-  static const int kDescriptionFieldNumber = 3;
-  const ::std::string& description() const;
-  void set_description(const ::std::string& value);
-  void set_description(const char* value);
-  void set_description(const char* value, size_t size);
-  ::std::string* mutable_description();
-  ::std::string* release_description();
-  void set_allocated_description(::std::string* description);
-
-  // @@protoc_insertion_point(class_scope:monitor.AlertState)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  bool _is_default_instance_;
-  double value_;
-  ::google::protobuf::internal::ArenaStringPtr description_;
-  int alert_state_;
-  mutable int _cached_size_;
-  friend void  protobuf_AddDesc_monitor_2eproto();
-  friend void protobuf_AssignDesc_monitor_2eproto();
-  friend void protobuf_ShutdownFile_monitor_2eproto();
-
-  void InitAsDefaultInstance();
-  static AlertState* default_instance_;
-};
-// -------------------------------------------------------------------
-
 class AlertStatus : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:monitor.AlertStatus) */ {
  public:
   AlertStatus();
@@ -1930,101 +1639,6 @@ class AlertStatus : public ::google::protobuf::Message /* @@protoc_insertion_poi
 
   // accessors -------------------------------------------------------
 
-  // optional int64 timestamp = 1;
-  void clear_timestamp();
-  static const int kTimestampFieldNumber = 1;
-  ::google::protobuf::int64 timestamp() const;
-  void set_timestamp(::google::protobuf::int64 value);
-
-  // repeated .monitor.AlertState alert_state = 2;
-  int alert_state_size() const;
-  void clear_alert_state();
-  static const int kAlertStateFieldNumber = 2;
-  const ::monitor::AlertState& alert_state(int index) const;
-  ::monitor::AlertState* mutable_alert_state(int index);
-  ::monitor::AlertState* add_alert_state();
-  ::google::protobuf::RepeatedPtrField< ::monitor::AlertState >*
-      mutable_alert_state();
-  const ::google::protobuf::RepeatedPtrField< ::monitor::AlertState >&
-      alert_state() const;
-
-  // @@protoc_insertion_point(class_scope:monitor.AlertStatus)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  bool _is_default_instance_;
-  ::google::protobuf::int64 timestamp_;
-  ::google::protobuf::RepeatedPtrField< ::monitor::AlertState > alert_state_;
-  mutable int _cached_size_;
-  friend void  protobuf_AddDesc_monitor_2eproto();
-  friend void protobuf_AssignDesc_monitor_2eproto();
-  friend void protobuf_ShutdownFile_monitor_2eproto();
-
-  void InitAsDefaultInstance();
-  static AlertStatus* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class ChainAlertMessage : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:monitor.ChainAlertMessage) */ {
- public:
-  ChainAlertMessage();
-  virtual ~ChainAlertMessage();
-
-  ChainAlertMessage(const ChainAlertMessage& from);
-
-  inline ChainAlertMessage& operator=(const ChainAlertMessage& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const ChainAlertMessage& default_instance();
-
-  void Swap(ChainAlertMessage* other);
-
-  // implements Message ----------------------------------------------
-
-  inline ChainAlertMessage* New() const { return New(NULL); }
-
-  ChainAlertMessage* New(::google::protobuf::Arena* arena) const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ChainAlertMessage& from);
-  void MergeFrom(const ChainAlertMessage& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
-    return InternalSerializeWithCachedSizesToArray(false, output);
-  }
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  void InternalSwap(ChainAlertMessage* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _internal_metadata_.arena();
-  }
-  inline void* MaybeArenaPtr() const {
-    return _internal_metadata_.raw_arena_ptr();
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
   // optional int64 ledger_sequence = 2;
   void clear_ledger_sequence();
   static const int kLedgerSequenceFieldNumber = 2;
@@ -2051,7 +1665,7 @@ class ChainAlertMessage : public ::google::protobuf::Message /* @@protoc_inserti
   ::monitor::SystemStatus* release_system();
   void set_allocated_system(::monitor::SystemStatus* system);
 
-  // @@protoc_insertion_point(class_scope:monitor.ChainAlertMessage)
+  // @@protoc_insertion_point(class_scope:monitor.AlertStatus)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
@@ -2065,7 +1679,7 @@ class ChainAlertMessage : public ::google::protobuf::Message /* @@protoc_inserti
   friend void protobuf_ShutdownFile_monitor_2eproto();
 
   void InitAsDefaultInstance();
-  static ChainAlertMessage* default_instance_;
+  static AlertStatus* default_instance_;
 };
 // ===================================================================
 
@@ -2101,132 +1715,6 @@ inline void BubiAttack::set_bubi_attack_counts(::google::protobuf::uint32 value)
   
   bubi_attack_counts_ = value;
   // @@protoc_insertion_point(field_set:monitor.BubiAttack.bubi_attack_counts)
-}
-
-// -------------------------------------------------------------------
-
-// Threshold
-
-// optional float cpu = 1;
-inline void Threshold::clear_cpu() {
-  cpu_ = 0;
-}
-inline float Threshold::cpu() const {
-  // @@protoc_insertion_point(field_get:monitor.Threshold.cpu)
-  return cpu_;
-}
-inline void Threshold::set_cpu(float value) {
-  
-  cpu_ = value;
-  // @@protoc_insertion_point(field_set:monitor.Threshold.cpu)
-}
-
-// optional float memory = 2;
-inline void Threshold::clear_memory() {
-  memory_ = 0;
-}
-inline float Threshold::memory() const {
-  // @@protoc_insertion_point(field_get:monitor.Threshold.memory)
-  return memory_;
-}
-inline void Threshold::set_memory(float value) {
-  
-  memory_ = value;
-  // @@protoc_insertion_point(field_set:monitor.Threshold.memory)
-}
-
-// optional float disk = 3;
-inline void Threshold::clear_disk() {
-  disk_ = 0;
-}
-inline float Threshold::disk() const {
-  // @@protoc_insertion_point(field_get:monitor.Threshold.disk)
-  return disk_;
-}
-inline void Threshold::set_disk(float value) {
-  
-  disk_ = value;
-  // @@protoc_insertion_point(field_set:monitor.Threshold.disk)
-}
-
-// optional uint32 consensus_timeout = 4;
-inline void Threshold::clear_consensus_timeout() {
-  consensus_timeout_ = 0u;
-}
-inline ::google::protobuf::uint32 Threshold::consensus_timeout() const {
-  // @@protoc_insertion_point(field_get:monitor.Threshold.consensus_timeout)
-  return consensus_timeout_;
-}
-inline void Threshold::set_consensus_timeout(::google::protobuf::uint32 value) {
-  
-  consensus_timeout_ = value;
-  // @@protoc_insertion_point(field_set:monitor.Threshold.consensus_timeout)
-}
-
-// optional uint32 bubi_timeout = 5;
-inline void Threshold::clear_bubi_timeout() {
-  bubi_timeout_ = 0u;
-}
-inline ::google::protobuf::uint32 Threshold::bubi_timeout() const {
-  // @@protoc_insertion_point(field_get:monitor.Threshold.bubi_timeout)
-  return bubi_timeout_;
-}
-inline void Threshold::set_bubi_timeout(::google::protobuf::uint32 value) {
-  
-  bubi_timeout_ = value;
-  // @@protoc_insertion_point(field_set:monitor.Threshold.bubi_timeout)
-}
-
-// optional uint32 monitor_timeout = 6;
-inline void Threshold::clear_monitor_timeout() {
-  monitor_timeout_ = 0u;
-}
-inline ::google::protobuf::uint32 Threshold::monitor_timeout() const {
-  // @@protoc_insertion_point(field_get:monitor.Threshold.monitor_timeout)
-  return monitor_timeout_;
-}
-inline void Threshold::set_monitor_timeout(::google::protobuf::uint32 value) {
-  
-  monitor_timeout_ = value;
-  // @@protoc_insertion_point(field_set:monitor.Threshold.monitor_timeout)
-}
-
-// optional .monitor.BubiAttack bubi_attack = 7;
-inline bool Threshold::has_bubi_attack() const {
-  return !_is_default_instance_ && bubi_attack_ != NULL;
-}
-inline void Threshold::clear_bubi_attack() {
-  if (GetArenaNoVirtual() == NULL && bubi_attack_ != NULL) delete bubi_attack_;
-  bubi_attack_ = NULL;
-}
-inline const ::monitor::BubiAttack& Threshold::bubi_attack() const {
-  // @@protoc_insertion_point(field_get:monitor.Threshold.bubi_attack)
-  return bubi_attack_ != NULL ? *bubi_attack_ : *default_instance_->bubi_attack_;
-}
-inline ::monitor::BubiAttack* Threshold::mutable_bubi_attack() {
-  
-  if (bubi_attack_ == NULL) {
-    bubi_attack_ = new ::monitor::BubiAttack;
-  }
-  // @@protoc_insertion_point(field_mutable:monitor.Threshold.bubi_attack)
-  return bubi_attack_;
-}
-inline ::monitor::BubiAttack* Threshold::release_bubi_attack() {
-  // @@protoc_insertion_point(field_release:monitor.Threshold.bubi_attack)
-  
-  ::monitor::BubiAttack* temp = bubi_attack_;
-  bubi_attack_ = NULL;
-  return temp;
-}
-inline void Threshold::set_allocated_bubi_attack(::monitor::BubiAttack* bubi_attack) {
-  delete bubi_attack_;
-  bubi_attack_ = bubi_attack;
-  if (bubi_attack) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:monitor.Threshold.bubi_attack)
 }
 
 // -------------------------------------------------------------------
@@ -2497,44 +1985,6 @@ inline void Register::set_timestamp(::google::protobuf::int64 value) {
   
   timestamp_ = value;
   // @@protoc_insertion_point(field_set:monitor.Register.timestamp)
-}
-
-// optional .monitor.Threshold threshold = 5;
-inline bool Register::has_threshold() const {
-  return !_is_default_instance_ && threshold_ != NULL;
-}
-inline void Register::clear_threshold() {
-  if (GetArenaNoVirtual() == NULL && threshold_ != NULL) delete threshold_;
-  threshold_ = NULL;
-}
-inline const ::monitor::Threshold& Register::threshold() const {
-  // @@protoc_insertion_point(field_get:monitor.Register.threshold)
-  return threshold_ != NULL ? *threshold_ : *default_instance_->threshold_;
-}
-inline ::monitor::Threshold* Register::mutable_threshold() {
-  
-  if (threshold_ == NULL) {
-    threshold_ = new ::monitor::Threshold;
-  }
-  // @@protoc_insertion_point(field_mutable:monitor.Register.threshold)
-  return threshold_;
-}
-inline ::monitor::Threshold* Register::release_threshold() {
-  // @@protoc_insertion_point(field_release:monitor.Register.threshold)
-  
-  ::monitor::Threshold* temp = threshold_;
-  threshold_ = NULL;
-  return temp;
-}
-inline void Register::set_allocated_threshold(::monitor::Threshold* threshold) {
-  delete threshold_;
-  threshold_ = threshold;
-  if (threshold) {
-    
-  } else {
-    
-  }
-  // @@protoc_insertion_point(field_set_allocated:monitor.Register.threshold)
 }
 
 // -------------------------------------------------------------------
@@ -3575,218 +3025,94 @@ inline void SystemStatus::set_allocated_partitions(::monitor::Partition* partiti
 
 // -------------------------------------------------------------------
 
-// AlertState
-
-// optional .monitor.AlertState.ALERT_TYPE alert_state = 1;
-inline void AlertState::clear_alert_state() {
-  alert_state_ = 0;
-}
-inline ::monitor::AlertState_ALERT_TYPE AlertState::alert_state() const {
-  // @@protoc_insertion_point(field_get:monitor.AlertState.alert_state)
-  return static_cast< ::monitor::AlertState_ALERT_TYPE >(alert_state_);
-}
-inline void AlertState::set_alert_state(::monitor::AlertState_ALERT_TYPE value) {
-  
-  alert_state_ = value;
-  // @@protoc_insertion_point(field_set:monitor.AlertState.alert_state)
-}
-
-// optional double value = 2;
-inline void AlertState::clear_value() {
-  value_ = 0;
-}
-inline double AlertState::value() const {
-  // @@protoc_insertion_point(field_get:monitor.AlertState.value)
-  return value_;
-}
-inline void AlertState::set_value(double value) {
-  
-  value_ = value;
-  // @@protoc_insertion_point(field_set:monitor.AlertState.value)
-}
-
-// optional string description = 3;
-inline void AlertState::clear_description() {
-  description_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& AlertState::description() const {
-  // @@protoc_insertion_point(field_get:monitor.AlertState.description)
-  return description_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void AlertState::set_description(const ::std::string& value) {
-  
-  description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:monitor.AlertState.description)
-}
-inline void AlertState::set_description(const char* value) {
-  
-  description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:monitor.AlertState.description)
-}
-inline void AlertState::set_description(const char* value, size_t size) {
-  
-  description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:monitor.AlertState.description)
-}
-inline ::std::string* AlertState::mutable_description() {
-  
-  // @@protoc_insertion_point(field_mutable:monitor.AlertState.description)
-  return description_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* AlertState::release_description() {
-  // @@protoc_insertion_point(field_release:monitor.AlertState.description)
-  
-  return description_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void AlertState::set_allocated_description(::std::string* description) {
-  if (description != NULL) {
-    
-  } else {
-    
-  }
-  description_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), description);
-  // @@protoc_insertion_point(field_set_allocated:monitor.AlertState.description)
-}
-
-// -------------------------------------------------------------------
-
 // AlertStatus
 
-// optional int64 timestamp = 1;
-inline void AlertStatus::clear_timestamp() {
-  timestamp_ = GOOGLE_LONGLONG(0);
-}
-inline ::google::protobuf::int64 AlertStatus::timestamp() const {
-  // @@protoc_insertion_point(field_get:monitor.AlertStatus.timestamp)
-  return timestamp_;
-}
-inline void AlertStatus::set_timestamp(::google::protobuf::int64 value) {
-  
-  timestamp_ = value;
-  // @@protoc_insertion_point(field_set:monitor.AlertStatus.timestamp)
-}
-
-// repeated .monitor.AlertState alert_state = 2;
-inline int AlertStatus::alert_state_size() const {
-  return alert_state_.size();
-}
-inline void AlertStatus::clear_alert_state() {
-  alert_state_.Clear();
-}
-inline const ::monitor::AlertState& AlertStatus::alert_state(int index) const {
-  // @@protoc_insertion_point(field_get:monitor.AlertStatus.alert_state)
-  return alert_state_.Get(index);
-}
-inline ::monitor::AlertState* AlertStatus::mutable_alert_state(int index) {
-  // @@protoc_insertion_point(field_mutable:monitor.AlertStatus.alert_state)
-  return alert_state_.Mutable(index);
-}
-inline ::monitor::AlertState* AlertStatus::add_alert_state() {
-  // @@protoc_insertion_point(field_add:monitor.AlertStatus.alert_state)
-  return alert_state_.Add();
-}
-inline ::google::protobuf::RepeatedPtrField< ::monitor::AlertState >*
-AlertStatus::mutable_alert_state() {
-  // @@protoc_insertion_point(field_mutable_list:monitor.AlertStatus.alert_state)
-  return &alert_state_;
-}
-inline const ::google::protobuf::RepeatedPtrField< ::monitor::AlertState >&
-AlertStatus::alert_state() const {
-  // @@protoc_insertion_point(field_list:monitor.AlertStatus.alert_state)
-  return alert_state_;
-}
-
-// -------------------------------------------------------------------
-
-// ChainAlertMessage
-
 // optional int64 ledger_sequence = 2;
-inline void ChainAlertMessage::clear_ledger_sequence() {
+inline void AlertStatus::clear_ledger_sequence() {
   ledger_sequence_ = GOOGLE_LONGLONG(0);
 }
-inline ::google::protobuf::int64 ChainAlertMessage::ledger_sequence() const {
-  // @@protoc_insertion_point(field_get:monitor.ChainAlertMessage.ledger_sequence)
+inline ::google::protobuf::int64 AlertStatus::ledger_sequence() const {
+  // @@protoc_insertion_point(field_get:monitor.AlertStatus.ledger_sequence)
   return ledger_sequence_;
 }
-inline void ChainAlertMessage::set_ledger_sequence(::google::protobuf::int64 value) {
+inline void AlertStatus::set_ledger_sequence(::google::protobuf::int64 value) {
   
   ledger_sequence_ = value;
-  // @@protoc_insertion_point(field_set:monitor.ChainAlertMessage.ledger_sequence)
+  // @@protoc_insertion_point(field_set:monitor.AlertStatus.ledger_sequence)
 }
 
 // optional string node_id = 3;
-inline void ChainAlertMessage::clear_node_id() {
+inline void AlertStatus::clear_node_id() {
   node_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& ChainAlertMessage::node_id() const {
-  // @@protoc_insertion_point(field_get:monitor.ChainAlertMessage.node_id)
+inline const ::std::string& AlertStatus::node_id() const {
+  // @@protoc_insertion_point(field_get:monitor.AlertStatus.node_id)
   return node_id_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void ChainAlertMessage::set_node_id(const ::std::string& value) {
+inline void AlertStatus::set_node_id(const ::std::string& value) {
   
   node_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:monitor.ChainAlertMessage.node_id)
+  // @@protoc_insertion_point(field_set:monitor.AlertStatus.node_id)
 }
-inline void ChainAlertMessage::set_node_id(const char* value) {
+inline void AlertStatus::set_node_id(const char* value) {
   
   node_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:monitor.ChainAlertMessage.node_id)
+  // @@protoc_insertion_point(field_set_char:monitor.AlertStatus.node_id)
 }
-inline void ChainAlertMessage::set_node_id(const char* value, size_t size) {
+inline void AlertStatus::set_node_id(const char* value, size_t size) {
   
   node_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:monitor.ChainAlertMessage.node_id)
+  // @@protoc_insertion_point(field_set_pointer:monitor.AlertStatus.node_id)
 }
-inline ::std::string* ChainAlertMessage::mutable_node_id() {
+inline ::std::string* AlertStatus::mutable_node_id() {
   
-  // @@protoc_insertion_point(field_mutable:monitor.ChainAlertMessage.node_id)
+  // @@protoc_insertion_point(field_mutable:monitor.AlertStatus.node_id)
   return node_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* ChainAlertMessage::release_node_id() {
-  // @@protoc_insertion_point(field_release:monitor.ChainAlertMessage.node_id)
+inline ::std::string* AlertStatus::release_node_id() {
+  // @@protoc_insertion_point(field_release:monitor.AlertStatus.node_id)
   
   return node_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void ChainAlertMessage::set_allocated_node_id(::std::string* node_id) {
+inline void AlertStatus::set_allocated_node_id(::std::string* node_id) {
   if (node_id != NULL) {
     
   } else {
     
   }
   node_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), node_id);
-  // @@protoc_insertion_point(field_set_allocated:monitor.ChainAlertMessage.node_id)
+  // @@protoc_insertion_point(field_set_allocated:monitor.AlertStatus.node_id)
 }
 
 // optional .monitor.SystemStatus system = 4;
-inline bool ChainAlertMessage::has_system() const {
+inline bool AlertStatus::has_system() const {
   return !_is_default_instance_ && system_ != NULL;
 }
-inline void ChainAlertMessage::clear_system() {
+inline void AlertStatus::clear_system() {
   if (GetArenaNoVirtual() == NULL && system_ != NULL) delete system_;
   system_ = NULL;
 }
-inline const ::monitor::SystemStatus& ChainAlertMessage::system() const {
-  // @@protoc_insertion_point(field_get:monitor.ChainAlertMessage.system)
+inline const ::monitor::SystemStatus& AlertStatus::system() const {
+  // @@protoc_insertion_point(field_get:monitor.AlertStatus.system)
   return system_ != NULL ? *system_ : *default_instance_->system_;
 }
-inline ::monitor::SystemStatus* ChainAlertMessage::mutable_system() {
+inline ::monitor::SystemStatus* AlertStatus::mutable_system() {
   
   if (system_ == NULL) {
     system_ = new ::monitor::SystemStatus;
   }
-  // @@protoc_insertion_point(field_mutable:monitor.ChainAlertMessage.system)
+  // @@protoc_insertion_point(field_mutable:monitor.AlertStatus.system)
   return system_;
 }
-inline ::monitor::SystemStatus* ChainAlertMessage::release_system() {
-  // @@protoc_insertion_point(field_release:monitor.ChainAlertMessage.system)
+inline ::monitor::SystemStatus* AlertStatus::release_system() {
+  // @@protoc_insertion_point(field_release:monitor.AlertStatus.system)
   
   ::monitor::SystemStatus* temp = system_;
   system_ = NULL;
   return temp;
 }
-inline void ChainAlertMessage::set_allocated_system(::monitor::SystemStatus* system) {
+inline void AlertStatus::set_allocated_system(::monitor::SystemStatus* system) {
   delete system_;
   system_ = system;
   if (system) {
@@ -3794,16 +3120,10 @@ inline void ChainAlertMessage::set_allocated_system(::monitor::SystemStatus* sys
   } else {
     
   }
-  // @@protoc_insertion_point(field_set_allocated:monitor.ChainAlertMessage.system)
+  // @@protoc_insertion_point(field_set_allocated:monitor.AlertStatus.system)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
@@ -3841,11 +3161,6 @@ inline void ChainAlertMessage::set_allocated_system(::monitor::SystemStatus* sys
 namespace google {
 namespace protobuf {
 
-template <> struct is_proto_enum< ::monitor::AlertState_ALERT_TYPE> : ::google::protobuf::internal::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::monitor::AlertState_ALERT_TYPE>() {
-  return ::monitor::AlertState_ALERT_TYPE_descriptor();
-}
 template <> struct is_proto_enum< ::monitor::MONITOR_MESSAGE_TYPE> : ::google::protobuf::internal::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::monitor::MONITOR_MESSAGE_TYPE>() {
