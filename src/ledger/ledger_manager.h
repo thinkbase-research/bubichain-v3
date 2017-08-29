@@ -62,6 +62,8 @@ namespace bubi {
 
 		bool ConsensusValueFromDB(int64_t seq, protocol::ConsensusValue& request);
 
+		bool DoTransaction(protocol::TransactionEnv& env);
+
 		virtual void OnTimer(int64_t current_time) override;
 		virtual void OnSlowTimer(int64_t current_time) override;
 		virtual void GetModuleStatus(Json::Value &data);
@@ -72,7 +74,8 @@ namespace bubi {
 		utils::Mutex gmutex_;
 
 		LedgerFrm::pointer closing_ledger_;
-		std::shared_ptr<TransactionFrm> execute_transaction_;
+		//std::shared_ptr<TransactionFrm> execute_transaction_;
+		std::stack<std::shared_ptr<TransactionFrm>> transaction_stack_;
 		KVTrie* tree_;
 	private:
 		LedgerManager();

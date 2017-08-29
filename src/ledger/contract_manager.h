@@ -32,9 +32,13 @@ namespace bubi{
 		
 
 	    static std::map<std::string, std::string> jslib_sources;
-		static const std::string sender_key_ ;
-		static const std::string contractor_key_;
+		static const std::string sender_name_ ;
+		static const std::string this_address_;
 		static const char* main_name_;
+		static const std::string trigger_tx_name_;
+		static const std::string trigger_tx_index_name_;
+		static const std::string this_header_name_;
+
 		static v8::Platform* 	platform_;
 		static v8::Isolate::CreateParams create_params_;
 		
@@ -48,7 +52,14 @@ namespace bubi{
 
 		static void Initialize(int argc, char** argv);
 
-		bool Execute(const std::string& src, const std::string &input, const std::string& token, const std::string& sender);
+		bool Execute(const std::string& code, 
+			const std::string &input, 
+			const std::string& thisAddress, 
+			const std::string& sender,
+			const std::string& trigger_tx,
+			int32_t index,
+			const std::string& consensus_value,
+			std::string& error_msg);
 
 		bool SourceCodeCheck(const std::string& code, std::string& err_msg);
 
@@ -70,7 +81,6 @@ namespace bubi{
 
 		static void Include(const v8::FunctionCallbackInfo<v8::Value>& args);
 
-
 		//get account info from an account
 		static void CallBackGetAccountInfo(const v8::FunctionCallbackInfo<v8::Value>& args);
 
@@ -87,7 +97,7 @@ namespace bubi{
 
 		static ContractManager* UnwrapContract(v8::Local<v8::Object> obj);
 
-		static bool DoTransaction(protocol::TransactionEnv& env);
+		//static bool DoTransaction(protocol::TransactionEnv& env);
 	};
 }
 #endif

@@ -28,10 +28,12 @@ namespace bubi{
 	protected:
 		protocol::Operation operation_;
 		TransactionFrm* transaction_;
+		int32_t	index_;
 		Result result_;
 		std::shared_ptr<AccountFrm> source_account_;
 	public:
-		OperationFrm(const protocol::Operation &operation, TransactionFrm* tran);
+
+		OperationFrm(const protocol::Operation &operation, TransactionFrm* tran, int32_t index = 0);
 		~OperationFrm();
 
 		Result Apply(std::shared_ptr<Environment> txenvironment);

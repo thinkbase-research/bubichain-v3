@@ -72,10 +72,13 @@ const ::google::protobuf::Descriptor* Signer_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Signer_reflection_ = NULL;
 const ::google::protobuf::EnumDescriptor* Signer_Limit_descriptor_ = NULL;
-const ::google::protobuf::Descriptor* TransactionTrigger_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* Trigger_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  TransactionTrigger_reflection_ = NULL;
-const ::google::protobuf::EnumDescriptor* TransactionTrigger_TransactionType_descriptor_ = NULL;
+  Trigger_reflection_ = NULL;
+const ::google::protobuf::Descriptor* Trigger_OperationTrigger_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  Trigger_OperationTrigger_reflection_ = NULL;
+const ::google::protobuf::EnumDescriptor* Trigger_TransactionType_descriptor_ = NULL;
 const ::google::protobuf::Descriptor* TransactionEnv_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   TransactionEnv_reflection_ = NULL;
@@ -399,24 +402,40 @@ void protobuf_AssignDesc_chain_2eproto() {
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Signer, _internal_metadata_),
       GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Signer, _is_default_instance_));
   Signer_Limit_descriptor_ = Signer_descriptor_->enum_type(0);
-  TransactionTrigger_descriptor_ = file->message_type(16);
-  static const int TransactionTrigger_offsets_[3] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TransactionTrigger, transaction_type_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TransactionTrigger, ledger_seq_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TransactionTrigger, transaction_hash_),
+  Trigger_descriptor_ = file->message_type(16);
+  static const int Trigger_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Trigger, transaction_type_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Trigger, ledger_seq_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Trigger, transaction_),
   };
-  TransactionTrigger_reflection_ =
+  Trigger_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
-      TransactionTrigger_descriptor_,
-      TransactionTrigger::default_instance_,
-      TransactionTrigger_offsets_,
+      Trigger_descriptor_,
+      Trigger::default_instance_,
+      Trigger_offsets_,
       -1,
       -1,
       -1,
-      sizeof(TransactionTrigger),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TransactionTrigger, _internal_metadata_),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TransactionTrigger, _is_default_instance_));
-  TransactionTrigger_TransactionType_descriptor_ = TransactionTrigger_descriptor_->enum_type(0);
+      sizeof(Trigger),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Trigger, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Trigger, _is_default_instance_));
+  Trigger_OperationTrigger_descriptor_ = Trigger_descriptor_->nested_type(0);
+  static const int Trigger_OperationTrigger_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Trigger_OperationTrigger, hash_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Trigger_OperationTrigger, index_),
+  };
+  Trigger_OperationTrigger_reflection_ =
+    ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
+      Trigger_OperationTrigger_descriptor_,
+      Trigger_OperationTrigger::default_instance_,
+      Trigger_OperationTrigger_offsets_,
+      -1,
+      -1,
+      -1,
+      sizeof(Trigger_OperationTrigger),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Trigger_OperationTrigger, _internal_metadata_),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Trigger_OperationTrigger, _is_default_instance_));
+  Trigger_TransactionType_descriptor_ = Trigger_descriptor_->enum_type(0);
   TransactionEnv_descriptor_ = file->message_type(17);
   static const int TransactionEnv_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TransactionEnv, transaction_),
@@ -603,7 +622,9 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       Signer_descriptor_, &Signer::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      TransactionTrigger_descriptor_, &TransactionTrigger::default_instance());
+      Trigger_descriptor_, &Trigger::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+      Trigger_OperationTrigger_descriptor_, &Trigger_OperationTrigger::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
       TransactionEnv_descriptor_, &TransactionEnv::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -657,8 +678,10 @@ void protobuf_ShutdownFile_chain_2eproto() {
   delete Transaction_reflection_;
   delete Signer::default_instance_;
   delete Signer_reflection_;
-  delete TransactionTrigger::default_instance_;
-  delete TransactionTrigger_reflection_;
+  delete Trigger::default_instance_;
+  delete Trigger_reflection_;
+  delete Trigger_OperationTrigger::default_instance_;
+  delete Trigger_OperationTrigger_reflection_;
   delete TransactionEnv::default_instance_;
   delete TransactionEnv_reflection_;
   delete TransactionEnvStore::default_instance_;
@@ -742,40 +765,41 @@ void protobuf_AddDesc_chain_2eproto() {
     "ion\022\020\n\010metadata\030\005 \001(\014\"%\n\005Limit\022\013\n\007UNKNOW"
     "N\020\000\022\017\n\nOPERATIONS\020\350\007\"O\n\006Signer\022\017\n\007addres"
     "s\030\001 \001(\t\022\016\n\006weight\030\002 \001(\003\"$\n\005Limit\022\017\n\013SIGN"
-    "ER_NONE\020\000\022\n\n\006SIGNER\020d\"\317\001\n\022TransactionTri"
-    "gger\022F\n\020transaction_type\030\001 \001(\0162,.protoco"
-    "l.TransactionTrigger.TransactionType\022\022\n\n"
-    "ledger_seq\030\002 \001(\003\022\030\n\020transaction_hash\030\003 \001"
-    "(\014\"C\n\017TransactionType\022\026\n\022NORMAL_TRANSACT"
-    "ION\020\000\022\030\n\024CONTRACT_TRANSACTION\020\001\"\224\001\n\016Tran"
-    "sactionEnv\022*\n\013transaction\030\001 \001(\0132\025.protoc"
-    "ol.Transaction\022\'\n\nsignatures\030\002 \003(\0132\023.pro"
-    "tocol.Signature\022-\n\007trigger\030\003 \001(\0132\034.proto"
-    "col.TransactionTrigger\"\230\001\n\023TransactionEn"
-    "vStore\0221\n\017transaction_env\030\001 \001(\0132\030.protoc"
-    "ol.TransactionEnv\022\022\n\nerror_code\030\002 \001(\005\022\022\n"
-    "\nerror_desc\030\003 \001(\t\022\022\n\nledger_seq\030\004 \001(\003\022\022\n"
-    "\nclose_time\030\005 \001(\003\":\n\021TransactionEnvSet\022%"
-    "\n\003txs\030\002 \003(\0132\030.protocol.TransactionEnv\"\313\001"
-    "\n\016ConsensusValue\022*\n\005txset\030\001 \001(\0132\033.protoc"
-    "ol.TransactionEnvSet\022\022\n\nclose_time\030\002 \001(\003"
-    "\022\026\n\016previous_proof\030\003 \001(\014\022\022\n\nledger_seq\030\004"
-    " \001(\003\022\034\n\024previous_ledger_hash\030\005 \001(\014\022/\n\016le"
-    "dger_upgrade\030\006 \001(\0132\027.protocol.LedgerUpgr"
-    "ade\"f\n\025TransactionEnvWrapper\0221\n\017transact"
-    "ion_env\030\001 \001(\0132\030.protocol.TransactionEnv\022"
-    "\032\n\022suggest_ledger_seq\030\002 \001(\003\"j\n\010Contract\022"
-    "-\n\004type\030\001 \001(\0162\037.protocol.Contract.Contra"
-    "ctType\022\017\n\007payload\030\002 \001(\t\"\036\n\014ContractType\022"
-    "\016\n\nJAVASCRIPT\020\000\"\244\001\n\026OperationCreateAccou"
-    "nt\022\024\n\014dest_address\030\001 \001(\t\022$\n\010contract\030\002 \001"
-    "(\0132\022.protocol.Contract\022(\n\004priv\030\003 \001(\0132\032.p"
-    "rotocol.AccountPrivilege\022$\n\tmetadatas\030\004 "
-    "\003(\0132\021.protocol.KeyPair\"C\n\024OperationSetMe"
-    "tadata\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\022\017\n\007ve"
-    "rsion\030\003 \001(\003*#\n\005Limit\022\013\n\007UNKNOWN\020\000\022\r\n\tSIG"
-    "NATURE\020dB\035\n\033cn.bubi.blockchain.adapter3b"
-    "\006proto3", 3567);
+    "ER_NONE\020\000\022\n\n\006SIGNER\020d\"\211\002\n\007Trigger\022;\n\020tra"
+    "nsaction_type\030\001 \001(\0162!.protocol.Trigger.T"
+    "ransactionType\022\022\n\nledger_seq\030\002 \001(\003\0227\n\013tr"
+    "ansaction\030\003 \001(\0132\".protocol.Trigger.Opera"
+    "tionTrigger\032/\n\020OperationTrigger\022\014\n\004hash\030"
+    "\001 \001(\014\022\r\n\005index\030\002 \001(\003\"C\n\017TransactionType\022"
+    "\026\n\022NORMAL_TRANSACTION\020\000\022\030\n\024CONTRACT_TRAN"
+    "SACTION\020\001\"\211\001\n\016TransactionEnv\022*\n\013transact"
+    "ion\030\001 \001(\0132\025.protocol.Transaction\022\'\n\nsign"
+    "atures\030\002 \003(\0132\023.protocol.Signature\022\"\n\007tri"
+    "gger\030\003 \001(\0132\021.protocol.Trigger\"\230\001\n\023Transa"
+    "ctionEnvStore\0221\n\017transaction_env\030\001 \001(\0132\030"
+    ".protocol.TransactionEnv\022\022\n\nerror_code\030\002"
+    " \001(\005\022\022\n\nerror_desc\030\003 \001(\t\022\022\n\nledger_seq\030\004"
+    " \001(\003\022\022\n\nclose_time\030\005 \001(\003\":\n\021TransactionE"
+    "nvSet\022%\n\003txs\030\002 \003(\0132\030.protocol.Transactio"
+    "nEnv\"\313\001\n\016ConsensusValue\022*\n\005txset\030\001 \001(\0132\033"
+    ".protocol.TransactionEnvSet\022\022\n\nclose_tim"
+    "e\030\002 \001(\003\022\026\n\016previous_proof\030\003 \001(\014\022\022\n\nledge"
+    "r_seq\030\004 \001(\003\022\034\n\024previous_ledger_hash\030\005 \001("
+    "\014\022/\n\016ledger_upgrade\030\006 \001(\0132\027.protocol.Led"
+    "gerUpgrade\"f\n\025TransactionEnvWrapper\0221\n\017t"
+    "ransaction_env\030\001 \001(\0132\030.protocol.Transact"
+    "ionEnv\022\032\n\022suggest_ledger_seq\030\002 \001(\003\"j\n\010Co"
+    "ntract\022-\n\004type\030\001 \001(\0162\037.protocol.Contract"
+    ".ContractType\022\017\n\007payload\030\002 \001(\t\"\036\n\014Contra"
+    "ctType\022\016\n\nJAVASCRIPT\020\000\"\244\001\n\026OperationCrea"
+    "teAccount\022\024\n\014dest_address\030\001 \001(\t\022$\n\010contr"
+    "act\030\002 \001(\0132\022.protocol.Contract\022(\n\004priv\030\003 "
+    "\001(\0132\032.protocol.AccountPrivilege\022$\n\tmetad"
+    "atas\030\004 \003(\0132\021.protocol.KeyPair\"C\n\024Operati"
+    "onSetMetadata\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001("
+    "\t\022\017\n\007version\030\003 \001(\003*#\n\005Limit\022\013\n\007UNKNOWN\020\000"
+    "\022\r\n\tSIGNATURE\020dB\035\n\033cn.bubi.blockchain.ad"
+    "apter3b\006proto3", 3614);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "chain.proto", &protobuf_RegisterTypes);
   Account::default_instance_ = new Account();
@@ -794,7 +818,8 @@ void protobuf_AddDesc_chain_2eproto() {
   OperationSetThreshold::default_instance_ = new OperationSetThreshold();
   Transaction::default_instance_ = new Transaction();
   Signer::default_instance_ = new Signer();
-  TransactionTrigger::default_instance_ = new TransactionTrigger();
+  Trigger::default_instance_ = new Trigger();
+  Trigger_OperationTrigger::default_instance_ = new Trigger_OperationTrigger();
   TransactionEnv::default_instance_ = new TransactionEnv();
   TransactionEnvStore::default_instance_ = new TransactionEnvStore();
   TransactionEnvSet::default_instance_ = new TransactionEnvSet();
@@ -819,7 +844,8 @@ void protobuf_AddDesc_chain_2eproto() {
   OperationSetThreshold::default_instance_->InitAsDefaultInstance();
   Transaction::default_instance_->InitAsDefaultInstance();
   Signer::default_instance_->InitAsDefaultInstance();
-  TransactionTrigger::default_instance_->InitAsDefaultInstance();
+  Trigger::default_instance_->InitAsDefaultInstance();
+  Trigger_OperationTrigger::default_instance_->InitAsDefaultInstance();
   TransactionEnv::default_instance_->InitAsDefaultInstance();
   TransactionEnvStore::default_instance_->InitAsDefaultInstance();
   TransactionEnvSet::default_instance_->InitAsDefaultInstance();
@@ -8427,11 +8453,11 @@ void Signer::clear_weight() {
 
 // ===================================================================
 
-const ::google::protobuf::EnumDescriptor* TransactionTrigger_TransactionType_descriptor() {
+const ::google::protobuf::EnumDescriptor* Trigger_TransactionType_descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return TransactionTrigger_TransactionType_descriptor_;
+  return Trigger_TransactionType_descriptor_;
 }
-bool TransactionTrigger_TransactionType_IsValid(int value) {
+bool Trigger_TransactionType_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
@@ -8442,134 +8468,115 @@ bool TransactionTrigger_TransactionType_IsValid(int value) {
 }
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const TransactionTrigger_TransactionType TransactionTrigger::NORMAL_TRANSACTION;
-const TransactionTrigger_TransactionType TransactionTrigger::CONTRACT_TRANSACTION;
-const TransactionTrigger_TransactionType TransactionTrigger::TransactionType_MIN;
-const TransactionTrigger_TransactionType TransactionTrigger::TransactionType_MAX;
-const int TransactionTrigger::TransactionType_ARRAYSIZE;
+const Trigger_TransactionType Trigger::NORMAL_TRANSACTION;
+const Trigger_TransactionType Trigger::CONTRACT_TRANSACTION;
+const Trigger_TransactionType Trigger::TransactionType_MIN;
+const Trigger_TransactionType Trigger::TransactionType_MAX;
+const int Trigger::TransactionType_ARRAYSIZE;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int TransactionTrigger::kTransactionTypeFieldNumber;
-const int TransactionTrigger::kLedgerSeqFieldNumber;
-const int TransactionTrigger::kTransactionHashFieldNumber;
+const int Trigger_OperationTrigger::kHashFieldNumber;
+const int Trigger_OperationTrigger::kIndexFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
-TransactionTrigger::TransactionTrigger()
+Trigger_OperationTrigger::Trigger_OperationTrigger()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:protocol.TransactionTrigger)
+  // @@protoc_insertion_point(constructor:protocol.Trigger.OperationTrigger)
 }
 
-void TransactionTrigger::InitAsDefaultInstance() {
+void Trigger_OperationTrigger::InitAsDefaultInstance() {
   _is_default_instance_ = true;
 }
 
-TransactionTrigger::TransactionTrigger(const TransactionTrigger& from)
+Trigger_OperationTrigger::Trigger_OperationTrigger(const Trigger_OperationTrigger& from)
   : ::google::protobuf::Message(),
     _internal_metadata_(NULL) {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:protocol.TransactionTrigger)
+  // @@protoc_insertion_point(copy_constructor:protocol.Trigger.OperationTrigger)
 }
 
-void TransactionTrigger::SharedCtor() {
+void Trigger_OperationTrigger::SharedCtor() {
     _is_default_instance_ = false;
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
-  transaction_type_ = 0;
-  ledger_seq_ = GOOGLE_LONGLONG(0);
-  transaction_hash_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  hash_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  index_ = GOOGLE_LONGLONG(0);
 }
 
-TransactionTrigger::~TransactionTrigger() {
-  // @@protoc_insertion_point(destructor:protocol.TransactionTrigger)
+Trigger_OperationTrigger::~Trigger_OperationTrigger() {
+  // @@protoc_insertion_point(destructor:protocol.Trigger.OperationTrigger)
   SharedDtor();
 }
 
-void TransactionTrigger::SharedDtor() {
-  transaction_hash_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+void Trigger_OperationTrigger::SharedDtor() {
+  hash_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (this != default_instance_) {
   }
 }
 
-void TransactionTrigger::SetCachedSize(int size) const {
+void Trigger_OperationTrigger::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* TransactionTrigger::descriptor() {
+const ::google::protobuf::Descriptor* Trigger_OperationTrigger::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return TransactionTrigger_descriptor_;
+  return Trigger_OperationTrigger_descriptor_;
 }
 
-const TransactionTrigger& TransactionTrigger::default_instance() {
+const Trigger_OperationTrigger& Trigger_OperationTrigger::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_chain_2eproto();
   return *default_instance_;
 }
 
-TransactionTrigger* TransactionTrigger::default_instance_ = NULL;
+Trigger_OperationTrigger* Trigger_OperationTrigger::default_instance_ = NULL;
 
-TransactionTrigger* TransactionTrigger::New(::google::protobuf::Arena* arena) const {
-  TransactionTrigger* n = new TransactionTrigger;
+Trigger_OperationTrigger* Trigger_OperationTrigger::New(::google::protobuf::Arena* arena) const {
+  Trigger_OperationTrigger* n = new Trigger_OperationTrigger;
   if (arena != NULL) {
     arena->Own(n);
   }
   return n;
 }
 
-void TransactionTrigger::Clear() {
-// @@protoc_insertion_point(message_clear_start:protocol.TransactionTrigger)
-  transaction_type_ = 0;
-  ledger_seq_ = GOOGLE_LONGLONG(0);
-  transaction_hash_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+void Trigger_OperationTrigger::Clear() {
+// @@protoc_insertion_point(message_clear_start:protocol.Trigger.OperationTrigger)
+  hash_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  index_ = GOOGLE_LONGLONG(0);
 }
 
-bool TransactionTrigger::MergePartialFromCodedStream(
+bool Trigger_OperationTrigger::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:protocol.TransactionTrigger)
+  // @@protoc_insertion_point(parse_start:protocol.Trigger.OperationTrigger)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;
+      // optional bytes hash = 1;
       case 1: {
-        if (tag == 8) {
-          int value;
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
-                 input, &value)));
-          set_transaction_type(static_cast< ::protocol::TransactionTrigger_TransactionType >(value));
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_hash()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(16)) goto parse_ledger_seq;
+        if (input->ExpectTag(16)) goto parse_index;
         break;
       }
 
-      // optional int64 ledger_seq = 2;
+      // optional int64 index = 2;
       case 2: {
         if (tag == 16) {
-         parse_ledger_seq:
+         parse_index:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
-                 input, &ledger_seq_)));
+                 input, &index_)));
 
-        } else {
-          goto handle_unusual;
-        }
-        if (input->ExpectTag(26)) goto parse_transaction_hash;
-        break;
-      }
-
-      // optional bytes transaction_hash = 3;
-      case 3: {
-        if (tag == 26) {
-         parse_transaction_hash:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_transaction_hash()));
         } else {
           goto handle_unusual;
         }
@@ -8590,18 +8597,301 @@ bool TransactionTrigger::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:protocol.TransactionTrigger)
+  // @@protoc_insertion_point(parse_success:protocol.Trigger.OperationTrigger)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:protocol.TransactionTrigger)
+  // @@protoc_insertion_point(parse_failure:protocol.Trigger.OperationTrigger)
   return false;
 #undef DO_
 }
 
-void TransactionTrigger::SerializeWithCachedSizes(
+void Trigger_OperationTrigger::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:protocol.TransactionTrigger)
-  // optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;
+  // @@protoc_insertion_point(serialize_start:protocol.Trigger.OperationTrigger)
+  // optional bytes hash = 1;
+  if (this->hash().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
+      1, this->hash(), output);
+  }
+
+  // optional int64 index = 2;
+  if (this->index() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->index(), output);
+  }
+
+  // @@protoc_insertion_point(serialize_end:protocol.Trigger.OperationTrigger)
+}
+
+::google::protobuf::uint8* Trigger_OperationTrigger::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:protocol.Trigger.OperationTrigger)
+  // optional bytes hash = 1;
+  if (this->hash().size() > 0) {
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
+        1, this->hash(), target);
+  }
+
+  // optional int64 index = 2;
+  if (this->index() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->index(), target);
+  }
+
+  // @@protoc_insertion_point(serialize_to_array_end:protocol.Trigger.OperationTrigger)
+  return target;
+}
+
+int Trigger_OperationTrigger::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protocol.Trigger.OperationTrigger)
+  int total_size = 0;
+
+  // optional bytes hash = 1;
+  if (this->hash().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::BytesSize(
+        this->hash());
+  }
+
+  // optional int64 index = 2;
+  if (this->index() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::Int64Size(
+        this->index());
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void Trigger_OperationTrigger::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protocol.Trigger.OperationTrigger)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  const Trigger_OperationTrigger* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const Trigger_OperationTrigger>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protocol.Trigger.OperationTrigger)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protocol.Trigger.OperationTrigger)
+    MergeFrom(*source);
+  }
+}
+
+void Trigger_OperationTrigger::MergeFrom(const Trigger_OperationTrigger& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protocol.Trigger.OperationTrigger)
+  if (GOOGLE_PREDICT_FALSE(&from == this)) {
+    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  }
+  if (from.hash().size() > 0) {
+
+    hash_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.hash_);
+  }
+  if (from.index() != 0) {
+    set_index(from.index());
+  }
+}
+
+void Trigger_OperationTrigger::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protocol.Trigger.OperationTrigger)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Trigger_OperationTrigger::CopyFrom(const Trigger_OperationTrigger& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protocol.Trigger.OperationTrigger)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Trigger_OperationTrigger::IsInitialized() const {
+
+  return true;
+}
+
+void Trigger_OperationTrigger::Swap(Trigger_OperationTrigger* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void Trigger_OperationTrigger::InternalSwap(Trigger_OperationTrigger* other) {
+  hash_.Swap(&other->hash_);
+  std::swap(index_, other->index_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  std::swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata Trigger_OperationTrigger::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = Trigger_OperationTrigger_descriptor_;
+  metadata.reflection = Trigger_OperationTrigger_reflection_;
+  return metadata;
+}
+
+
+// -------------------------------------------------------------------
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int Trigger::kTransactionTypeFieldNumber;
+const int Trigger::kLedgerSeqFieldNumber;
+const int Trigger::kTransactionFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+Trigger::Trigger()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:protocol.Trigger)
+}
+
+void Trigger::InitAsDefaultInstance() {
+  _is_default_instance_ = true;
+  transaction_ = const_cast< ::protocol::Trigger_OperationTrigger*>(&::protocol::Trigger_OperationTrigger::default_instance());
+}
+
+Trigger::Trigger(const Trigger& from)
+  : ::google::protobuf::Message(),
+    _internal_metadata_(NULL) {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:protocol.Trigger)
+}
+
+void Trigger::SharedCtor() {
+    _is_default_instance_ = false;
+  _cached_size_ = 0;
+  transaction_type_ = 0;
+  ledger_seq_ = GOOGLE_LONGLONG(0);
+  transaction_ = NULL;
+}
+
+Trigger::~Trigger() {
+  // @@protoc_insertion_point(destructor:protocol.Trigger)
+  SharedDtor();
+}
+
+void Trigger::SharedDtor() {
+  if (this != default_instance_) {
+    delete transaction_;
+  }
+}
+
+void Trigger::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* Trigger::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Trigger_descriptor_;
+}
+
+const Trigger& Trigger::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_chain_2eproto();
+  return *default_instance_;
+}
+
+Trigger* Trigger::default_instance_ = NULL;
+
+Trigger* Trigger::New(::google::protobuf::Arena* arena) const {
+  Trigger* n = new Trigger;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void Trigger::Clear() {
+// @@protoc_insertion_point(message_clear_start:protocol.Trigger)
+  transaction_type_ = 0;
+  ledger_seq_ = GOOGLE_LONGLONG(0);
+  if (GetArenaNoVirtual() == NULL && transaction_ != NULL) delete transaction_;
+  transaction_ = NULL;
+}
+
+bool Trigger::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:protocol.Trigger)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional .protocol.Trigger.TransactionType transaction_type = 1;
+      case 1: {
+        if (tag == 8) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          set_transaction_type(static_cast< ::protocol::Trigger_TransactionType >(value));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_ledger_seq;
+        break;
+      }
+
+      // optional int64 ledger_seq = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_ledger_seq:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &ledger_seq_)));
+
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_transaction;
+        break;
+      }
+
+      // optional .protocol.Trigger.OperationTrigger transaction = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_transaction:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_transaction()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:protocol.Trigger)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:protocol.Trigger)
+  return false;
+#undef DO_
+}
+
+void Trigger::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:protocol.Trigger)
+  // optional .protocol.Trigger.TransactionType transaction_type = 1;
   if (this->transaction_type() != 0) {
     ::google::protobuf::internal::WireFormatLite::WriteEnum(
       1, this->transaction_type(), output);
@@ -8612,19 +8902,19 @@ void TransactionTrigger::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->ledger_seq(), output);
   }
 
-  // optional bytes transaction_hash = 3;
-  if (this->transaction_hash().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytesMaybeAliased(
-      3, this->transaction_hash(), output);
+  // optional .protocol.Trigger.OperationTrigger transaction = 3;
+  if (this->has_transaction()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, *this->transaction_, output);
   }
 
-  // @@protoc_insertion_point(serialize_end:protocol.TransactionTrigger)
+  // @@protoc_insertion_point(serialize_end:protocol.Trigger)
 }
 
-::google::protobuf::uint8* TransactionTrigger::InternalSerializeWithCachedSizesToArray(
+::google::protobuf::uint8* Trigger::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:protocol.TransactionTrigger)
-  // optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;
+  // @@protoc_insertion_point(serialize_to_array_start:protocol.Trigger)
+  // optional .protocol.Trigger.TransactionType transaction_type = 1;
   if (this->transaction_type() != 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteEnumToArray(
       1, this->transaction_type(), target);
@@ -8635,22 +8925,22 @@ void TransactionTrigger::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->ledger_seq(), target);
   }
 
-  // optional bytes transaction_hash = 3;
-  if (this->transaction_hash().size() > 0) {
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteBytesToArray(
-        3, this->transaction_hash(), target);
+  // optional .protocol.Trigger.OperationTrigger transaction = 3;
+  if (this->has_transaction()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        3, *this->transaction_, false, target);
   }
 
-  // @@protoc_insertion_point(serialize_to_array_end:protocol.TransactionTrigger)
+  // @@protoc_insertion_point(serialize_to_array_end:protocol.Trigger)
   return target;
 }
 
-int TransactionTrigger::ByteSize() const {
-// @@protoc_insertion_point(message_byte_size_start:protocol.TransactionTrigger)
+int Trigger::ByteSize() const {
+// @@protoc_insertion_point(message_byte_size_start:protocol.Trigger)
   int total_size = 0;
 
-  // optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;
+  // optional .protocol.Trigger.TransactionType transaction_type = 1;
   if (this->transaction_type() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::EnumSize(this->transaction_type());
@@ -8663,11 +8953,11 @@ int TransactionTrigger::ByteSize() const {
         this->ledger_seq());
   }
 
-  // optional bytes transaction_hash = 3;
-  if (this->transaction_hash().size() > 0) {
+  // optional .protocol.Trigger.OperationTrigger transaction = 3;
+  if (this->has_transaction()) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::BytesSize(
-        this->transaction_hash());
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->transaction_);
   }
 
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
@@ -8676,25 +8966,25 @@ int TransactionTrigger::ByteSize() const {
   return total_size;
 }
 
-void TransactionTrigger::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:protocol.TransactionTrigger)
+void Trigger::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:protocol.Trigger)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
-  const TransactionTrigger* source = 
-      ::google::protobuf::internal::DynamicCastToGenerated<const TransactionTrigger>(
+  const Trigger* source = 
+      ::google::protobuf::internal::DynamicCastToGenerated<const Trigger>(
           &from);
   if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protocol.TransactionTrigger)
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:protocol.Trigger)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:protocol.TransactionTrigger)
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:protocol.Trigger)
     MergeFrom(*source);
   }
 }
 
-void TransactionTrigger::MergeFrom(const TransactionTrigger& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:protocol.TransactionTrigger)
+void Trigger::MergeFrom(const Trigger& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:protocol.Trigger)
   if (GOOGLE_PREDICT_FALSE(&from == this)) {
     ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
   }
@@ -8704,124 +8994,179 @@ void TransactionTrigger::MergeFrom(const TransactionTrigger& from) {
   if (from.ledger_seq() != 0) {
     set_ledger_seq(from.ledger_seq());
   }
-  if (from.transaction_hash().size() > 0) {
-
-    transaction_hash_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.transaction_hash_);
+  if (from.has_transaction()) {
+    mutable_transaction()->::protocol::Trigger_OperationTrigger::MergeFrom(from.transaction());
   }
 }
 
-void TransactionTrigger::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:protocol.TransactionTrigger)
+void Trigger::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:protocol.Trigger)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void TransactionTrigger::CopyFrom(const TransactionTrigger& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:protocol.TransactionTrigger)
+void Trigger::CopyFrom(const Trigger& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:protocol.Trigger)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool TransactionTrigger::IsInitialized() const {
+bool Trigger::IsInitialized() const {
 
   return true;
 }
 
-void TransactionTrigger::Swap(TransactionTrigger* other) {
+void Trigger::Swap(Trigger* other) {
   if (other == this) return;
   InternalSwap(other);
 }
-void TransactionTrigger::InternalSwap(TransactionTrigger* other) {
+void Trigger::InternalSwap(Trigger* other) {
   std::swap(transaction_type_, other->transaction_type_);
   std::swap(ledger_seq_, other->ledger_seq_);
-  transaction_hash_.Swap(&other->transaction_hash_);
+  std::swap(transaction_, other->transaction_);
   _internal_metadata_.Swap(&other->_internal_metadata_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
-::google::protobuf::Metadata TransactionTrigger::GetMetadata() const {
+::google::protobuf::Metadata Trigger::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = TransactionTrigger_descriptor_;
-  metadata.reflection = TransactionTrigger_reflection_;
+  metadata.descriptor = Trigger_descriptor_;
+  metadata.reflection = Trigger_reflection_;
   return metadata;
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
-// TransactionTrigger
+// Trigger_OperationTrigger
 
-// optional .protocol.TransactionTrigger.TransactionType transaction_type = 1;
-void TransactionTrigger::clear_transaction_type() {
-  transaction_type_ = 0;
+// optional bytes hash = 1;
+void Trigger_OperationTrigger::clear_hash() {
+  hash_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- ::protocol::TransactionTrigger_TransactionType TransactionTrigger::transaction_type() const {
-  // @@protoc_insertion_point(field_get:protocol.TransactionTrigger.transaction_type)
-  return static_cast< ::protocol::TransactionTrigger_TransactionType >(transaction_type_);
+ const ::std::string& Trigger_OperationTrigger::hash() const {
+  // @@protoc_insertion_point(field_get:protocol.Trigger.OperationTrigger.hash)
+  return hash_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void TransactionTrigger::set_transaction_type(::protocol::TransactionTrigger_TransactionType value) {
+ void Trigger_OperationTrigger::set_hash(const ::std::string& value) {
   
-  transaction_type_ = value;
-  // @@protoc_insertion_point(field_set:protocol.TransactionTrigger.transaction_type)
+  hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:protocol.Trigger.OperationTrigger.hash)
 }
-
-// optional int64 ledger_seq = 2;
-void TransactionTrigger::clear_ledger_seq() {
-  ledger_seq_ = GOOGLE_LONGLONG(0);
-}
- ::google::protobuf::int64 TransactionTrigger::ledger_seq() const {
-  // @@protoc_insertion_point(field_get:protocol.TransactionTrigger.ledger_seq)
-  return ledger_seq_;
-}
- void TransactionTrigger::set_ledger_seq(::google::protobuf::int64 value) {
+ void Trigger_OperationTrigger::set_hash(const char* value) {
   
-  ledger_seq_ = value;
-  // @@protoc_insertion_point(field_set:protocol.TransactionTrigger.ledger_seq)
+  hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:protocol.Trigger.OperationTrigger.hash)
 }
-
-// optional bytes transaction_hash = 3;
-void TransactionTrigger::clear_transaction_hash() {
-  transaction_hash_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
- const ::std::string& TransactionTrigger::transaction_hash() const {
-  // @@protoc_insertion_point(field_get:protocol.TransactionTrigger.transaction_hash)
-  return transaction_hash_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
- void TransactionTrigger::set_transaction_hash(const ::std::string& value) {
+ void Trigger_OperationTrigger::set_hash(const void* value, size_t size) {
   
-  transaction_hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:protocol.TransactionTrigger.transaction_hash)
-}
- void TransactionTrigger::set_transaction_hash(const char* value) {
-  
-  transaction_hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:protocol.TransactionTrigger.transaction_hash)
-}
- void TransactionTrigger::set_transaction_hash(const void* value, size_t size) {
-  
-  transaction_hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  hash_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:protocol.TransactionTrigger.transaction_hash)
+  // @@protoc_insertion_point(field_set_pointer:protocol.Trigger.OperationTrigger.hash)
 }
- ::std::string* TransactionTrigger::mutable_transaction_hash() {
+ ::std::string* Trigger_OperationTrigger::mutable_hash() {
   
-  // @@protoc_insertion_point(field_mutable:protocol.TransactionTrigger.transaction_hash)
-  return transaction_hash_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:protocol.Trigger.OperationTrigger.hash)
+  return hash_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- ::std::string* TransactionTrigger::release_transaction_hash() {
-  // @@protoc_insertion_point(field_release:protocol.TransactionTrigger.transaction_hash)
+ ::std::string* Trigger_OperationTrigger::release_hash() {
+  // @@protoc_insertion_point(field_release:protocol.Trigger.OperationTrigger.hash)
   
-  return transaction_hash_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return hash_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
- void TransactionTrigger::set_allocated_transaction_hash(::std::string* transaction_hash) {
-  if (transaction_hash != NULL) {
+ void Trigger_OperationTrigger::set_allocated_hash(::std::string* hash) {
+  if (hash != NULL) {
     
   } else {
     
   }
-  transaction_hash_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), transaction_hash);
-  // @@protoc_insertion_point(field_set_allocated:protocol.TransactionTrigger.transaction_hash)
+  hash_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), hash);
+  // @@protoc_insertion_point(field_set_allocated:protocol.Trigger.OperationTrigger.hash)
+}
+
+// optional int64 index = 2;
+void Trigger_OperationTrigger::clear_index() {
+  index_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 Trigger_OperationTrigger::index() const {
+  // @@protoc_insertion_point(field_get:protocol.Trigger.OperationTrigger.index)
+  return index_;
+}
+ void Trigger_OperationTrigger::set_index(::google::protobuf::int64 value) {
+  
+  index_ = value;
+  // @@protoc_insertion_point(field_set:protocol.Trigger.OperationTrigger.index)
+}
+
+// -------------------------------------------------------------------
+
+// Trigger
+
+// optional .protocol.Trigger.TransactionType transaction_type = 1;
+void Trigger::clear_transaction_type() {
+  transaction_type_ = 0;
+}
+ ::protocol::Trigger_TransactionType Trigger::transaction_type() const {
+  // @@protoc_insertion_point(field_get:protocol.Trigger.transaction_type)
+  return static_cast< ::protocol::Trigger_TransactionType >(transaction_type_);
+}
+ void Trigger::set_transaction_type(::protocol::Trigger_TransactionType value) {
+  
+  transaction_type_ = value;
+  // @@protoc_insertion_point(field_set:protocol.Trigger.transaction_type)
+}
+
+// optional int64 ledger_seq = 2;
+void Trigger::clear_ledger_seq() {
+  ledger_seq_ = GOOGLE_LONGLONG(0);
+}
+ ::google::protobuf::int64 Trigger::ledger_seq() const {
+  // @@protoc_insertion_point(field_get:protocol.Trigger.ledger_seq)
+  return ledger_seq_;
+}
+ void Trigger::set_ledger_seq(::google::protobuf::int64 value) {
+  
+  ledger_seq_ = value;
+  // @@protoc_insertion_point(field_set:protocol.Trigger.ledger_seq)
+}
+
+// optional .protocol.Trigger.OperationTrigger transaction = 3;
+bool Trigger::has_transaction() const {
+  return !_is_default_instance_ && transaction_ != NULL;
+}
+void Trigger::clear_transaction() {
+  if (GetArenaNoVirtual() == NULL && transaction_ != NULL) delete transaction_;
+  transaction_ = NULL;
+}
+const ::protocol::Trigger_OperationTrigger& Trigger::transaction() const {
+  // @@protoc_insertion_point(field_get:protocol.Trigger.transaction)
+  return transaction_ != NULL ? *transaction_ : *default_instance_->transaction_;
+}
+::protocol::Trigger_OperationTrigger* Trigger::mutable_transaction() {
+  
+  if (transaction_ == NULL) {
+    transaction_ = new ::protocol::Trigger_OperationTrigger;
+  }
+  // @@protoc_insertion_point(field_mutable:protocol.Trigger.transaction)
+  return transaction_;
+}
+::protocol::Trigger_OperationTrigger* Trigger::release_transaction() {
+  // @@protoc_insertion_point(field_release:protocol.Trigger.transaction)
+  
+  ::protocol::Trigger_OperationTrigger* temp = transaction_;
+  transaction_ = NULL;
+  return temp;
+}
+void Trigger::set_allocated_transaction(::protocol::Trigger_OperationTrigger* transaction) {
+  delete transaction_;
+  transaction_ = transaction;
+  if (transaction) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:protocol.Trigger.transaction)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -8843,7 +9188,7 @@ TransactionEnv::TransactionEnv()
 void TransactionEnv::InitAsDefaultInstance() {
   _is_default_instance_ = true;
   transaction_ = const_cast< ::protocol::Transaction*>(&::protocol::Transaction::default_instance());
-  trigger_ = const_cast< ::protocol::TransactionTrigger*>(&::protocol::TransactionTrigger::default_instance());
+  trigger_ = const_cast< ::protocol::Trigger*>(&::protocol::Trigger::default_instance());
 }
 
 TransactionEnv::TransactionEnv(const TransactionEnv& from)
@@ -8946,7 +9291,7 @@ bool TransactionEnv::MergePartialFromCodedStream(
         break;
       }
 
-      // optional .protocol.TransactionTrigger trigger = 3;
+      // optional .protocol.Trigger trigger = 3;
       case 3: {
         if (tag == 26) {
          parse_trigger:
@@ -8995,7 +9340,7 @@ void TransactionEnv::SerializeWithCachedSizes(
       2, this->signatures(i), output);
   }
 
-  // optional .protocol.TransactionTrigger trigger = 3;
+  // optional .protocol.Trigger trigger = 3;
   if (this->has_trigger()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, *this->trigger_, output);
@@ -9021,7 +9366,7 @@ void TransactionEnv::SerializeWithCachedSizes(
         2, this->signatures(i), false, target);
   }
 
-  // optional .protocol.TransactionTrigger trigger = 3;
+  // optional .protocol.Trigger trigger = 3;
   if (this->has_trigger()) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
@@ -9043,7 +9388,7 @@ int TransactionEnv::ByteSize() const {
         *this->transaction_);
   }
 
-  // optional .protocol.TransactionTrigger trigger = 3;
+  // optional .protocol.Trigger trigger = 3;
   if (this->has_trigger()) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -9091,7 +9436,7 @@ void TransactionEnv::MergeFrom(const TransactionEnv& from) {
     mutable_transaction()->::protocol::Transaction::MergeFrom(from.transaction());
   }
   if (from.has_trigger()) {
-    mutable_trigger()->::protocol::TransactionTrigger::MergeFrom(from.trigger());
+    mutable_trigger()->::protocol::Trigger::MergeFrom(from.trigger());
   }
 }
 
@@ -9205,7 +9550,7 @@ TransactionEnv::signatures() const {
   return signatures_;
 }
 
-// optional .protocol.TransactionTrigger trigger = 3;
+// optional .protocol.Trigger trigger = 3;
 bool TransactionEnv::has_trigger() const {
   return !_is_default_instance_ && trigger_ != NULL;
 }
@@ -9213,26 +9558,26 @@ void TransactionEnv::clear_trigger() {
   if (GetArenaNoVirtual() == NULL && trigger_ != NULL) delete trigger_;
   trigger_ = NULL;
 }
-const ::protocol::TransactionTrigger& TransactionEnv::trigger() const {
+const ::protocol::Trigger& TransactionEnv::trigger() const {
   // @@protoc_insertion_point(field_get:protocol.TransactionEnv.trigger)
   return trigger_ != NULL ? *trigger_ : *default_instance_->trigger_;
 }
-::protocol::TransactionTrigger* TransactionEnv::mutable_trigger() {
+::protocol::Trigger* TransactionEnv::mutable_trigger() {
   
   if (trigger_ == NULL) {
-    trigger_ = new ::protocol::TransactionTrigger;
+    trigger_ = new ::protocol::Trigger;
   }
   // @@protoc_insertion_point(field_mutable:protocol.TransactionEnv.trigger)
   return trigger_;
 }
-::protocol::TransactionTrigger* TransactionEnv::release_trigger() {
+::protocol::Trigger* TransactionEnv::release_trigger() {
   // @@protoc_insertion_point(field_release:protocol.TransactionEnv.trigger)
   
-  ::protocol::TransactionTrigger* temp = trigger_;
+  ::protocol::Trigger* temp = trigger_;
   trigger_ = NULL;
   return temp;
 }
-void TransactionEnv::set_allocated_trigger(::protocol::TransactionTrigger* trigger) {
+void TransactionEnv::set_allocated_trigger(::protocol::Trigger* trigger) {
   delete trigger_;
   trigger_ = trigger;
   if (trigger) {

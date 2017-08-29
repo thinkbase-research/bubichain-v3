@@ -19,6 +19,7 @@ limitations under the License.
 #include "transaction_frm.h"
 #include "contract_manager.h"
 
+#include "ledger_frm.h"
 namespace bubi {
 
 	TransactionFrm::TransactionFrm() :
@@ -30,26 +31,23 @@ namespace bubi {
 		data_(),
 		full_data_(),
 		valid_signature_(),
-		header_(),
+		ledger_(),
 		incoming_time_(utils::Timestamp::HighResolution())
 		{
 		utils::AtomicInc(&bubi::General::tx_new_count);
 	}
 
-	TransactionFrm::TransactionFrm(const protocol::TransactionEnv &env, pointer previous) :
+
+	TransactionFrm::TransactionFrm(const protocol::TransactionEnv &env, std::shared_ptr<Environment> envir) :
 		apply_time_(0),
 		result_(),
 		transaction_env_(env),
-		previous(previous),
 		valid_signature_(),
-		header_(),
+		ledger_(),
 		incoming_time_(utils::Timestamp::HighResolution()){
 		Initialize();
 		utils::AtomicInc(&bubi::General::tx_new_count);
-		if (previous)
-			environment_ = std::make_shared<Environment>(previous->environment_);
-		else
-			environment_ = nullptr;
+		environment_ = std::make_shared<Environment>(envir);
 	}
 
 	TransactionFrm::~TransactionFrm() {
@@ -399,28 +397,8 @@ namespace bubi {
 		return false;
 	}
 
-	bool TransactionFrm::Apply(std::shared_ptr<protocol::LedgerHeader> header,
-		bool bool_contract) {
-		auto tmp = previous;
-		int count = 0;
-		while (tmp->previous){
-			count++;
-			tmp = tmp->previous;
-		}
-		if (count > General::CONTRACT_MAX_RECURSIVE_DEPTH){
-			result_.set_code(protocol::ERRCODE_CONTRACT_TOO_MANY_RECURSION);
-			return false;
-		}
-
-		if (ContractManager::executing_contract_){
-			auto executing = ContractManager::executing_contract_;
-			executing->tx_do_count_++;
-			if (executing->tx_do_count_ > General::CONTRACT_TRANSACTION_LIMIT){
-				result_.set_code(protocol::ERRCODE_CONTRACT_TOO_MANY_TRANSACTIONS);
-				return false;
-			}
-		}
-		header_ = header;
+	bool TransactionFrm::Apply(LedgerFrm* ledger_frm, bool bool_contract) {
+		ledger_ = ledger_frm;
 		std::string str_address = GetSourceAddress();
 		AccountFrm::pointer source_account;
 		if (!environment_->GetEntry(str_address, source_account)) {
@@ -430,12 +408,14 @@ namespace bubi {
 		}
 
 		source_account->NonceIncrease();
-		SelfCommit();
+
+		environment_->Commit();
+
 		bool bSucess = true;
 		const protocol::Transaction &tran = transaction_env_.transaction();
-		for (int32_t i = 0; i < tran.operations_size(); i++) {
-			const protocol::Operation &ope = tran.operations(i);
-			std::shared_ptr<OperationFrm> opt = std::make_shared< OperationFrm>(ope, this);
+		for (processing_operation_ = 0; processing_operation_ < tran.operations_size(); processing_operation_++) {
+			const protocol::Operation &ope = tran.operations(processing_operation_);
+			std::shared_ptr<OperationFrm> opt = std::make_shared< OperationFrm>(ope, this, processing_operation_);
 			if (opt == nullptr) {
 				LOG_ERROR("Create operation frame failed");
 				result_.set_code(protocol::ERRCODE_INVALID_PARAMETER);
@@ -484,27 +464,11 @@ namespace bubi {
 				result_ = opt->GetResult();
 				bSucess = false;
 				LOG_ERROR("Transaction(%s) operation(%d) apply failed",
-					utils::String::BinToHexString(hash_).c_str(), i);
+					utils::String::BinToHexString(hash_).c_str(), processing_operation_);
 				break;
 			}
 		}
 		return bSucess;
-	}
-
-	void TransactionFrm::SelfCommit(){
-		if (previous){
-			protocol::TransactionEnvStore tx_store;
-			tx_store.mutable_transaction_env()->CopyFrom(transaction_env_);
-			auto trigger = tx_store.mutable_transaction_env()->mutable_trigger();
-			trigger->set_transaction_hash(previous->GetContentHash());
-			previous->instructions_.push_back(tx_store);
-		}
-		environment_->Commit();
-	}
-
-	void TransactionFrm::AllCommit(){
-		previous->instructions_.insert(previous->instructions_.end(), instructions_.begin(), instructions_.end());
-		environment_->Commit();
 	}
 }
 
