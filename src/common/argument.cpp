@@ -76,9 +76,10 @@ namespace bubi {
 				create_hardfork_ = true;
 			}
 			else if (s == "--version") {
-				printf("%s\n", General::BUBI_VERSION);
 #ifdef SVNVERSION
 				printf("%s; " SVNVERSION "\n", General::BUBI_VERSION);
+#else
+				printf("%s\n", General::BUBI_VERSION);
 #endif 
 				return true;
 			}
