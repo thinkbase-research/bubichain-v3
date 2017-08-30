@@ -338,7 +338,6 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 4 | 设置metadata     |  设置账号属性 key / value 值
 5 | 设置Signer Weight | 设置账号权重，包括master 和 signer
 6 | 设置Threshold | 设置门限值，包括默认门限或具体操作门限
-7 | 调用合约
 
 
 #### 1. 创建账号
@@ -834,8 +833,7 @@ error_code | enum | error_desc
 
 ## __操作码__
 
-type | enum | 交易说明
-|:--- | --- | --- |
+type | enum | 交易说|:--- | --- | --- |
 1  | CREATE_ACCOUNT | 创建账号
 2  | ISSUE_ASSET | 发行资产
 3  | PAYMENT | 转移资产
