@@ -832,7 +832,7 @@ error_code | enum | error_desc
 151 | ERRCODE_CONTRACT_EXECUTE_FAIL | 合约执行失败
 152 | ERRCODE_CONTRACT_SYNTAX_ERROR | 合约语法分析失败
 
-## __交易码__
+## __操作码__
 
 type | enum | 交易说明
 |:--- | --- | --- |
