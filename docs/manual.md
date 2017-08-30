@@ -385,5 +385,13 @@ user certificate file: /usr/local/bubichain/config/node_bubi.crt
 ```bash
 bubichain/bin/bubi --dropdb
 ```
+### 创建硬分叉
+```bash
+bubichain/bin/bubi --create-hardfork
+bubichain/bin/bubi --clear-consensus-status
+```
+当已经加入其他区块链网络的节点想单独运行一条链时，可以执行以上命令创建硬分叉
+执行后，新的区块链网络只有一个验证节点为本节点。
+
 ### 数据库存储
 布比区块链存储的数据默认是存放在 bubichain/data 目录下，如有需要可修改配置文件中数据存储部分
