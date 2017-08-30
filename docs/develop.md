@@ -843,10 +843,11 @@ error_code | enum | error_desc
 
 ## __操作码__
 
-type | enum | 交易说|:--- | --- | --- |
-1  | CREATE_ACCOUNT | 创建账号
-2  | ISSUE_ASSET | 发行资产
-3  | PAYMENT | 转移资产
-4  | SET_METADATA | 设置metadata
-5  | SET_SIGNER_WEIGHT | 设置signerweight
-6  | SET_THRESHOLD | 设置threshold
+|代码 | 枚举名 | 说明
+|:--- | --- | --- |
+|1  | CREATE_ACCOUNT | 创建账号
+|2  | ISSUE_ASSET | 发行资产
+|3  | PAYMENT | 转移资产
+|4  | SET_METADATA | 设置metadata
+|5  | SET_SIGNER_WEIGHT | 设置signerweight
+|6  | SET_THRESHOLD | 设置threshold
