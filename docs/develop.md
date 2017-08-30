@@ -330,15 +330,14 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 
 
 #### 操作类型
-操作类型代码 | 操作类型名称 | 说明
-|:--- | --- | --- |
-1 | 创建帐号 | 用来新建帐号
-2 | 发行资产 | 
-3 | 转移资产 | 调用此接口可以将自定义资产转给另一个帐号
-4 | 设置metadata     |  设置账号属性 key / value 值
-5 | 设置Signer Weight | 设置账号权重，包括master 和 signer
-6 | 设置Threshold | 设置门限值，包括默认门限或具体操作门限
-
+|代码|名称|说明
+|:--|--|--
+|1| 创建帐号 | 用来新建帐号
+|2| 发行资产 | 用来发行一笔资产
+|3| 转移资产 | 调用此接口可以将自定义资产转给另一个帐号
+|4| 设置metadata     |  设置账号属性 key / value 值
+|5| 设置Signer Weight | 设置账号权重，包括master 和 signer
+|6| 设置Threshold | 设置门限值，包括默认门限或具体操作门限
 
 #### 1. 创建账号
 
@@ -401,6 +400,11 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 ```
 
 #### 2. 发行资产
+发行一笔资产，这笔资产的发行方就是本操作的source_address。
+|参数|描述
+|:--- | --- 
+|amount |  发行的数量
+|code|  资产代码
 
 ```json
 
@@ -418,7 +422,13 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 #### 3. 转移资产/调用合约
 该操作先把指定的资产转给目标账号，然后调用目标账号的合约代码并以input作为入参。
 若目标账号没有合约代码，则只进行转移资产操作。
-
+|参数|描述
+|:--- | --- 
+|payment.dest_address |  目标账户
+|payment.asset.property.issuer|  资产发行方
+|payment.asset.property.code|  资产代码
+|payment.asset.amount|  要转移的数量
+|payment.input|  触发合约调用的入参
 ```json
 
 {
@@ -446,9 +456,9 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 
 |参数|描述
 |:--- | --- 
-| key  |required，length:(0, 256]
-| value  |optional，length:(0, 1048576]
-| version |optional，default 0, 0：不限制版本，>0 : 当前 value 的版本必须为该值， <0 : 非法
+| set_metadata.key  |required，length:(0, 256]
+| set_metadata.value  |optional，length:(0, 1048576]
+| set_metadata.version |optional，default 0, 0：不限制版本，>0 : 当前 value 的版本必须为该值， <0 : 非法
 
 ```json
 {
