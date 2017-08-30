@@ -672,7 +672,7 @@ namespace utils {
 		std::string xPA;
 		std::string yPA;
 		if (!valid_) {
-			return false;
+			return "";
 		}
 		BN_CTX *ctx = BN_CTX_new();
 		BN_CTX_start(ctx);
