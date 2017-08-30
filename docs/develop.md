@@ -739,7 +739,7 @@ sender
 
 ```sender```的值等于本次调用该合约的账号。
 
-例如某账号发起了一笔交易，该交易中有个操作是调用合约Y（该操作的source_address是x），那么合约Y执行过程中，Sender的值就是x账号的地址。
+例如某账号发起了一笔交易，该交易中有个操作是调用合约Y（该操作的source_address是x），那么合约Y执行过程中，sender的值就是x账号的地址。
 
 ```javascript
 var bar = sender;
@@ -778,11 +778,15 @@ var bar = triggerIndex;
 consensusValue
 
 ```consensusValue```当前块(正在生成的块)的共识数据。
-consensusValue的数据结构可以在src/proto/chain.proto中找到message ConsensusValue。
+consensusValue的数据结构可以在src/proto/chain.proto中找到ConsensusValue。
+ConsensusValue是一个protobuffer对象，根据protobuffer对象转为json格式的标准方法转换，即是```consensusValue```的值。
 
 ```javascript
 var bar = consensusValue;
-/* bar 具有以下结构*/
+/*consensusValue结构比较复杂，常用的数据有以下几个:*/
+consensusValue.close_time;	/*当前时间*/
+consensusValue.ledger_seq; 	/*当前区块序号*/
+consensusValue.previous_ledger_hash; /*上一个区块hash*/
 ```
 
 ## __错误码__
