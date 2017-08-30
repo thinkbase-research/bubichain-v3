@@ -842,4 +842,3 @@ type | enum | 交易说明
 4  | SET_METADATA | 设置metadata
 5  | SET_SIGNER_WEIGHT | 设置signerweight
 6  | SET_THRESHOLD | 设置threshold
-7  | INVOKE_CONTRACT | 调用合约
