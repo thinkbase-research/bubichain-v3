@@ -297,10 +297,10 @@ POST /submitTransaction
 
 |参数|描述
 |:--- | --- 
-|source_address | 交易发起人地址， required
-|nonce| 交易序号,required
-|expr_condition|表达式字段, optional
-|metadata|交易的元数据, optional
+|source_address | 交易发起人地址， 必填
+|nonce| 交易序号, 必填
+|expr_condition|表达式字段, 可选
+|metadata|交易的备注数据, 用户自定义, 可选, 必须为16进制表示
 
 ### expr_condtion 表达式规则
 该表达式字段，用于自定义交易有效规则，比如设置交易在某个账户的master_weight 大于 100 有效，则填：
@@ -323,10 +323,10 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 
 |参数|描述
 |:--- | --- 
-|source_address| 指哪个账号做此操作,若为空或不填写，默认与交易发起者相同， optional
-|type|表示该操作的类型， required
-|metadata|操作的 metadata 值，16进制表示， optional
-|expr_condition|操作的表达式限制， optional
+|source_address| 指哪个账号做此操作,若为空或不填写，默认与交易发起者相同， 可选
+|type|表示该操作的类型， 必填
+|metadata|操作的备注数据,用户自定义,必须16进制表示， 可选
+|expr_condition|操作的表达式限制， 可选
 
 
 #### 操作类型
