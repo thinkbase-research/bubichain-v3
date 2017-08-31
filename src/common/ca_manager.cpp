@@ -10,16 +10,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 */
-
+#include "ca_manager.h"
 #include <json/json.h>
-#include <utils/ca.h>
 #include <utils/strings.h>
 #include <utils/file.h>
 #include <utils/logger.h>
 #include <utils/system.h>
 #include <common/private_key.h>
 #include <HttpClient.h>
-#include "ca_manager.h"
 
 namespace bubi {
 	bool CAManager::RequestCA(char *file_path, char *common_name, char *organization, char *email, char *priv_password, char *hard_addr, char *node_id, char *out_msg) {
@@ -51,7 +49,7 @@ namespace bubi {
 				std::string node_address = node_id;
 			}
 
-			utils::stuSUBJECT subject;
+			bubi::stuSUBJECT subject;
 			strncpy((char *)subject.O, organization, strlen(organization) > (strlen((char *)subject.O) - 1) ? (strlen((char *)subject.O) - 1) : strlen(organization));
 			strncpy((char *)subject.CN, common_name, strlen(organization) > (strlen((char *)subject.CN) - 1) ? (strlen((char *)subject.CN) - 1) : strlen(organization));
 			strncpy((char *)subject.MAIL, email, strlen(email) > (strlen((char *)subject.MAIL) - 1) ? (strlen((char *)subject.MAIL) - 1) : strlen(email));
@@ -65,7 +63,7 @@ namespace bubi {
 
 			std::string req_csr = utils::String::Format("%s/%s_%s.csr", file_paths.c_str(), common_name, organization);
 			std::string priv_pem = utils::String::Format("%s/%s_%s.pem", file_paths.c_str(), common_name, organization);
-			utils::CA ca;
+			bubi::CA ca;
 			if (!ca.MakeReq(&subject, 2048, req_csr.c_str(), priv_pem.c_str(), priv_password, err_msg)) {
 				sprintf(out_msg, "make request certificate failed, because %s", err_msg);
 				break;
@@ -96,8 +94,8 @@ namespace bubi {
 			}
 
 			// get request certificate content
-			utils::CA ca;
-			utils::stuSUBJECT req_info;
+			bubi::CA ca;
+			bubi::stuSUBJECT req_info;
 			char err_msg[256] = { 0 };
 			if (!ca.GetReqContent(req_file_path.c_str(), req_info, err_msg)) {
 				sprintf(out_msg, "get request certificate info failed, %s", err_msg);
@@ -152,7 +150,7 @@ namespace bubi {
 			if (!utils::File::IsAbsolute(priv_key_file_full)) {
 				priv_key_file_full = utils::String::Format("%s/%s", utils::File::GetBinHome().c_str(), priv_key_file_full.c_str());
 			}
-			utils::CA ca;
+			bubi::CA ca;
 			char root_ext_code[256] = { 0 };
 			if (!ca.CheckRootCert(verify_file_full.c_str(), root_ext_code, 256, err_msg)) {
 				sprintf(out_msg, "this root certificate is invalid, %s", err_msg);
@@ -219,9 +217,9 @@ namespace bubi {
 				break;
 			}
 			X509 *cert = (X509*)x509;
-			const utils::CAStatusMap* ca_list = (const utils::CAStatusMap*)ca_lists;
+			const bubi::CAStatusMap* ca_list = (const bubi::CAStatusMap*)ca_lists;
 			// check certificate
-			utils::CA ca;
+			bubi::CA ca;
 			char serial[128] = { 0 };
 			if (!ca.GetCertSerial(cert, serial, out_msg)) {
 				sprintf(out_msg, "get remote certificate serial number failed");
@@ -286,7 +284,7 @@ namespace bubi {
 		const std::string serial_num, void *ca_lists, char *out_msg) {
 		bool bret = false;
 		do {
-			utils::CAStatusMap *ca_list = (utils::CAStatusMap *)ca_lists;
+			bubi::CAStatusMap *ca_list = (bubi::CAStatusMap *)ca_lists;
 			std::string path_full = "/";
 			path_full = path_full + path + "/all?serial=" + serial_num;
 			std::string result;
@@ -303,7 +301,7 @@ namespace bubi {
 				const Json::Value& ca_items = jresult["ca"];
 				for (unsigned i = 0; i < ca_items.size(); i++) {
 					const Json::Value& ca_item = ca_items[i];
-					utils::stuStatus ca_status;
+					bubi::stuStatus ca_status;
 					ca_status.hardware_address_ = ca_item["hardware_address"].asString();
 					ca_status.node_id_ = ca_item["node_id"].asString();
 					ca_list->insert(std::make_pair(ca_item["id"].asString(), ca_status));
