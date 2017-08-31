@@ -13,7 +13,7 @@
 #define PEM                3   
 #define P12                5   
 
-namespace utils {
+namespace bubi {
 	struct stuSUBJECT  {
 		unsigned char C[4];			// country   
 		unsigned char ST[4];		// province

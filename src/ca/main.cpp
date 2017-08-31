@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
 						printf("error: days must be number \n");
 						break;
 					}
-					utils::stuSUBJECT subject;
+					bubi::stuSUBJECT subject;
 					std::string file_name = argv[3];
 					std::string file_path = argv[2];
 					file_path = file_path + "/" + file_name;

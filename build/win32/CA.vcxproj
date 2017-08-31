@@ -15,6 +15,9 @@
     <ClCompile Include="..\..\src\ca\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Common.vcxproj">
+      <Project>{b808de3b-c0e7-49b7-924f-e3cb100221c0}</Project>
+    </ProjectReference>
     <ProjectReference Include="Utils.vcxproj">
       <Project>{85f7a975-b30b-487e-8f7b-90a19d775459}</Project>
     </ProjectReference>
