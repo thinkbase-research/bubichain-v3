@@ -49,8 +49,9 @@ namespace bubi {
 			Result result;
 			result.set_code(protocol::ERRCODE_SUCCESS);
 			result.set_desc("");
+
+			protocol::TransactionEnv tran_env;
 			do {
-				protocol::TransactionEnv tran_env;
 				if (json_item.isMember("transaction_blob")) {
 					if (!json_item.isMember("signatures")) {
 						result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
@@ -159,13 +160,14 @@ namespace bubi {
 					break;
 				}
 
-				if (result.code() == protocol::ERRCODE_SUCCESS) {
-					success_count++;
-					TransactionFrm::pointer ptr = std::make_shared<TransactionFrm>(tran_env);
-					GlueManager::Instance().OnTransaction(ptr, result);
-					PeerManager::Instance().Broadcast(protocol::OVERLAY_MSGTYPE_TRANSACTION, tran_env.SerializeAsString());
-				}
 			} while (false);
+
+			if (result.code() == protocol::ERRCODE_SUCCESS) {
+				success_count++;
+				TransactionFrm::pointer ptr = std::make_shared<TransactionFrm>(tran_env);
+				GlueManager::Instance().OnTransaction(ptr, result);
+				PeerManager::Instance().Broadcast(protocol::OVERLAY_MSGTYPE_TRANSACTION, tran_env.SerializeAsString());
+			}
 			result_item["error_code"] = result.code();
 			result_item["error_desc"] = result.desc();
 		}
