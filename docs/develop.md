@@ -297,10 +297,10 @@ POST /submitTransaction
 
 |参数|描述
 |:--- | --- 
-|source_address | 交易发起人地址， required
-|nonce| 交易序号,required
-|expr_condition|表达式字段, optional
-|metadata|交易的元数据, optional
+|source_address | 交易发起人地址， 必填
+|nonce| 交易序号, 必填
+|expr_condition|表达式字段, 可选
+|metadata|交易的备注数据, 用户自定义, 可选, 必须为16进制表示
 
 ### expr_condtion 表达式规则
 该表达式字段，用于自定义交易有效规则，比如设置交易在某个账户的master_weight 大于 100 有效，则填：
@@ -323,23 +323,21 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 
 |参数|描述
 |:--- | --- 
-|source_address| 指哪个账号做此操作,若为空或不填写，默认与交易发起者相同， optional
-|type|表示该操作的类型， required
-|metadata|操作的 metadata 值，16进制表示， optional
-|expr_condition|操作的表达式限制， optional
+|source_address| 指哪个账号做此操作,若为空或不填写，默认与交易发起者相同， 可选
+|type|表示该操作的类型， 必填
+|metadata|操作的备注数据,用户自定义,必须16进制表示， 可选
+|expr_condition|操作的表达式限制， 可选
 
 
 #### 操作类型
-操作类型代码 | 操作类型名称 | 说明
-|:--- | --- | --- |
-1 | 创建帐号 | 用来新建帐号
-2 | 发行资产 | 
-3 | 转移资产 | 调用此接口可以将自定义资产转给另一个帐号
-4 | 设置metadata     |  设置账号属性 key / value 值
-5 | 设置Signer Weight | 设置账号权重，包括master 和 signer
-6 | 设置Threshold | 设置门限值，包括默认门限或具体操作门限
-7 | 调用合约
-
+|代码|名称|说明
+|:--|--|--
+|1| 创建帐号 | 用来新建帐号
+|2| 发行资产 | 用来发行一笔资产
+|3| 转移资产 | 调用此接口可以将自定义资产转给另一个帐号
+|4| 设置metadata     |  设置账号属性 key / value 值
+|5| 设置Signer Weight | 设置账号权重，包括master 和 signer
+|6| 设置Threshold | 设置门限值，包括默认门限或具体操作门限
 
 #### 1. 创建账号
 
@@ -402,6 +400,11 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 ```
 
 #### 2. 发行资产
+发行一笔资产，这笔资产的发行方就是本操作的source_address。
+|参数|描述
+|:--- | --- 
+|amount |  发行的数量
+|code|  资产代码
 
 ```json
 
@@ -419,7 +422,13 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 #### 3. 转移资产/调用合约
 该操作先把指定的资产转给目标账号，然后调用目标账号的合约代码并以input作为入参。
 若目标账号没有合约代码，则只进行转移资产操作。
-
+|参数|描述
+|:--- | --- 
+|payment.dest_address |  目标账户
+|payment.asset.property.issuer|  资产发行方
+|payment.asset.property.code|  资产代码
+|payment.asset.amount|  要转移的数量
+|payment.input|  触发合约调用的入参
 ```json
 
 {
@@ -447,9 +456,9 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 
 |参数|描述
 |:--- | --- 
-| key  |required，length:(0, 256]
-| value  |optional，length:(0, 1048576]
-| version |optional，default 0, 0：不限制版本，>0 : 当前 value 的版本必须为该值， <0 : 非法
+| set_metadata.key  |required，length:(0, 256]
+| set_metadata.value  |optional，length:(0, 1048576]
+| set_metadata.version |optional，default 0, 0：不限制版本，>0 : 当前 value 的版本必须为该值， <0 : 非法
 
 ```json
 {
@@ -813,7 +822,7 @@ error_code | enum | error_desc
 94  | ERRCODE_INVALID_ADDRESS | 地址非法
 95  | ERRCODE_TIME_NOT_IN_RANGE | 不在有效时间范围内
 96  | ERRCODE_NO_NETWORK_CONSENSUS | 
-97  | ERRCODE_MISSING_OPERATIONS | TX 确实操作
+97  | ERRCODE_MISSING_OPERATIONS | TX 缺失操作
 98  | ERRCODE_LAGER_OPERATIONS | 
 99  | ERRCODE_BAD_SEQUENCE | 序列号错误
 100 | ERRCODE_ACCOUNT_LOW_RESERVE | 
@@ -832,14 +841,13 @@ error_code | enum | error_desc
 151 | ERRCODE_CONTRACT_EXECUTE_FAIL | 合约执行失败
 152 | ERRCODE_CONTRACT_SYNTAX_ERROR | 合约语法分析失败
 
-## __交易码__
+## __操作码__
 
-type | enum | 交易说明
+|代码 | 枚举名 | 说明
 |:--- | --- | --- |
-1  | CREATE_ACCOUNT | 创建账号
-2  | ISSUE_ASSET | 发行资产
-3  | PAYMENT | 转移资产
-4  | SET_METADATA | 设置metadata
-5  | SET_SIGNER_WEIGHT | 设置signerweight
-6  | SET_THRESHOLD | 设置threshold
-7  | INVOKE_CONTRACT | 调用合约
+|1  | CREATE_ACCOUNT | 创建账号
+|2  | ISSUE_ASSET | 发行资产
+|3  | PAYMENT | 转移资产
+|4  | SET_METADATA | 设置metadata
+|5  | SET_SIGNER_WEIGHT | 设置signerweight
+|6  | SET_THRESHOLD | 设置threshold
