@@ -53,7 +53,9 @@ add_permission:
 	chmod +x ./protobuf/autogen.sh; \
 	chmod +x ./jsoncpp/automake.sh; \
 	chmod +x ./rocksdb/build_tools/*; \
-	chmod +x ./sqlite/configure
+	chmod +x ./sqlite/configure; \
+	chmod +x ./openssl/config; \
+	[-d ./openssl/include] || cd openssl && ./config;
 
 #sub target 
 $(ROCKSDB):
