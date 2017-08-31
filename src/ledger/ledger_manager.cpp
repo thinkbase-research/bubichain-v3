@@ -864,7 +864,7 @@ namespace bubi {
 		
 		auto header = std::make_shared<protocol::LedgerHeader>(LedgerManager::Instance().closing_ledger_->GetProtoHeader());
 
-		auto txfrm = std::make_shared<bubi::TransactionFrm >(env);
+		auto txfrm = std::make_shared<bubi::TransactionFrm >(env, back->environment_);
 
 		do 
 		{
@@ -896,6 +896,7 @@ namespace bubi {
 
 			if (txfrm->GetResult().code() == protocol::ERRCODE_SUCCESS){
 				back->instructions_.insert(back->instructions_.end(), txfrm->instructions_.begin(), txfrm->instructions_.end());
+				txfrm->environment_->Commit();
 			}
 			transaction_stack_.pop();
 

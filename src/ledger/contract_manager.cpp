@@ -706,7 +706,8 @@ namespace bubi{
 		v8::String::Utf8Value str(args[0]);
 		std::string hash(ToCString(str));
 		bubi::TransactionFrm txfrm;
-		if (txfrm.LoadFromDb(hash)){
+		std::string hashBin = utils::String::HexStringToBin(hash);
+		if (txfrm.LoadFromDb(hashBin)){
 			Json::Value json = bubi::Proto2Json(txfrm.GetProtoTxEnv());
 			std::string strvalue = json.toStyledString();
 			v8::Local<v8::String> returnvalue = v8::String::NewFromUtf8(
