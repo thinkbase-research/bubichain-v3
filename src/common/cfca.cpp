@@ -256,6 +256,21 @@ namespace cfca {
 			return false;
 		} 
 
+		// check publickey is or not a base64 character string
+		if (publickey.length() % 4 != 0) {
+			LOG_ERROR("publickey is invalid, please check");
+			return false;
+		}
+		for (char key : publickey) {
+			if ((key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z') || (key >= '0' && key <= '9')) {
+				continue;
+			}
+			else {
+				LOG_ERROR("publickey is invalid, please check");
+				return false;
+			}
+		}
+
 		char szAlgorithm[8] = { 0 };
 		if (!GetAlgorithm((char*)publickey.c_str(), szAlgorithm)) {
 			LOG_ERROR("GetAlgorithm failed");
