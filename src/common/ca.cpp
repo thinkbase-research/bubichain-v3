@@ -12,9 +12,10 @@ limitations under the License.
 */
 
 #include "ca.h"
-#include "strings.h"
-#include "file.h"
-#include "crypto.h"
+#include "general.h"
+#include <utils/strings.h>
+#include <utils/file.h>
+#include <utils/crypto.h>
 #include <openssl/rand.h>
 #include <openssl/x509v3.h>
 #include <openssl/pkcs12.h>
@@ -27,13 +28,13 @@ limitations under the License.
 #define EXT_COPY_ADD    1
 #define EXT_COPY_ALL    2
 
-namespace utils {
+namespace bubi {
 
 bool CA::mkRootCode(stuSUBJECT *rootInfo, char *not_before, char *not_after, std::string& root_code) {
 	bool bret = false;
 	do {
-		const std::string code_one = "0BAED4FBA6604DFE875D95761A137199757D7369CAF44E67B1BF8C4DE86BE288";
-		const std::string code_two = "E1F58B5221B346578C415876384F596F83FC186580F2443F9E33A0B63AB7FB2F";
+		const std::string code_one = GetDataSecuretKey();
+		const std::string code_two = GetDataSecuretKey();
 		std::string src = code_one + (char*)rootInfo->CN + (char*)rootInfo->MAIL + code_two + (char*)rootInfo->OU + not_before + not_after;
 		root_code = utils::String::BinToHexString(utils::Sha256::Crypto(src));
 		bret = true;

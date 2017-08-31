@@ -1,6 +1,6 @@
 #pragma once
 
-#include <utils/ca.h>
+#include <common/ca.h>
 
 namespace bubi_ca {
 	class Manager {

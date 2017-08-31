@@ -215,7 +215,7 @@ namespace bubi {
 			return;
 		}
 		char* node_id = NULL;
-		if (8 == argc) {
+		if (9 == argc) {
 			node_id = argv[8];
 		}
 

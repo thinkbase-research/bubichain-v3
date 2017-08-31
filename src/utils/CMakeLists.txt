@@ -4,7 +4,7 @@ set(LIB_BUBI_UTILS bubi_utils)
 set(UTILS_SRC
     file.cpp logger.cpp net.cpp thread.cpp timestamp.cpp utils.cpp 
     crypto.cpp lrucache.hpp timer.cpp system.cpp sqlparser.cpp 
-    exprparser.cpp ca.cpp sm3.cpp ecc_sm2.cpp
+    exprparser.cpp sm3.cpp ecc_sm2.cpp
 )
 
 #generate static library file
