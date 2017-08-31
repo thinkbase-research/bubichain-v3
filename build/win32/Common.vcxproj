@@ -83,6 +83,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\common\argument.cpp" />
+    <ClCompile Include="..\..\src\common\ca.cpp" />
     <ClCompile Include="..\..\src\common\ca_manager.cpp" />
     <ClCompile Include="..\..\src\common\cfca.cpp" />
     <ClCompile Include="..\..\src\common\configure_base.cpp" />
@@ -96,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\common\argument.h" />
+    <ClInclude Include="..\..\src\common\ca.h" />
     <ClInclude Include="..\..\src\common\ca_manager.h" />
     <ClInclude Include="..\..\src\common\cfca.h" />
     <ClInclude Include="..\..\src\common\configure_base.h" />

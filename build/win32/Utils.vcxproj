@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\src\utils\basen.h" />
-    <ClInclude Include="..\..\src\utils\ca.h" />
     <ClInclude Include="..\..\src\utils\common.h" />
     <ClInclude Include="..\..\src\utils\crypto.h" />
     <ClInclude Include="..\..\src\utils\ecc_sm2.h" />
@@ -34,7 +33,6 @@
     <ClInclude Include="..\..\src\utils\utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\src\utils\ca.cpp" />
     <ClCompile Include="..\..\src\utils\crypto.cpp" />
     <ClCompile Include="..\..\src\utils\ecc_sm2.cpp" />
     <ClCompile Include="..\..\src\utils\exprparser.cpp" />
