@@ -46,7 +46,7 @@ namespace bubi {
 			// get node id
 			std::string node_address = "*";
 			if (node_id != NULL) {
-				std::string node_address = node_id;
+				node_address = node_id;
 			}
 
 			bubi::stuSUBJECT subject;
