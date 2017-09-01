@@ -44,14 +44,14 @@ namespace bubi {
 			std::string hard_address = hard_addr;
 
 			// get node id
-			std::string node_address = "*";
+			std::string node_address = "-";
 			if (node_id != NULL) {
 				node_address = node_id;
 			}
 
 			bubi::stuSUBJECT subject;
 			strncpy((char *)subject.O, organization, strlen(organization) > (strlen((char *)subject.O) - 1) ? (strlen((char *)subject.O) - 1) : strlen(organization));
-			strncpy((char *)subject.CN, common_name, strlen(organization) > (strlen((char *)subject.CN) - 1) ? (strlen((char *)subject.CN) - 1) : strlen(organization));
+			strncpy((char *)subject.CN, common_name, strlen(common_name) > (strlen((char *)subject.CN) - 1) ? (strlen((char *)subject.CN) - 1) : strlen(common_name));
 			strncpy((char *)subject.MAIL, email, strlen(email) > (strlen((char *)subject.MAIL) - 1) ? (strlen((char *)subject.MAIL) - 1) : strlen(email));
 			strncpy((char *)subject.HD, hard_address.c_str(), hard_address.length() > (strlen((char *)subject.HD) - 1) ? (strlen((char *)subject.HD) - 1) : hard_address.length());
 			strncpy((char *)subject.NI, node_address.c_str(), node_address.length() > (strlen((char *)subject.NI) - 1) ? hard_address.length() > (strlen((char *)subject.NI) - 1) : node_address.length());
@@ -168,7 +168,7 @@ namespace bubi {
 				sprintf(out_msg, "get hardware address and node id failed ,%s", err_msg);
 				break;
 			}
-			if (strcmp(hard_address, "*") != 0) {
+			if (strcmp(hard_address, "-") != 0) {
 				utils::System system;
 				std::string hard_addr;
 				if (!system.GetHardwareAddress(hard_addr, err_msg)) {
@@ -180,7 +180,7 @@ namespace bubi {
 					break;
 				}
 			}
-			if (strcmp(node_id, "*") != 0) {
+			if (strcmp(node_id, "-") != 0) {
 				bubi::PrivateKey priv_key(node_private_key);
 				std::string node_address = priv_key.GetBase16Address();
 				if (node_address.compare(node_id) != 0) {
