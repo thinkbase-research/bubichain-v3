@@ -257,6 +257,13 @@ local hardware address (0bc9143ba7ccc951cf257948af2d02ff)
 | hardware_address |硬件地址（由上一步获取）
 | node_id | 节点id，可不填
 
+注意: hardware_address需要设置为*的话，需要输入\*，如下：
+```bash
+./bin/bubi --request-cert /usr/local/bubichain/config node bubi bubi@bubi.cn bubitest \*
+```
+
+- 具体操作如下 ：
+
 ```bash
 [root@localhost bubichain]# ./bin/bubi --request-cert
 error: missing parameter, need 6 parameters (filepath, common_name, organization, email, private_password, hardware_address, node_id(when ignore, it's *)
