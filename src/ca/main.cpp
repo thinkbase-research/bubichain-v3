@@ -104,7 +104,7 @@ int main(int argc, char** argv) {
 			break;
 		case 4: {
 					if (argc < 3) {
-						printf("error: missing parameter, need 6 parameter (root_ca_file_path, root_private_file_path, root_private_password, request_file_path, days\n");
+						printf("error: missing parameter, need 5 parameter (root_ca_file_path, root_private_file_path, root_private_password, request_file_path, days\n");
 						break;
 					}
 					if (!utils::String::is_number(argv[6])) {
