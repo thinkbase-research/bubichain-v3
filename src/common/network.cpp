@@ -634,7 +634,7 @@ namespace bubi {
 			}
 		}
 		catch (std::exception& e) {
-			LOG_ERROR("Exception: %s " , e.what());
+			BUBI_EXIT("Exception: %s " , e.what());
 		}
 		return ctx;
 	}
