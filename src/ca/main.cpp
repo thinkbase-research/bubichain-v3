@@ -104,22 +104,14 @@ int main(int argc, char** argv) {
 			break;
 		case 4: {
 					if (argc < 3) {
-						printf("error: missing parameter, need 6 parameter (root_ca_file_path, root_private_file_path, root_private_password, request_file_path, days, ca_enable(must be number, 1 or 0)\n");
+						printf("error: missing parameter, need 6 parameter (root_ca_file_path, root_private_file_path, root_private_password, request_file_path, days\n");
 						break;
 					}
 					if (!utils::String::is_number(argv[6])) {
 						printf("error: days must be number \n");
 						break;
 					}
-					if (!utils::String::is_number(argv[7])) {
-						printf("error: ca_enable must be number \n");
-						break;
-					}
-					int ca_enable = atoi(argv[7]);
-					if (ca_enable != 1 && ca_enable != 0) {
-						printf("error: ca_enable must be 1 or 0\n");
-						break;
-					}
+					int ca_enable = 1;
 					bubi_ca::Manager ca;
 					char out_msg[256] = { 0 };
 					if (!ca.MakeEntity(argv[2], argv[3], argv[4], argv[5], atoi(argv[6]), ca_enable, out_msg)) {
