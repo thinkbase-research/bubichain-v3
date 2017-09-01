@@ -44,7 +44,7 @@ namespace bubi {
 			std::string hard_address = hard_addr;
 
 			// get node id
-			std::string node_address = "-";
+			std::string node_address = "*";
 			if (node_id != NULL) {
 				node_address = node_id;
 			}
@@ -168,7 +168,7 @@ namespace bubi {
 				sprintf(out_msg, "get hardware address and node id failed ,%s", err_msg);
 				break;
 			}
-			if (strcmp(hard_address, "-") != 0) {
+			if (strcmp(hard_address, "*") != 0) {
 				utils::System system;
 				std::string hard_addr;
 				if (!system.GetHardwareAddress(hard_addr, err_msg)) {
@@ -180,7 +180,7 @@ namespace bubi {
 					break;
 				}
 			}
-			if (strcmp(node_id, "-") != 0) {
+			if (strcmp(node_id, "*") != 0) {
 				bubi::PrivateKey priv_key(node_private_key);
 				std::string node_address = priv_key.GetBase16Address();
 				if (node_address.compare(node_id) != 0) {
