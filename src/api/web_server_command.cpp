@@ -163,10 +163,10 @@ namespace bubi {
 			} while (false);
 
 			if (result.code() == protocol::ERRCODE_SUCCESS) {
-				success_count++;
 				TransactionFrm::pointer ptr = std::make_shared<TransactionFrm>(tran_env);
 				GlueManager::Instance().OnTransaction(ptr, result);
 				PeerManager::Instance().Broadcast(protocol::OVERLAY_MSGTYPE_TRANSACTION, tran_env.SerializeAsString());
+				if (result.code() == protocol::ERRCODE_SUCCESS) success_count++;
 			}
 			result_item["error_code"] = result.code();
 			result_item["error_desc"] = result.desc();
