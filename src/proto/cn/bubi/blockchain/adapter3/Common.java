@@ -56,6 +56,10 @@ public final class Common {
      */
     ERRCODE_EXPR_CONDITION_SYNTAX_ERROR(21),
     /**
+     * <pre>
+     * NOT USED
+     * </pre>
+     *
      * <code>ERRCODE_INVALID_PUBKEY = 90;</code>
      */
     ERRCODE_INVALID_PUBKEY(90),
@@ -76,10 +80,18 @@ public final class Common {
      */
     ERRCODE_INVALID_ADDRESS(94),
     /**
+     * <pre>
+     * NOT USED
+     * </pre>
+     *
      * <code>ERRCODE_TIME_NOT_IN_RANGE = 95;</code>
      */
     ERRCODE_TIME_NOT_IN_RANGE(95),
     /**
+     * <pre>
+     * NOT USED
+     * </pre>
+     *
      * <code>ERRCODE_NO_NETWORK_CONSENSUS = 96;</code>
      */
     ERRCODE_NO_NETWORK_CONSENSUS(96),
@@ -88,6 +100,10 @@ public final class Common {
      */
     ERRCODE_MISSING_OPERATIONS(97),
     /**
+     * <pre>
+     * NOT USED
+     * </pre>
+     *
      * <code>ERRCODE_LAGER_OPERATIONS = 98;</code>
      */
     ERRCODE_LAGER_OPERATIONS(98),
@@ -128,6 +144,10 @@ public final class Common {
      */
     ERRCODE_ACCOUNT_ASSET_AMOUNT_TOO_LARGE(105),
     /**
+     * <pre>
+     * NOT USED
+     * </pre>
+     *
      * <code>ERRCODE_SEQNUMBER_NOT_MATCH = 110;</code>
      */
     ERRCODE_SEQNUMBER_NOT_MATCH(110),
@@ -144,17 +164,13 @@ public final class Common {
      */
     ERRCODE_THRESHOLD_NOT_VALID(121),
     /**
+     * <pre>
+     * NOT USED
+     * </pre>
+     *
      * <code>ERRCODE_INPUT_NOT_EXIST = 130;</code>
      */
     ERRCODE_INPUT_NOT_EXIST(130),
-    /**
-     * <code>ERRCODE_INPUT_INVALID = 131;</code>
-     */
-    ERRCODE_INPUT_INVALID(131),
-    /**
-     * <code>ERRCODE_NOT_SUPPLY = 132;</code>
-     */
-    ERRCODE_NOT_SUPPLY(132),
     /**
      * <pre>
      *metadata version error
@@ -164,14 +180,14 @@ public final class Common {
      */
     ERRCODE_INVALID_DATAVERSION(144),
     /**
-     * <code>ERRCODE_ACCOUNT_SIZE_TOO_BIG = 145;</code>
-     */
-    ERRCODE_ACCOUNT_SIZE_TOO_BIG(145),
-    /**
      * <code>ERRCODE_TX_SIZE_TOO_BIG = 146;</code>
      */
     ERRCODE_TX_SIZE_TOO_BIG(146),
     /**
+     * <pre>
+     * NOT USED
+     * </pre>
+     *
      * <code>ERRCODE_TXSET_SIZE_TOO_BIG = 147;</code>
      */
     ERRCODE_TXSET_SIZE_TOO_BIG(147),
@@ -231,6 +247,10 @@ public final class Common {
      */
     public static final int ERRCODE_EXPR_CONDITION_SYNTAX_ERROR_VALUE = 21;
     /**
+     * <pre>
+     * NOT USED
+     * </pre>
+     *
      * <code>ERRCODE_INVALID_PUBKEY = 90;</code>
      */
     public static final int ERRCODE_INVALID_PUBKEY_VALUE = 90;
@@ -251,10 +271,18 @@ public final class Common {
      */
     public static final int ERRCODE_INVALID_ADDRESS_VALUE = 94;
     /**
+     * <pre>
+     * NOT USED
+     * </pre>
+     *
      * <code>ERRCODE_TIME_NOT_IN_RANGE = 95;</code>
      */
     public static final int ERRCODE_TIME_NOT_IN_RANGE_VALUE = 95;
     /**
+     * <pre>
+     * NOT USED
+     * </pre>
+     *
      * <code>ERRCODE_NO_NETWORK_CONSENSUS = 96;</code>
      */
     public static final int ERRCODE_NO_NETWORK_CONSENSUS_VALUE = 96;
@@ -263,6 +291,10 @@ public final class Common {
      */
     public static final int ERRCODE_MISSING_OPERATIONS_VALUE = 97;
     /**
+     * <pre>
+     * NOT USED
+     * </pre>
+     *
      * <code>ERRCODE_LAGER_OPERATIONS = 98;</code>
      */
     public static final int ERRCODE_LAGER_OPERATIONS_VALUE = 98;
@@ -303,6 +335,10 @@ public final class Common {
      */
     public static final int ERRCODE_ACCOUNT_ASSET_AMOUNT_TOO_LARGE_VALUE = 105;
     /**
+     * <pre>
+     * NOT USED
+     * </pre>
+     *
      * <code>ERRCODE_SEQNUMBER_NOT_MATCH = 110;</code>
      */
     public static final int ERRCODE_SEQNUMBER_NOT_MATCH_VALUE = 110;
@@ -319,17 +355,13 @@ public final class Common {
      */
     public static final int ERRCODE_THRESHOLD_NOT_VALID_VALUE = 121;
     /**
+     * <pre>
+     * NOT USED
+     * </pre>
+     *
      * <code>ERRCODE_INPUT_NOT_EXIST = 130;</code>
      */
     public static final int ERRCODE_INPUT_NOT_EXIST_VALUE = 130;
-    /**
-     * <code>ERRCODE_INPUT_INVALID = 131;</code>
-     */
-    public static final int ERRCODE_INPUT_INVALID_VALUE = 131;
-    /**
-     * <code>ERRCODE_NOT_SUPPLY = 132;</code>
-     */
-    public static final int ERRCODE_NOT_SUPPLY_VALUE = 132;
     /**
      * <pre>
      *metadata version error
@@ -339,14 +371,14 @@ public final class Common {
      */
     public static final int ERRCODE_INVALID_DATAVERSION_VALUE = 144;
     /**
-     * <code>ERRCODE_ACCOUNT_SIZE_TOO_BIG = 145;</code>
-     */
-    public static final int ERRCODE_ACCOUNT_SIZE_TOO_BIG_VALUE = 145;
-    /**
      * <code>ERRCODE_TX_SIZE_TOO_BIG = 146;</code>
      */
     public static final int ERRCODE_TX_SIZE_TOO_BIG_VALUE = 146;
     /**
+     * <pre>
+     * NOT USED
+     * </pre>
+     *
      * <code>ERRCODE_TXSET_SIZE_TOO_BIG = 147;</code>
      */
     public static final int ERRCODE_TXSET_SIZE_TOO_BIG_VALUE = 147;
@@ -416,10 +448,7 @@ public final class Common {
         case 120: return ERRCODE_WEIGHT_NOT_VALID;
         case 121: return ERRCODE_THRESHOLD_NOT_VALID;
         case 130: return ERRCODE_INPUT_NOT_EXIST;
-        case 131: return ERRCODE_INPUT_INVALID;
-        case 132: return ERRCODE_NOT_SUPPLY;
         case 144: return ERRCODE_INVALID_DATAVERSION;
-        case 145: return ERRCODE_ACCOUNT_SIZE_TOO_BIG;
         case 146: return ERRCODE_TX_SIZE_TOO_BIG;
         case 147: return ERRCODE_TXSET_SIZE_TOO_BIG;
         case 151: return ERRCODE_CONTRACT_EXECUTE_FAIL;
@@ -4307,7 +4336,7 @@ public final class Common {
       "\t\022\026\n\016del_validators\030\003 \003(\t\"J\n\tWsMessage\022\014" +
       "\n\004type\030\001 \001(\003\022\017\n\007request\030\002 \001(\010\022\020\n\010sequenc" +
       "e\030\003 \001(\003\022\014\n\004data\030\004 \001(\014\"\025\n\004Ping\022\r\n\005nonce\030\001" +
-      " \001(\003\"\025\n\004Pong\022\r\n\005nonce\030\001 \001(\003*\205\n\n\tERRORCOD" +
+      " \001(\003\"\025\n\004Pong\022\r\n\005nonce\030\001 \001(\003*\255\t\n\tERRORCOD" +
       "E\022\023\n\017ERRCODE_SUCCESS\020\000\022\032\n\026ERRCODE_INTERN",
       "AL_ERROR\020\001\022\035\n\031ERRCODE_INVALID_PARAMETER\020" +
       "\002\022\031\n\025ERRCODE_ALREADY_EXIST\020\003\022\025\n\021ERRCODE_" +
@@ -4331,16 +4360,14 @@ public final class Common {
       "OT_MATCH\020n\022\032\n\026ERRCODE_OUT_OF_TXCACHE\020r\022\034",
       "\n\030ERRCODE_WEIGHT_NOT_VALID\020x\022\037\n\033ERRCODE_" +
       "THRESHOLD_NOT_VALID\020y\022\034\n\027ERRCODE_INPUT_N" +
-      "OT_EXIST\020\202\001\022\032\n\025ERRCODE_INPUT_INVALID\020\203\001\022" +
-      "\027\n\022ERRCODE_NOT_SUPPLY\020\204\001\022 \n\033ERRCODE_INVA" +
-      "LID_DATAVERSION\020\220\001\022!\n\034ERRCODE_ACCOUNT_SI" +
-      "ZE_TOO_BIG\020\221\001\022\034\n\027ERRCODE_TX_SIZE_TOO_BIG" +
-      "\020\222\001\022\037\n\032ERRCODE_TXSET_SIZE_TOO_BIG\020\223\001\022\"\n\035" +
-      "ERRCODE_CONTRACT_EXECUTE_FAIL\020\227\001\022\"\n\035ERRC" +
-      "ODE_CONTRACT_SYNTAX_ERROR\020\230\001\022(\n#ERRCODE_" +
-      "CONTRACT_TOO_MANY_RECURSION\020\231\001\022+\n&ERRCOD",
-      "E_CONTRACT_TOO_MANY_TRANSACTIONS\020\232\001B\035\n\033c" +
-      "n.bubi.blockchain.adapter3b\006proto3"
+      "OT_EXIST\020\202\001\022 \n\033ERRCODE_INVALID_DATAVERSI" +
+      "ON\020\220\001\022\034\n\027ERRCODE_TX_SIZE_TOO_BIG\020\222\001\022\037\n\032E" +
+      "RRCODE_TXSET_SIZE_TOO_BIG\020\223\001\022\"\n\035ERRCODE_" +
+      "CONTRACT_EXECUTE_FAIL\020\227\001\022\"\n\035ERRCODE_CONT" +
+      "RACT_SYNTAX_ERROR\020\230\001\022(\n#ERRCODE_CONTRACT" +
+      "_TOO_MANY_RECURSION\020\231\001\022+\n&ERRCODE_CONTRA" +
+      "CT_TOO_MANY_TRANSACTIONS\020\232\001B\035\n\033cn.bubi.b" +
+      "lockchain.adapter3b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
