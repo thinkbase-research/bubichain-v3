@@ -14,11 +14,11 @@ limitations under the License.
 #ifndef GENERAL_H_
 #define GENERAL_H_
 
-#include "data_secret_key.h"
 #include <asio.hpp>
 #include <utils/headers.h>
 #include <json/value.h>
 #include <utils/sm3.h>
+#include "data_secret_key.h"
 
 namespace bubi {
 	class General {

@@ -14,8 +14,8 @@ limitations under the License.
 #ifndef CA_MANAGER_H_
 #define CA_MANAGER_H_
 
-#include "ca.h"
 #include <string>
+#include "ca.h"
 
 namespace bubi {
 	class CAManager {
