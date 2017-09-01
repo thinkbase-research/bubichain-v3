@@ -51,7 +51,7 @@ namespace bubi {
 
 			bubi::stuSUBJECT subject;
 			strncpy((char *)subject.O, organization, strlen(organization) > (strlen((char *)subject.O) - 1) ? (strlen((char *)subject.O) - 1) : strlen(organization));
-			strncpy((char *)subject.CN, common_name, strlen(organization) > (strlen((char *)subject.CN) - 1) ? (strlen((char *)subject.CN) - 1) : strlen(organization));
+			strncpy((char *)subject.CN, common_name, strlen(common_name) > (strlen((char *)subject.CN) - 1) ? (strlen((char *)subject.CN) - 1) : strlen(common_name));
 			strncpy((char *)subject.MAIL, email, strlen(email) > (strlen((char *)subject.MAIL) - 1) ? (strlen((char *)subject.MAIL) - 1) : strlen(email));
 			strncpy((char *)subject.HD, hard_address.c_str(), hard_address.length() > (strlen((char *)subject.HD) - 1) ? (strlen((char *)subject.HD) - 1) : hard_address.length());
 			strncpy((char *)subject.NI, node_address.c_str(), node_address.length() > (strlen((char *)subject.NI) - 1) ? hard_address.length() > (strlen((char *)subject.NI) - 1) : node_address.length());
