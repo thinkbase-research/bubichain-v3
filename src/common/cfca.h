@@ -77,7 +77,7 @@ namespace cfca {
 		bool ReadCertificateContent(char* pszCertFilePath, char* pszInfoContent);
 		bool GetSubjectDn(char* pszPFXFilePath, char* pszPFXPassword, char* pszInfoContent);
 		bool GetSubjectDn(char* pszPublicFilePath, char* pszInfoContent);
-		bool GetAlgorithm(char* pszBase64CertContent, char* pszAlgorithm);
+		//bool GetAlgorithm(char* pszBase64CertContent, char* pszAlgorithm);
 		bool VerifyCertificate(char* pszPublicFilePath, int nCertVerifyFlag, char* pszTrustedCACertFilePath, char* pszCRLFilePath);
 		bool SignMessage(char* pszAlgorithm, char* pszPFXFilePath, char* pszPFXPassword, const char* pbySourceData, int nSourceSize, char* pszHashAlg, char* pszBase64PKCS1Signature);
 		bool VerifySignature(char*  pszAlgorithm, unsigned char* pbySourceData, int nSourceSize, char* pszBase64CertContent, char* pszHashAlg, char* pszBase64PKCS1Signature);
@@ -85,7 +85,7 @@ namespace cfca {
 
 	public:
 		bool Initialize();
-
+		bool GetAlgorithm(char* pszBase64CertContent, char* pszAlgorithm);
 		bool Verify(const std::string& msg, const std::string& sig, const std::string& pubcontent);
 		bool Exit();
 

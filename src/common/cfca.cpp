@@ -261,8 +261,10 @@ namespace cfca {
 			LOG_ERROR("publickey is invalid, please check");
 			return false;
 		}
-		for (char key : publickey) {
-			if ((key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z') || (key >= '0' && key <= '9')) {
+		int length = publickey.find('=');
+		for (int i = 0; i < length; i++) {
+			char key = publickey[i];
+			if ((key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z') || (key >= '0' && key <= '9') || key == '/' || key == '+') {
 				continue;
 			}
 			else {
