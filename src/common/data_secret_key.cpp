@@ -15,9 +15,10 @@ limitations under the License.
 
 namespace bubi {
 	std::string GetDataSecuretKey() {
+		//key must be string, ended with 0, length must be 32 + 1.
 		/*char key[] = { 'H', 'C', 'P', 'w', 'z', '!', 'H', '1', 'Y', '3', 'j', 'a', 'J', '*', '|', 'q', 'w', '8', 'K', '<', 'e', 'o', '7', '>', 'Q', 'i', 'h', ')', 'r', 'P', 'q', '1', 0 };*/
 		char key[] = { 'Z', 'C', 'O', 'w', 'z', '!', 'F', '1', 'Y', '3', 'j', 'b', 'S', '*', '|', 'q', 'w', '8', 'K', 'a', 'e', 'o', '7', '>', 'Q', 'q', 'h', ')', 'r', '!', 'q', '1', 8 };
-
-		return std::string(key, sizeof(key));
+		
+		return key;
 	}
 }
