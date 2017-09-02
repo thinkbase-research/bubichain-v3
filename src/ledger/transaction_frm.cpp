@@ -400,16 +400,22 @@ namespace bubi {
 	bool TransactionFrm::Apply(LedgerFrm* ledger_frm, bool bool_contract) {
 		ledger_ = ledger_frm;
 		std::string str_address = GetSourceAddress();
+		
+		if (!environment_->parent_){
+			BUBI_EXIT("unexpected error. Transaction without an environment?");
+		}
+
+		std::shared_ptr<Environment> penv = std::static_pointer_cast <Environment>(environment_->parent_);
 		AccountFrm::pointer source_account;
-		if (!environment_->GetEntry(str_address, source_account)) {
+		auto env = std::make_shared<Environment>(penv);
+		if (!env->GetEntry(str_address, source_account)) {
 			LOG_ERROR("Source account(%s) does not exists", str_address.c_str());
 			result_.set_code(protocol::ERRCODE_ACCOUNT_NOT_EXIST);
 			return false;
 		}
 
-		source_account->NonceIncrease();
-
-		environment_->Commit();
+		source_account->NonceIncrease();		
+		env->Commit();
 
 		bool bSucess = true;
 		const protocol::Transaction &tran = transaction_env_.transaction();
