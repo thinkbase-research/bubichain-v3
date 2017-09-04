@@ -34,7 +34,7 @@ namespace bubi {
 		unsigned char PW[12];		// pkcs9 challenge password   
 		unsigned char ADD[12];		// pkcs9 unstructured address
 		char HD[33];				// hardware address
-		char NI[50];				// node address
+		char NI[4096];				// node address
 		stuSUBJECT() {
 			memset(this, 0, sizeof(stuSUBJECT));
 		}
