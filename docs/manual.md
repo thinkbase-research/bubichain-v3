@@ -13,6 +13,7 @@ sudo apt-get install g++
 sudo apt-get install libssl-dev
 sudo apt-get install cmake
 sudo apt-get install libbz2-dev
+sudo apt-get install python
 ```
 - 编译
 ```bash
