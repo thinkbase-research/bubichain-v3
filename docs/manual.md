@@ -399,6 +399,31 @@ bubichain/bin/bubi --clear-consensus-status
 ```
 当已经加入其他区块链网络的节点想单独运行一条链时，可以执行以上命令创建硬分叉
 执行后，新的区块链网络只有一个验证节点为本节点。
+- 执行硬分叉命令后获取到如下Hash值
+
+Create hard fork ledger successful, seq(20), consensus value hash(**7aa332f05748e6ce9ad3d059c959a50675109bcaf0a4ba2c5c6adc6418960197**)
+
+- 把上述 Hash 值配置到本节点或者同步节点的 bubi.json 的hardfork_points
+
+```json
+    "ledger": {
+       	"genesis_account": "a0025e6de5a793da4b5b00715b7774916c06e9a72b7c18",
+        "base_fee": 1000,
+        "base_reserve": 10000000,
+        "hash_type": 0, // 0 : SHA256 1: SM3
+        "max_trans_per_ledger": 1000,
+        "max_ledger_per_message": 5,
+        "max_trans_in_memory": 2000,
+        "max_apply_ledger_per_round": 3,
+        "hardfork_points" : 
+        [
+        	"7aa332f05748e6ce9ad3d059c959a50675109bcaf0a4ba2c5c6adc6418960197"
+        ]
+    },
+```
+
+- 启动节点服务即可生效
+
 
 ### 数据库存储
 布比区块链存储的数据默认是存放在 bubichain/data 目录下，如有需要可修改配置文件中数据存储部分
