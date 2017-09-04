@@ -99,7 +99,7 @@ namespace bubi {
 		bool bret = false;
 		do {
 			Monitor *monitor = (Monitor *)GetClientConnection();
-			if (NULL == monitor) {
+			if (NULL == monitor || !monitor->IsActive()) {
 				break;
 			}
 
@@ -210,7 +210,7 @@ namespace bubi {
 		utils::MutexGuard guard(conns_list_lock_);
 		for (auto item : connections_) {
 			Monitor *peer = (Monitor *)item.second;
-			if (peer->IsActive() && !peer->InBound()) {
+			if (!peer->InBound()) {
 				monitor = peer;
 				break;
 			}
@@ -248,7 +248,7 @@ namespace bubi {
 
 	void MonitorManager::OnSlowTimer(int64_t current_time) {
 		Monitor *monitor = (Monitor *)GetClientConnection();
-		if (!init_ || monitor == NULL) {
+		if (!init_ || monitor == NULL || !monitor->IsActive()) {
 			return;
 		}
 
