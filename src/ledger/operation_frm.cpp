@@ -107,7 +107,7 @@ namespace bubi {
 			for (int32_t i = 0; i < threshold.type_thresholds_size(); i++) {
 				const protocol::OperationTypeThreshold  &type_thresholds = threshold.type_thresholds(i);
 				if (type_thresholds.type() > 100 || type_thresholds.type() <= 0) {
-					result.set_code(protocol::ERRCODE_THRESHOLD_NOT_VALID);
+					result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
 					result.set_desc(utils::String::Format("Operation type(%u) not support", type_thresholds.type()));
 					break;
 				}
