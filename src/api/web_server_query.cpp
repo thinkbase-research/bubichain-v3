@@ -520,7 +520,7 @@ namespace bubi {
 					result["validators"] = validator["validators"];
 				}
 				else {
-					error_code = protocol::ERRCODE_INTERNAL_ERROR;
+					error_code = protocol::ERRCODE_NOT_EXIST;
 					break;
 				}
 			}
@@ -530,10 +530,15 @@ namespace bubi {
 				if (LedgerManager::Instance().ConsensusValueFromDB(seq, cons)) {
 					result["consensus_value"] = Proto2Json(cons);
 				}
+				else {
+					error_code = protocol::ERRCODE_NOT_EXIST;
+					break;
+				}
 
 				Json::Value &json_cons = result["consensus_value"];
 				protocol::PbftProof pbft_evidence;
 				if (!pbft_evidence.ParseFromString(cons.previous_proof())) {
+					error_code = protocol::ERRCODE_INTERNAL_ERROR;
 					break;
 				}
 
