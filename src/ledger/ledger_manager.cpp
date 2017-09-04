@@ -744,7 +744,7 @@ namespace bubi {
 	ExprCondition::~ExprCondition() {}
 
 	void ExprCondition::RegisterFunctions() {
-		utils::OneCommonArgumentFunctions["ledger"] = DoLedger;
+		//utils::OneCommonArgumentFunctions["ledger"] = DoLedger;
 		utils::OneCommonArgumentFunctions["account"] = DoAccount;
 		utils::TwoCommonArgumentFunctions["jsonpath"] = DoJsonPath;
 	}
