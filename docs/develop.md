@@ -401,6 +401,7 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 
 #### 2. 发行资产
 发行一笔资产，这笔资产的发行方就是本操作的source_address。
+
 |参数|描述
 |:--- | --- 
 |amount |  发行的数量
@@ -422,6 +423,7 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 #### 3. 转移资产/调用合约
 该操作先把指定的资产转给目标账号，然后调用目标账号的合约代码并以input作为入参。
 若目标账号没有合约代码，则只进行转移资产操作。
+
 |参数|描述
 |:--- | --- 
 |payment.dest_address |  目标账户
@@ -570,7 +572,7 @@ account具有如下格式
 */
 ```
 
-### 2. 获取某个账号的metadata信息
+### 1. 获取某个账号的metadata信息
 callBackGetAccountMetaData(account_address, metadata_key);
 - account_address: 账号地址
 - metadata_key： metadata的key
@@ -590,7 +592,7 @@ var bar = callBackGetAccountMetaData('a0025e6de5a793da4b5b00715b7774916c06e9a72b
 ```
 即可得到账号a0025e6de5a793da4b5b00715b7774916c06e9a72b7c18的metadata中abc的值
 
-### 3.  获取某个账号的资产信息
+### 1.  获取某个账号的资产信息
 callBackGetAccountAsset(account_address, asset_property);
 
 - account_address: 账号地址
@@ -616,16 +618,8 @@ var bar = callBackGetAccountAsset('a0025e6de5a793da4b5b00715b7774916c06e9a72b7c1
 */
 ```
 
-### 4.  获取交易
-callBackGetTransactionInfo(hash);
-- hash: 交易hash
 
-例如
-```javascript
-var tx = callBackGetTransactionInfo('ea565a904d568368f4ab556bb20c3f3933411f72ef487e8f73eddbc6d7b84565');
-```
-
-### 5. 获取区块信息
+### 1. 获取区块信息
 callBackGetLedgerInfo(ledger_seq);
 - ledger_seq: 区块号
 
@@ -654,7 +648,7 @@ ledger具有如下格式
 
 
 
-### 6.  做交易
+### 1.  做交易
 令合约账号做一笔交易，即里面的任意一个操作的source_address都会自动变成合约账号。
 所以source_address是不需要填写的，即使填写也无用。
 
@@ -684,7 +678,7 @@ var transaction =
 var result = callBackDoOperation(transaction);
 ```
 
-### 7.  设置本合约账号的metadata
+### 1.  设置本合约账号的metadata
 callBackSetAccountMetaData(KeyPair);
 - KeyPair: 要设置的内容
 返回:true/false
@@ -820,12 +814,9 @@ error_code | enum | error_desc
 |92 | ERRCODE_ASSET_INVALID | 资产issue 地址非法，或者 code 长度不在有效范围内
 |93 | ERRCODE_INVALID_SIGNATURE | 签名权重不够，达不到操作的门限值
 |94 | ERRCODE_INVALID_ADDRESS | 地址非法
-|95 | ERRCODE_TIME_NOT_IN_RANGE | 不在有效时间范围内
-|96 | ERRCODE_NO_NETWORK_CONSENSUS | 
 |97 | ERRCODE_MISSING_OPERATIONS | TX 缺失操作
-|98 | ERRCODE_LAGER_OPERATIONS | 
 |99 | ERRCODE_BAD_SEQUENCE | 序列号错误
-|100| ERRCODE_ACCOUNT_LOW_RESERVE | 
+|100| ERRCODE_ACCOUNT_LOW_RESERVE | 余额不足
 |101| ERRCODE_ACCOUNT_SOURCEDEST_EQUAL | 源目的账号相等
 |102| ERRCODE_ACCOUNT_DEST_EXIST | 创建账号操作，目标账号已存在
 |103| ERRCODE_ACCOUNT_NOT_EXIST | 账户不存在

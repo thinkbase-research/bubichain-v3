@@ -82,12 +82,8 @@ namespace bubi{
 
 
 			global->Set(
-				v8::String::NewFromUtf8(isolate_, "callBackGetTransactionInfo", v8::NewStringType::kNormal)
-				.ToLocalChecked(),
-				v8::FunctionTemplate::New(isolate_, ContractManager::CallBackGetTransactionInfo, v8::External::New(isolate_, this)));
 
 
-			global->Set(
 				v8::String::NewFromUtf8(isolate_, "callBackDoOperation", v8::NewStringType::kNormal)
 				.ToLocalChecked(),
 				v8::FunctionTemplate::New(isolate_, ContractManager::CallBackDoOperation, v8::External::New(isolate_, this)));
