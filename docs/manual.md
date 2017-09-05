@@ -13,6 +13,7 @@ sudo apt-get install g++
 sudo apt-get install libssl-dev
 sudo apt-get install cmake
 sudo apt-get install libbz2-dev
+sudo apt-get install python
 ```
 - 编译
 ```bash
@@ -33,6 +34,11 @@ Windows 部署与 Linux 下部署基本类似，本示例以 Linux 为准。
 ```bash
 cd bubichain-v3
 make install
+```
+
+将 libSADK_Standard.so.3.4.0.3 库文件拷贝到 /usr/local/bubichain/bin/ 目录下，并创建软链接:
+```bash
+sudo ln -s /usr/local/bubichain/bin/libSADK_Standard.so.3.4.0.3 /usr/local/bubichain/bin/libSADK_Standard.so
 ```
 
 服务将安装在/usr/local/bubichain/目录下

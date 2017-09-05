@@ -96,6 +96,7 @@ file(APPEND ${SUPPLEMENT} "\tsudo ln -s -f /etc/init.d/bubid /etc/rc2.d/S50bubid
 file(APPEND ${SUPPLEMENT} "\tsudo ln -s -f /etc/init.d/bubid /etc/rc3.d/S50bubid;\\\n")
 file(APPEND ${SUPPLEMENT} "\tsudo ln -s -f /etc/init.d/bubid /etc/rc4.d/S50bubid;\\\n")
 file(APPEND ${SUPPLEMENT} "\tsudo ln -s -f /etc/init.d/bubid /etc/rc5.d/S50bubid;\\\n")
+file(APPEND ${SUPPLEMENT} "\tsudo mkdir -p ${FIX_DIR}/data;\n")
 
 file(APPEND ${SUPPLEMENT} "\nuninstall:\n")
 file(APPEND ${SUPPLEMENT} "\trm -f /etc/rc1.d/S99bubi;\\\n")
