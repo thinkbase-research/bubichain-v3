@@ -59,11 +59,12 @@ namespace bubi {
 			const protocol::AccountPrivilege &priv = create_account.priv();
 			if (priv.master_weight() < 0 || priv.master_weight() > UINT32_MAX) {
 				result.set_code(protocol::ERRCODE_WEIGHT_NOT_VALID);
-				result.set_desc(utils::String::Format("Master weight(" FMT_I64 ") is larger than %u  or less 0", priv.master_weight(), UINT32_MAX));
+				result.set_desc(utils::String::Format("Master weight(" FMT_I64 ") is larger than %u or less 0", priv.master_weight(), UINT32_MAX));
 				break;
 			}
 
 			//for signers
+			std::set<std::string> duplicate_set;
 			bool shouldBreak = false;
 			for (int32_t i = 0; i < priv.signers_size(); i++) {
 				const protocol::Signer &signer = priv.signers(i);
@@ -87,6 +88,15 @@ namespace bubi {
 					shouldBreak = true;
 					break;
 				}
+
+				if (duplicate_set.find(signer.address()) != duplicate_set.end()) {
+					result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
+					result.set_desc(utils::String::Format("Signer address(%s) duplicated", signer.address().c_str()));
+					shouldBreak = true;
+					break;
+				} 
+
+				duplicate_set.insert(signer.address());
 			}
 			if (shouldBreak) break;
 
@@ -104,6 +114,7 @@ namespace bubi {
 				break;
 			}
 
+			std::set<int32_t> duplicate_type;
 			for (int32_t i = 0; i < threshold.type_thresholds_size(); i++) {
 				const protocol::OperationTypeThreshold  &type_thresholds = threshold.type_thresholds(i);
 				if (type_thresholds.type() > 100 || type_thresholds.type() <= 0) {
@@ -117,6 +128,14 @@ namespace bubi {
 					result.set_desc(utils::String::Format("Operation type(%d) threshold(" FMT_I64 ") is less than 0", (int32_t)type_thresholds.type(), type_thresholds.threshold()));
 					break;
 				}
+
+				if (duplicate_type.find(type_thresholds.type()) != duplicate_type.end()) {
+					result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
+					result.set_desc(utils::String::Format("Operation type(%u) duplicated", type_thresholds.type()));
+					break;
+				} 
+				
+				duplicate_type.insert(type_thresholds.type());
 			}
 
 			///////////////////////////////////////////////////
@@ -209,7 +228,7 @@ namespace bubi {
 			const protocol::OperationSetSignerWeight &operation_setoptions = operation.set_signer_weight();
 			if (operation_setoptions.master_weight() < -1 || operation_setoptions.master_weight() > UINT32_MAX) {
 				result.set_code(protocol::ERRCODE_WEIGHT_NOT_VALID);
-				result.set_desc(utils::String::Format("Master weight(" FMT_I64 ") is larger than %u  or less -1", operation_setoptions.master_weight(), UINT32_MAX));
+				result.set_desc(utils::String::Format("Master weight(" FMT_I64 ") is larger than %u or less -1", operation_setoptions.master_weight(), UINT32_MAX));
 				break;
 			}
 
