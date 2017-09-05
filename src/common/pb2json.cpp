@@ -53,6 +53,9 @@ namespace  bubi {
 		virtual ~j2pb_error() throw() {};
 
 		virtual const char *what() const throw () { return _error.c_str(); };
+		static std::string error_msg(const FieldDescriptor *field, const std::string &e){
+			return field->name() + ": " + e;
+		}
 	};
 
 	static Json::Value  _field2json(const Message& msg, const FieldDescriptor *field, size_t index) {
@@ -136,7 +139,7 @@ namespace  bubi {
 
 		return jf;
 	}
-	static bool _json2field(Message &msg, const FieldDescriptor *field, const Json::Value& jf) {
+	static bool _json2field(Message &msg, const FieldDescriptor *field, const Json::Value& jf, std::string& errorMsg) {
 		const Reflection *ref = msg.GetReflection();
 		const bool repeated = field->is_repeated();
 		
@@ -182,7 +185,15 @@ namespace  bubi {
 			case FieldDescriptor::CPPTYPE_STRING: {
 				std::string value = jf.asString();
 				if (field->type() == FieldDescriptor::TYPE_BYTES)
-					_SET_OR_ADD(SetString, AddString, utils::String::HexStringToBin(value));
+				{
+					std::string strBin;
+					if (utils::String::HexStringToBin(value, strBin))
+						_SET_OR_ADD(SetString, AddString, strBin);
+					else{
+						errorMsg = j2pb_error::error_msg(field, "not a valid hex string");
+						return false;
+					}
+				}
 				else
 					_SET_OR_ADD(SetString, AddString, value);
 				break;
@@ -192,7 +203,9 @@ namespace  bubi {
 				Message *mf = (repeated) ?
 					ref->AddMessage(&msg, field) :
 					ref->MutableMessage(&msg, field);
-				Json2Proto(jf, *mf);
+				if (!Json2Proto(jf, *mf, errorMsg)){
+					return false;
+				}
 				break;
 			}
 			case FieldDescriptor::CPPTYPE_ENUM: {
@@ -205,12 +218,13 @@ namespace  bubi {
 					ev = ed->FindValueByName(jf.asString());
 				}
 				else {
+					errorMsg = j2pb_error::error_msg(field, "Not an integer or string");
+
 					return false;
-					//throw j2pb_error(field, "Not an integer or string");
 				}
 				if (!ev) {
+					errorMsg = j2pb_error::error_msg(field, "Enum value not found");
 					return false;
-					//throw j2pb_error(field, "Enum value not found");
 				}
 				_SET_OR_ADD(SetEnum, AddEnum, ev);
 				break;
@@ -259,7 +273,7 @@ namespace  bubi {
 	}
 
 
-	bool Json2Proto(const Json::Value& root, Message& msg) {
+	bool Json2Proto(const Json::Value& root, Message& msg, std::string& errorMsg) {
 
 		const Descriptor *descriptor = msg.GetDescriptor();
 		const Reflection *ref = msg.GetReflection();
@@ -281,14 +295,18 @@ namespace  bubi {
 
 			int r = 0;
 			if (field->is_repeated()) {
-				if (!jf.isArray())
-					//throw j2pb_error(field, "Not array");
+				if (!jf.isArray()){
+					errorMsg = j2pb_error::error_msg(field, "Not array");
 					return false;
-				for (size_t j = 0; j < jf.size(); j++)
-					if (!_json2field(msg, field, jf[j])) return false;
+				}
+
+				for (size_t j = 0; j < jf.size(); j++){
+					if (!_json2field(msg, field, jf[j], errorMsg))
+						return false;
+				}
 			}
 			else {
-				if (!_json2field(msg, field, jf)) {
+				if (!_json2field(msg, field, jf, errorMsg)) {
 					bok = false;
 					break;
 				}

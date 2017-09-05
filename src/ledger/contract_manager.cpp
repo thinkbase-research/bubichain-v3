@@ -81,9 +81,13 @@ namespace bubi{
 				v8::FunctionTemplate::New(isolate_, ContractManager::CallBackGetLedgerInfo, v8::External::New(isolate_, this)));
 
 
+			/*		global->Set(
+						v8::String::NewFromUtf8(isolate_, "callBackGetTransactionInfo", v8::NewStringType::kNormal)
+						.ToLocalChecked(),
+						v8::FunctionTemplate::New(isolate_, ContractManager::CallBackGetTransactionInfo, v8::External::New(isolate_, this)));*/
+
+
 			global->Set(
-
-
 				v8::String::NewFromUtf8(isolate_, "callBackDoOperation", v8::NewStringType::kNormal)
 				.ToLocalChecked(),
 				v8::FunctionTemplate::New(isolate_, ContractManager::CallBackDoOperation, v8::External::New(isolate_, this)));
@@ -439,8 +443,9 @@ namespace bubi{
 			json.fromString(strjson);
 
 			protocol::AssetProperty property;
-			if (!Json2Proto(json, property)){
-				LOG_ERROR("contract execute error,CallBackGetAccountAsset,parameter property not valid");
+			std::string error_msg;
+			if (!Json2Proto(json, property, error_msg)){
+				LOG_ERROR("contract execute error,CallBackGetAccountAsset,parameter property not valid. error=%s", error_msg.c_str());
 				break;
 			}
 
@@ -547,7 +552,11 @@ namespace bubi{
 
 			ope->set_type(protocol::Operation_Type_SET_METADATA);
 			protocol::OperationSetMetadata proto_setmetadata;
-			Json2Proto(json, proto_setmetadata);
+			std::string error_msg;
+			if (!Json2Proto(json, proto_setmetadata, error_msg)){
+				LOG_ERROR("json error=%s", error_msg.c_str());
+				break;
+			}
 			ope->mutable_set_metadata()->CopyFrom(proto_setmetadata);
 			LedgerManager::Instance().DoTransaction(txenv);
 			args.GetReturnValue().Set(true);
@@ -625,8 +634,9 @@ namespace bubi{
 			}
 
 			protocol::Transaction transaction;
-			if (!Json2Proto(transaction_json, transaction)){
-				LOG_ERROR("json to protocol object failed: json=%s", strdata);
+			std::string error_msg;
+			if (!Json2Proto(transaction_json, transaction, error_msg)){
+				LOG_ERROR("json to protocol object failed: json=%s. error=%s", strdata, error_msg.c_str());
 				break;
 			}
 

@@ -863,7 +863,7 @@ namespace bubi {
 		
 		auto header = std::make_shared<protocol::LedgerHeader>(LedgerManager::Instance().closing_ledger_->GetProtoHeader());
 
-		auto txfrm = std::make_shared<bubi::TransactionFrm >(env, back->environment_);
+		auto txfrm = std::make_shared<bubi::TransactionFrm >(env);
 
 		do 
 		{
@@ -883,7 +883,7 @@ namespace bubi {
 
 			transaction_stack_.push(txfrm);
 			if (txfrm->ValidForParameter()){
-				txfrm->Apply(LedgerManager::Instance().closing_ledger_.get(), true);
+				txfrm->Apply(LedgerManager::Instance().closing_ledger_.get(), back->environment_, true);
 			}
 
 			protocol::TransactionEnvStore tx_store;

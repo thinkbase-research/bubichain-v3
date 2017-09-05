@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include <google/protobuf/message.h>
 
 namespace bubi {
-	bool Json2Proto(const Json::Value& root, google::protobuf::Message& msg);
+	bool Json2Proto(const Json::Value& root, google::protobuf::Message& msg, std::string& errorMsg);
 	Json::Value Proto2Json(const google::protobuf::Message& message);
 } // namespace json_protobuf
 
