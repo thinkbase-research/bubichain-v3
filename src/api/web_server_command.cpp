@@ -118,8 +118,12 @@ namespace bubi {
 				}
 				else {
 					protocol::Transaction *tran = tran_env.mutable_transaction();
-		
-					Json2Proto(json_item["transaction_json"], *tran);
+					std::string error_msg;
+					if (!Json2Proto(json_item["transaction_json"], *tran, error_msg)){
+						result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
+						result.set_desc(error_msg);
+						break;
+					}
 	
 
 					std::string content = tran->SerializeAsString();

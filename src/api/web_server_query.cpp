@@ -190,7 +190,10 @@ namespace bubi {
 			}
 
 			protocol::Transaction tran;
-			if (!Json2Proto(body, tran)){
+			std::string error_msg;
+			if (!Json2Proto(body, tran, error_msg)){
+				result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
+				result.set_desc(error_msg);
 				break;
 			}
 
