@@ -39,7 +39,7 @@ namespace bubi {
 	public:
 		//only valid when the transaction belongs to a txset
 		TransactionFrm();
-		TransactionFrm(const protocol::TransactionEnv &env, std::shared_ptr<Environment> environment = nullptr);
+		TransactionFrm(const protocol::TransactionEnv &env);
 		
 		virtual ~TransactionFrm();
 		
@@ -70,7 +70,7 @@ namespace bubi {
 
 		bool CheckTimeout(int64_t expire_time);
 
-		bool Apply(LedgerFrm* ledger_frm, bool bool_contract = false);
+		bool Apply(LedgerFrm* ledger_frm, std::shared_ptr<Environment> env, bool bool_contract = false);
 
 		protocol::TransactionEnv &GetProtoTxEnv() {
 			return transaction_env_;
@@ -80,7 +80,7 @@ namespace bubi {
 		
 		bool ValidForSourceSignature();
 
-		bool ValidForApply();
+		bool ValidForApply(std::shared_ptr<Environment> environment);
 
 		uint64_t apply_time_;
 		Result result_;	

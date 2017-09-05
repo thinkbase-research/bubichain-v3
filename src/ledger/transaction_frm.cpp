@@ -38,7 +38,7 @@ namespace bubi {
 	}
 
 
-	TransactionFrm::TransactionFrm(const protocol::TransactionEnv &env, std::shared_ptr<Environment> envir) :
+	TransactionFrm::TransactionFrm(const protocol::TransactionEnv &env) :
 		apply_time_(0),
 		result_(),
 		transaction_env_(env),
@@ -47,7 +47,6 @@ namespace bubi {
 		incoming_time_(utils::Timestamp::HighResolution()){
 		Initialize();
 		utils::AtomicInc(&bubi::General::tx_new_count);
-		environment_ = std::make_shared<Environment>(envir.get());
 	}
 
 	TransactionFrm::~TransactionFrm() {
@@ -111,7 +110,7 @@ namespace bubi {
 	}
 
 
-	bool TransactionFrm::ValidForApply(/*std::shared_ptr<Environment> environment*/) {
+	bool TransactionFrm::ValidForApply(std::shared_ptr<Environment> environment) {
 		do
 		{
 			if (!ValidForParameter())
@@ -397,25 +396,19 @@ namespace bubi {
 		return false;
 	}
 
-	bool TransactionFrm::Apply(LedgerFrm* ledger_frm, bool bool_contract) {
+	bool TransactionFrm::Apply(LedgerFrm* ledger_frm, std::shared_ptr<Environment> parent, bool bool_contract) {
 		ledger_ = ledger_frm;
-		
-		
-		if (!environment_->parent_){
-			BUBI_EXIT("unexpected error. Transaction without an environment?");
-		}
-		
-		//Environment penv(environment_->parent_);
 		AccountFrm::pointer source_account;
 		std::string str_address = GetSourceAddress();
-		if (!environment_->GetEntry(str_address, source_account)) {
+		if (!parent->GetEntry(str_address, source_account)) {
 			LOG_ERROR("Source account(%s) does not exists", str_address.c_str());
 			result_.set_code(protocol::ERRCODE_ACCOUNT_NOT_EXIST);
 			return false;
 		}
 		source_account->NonceIncrease();
-		environment_->Commit();
 
+		environment_ = std::make_shared<Environment>(parent.get());
+		
 		bool bSucess = true;
 		const protocol::Transaction &tran = transaction_env_.transaction();
 		for (processing_operation_ = 0; processing_operation_ < tran.operations_size(); processing_operation_++) {
