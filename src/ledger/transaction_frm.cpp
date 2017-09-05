@@ -119,7 +119,7 @@ namespace bubi {
 			std::string str_address = transaction_env_.transaction().source_address();
 			AccountFrm::pointer source_account;
 
-			if (!environment_->GetEntry(str_address, source_account)) {
+			if (!environment->GetEntry(str_address, source_account)) {
 				LOG_ERROR("Source account(%s) does not exists", str_address.c_str());
 				result_.set_code(protocol::ERRCODE_ACCOUNT_NOT_EXIST);
 				break;
