@@ -312,7 +312,6 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 |参数|描述
 |:--- | --- 
 |account(address)| 获取账户信息, 返回 json 序列化字符串
-|ledger(nonce) | 获取区块信息, 返回 json 序列化字符串
 |jsonpath(json_string, path)| 获取json对象的属性值 
 |LEDGER_SEQ| 内置变量，代表最新的区块高度
 |LEDGER_TIME|内置变量，代表最新的区块生成时间
