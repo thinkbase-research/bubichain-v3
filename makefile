@@ -8,7 +8,7 @@ all:
 clean_all:clean clean_build clean_3rd
 
 clean:
-	rm -rf bin && rm -rf lib
+	rm -rf bin/* && cd lib/ && ls | grep -v http |grep -v ed25519 | xargs rm -rf
 
 clean_3rd:
 	cd src/3rd && make clean_3rd && cd ../../
