@@ -148,6 +148,21 @@ namespace bubi {
 					result.set_desc(err_msg);
 				}
 			}
+
+			for (uint32_t i = 0; i < create_account.metadatas_size(); i++){
+				const auto kp = create_account.metadatas(i);
+				if (kp.key().size() > General::METADATA_KEY_MAXSIZE){
+					result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
+					result.set_desc(utils::String::Format("Length of the key exceeds the limit(%d). key=%s,key.length=%d",
+						General::METADATA_KEY_MAXSIZE, kp.key().c_str(), kp.key().length()));
+				}
+
+				if (kp.value().size() > General::METADATA_MAX_VALUE_SIZE){
+					result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
+					result.set_desc(utils::String::Format("Length of the value exceeds the limit(%d).key=%s,value.length=%d",
+						General::METADATA_MAX_VALUE_SIZE, kp.key().c_str(), kp.value().length()));
+				}
+			}
 			break;
 		}
 		case protocol::Operation_Type_PAYMENT:
@@ -213,14 +228,19 @@ namespace bubi {
 			std::string trim = set_metadata.key();
 			if (trim.size() == 0 || trim.size() > General::METADATA_KEY_MAXSIZE) {
 				result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
-				result.set_desc(utils::String::Format("metadata key length should between (0,%d]", General::METADATA_KEY_MAXSIZE));
+				result.set_desc(utils::String::Format("Length of the key exceeds the limit(%d).key=%s,key.length=%d",
+					General::METADATA_KEY_MAXSIZE, trim.c_str(), trim.length()));
 				break;
 			}
-			if (set_metadata.value().size() > General::METADATA_MAXSIZE) {
+
+			if (set_metadata.value().size() > General::METADATA_MAX_VALUE_SIZE) {
 				result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
-				result.set_desc(utils::String::Format("metadata data length should between (0,%d]", General::METADATA_MAXSIZE));
+				result.set_desc(utils::String::Format("Length of the value exceeds the limit(%d).key=%s,value.length=%d",
+					General::METADATA_MAX_VALUE_SIZE, trim.c_str(), set_metadata.value().length()));
 				break;
 			}
+
+
 			break;
 		}
 		case protocol::Operation_Type_SET_SIGNER_WEIGHT:
