@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
 project(bubi)
-add_compile_options("-g")
+add_compile_options(-g -O2)
 add_definitions(-DSVNVERSION=\"${SVNVERSION}\")
 message(STATUS "-DSVNVERSION="${SVNVERSION})
 
