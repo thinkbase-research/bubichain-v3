@@ -214,9 +214,12 @@ namespace bubi {
 			return check_valid;
 		}
 
-		if (tran.metadata().size() > General::METADATA_MAXSIZE) {
+		if (tran.metadata().size() > General::METADATA_MAX_VALUE_SIZE) {
 			result_.set_code(protocol::ERRCODE_INVALID_PARAMETER);
-			result_.set_desc("Tx's metadata too long");
+			//result_.set_desc("Transaction metadata too long");
+			result_.set_desc(utils::String::Format("Length of the metadata from transaction exceeds the limit(%d).",
+				General::METADATA_MAX_VALUE_SIZE));
+
 			LOG_ERROR("%s", result_.desc().c_str());
 			check_valid = false;
 			return check_valid;
@@ -238,10 +241,11 @@ namespace bubi {
 			}
 
 			if (ope.metadata().size() > 0) {
-				if (ope.metadata().size() > General::METADATA_MAXSIZE) {
+				if (ope.metadata().size() > General::METADATA_MAX_VALUE_SIZE) {
 					check_valid = false;
 					result_.set_code(protocol::ERRCODE_INVALID_PARAMETER);
-					result_.set_desc("Tx's metadata too long");
+					result_.set_desc(utils::String::Format("Length of the metadata from operation(%d) exceeds the limit(%d).",
+						i, General::METADATA_MAX_VALUE_SIZE));
 					LOG_ERROR("%s", result_.desc().c_str());
 					break;
 				}

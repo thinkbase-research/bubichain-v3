@@ -33,8 +33,8 @@ namespace bubi {
 		const static int CONSENSUS_PORT = 9333;
 		const static int WEBSERVER_PORT = 19333;
 
-		const static int METADATA_KEY_MAXSIZE = 256;
-		const static int METADATA_MAXSIZE = 1048576;
+		const static int METADATA_KEY_MAXSIZE = 1024;
+		const static int METADATA_MAX_VALUE_SIZE = 1048576;
 		const static int ASSET_CODE_MAX_SIZE = 64;
 		const static int EXPRCONDITION_MAXSIZE = 1048576;
 
