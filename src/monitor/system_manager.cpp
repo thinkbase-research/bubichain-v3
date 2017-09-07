@@ -120,9 +120,7 @@ namespace bubi {
 			}
 		}
 
-		if (cpu_used_percent_ > 1e-6) {
-			system_status->mutable_cpu()->set_usedpercent(cpu_used_percent_);
-		}
+		system_status->mutable_cpu()->set_usedpercent(cpu_used_percent_);
 
 		return true;
 	}
