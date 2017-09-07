@@ -35,7 +35,6 @@ namespace bubi {
 		request_methods_[monitor::MONITOR_MSGTYPE_SYSTEM] = std::bind(&MonitorManager::OnSystemStatus, this, std::placeholders::_1, std::placeholders::_2);
 
 		thread_ptr_ = NULL;
-		init_ = false;
 	}
 
 	MonitorManager::~MonitorManager() {
@@ -53,7 +52,6 @@ namespace bubi {
 			return false;
 		}
 
-		init_ = true;
 		StatusModule::RegisterModule(this);
 		TimerNotify::RegisterModule(this);
 		LOG_INFO("monitor manager initialized");
@@ -231,10 +229,6 @@ namespace bubi {
 	}
 
 	void MonitorManager::OnTimer(int64_t current_time) {
-		if (!init_) {
-			return;
-		}
-
 		// reconnect if disconnect
 		if (current_time - last_connect_time_ > connect_interval_) {
 			Monitor *monitor = (Monitor *)GetClientConnection();
@@ -248,7 +242,7 @@ namespace bubi {
 
 	void MonitorManager::OnSlowTimer(int64_t current_time) {
 		Monitor *monitor = (Monitor *)GetClientConnection();
-		if (!init_ || monitor == NULL || !monitor->IsActive()) {
+		if (monitor == NULL || !monitor->IsActive()) {
 			return;
 		}
 
