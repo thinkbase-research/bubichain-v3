@@ -75,7 +75,7 @@ namespace bubi {
 					break;
 				}
 
-				if (signer.address() == source_address) {
+				if (signer.address() == create_account.dest_address()) {
 					result.set_code(protocol::ERRCODE_INVALID_ADDRESS);
 					result.set_desc(utils::String::Format("Signer address(%s) can't be equal the source address", signer.address().c_str()));
 					shouldBreak = true;
