@@ -753,14 +753,14 @@ var bar = sender;
 ### 3.  触发本次合约的交易hash
 trigger
 
-```trigger```的值等于触发本次合约的交易的hash。
+```trigger```的值等于触发本次合约的交易。
 
-例如某账号A发起了一笔交易tx0，tx0中有一个操作是给某个合约账户转移资产(调用合约), 那么```trigger```的值就是交易tx0的hash。
+例如某账号A发起了一笔交易tx0，tx0中有一个操作是给某个合约账户转移资产(调用合约), 那么```trigger```的值就是交易tx0。
 
 ```javascript
 var bar = trigger;
 /*
-那么bar的值是触发本次合约的交易hash。
+那么bar的值是触发本次合约的交易。
 */
 ```
 
