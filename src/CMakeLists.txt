@@ -12,7 +12,7 @@ set(LIBRARY_OUTPUT_PATH ${BUBI_ROOT_DIR}/lib)
 set(EXECUTABLE_OUTPUT_PATH ${BUBI_ROOT_DIR}/bin)
 set(BUBI_LINKER_FLAGS "-Wl,-dy -lpthread -lrt -ldl")
 
-execute_process(COMMAND make all -j8 WORKING_DIRECTORY ${BUBI_SRC_DIR}/3rd)
+execute_process(COMMAND make all WORKING_DIRECTORY ${BUBI_SRC_DIR}/3rd)
 
 include_directories(
     ${BUBI_SRC_DIR}
