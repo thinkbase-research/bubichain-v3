@@ -1613,7 +1613,7 @@ bool CA::GetHDAndDA(X509_REQ *req, char *hardware_address, int hard_len, char *n
 				uint32_t data_len = strlen((char *)&octet_str->data[2]);
 				if ((unsigned)id_len < data_len) {
 					bsuccess = false;
-					sprintf(out_msg, "the length of hardware address buffer is too small");
+					sprintf(out_msg, "node id is invalid");
 					break;
 				}
 				strcpy(node_id, (char *)&octet_str->data[2]);
@@ -1623,7 +1623,7 @@ bool CA::GetHDAndDA(X509_REQ *req, char *hardware_address, int hard_len, char *n
 				uint32_t data_len = strlen((char *)&octet_str->data[2]);
 				if ((unsigned)hard_len < data_len) {
 					bsuccess = false;
-					sprintf(out_msg, "the length of node id buffer is too small");
+					sprintf(out_msg, "hardware address is invalid");
 					break;
 				}
 				strcpy(hardware_address, (char *)&octet_str->data[2]);

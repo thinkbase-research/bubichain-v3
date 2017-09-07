@@ -176,10 +176,10 @@ namespace bubi_ca {
 
 				// get hardware address and node id
 				char hard_address[33] = { 0 };
-				char node_id[50] = { 0 };
+				char node_id[4096] = { 0 };
 				if (!ca.GetHDAndDA(request_csr.c_str(), hard_address, sizeof(hard_address), node_id, sizeof(node_id), szmsg)) {
 					sprintf(out_msg, "get hardware address and node id failed, because %s", szmsg);
-					//db.Close();
+					utils::File::Delete(user_ca_crt);
 					break;
 				}
 				printf("\n\nmake user certificate successfully\nuser certificate file: %s\n\n\n", user_ca_crt.c_str());

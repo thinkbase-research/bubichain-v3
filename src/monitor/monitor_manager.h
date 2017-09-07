@@ -61,7 +61,6 @@ namespace bubi {
 		Connection * GetClientConnection();
 
 	private:
-
 		bool init_;
 		utils::Thread *thread_ptr_;
 
