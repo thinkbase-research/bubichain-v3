@@ -571,7 +571,7 @@ account具有如下格式
 */
 ```
 
-### 1. 获取某个账号的metadata信息
+### 2. 获取某个账号的metadata信息
 callBackGetAccountMetaData(account_address, metadata_key);
 - account_address: 账号地址
 - metadata_key： metadata的key
@@ -591,7 +591,7 @@ var bar = callBackGetAccountMetaData('a0025e6de5a793da4b5b00715b7774916c06e9a72b
 ```
 即可得到账号a0025e6de5a793da4b5b00715b7774916c06e9a72b7c18的metadata中abc的值
 
-### 1.  获取某个账号的资产信息
+### 3.  获取某个账号的资产信息
 callBackGetAccountAsset(account_address, asset_property);
 
 - account_address: 账号地址
@@ -618,7 +618,7 @@ var bar = callBackGetAccountAsset('a0025e6de5a793da4b5b00715b7774916c06e9a72b7c1
 ```
 
 
-### 1. 获取区块信息
+### 4. 获取区块信息
 callBackGetLedgerInfo(ledger_seq);
 - ledger_seq: 区块号
 
@@ -647,7 +647,7 @@ ledger具有如下格式
 
 
 
-### 1.  做交易
+### 5.  做交易
 令合约账号做一笔交易，即里面的任意一个操作的source_address都会自动变成合约账号。
 所以source_address是不需要填写的，即使填写也无用。
 
@@ -677,7 +677,7 @@ var transaction =
 var result = callBackDoOperation(transaction);
 ```
 
-### 1.  设置本合约账号的metadata
+### 6.  设置本合约账号的metadata
 callBackSetAccountMetaData(KeyPair);
 - KeyPair: 要设置的内容
 返回:true/false
