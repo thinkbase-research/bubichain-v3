@@ -42,7 +42,7 @@ Json::Int64 v = 0;
 #if defined(WIN32) || defined(WIN64)
 			sscanf_s(number, "%I64d", &v);
 #else
-			sscanf(number, "%ld", &v);
+			sscanf(number, "%lld", &v);
 #endif
 return v;
 }
