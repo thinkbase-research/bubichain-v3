@@ -39,7 +39,7 @@ Json::Int64 decodeInt64( const char *number )
 
 //for more corret transalation
 Json::Int64 v = 0;
-#ifdef WIN32 || defined(WIN64)
+#if defined(WIN32) || defined(WIN64)
 			sscanf_s(number, "%I64d", &v);
 #else
 			sscanf(number, "%ld", &v);
