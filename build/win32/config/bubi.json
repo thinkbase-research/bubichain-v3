@@ -8,8 +8,8 @@
 	"monitor": {
 		"id": "123123123123123",
 		"center": "127.0.0.1:19336",
-		"connect_address": "127.0.0.1:4053",
-		"disk_path": "/,/mnt/"
+		"disk_path": "/,/mnt/",
+		"enabled" : true
 	},
 	"p2p": {
 		"network_id": 12332,
@@ -26,7 +26,7 @@
 			"heartbeat_interval": 60,
 			"listen_port": 6333,
 			"target_peer_connection": 50,
-			"known_peers": ["127.0.0.1:6333"]
+			"known_peers": ["127.0.0.1:6334"]
 		}
 	},
 	"webserver": {
@@ -59,6 +59,10 @@
 		"address": "a0024740b934765287b16113adc6bb285d72c124d9e3c1",
 		"node_private_key": "44b9aad4310804fd528d1e73da1d093abc09b5cbbaa85ff6e60e51d408a856565efd9c1f9f899c125c11d8c021b3935c935c3078cf739a765e0b2c6c9b9156feaaa4984fd2811f4eb07610029f55c44d",
 		"close_interval": 3,
-		"validators": ["a0024740b934765287b16113adc6bb285d72c124d9e3c1"]
+		"validators": [
+			"a0024740b934765287b16113adc6bb285d72c124d9e3c1",
+			"a0019b7ef40a5f3b2aca4ed1919f45e96061c3f96c7f59"
+
+		]
 	}
 }
