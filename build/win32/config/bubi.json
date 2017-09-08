@@ -6,8 +6,10 @@
         "tmp_path": "tmp"
       },
     "monitor": {
-        "connect_address": "127.0.0.1:4053", 
-		"disk_path":"/,/mnt/"
+		"id" : "10.211",
+        "center": "192.168.10.86:19336", 
+		"disk_path":"/,/mnt/",
+		"enabled" : true
     },
     "p2p":{
         "network_id":1,
@@ -16,7 +18,7 @@
         "ssl":{
             "chain_file":"config/entity.crt",
             "private_key_file":"config/entity_privkey.pem",
-            "private_password":"42001df2a1f54974baa38073eae2ee53",
+            "private_password":"67e2a4fa7e39c55f9e7b1234ccba0827",
             "dhparam_file":"config/dh2048.pem",
             "verify_file":"config/ca.crt"
         },
