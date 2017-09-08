@@ -82,6 +82,7 @@ namespace cfca {
 		bool SignMessage(char* pszAlgorithm, char* pszPFXFilePath, char* pszPFXPassword, const char* pbySourceData, int nSourceSize, char* pszHashAlg, char* pszBase64PKCS1Signature);
 		bool VerifySignature(char*  pszAlgorithm, unsigned char* pbySourceData, int nSourceSize, char* pszBase64CertContent, char* pszHashAlg, char* pszBase64PKCS1Signature);
 		bool VerifySignature(char*  pszAlgorithm, unsigned char* pbySourceData, int nSourceSize, char* pszBase64PKCS7DetachedSignature, char** ppszP7DetachedBase64SignCertContent);
+		bool IsBase64String(std::string msg);
 
 	public:
 		bool Initialize();
