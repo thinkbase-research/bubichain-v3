@@ -38,13 +38,9 @@ Json::Int64 decodeInt64( const char *number )
 //#endif
 
 //for more corret transalation
-Json::Int64 v = 0;
-#if defined(WIN32) || defined(WIN64)
-			sscanf_s(number, "%I64d", &v);
-#else
-			sscanf(number, "%lld", &v);
-#endif
-return v;
+//for more corret transalation
+	char* pEnd;
+	return strtoull(number, &pEnd, 10);
 }
 
 Json::UInt64 decodeUInt64( const char *number )
