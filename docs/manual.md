@@ -236,6 +236,7 @@ sudo ln -s /usr/local/bubichain/bin/libSADK_Standard.so.3.4.0.3 /usr/local/bubic
 |common_name | 通用名称
 | email | 联系邮箱 
 | domain | 域名
+| days | 证书有效期
 |private_password | 证书私钥（明文）
 
 ```bash
