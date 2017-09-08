@@ -156,6 +156,17 @@ make install
     }
 ```
 
+##### 监控配置
+
+```json
+    "monitor": {
+		"id" : "3736F393B4CB4D69BC9B0FD01E985F45", // 监控惟一标识
+        "center": "127.0.0.1:19336",  // 监控中心URL
+		"disk_path":"/,/mnt/", // 所检测的磁盘分区
+		"enabled" : true // 是否启动监控
+    },
+```
+
 #### 多节点配置说明
 
 - 下面示例是配置多个节点在一条链上运行示例，配置多节点主要修改p2p、validation和ledger这三块的设置
@@ -302,19 +313,17 @@ the request certificate information:
  
 | 名称 | 描述
 |:--- | --- 
-|filepath |生成路径 
-|common_name |节点名称 
-|organization |  组织机构名称 
-| email | 联系邮箱 
-|private_password | 证书私钥（明文）
-| hardware_address |硬件地址（由上一步获取）
-| node_id | 节点id，可不填
+|root_ca_file_path | 根证书文件绝对路径 
+|root_private_file_path | 根密钥证书文件绝对路径 
+|root_private_password | 根密钥证书的访问口令 
+| request_file_path | 用户请求证书绝对路径
+|days | 有效期
 
 ```bash
 [root@localhost bubichain]# ./bin/bubi_ca --entity
-error: missing parameter, need 6 parameter (root_ca_file_path, root_private_file_path, root_private_password, request_file_path, days, ca_enable(must be number, 1 or 0)
+error: missing parameter, need 5 parameter (root_ca_file_path, root_private_file_path, root_private_password, request_file_path, days
 
-[root@localhost bubichain]# ./bin/bubi_ca --entity /usr/local/bubichain/config/ca.crt /usr/local/bubichain/config/ca.pem root /usr/local/bubichain/config/node_bubi.csr 365 1
+[root@localhost bubichain]# ./bin/bubi_ca --entity /usr/local/bubichain/config/ca.crt /usr/local/bubichain/config/ca.pem root /usr/local/bubichain/config/node_bubi.csr 365
 
 make user certificate successfully
 user certificate file: /usr/local/bubichain/config/node_bubi.crt
