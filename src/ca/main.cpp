@@ -103,7 +103,7 @@ int main(int argc, char** argv) {
 			}
 			break;
 		case 4: {
-					if (argc < 3) {
+					if (argc < 7) {
 						printf("error: missing parameter, need 5 parameter (root_ca_file_path, root_private_file_path, root_private_password, request_file_path, days\n");
 						break;
 					}

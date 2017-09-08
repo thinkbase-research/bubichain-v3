@@ -1392,7 +1392,7 @@ bool CA::CheckRootCert(X509 *x509, char *root_ext_code, int root_ext_len, char *
 		mkRootCode(&root_info, not_before, not_after, root_code);
 
 		if (root_code.compare(root_ext_code) != 0) {
-			sprintf(err_msg, "the value of the extension (1.12.30663.195.6325) is invalid");
+			sprintf(err_msg, "this root certificate is not match with this version of bubi, please contact the bubi official!");
 			break;
 		}
 
