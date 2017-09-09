@@ -733,6 +733,11 @@ namespace bubi {
 		if (false == (preverified = ca.VerifyCertificate(cert, verify_file.c_str(), chain_file.c_str(), &ca_list, out_msg))) {
 			LOG_ERROR("%s", out_msg);
 		}
+		cert_is_valid_ = preverified;
 		return preverified;
+	}
+
+	bool PeerNetwork::OnValidate(websocketpp::connection_hdl hdl) {
+		return cert_is_valid_;
 	}
 }
