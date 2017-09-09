@@ -264,7 +264,7 @@ namespace bubi {
 	SslParameter::SslParameter() :enable_(false) {}
 	SslParameter::~SslParameter() {}
 
-	Network::Network(const SslParameter &ssl_parameter) : next_id_(0), enabled_(false), ssl_parameter_(ssl_parameter) {
+	Network::Network(const SslParameter &ssl_parameter) : next_id_(0), enabled_(false), cert_is_valid_(false), ssl_parameter_(ssl_parameter) {
 		last_check_time_ = 0;
 		connect_time_out_ = 60 * utils::MICRO_UNITS_PER_SEC;
 		std::error_code err;
@@ -278,6 +278,7 @@ namespace bubi {
 			tls_server_.set_message_handler(bind(&Network::OnMessage, this, _1, _2));
 			tls_server_.set_pong_handler(bind(&Network::OnPong, this, _1, _2));
 			tls_server_.set_tls_init_handler(bind(&Network::OnTlsInit, this, MOZILLA_MODERN, _1));
+			tls_server_.set_validate_handler(bind(&Network::OnValidate, this, _1));
 
 			tls_server_.clear_access_channels(websocketpp::log::alevel::all);
 			tls_server_.clear_error_channels(websocketpp::log::elevel::all);
@@ -301,6 +302,7 @@ namespace bubi {
 			tls_client_.clear_access_channels(websocketpp::log::alevel::all);
 			tls_client_.clear_error_channels(websocketpp::log::elevel::all);
 			tls_client_.set_tls_init_handler(bind(&Network::OnTlsInit, this, MOZILLA_MODERN, _1));
+			tls_client_.set_validate_handler(bind(&Network::OnValidate, this, _1));
 		}
 		else {
 			client_.init_asio(&io_);
@@ -592,6 +594,10 @@ namespace bubi {
 		bool preverified, // True if the certificate passed pre-verification.
 		asio::ssl::verify_context& ctx // The peer certificate and other context.
 		) {
+		return true;
+	}
+
+	bool Network::OnValidate(websocketpp::connection_hdl hdl) {
 		return true;
 	}
 

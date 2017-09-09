@@ -86,6 +86,7 @@ namespace bubi {
 			tls_server *tls_server_h, tls_client *tls_client_h,
 			connection_hdl con, const std::string &uri, int64_t id);
 		virtual bool OnVerifyCallback(bool preverified, asio::ssl::verify_context& ctx);
+		virtual bool OnValidate(websocketpp::connection_hdl hdl);
 
 	public:
 		bool Initialize(const std::string &node_address);

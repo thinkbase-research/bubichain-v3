@@ -134,6 +134,7 @@ namespace bubi {
 
 		int64_t next_id_;
 		bool enabled_;
+		bool cert_is_valid_;
 
 		SslParameter ssl_parameter_;
 
@@ -160,6 +161,7 @@ namespace bubi {
 
 		//for tls
 		context_ptr OnTlsInit(tls_mode mode, websocketpp::connection_hdl hdl);
+		virtual bool OnValidate(websocketpp::connection_hdl hdl);
 		virtual bool OnVerifyCallback(
 			bool preverified, // True if the certificate passed pre-verification.
 			asio::ssl::verify_context& ctx // The peer certificate and other context.
