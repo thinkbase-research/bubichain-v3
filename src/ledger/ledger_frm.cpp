@@ -39,10 +39,17 @@ namespace bubi {
 
 		bubi::KeyValueDb *db = bubi::Storage::Instance().ledger_db();
 		std::string ledger_header;
-		db->Get(ComposePrefix(General::LEDGER_PREFIX, ledger_seq), ledger_header);
-		ledger_.mutable_header()->ParseFromString(ledger_header);
+		int32_t ret = db->Get(ComposePrefix(General::LEDGER_PREFIX, ledger_seq), ledger_header);
+		if (ret > 0) {
+			ledger_.mutable_header()->ParseFromString(ledger_header);
+			return true;
+		}
+		else if (ret < 0) {
+			LOG_ERROR("Get ledger failed, error desc(%s)", db->error_desc().c_str());
+			return false;
+		}
 
-		return true;
+		return false;
 	}
 
 
