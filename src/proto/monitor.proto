@@ -1,0 +1,123 @@
+syntax = "proto3";
+package monitor;
+option java_package = "cn.bubi.blockchain.adapter3";
+
+import "chain.proto";
+
+enum MONITOR_MESSAGE_TYPE{
+	MONITOR_MSGTYPE_NONE = 0;
+	MONITOR_MSGTYPE_HELLO = 30;
+	MONITOR_MSGTYPE_REGISTER = 31;
+	MONITOR_MSGTYPE_BUBI = 32;
+	MONITOR_MSGTYPE_LEDGER = 33;
+	MONITOR_MSGTYPE_SYSTEM = 34;
+	MONITOR_MSGTYPE_ALERT = 35;
+	MONITOR_MSGTYPE_NOTICE = 36;
+	MONITOR_MSGTYPE_ACCOUNT_EXCEPTION = 37;
+	MONITOR_MSGTYPE_ERROR = 39;
+}
+
+message BubiAttack {
+	uint32 bubi_attack_time = 1;
+	uint32 bubi_attack_counts = 2;
+}
+
+message Hello {
+	string id = 1;
+	string blockchain_version = 2;
+	int64 data_version = 3;
+	int64 timestamp = 4;
+}
+
+message Register {
+	string rand_id = 1;
+	string session_id = 2;
+	string version = 3;
+	int64 timestamp = 4;
+}
+
+message ErrorMessage {
+	MONITOR_ERROR error_code = 1;
+	string desception = 2;
+	int64 timestamp = 3;
+}
+
+message Peer {
+	string id = 1;
+	int64 delay = 2;
+	bool active = 3;
+	string ip_address = 4;
+}
+
+message GlueManager {
+	string system_current_time = 1;
+	string process_uptime = 2;
+	string system_uptime = 3;
+}
+
+message PeerManager {
+	string peer_id = 1;
+	repeated Peer peer = 2;
+}
+
+message BubiStatus {
+	GlueManager glue_manager = 1;
+	PeerManager peer_manager = 2;
+}
+
+message LedgerStatus {
+	protocol.LedgerHeader ledger_header = 1;
+	int64 transaction_size = 2;
+	int64 account_count = 3;
+	int64 timestamp = 4;
+}
+
+message SystemProperty {
+	string host_name = 1;
+	string os_version = 2;
+	int64 startup_time = 3;
+	string os_bit = 4;
+}
+
+message SystemResource {
+	int64 available = 1;
+	int64 total = 2;
+	double usedPercent = 3;
+	string description = 4;
+}
+
+message Partition {
+	int64 total_bytes = 1;
+	repeated SystemResource partition = 2;
+}
+
+message CPU {
+	double usedPercent = 1;
+}
+
+message SystemStatus {
+	SystemProperty property = 1;
+	SystemResource memory = 2;
+	CPU cpu = 3;
+	Partition partitions = 4;
+}
+
+message AlertStatus {
+	int64 ledger_sequence = 2;
+	string node_id = 3;
+	SystemStatus system = 4;
+}
+
+enum MONITOR_ERROR{
+	MONITOR_INTERNAL_ERROR = 0;
+	MONITOR_MESSAGE_NOT_EXIST = 1;
+	MONITOR_MISSING_PARAMETER = 2;
+	MONITOR_ID_NOT_EXIST = 3;
+	MONITOR_ID_ALREAD_EXIST = 4;
+	MONITOR_CENTER_INVALID = 5;
+	MONITOR_AGENT_INVALID = 6;
+	MONITOR_NOT_LOGIN = 7;
+	MONITOR_BUBI_MESSAGE_ERROR = 8;
+	MONITOR_SYSTEM_MESSAGE_ERROR = 9;
+	MONITOR_LEDGER_MESSAGE_ERROR = 10;
+}

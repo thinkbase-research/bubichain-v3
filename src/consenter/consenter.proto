@@ -1,0 +1,25 @@
+package protocol;
+
+//for transaction
+message TransactionLite{
+	required string topic = 1;
+	required int64 sequence = 2;
+	required string operation = 3;
+}
+
+//for transaction set
+message TransactionLiteSet{
+	required bytes preledger_hash = 1;
+	repeated TransactionLite txs = 2;
+}
+
+//for ledger
+message LedgerHeaderLite
+{
+	required	int64		sequence = 1;
+	required	bytes		hash = 2;
+	required	bytes		phash = 3;
+	required	bytes		txs_hash = 4;
+	required  int64   apply_time = 5;
+	required  int64   tx_count = 6;			
+}
