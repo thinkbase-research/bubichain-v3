@@ -153,13 +153,13 @@ namespace bubi {
 				const auto kp = create_account.metadatas(i);
 				if (kp.key().size() > General::METADATA_KEY_MAXSIZE){
 					result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
-					result.set_desc(utils::String::Format("Length of the key exceeds the limit(%d). key=%s,key.length=%d",
+					result.set_desc(utils::String::Format("Length of the key should be between [1, %d]. key=%s,key.length=%d",
 						General::METADATA_KEY_MAXSIZE, kp.key().c_str(), kp.key().length()));
 				}
 
 				if (kp.value().size() > General::METADATA_MAX_VALUE_SIZE){
 					result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
-					result.set_desc(utils::String::Format("Length of the value exceeds the limit(%d).key=%s,value.length=%d",
+					result.set_desc(utils::String::Format("Length of the value should be between [1, %d].key=%s,value.length=%d",
 						General::METADATA_MAX_VALUE_SIZE, kp.key().c_str(), kp.value().length()));
 				}
 			}
@@ -228,14 +228,14 @@ namespace bubi {
 			std::string trim = set_metadata.key();
 			if (trim.size() == 0 || trim.size() > General::METADATA_KEY_MAXSIZE) {
 				result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
-				result.set_desc(utils::String::Format("Length of the key exceeds the limit(%d).key=%s,key.length=%d",
+				result.set_desc(utils::String::Format("Length of the key should be between [1, %d]. key=%s,key.length=%d",
 					General::METADATA_KEY_MAXSIZE, trim.c_str(), trim.length()));
 				break;
 			}
 
-			if (set_metadata.value().size() > General::METADATA_MAX_VALUE_SIZE) {
+			if (set_metadata.value().size() == 0 || set_metadata.value().size() > General::METADATA_MAX_VALUE_SIZE) {
 				result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
-				result.set_desc(utils::String::Format("Length of the value exceeds the limit(%d).key=%s,value.length=%d",
+				result.set_desc(utils::String::Format("Length of the value should be between [1, %d]. key=%s,value.length=%d",
 					General::METADATA_MAX_VALUE_SIZE, trim.c_str(), set_metadata.value().length()));
 				break;
 			}
