@@ -270,10 +270,11 @@ namespace bubi {
 				break;
 			}
 
-			if (strcmp(serial_number, local_serial_number) == 0) {
-				sprintf(out_msg, "the remote certificate is same with local certificate");
-				break;
-			}
+			// compare the entity certificates between each node
+			//if (strcmp(serial_number, local_serial_number) == 0) {
+			//	sprintf(out_msg, "the entity certificates cannot be same between each node");
+			//	break;
+			//}
 			bret = true;
 		} while (false);
 

@@ -36,6 +36,7 @@ namespace bubi {
 		asio::ssl::context context_;
 
 		bool dns_seed_inited_;
+		bool cert_is_valid_;
 
 		//Peer cach list
 		Json::Value db_peer_cache_;
