@@ -1,0 +1,71 @@
+{
+    "db": {
+        "keyvalue_path": "data/consenter.db",
+        "rational_db_type": "pgsql",
+        "tmp_path": "tmp",
+        "rational_string": "hostaddr=127.0.0.1 port=5432 dbname=consenter1 user=postgres password=root",
+        "desc": " rational_db_type can be mysql|pgsql, rationl_string can be ' hostaddr=127.0.0.1 port=5432 dbname=bubichain user=root password=root' hostaddr=127.0.0.1 port=5432 dbname=bubichain15 user=postgres password=root"
+    },
+
+    "logger": {
+        "path": "log/consenter.log",
+        "dest": "FILE|STDOUT|STDERR",
+        "level": "TRACE|INFO|WARNING|ERROR|FATAL",
+        "time_capacity": 1,
+        "size_capacity": 10,
+        "expire_days": 10
+    },
+    "p2p": {
+        "node_private_key": "privbxtxBZo7naZNGvunSf9eTudggWU39RRJ2JKSeYPwxDQf8b4rrB6F",
+        "ssl": {
+            "chain_file": "config/cacert.pem",
+            "private_key_file": "config/privkey.pem",
+            "dhparam_file": "config/dh1024.pem",
+            "verify_file": "config/cacert.pem"
+        },
+        "consensus_network": {
+            "listen_port": 9333,
+            "target_peer_connection": 50,
+            "known_peers": [
+                "127.0.0.1:9334",
+                "127.0.0.1:9335"
+            ]
+        }
+    },
+    "validation": {
+        "type": "pbft",
+        "is_validator": true,
+        "address": "bubiV8iAVNmv5w4irqZkB94kSZHE2zButNT3qBrC",
+        "node_private_key": "privbtpSNqympJby3L2La4XF2gGd6QFwqxehXSGYzu3Foo7C9StCTdAH",
+        "close_interval": 1,
+        "validators": [
+            "bubiV8iAVNmv5w4irqZkB94kSZHE2zButNT3qBrC",
+            "bubiV8i9roYmiDTFoKnzJhWn1XNxBmJWYReMHwhf",
+            "bubiV8hUcqkDeBy5UrdtmxscCLKpHQqeCDd4MuWN",
+            "bubiV8i22nWjjWnJETbvmg2Vrxh3MajpiRfxWohi"
+        ]
+    },
+    "webserver": {
+        "listen_addresses": "0.0.0.0:19333",
+        "remote_authorized": false,
+        "ssl_enable": false,
+        "ssl": {
+            "chain_file": "config/cacert.pem",
+            "private_key_file": "config/privkey.pem",
+            "dhparam_file": "config/dh1024.pem"
+        }
+    },
+    "validation": {
+        "type": "one_node",
+        "is_validator": true,
+        "address": "bubiV8iAVNmv5w4irqZkB94kSZHE2zButNT3qBrC",
+        "node_private_key": "be240b7d3e41112a3084d5432cc5fb4569992e47e69c7066fd4cc1af4f88a5fe30737a74823022e64a6d1ac182627060dbabad34a43e75db0a76e2343e8400d7",
+        "close_interval": 3,
+        "validators": [
+            "bubiV8iAVNmv5w4irqZkB94kSZHE2zButNT3qBrC",
+            "bubiV8i9roYmiDTFoKnzJhWn1XNxBmJWYReMHwhf",
+            "bubiV8hUcqkDeBy5UrdtmxscCLKpHQqeCDd4MuWN",
+            "bubiV8i22nWjjWnJETbvmg2Vrxh3MajpiRfxWohi"
+        ]
+    }
+}

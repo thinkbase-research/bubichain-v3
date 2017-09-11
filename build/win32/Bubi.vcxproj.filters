@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ledger">
+      <UniqueIdentifier>{c64849c3-103b-4cc3-840e-4959d5450a34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{ba5f52bf-f102-4596-a4cd-35240d6080c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="overlay">
+      <UniqueIdentifier>{1489e434-0b2d-4595-a8a8-ef2ed1a6ff81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="glue">
+      <UniqueIdentifier>{3917965e-3946-4aa1-8f53-ac9edd6ad47d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="proto">
+      <UniqueIdentifier>{904378a7-6fb9-4140-9518-5cc9be76d064}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="api">
+      <UniqueIdentifier>{9cd9bccc-0acc-4fb6-80c5-4106b43aac4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="monitor">
+      <UniqueIdentifier>{f06ae41d-262b-435b-9143-a83f4b5a5d11}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\main\main.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\overlay\peer_manager.cpp">
+      <Filter>overlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ledger\account.cpp">
+      <Filter>ledger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ledger\ledger_manager.cpp">
+      <Filter>ledger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\overlay\broadcast.cpp">
+      <Filter>overlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ledger\ledger_frm.cpp">
+      <Filter>ledger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\glue\glue_manager.cpp">
+      <Filter>glue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ledger\transaction_frm.cpp">
+      <Filter>ledger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\api\web_server.cpp">
+      <Filter>api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\api\web_server_helper.cpp">
+      <Filter>api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\api\web_server_query.cpp">
+      <Filter>api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\api\web_server_update.cpp">
+      <Filter>api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\api\web_server_command.cpp">
+      <Filter>api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\proto\cpp\common.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\proto\cpp\consensus.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\proto\cpp\overlay.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\overlay\peer_network.cpp">
+      <Filter>overlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\overlay\peer.cpp">
+      <Filter>overlay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\glue\transaction_set.cpp">
+      <Filter>glue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ledger\environment.cpp">
+      <Filter>ledger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\proto\cpp\merkeltrie.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ledger\kv_trie.cpp">
+      <Filter>ledger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ledger\trie.cpp">
+      <Filter>ledger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ledger\contract_manager.cpp">
+      <Filter>ledger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\ledger\operation_frm.cpp">
+      <Filter>ledger</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\api\websocket_server.cpp">
+      <Filter>api</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\main\configure.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\monitor\monitor.cpp">
+      <Filter>monitor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\monitor\system_manager.cpp">
+      <Filter>monitor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\proto\cpp\monitor.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\proto\cpp\chain.pb.cc">
+      <Filter>proto</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\glue\ledger_upgrade.cpp">
+      <Filter>glue</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\monitor\monitor_manager.cpp">
+      <Filter>monitor</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\overlay\peer_manager.h">
+      <Filter>overlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ledger\account.h">
+      <Filter>ledger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ledger\ledger_manager.h">
+      <Filter>ledger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\overlay\broadcast.h">
+      <Filter>overlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ledger\ledger_frm.h">
+      <Filter>ledger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\glue\glue_manager.h">
+      <Filter>glue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ledger\transaction_frm.h">
+      <Filter>ledger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\proto\pb2json.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\api\web_server.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\proto\cpp\common.pb.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\proto\cpp\consensus.pb.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\proto\cpp\overlay.pb.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\overlay\peer_network.h">
+      <Filter>overlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\overlay\peer.h">
+      <Filter>overlay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\glue\transaction_set.h">
+      <Filter>glue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ledger\environment.h">
+      <Filter>ledger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\proto\cpp\merkeltrie.pb.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ledger\kv_trie.h">
+      <Filter>ledger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ledger\trie.h">
+      <Filter>ledger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ledger\contract_manager.h">
+      <Filter>ledger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\ledger\operation_frm.h">
+      <Filter>ledger</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\api\websocket_server.h">
+      <Filter>api</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\main\configure.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\monitor\monitor.h">
+      <Filter>monitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\monitor\system_manager.h">
+      <Filter>monitor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\proto\cpp\monitor.pb.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\proto\cpp\chain.pb.h">
+      <Filter>proto</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\glue\ledger_upgrade.h">
+      <Filter>glue</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\monitor\monitor_manager.h">
+      <Filter>monitor</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\src\ledger\Makefile.am">
+      <Filter>ledger</Filter>
+    </None>
+    <None Include="..\..\src\main\Makefile.am">
+      <Filter>main</Filter>
+    </None>
+    <None Include="..\..\configure.ac" />
+    <None Include="..\..\src\overlay\Makefile.am">
+      <Filter>overlay</Filter>
+    </None>
+    <None Include="..\..\src\glue\Makefile.am">
+      <Filter>glue</Filter>
+    </None>
+    <None Include="..\..\src\proto\common.proto">
+      <Filter>proto</Filter>
+    </None>
+    <None Include="..\..\src\proto\consensus.proto">
+      <Filter>proto</Filter>
+    </None>
+    <None Include="..\..\src\proto\merkeltrie.proto">
+      <Filter>proto</Filter>
+    </None>
+    <None Include="..\..\src\proto\overlay.proto">
+      <Filter>proto</Filter>
+    </None>
+    <None Include="..\..\src\proto\chain.proto">
+      <Filter>proto</Filter>
+    </None>
+  </ItemGroup>
+</Project>
