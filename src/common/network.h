@@ -134,7 +134,6 @@ namespace bubi {
 
 		int64_t next_id_;
 		bool enabled_;
-		bool cert_is_valid_;
 
 		SslParameter ssl_parameter_;
 

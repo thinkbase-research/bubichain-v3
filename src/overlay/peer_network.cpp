@@ -29,6 +29,7 @@ namespace bubi {
 	PeerNetwork::PeerNetwork(const SslParameter &ssl_parameter_) :Network(ssl_parameter_),
 		context_(asio::ssl::context::tlsv12),
 		cert_enabled_(false),
+		cert_is_valid_(false),
 		broadcast_(this) {
 		check_interval_ = 5 * utils::MICRO_UNITS_PER_SEC;
 		dns_seed_inited_ = false;  

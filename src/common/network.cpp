@@ -264,7 +264,7 @@ namespace bubi {
 	SslParameter::SslParameter() :enable_(false) {}
 	SslParameter::~SslParameter() {}
 
-	Network::Network(const SslParameter &ssl_parameter) : next_id_(0), enabled_(false), cert_is_valid_(false), ssl_parameter_(ssl_parameter) {
+	Network::Network(const SslParameter &ssl_parameter) : next_id_(0), enabled_(false), ssl_parameter_(ssl_parameter) {
 		last_check_time_ = 0;
 		connect_time_out_ = 60 * utils::MICRO_UNITS_PER_SEC;
 		std::error_code err;
