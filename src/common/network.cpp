@@ -278,6 +278,7 @@ namespace bubi {
 			tls_server_.set_message_handler(bind(&Network::OnMessage, this, _1, _2));
 			tls_server_.set_pong_handler(bind(&Network::OnPong, this, _1, _2));
 			tls_server_.set_tls_init_handler(bind(&Network::OnTlsInit, this, MOZILLA_MODERN, _1));
+			tls_server_.set_validate_handler(bind(&Network::OnValidate, this, _1));
 
 			tls_server_.clear_access_channels(websocketpp::log::alevel::all);
 			tls_server_.clear_error_channels(websocketpp::log::elevel::all);
@@ -301,6 +302,7 @@ namespace bubi {
 			tls_client_.clear_access_channels(websocketpp::log::alevel::all);
 			tls_client_.clear_error_channels(websocketpp::log::elevel::all);
 			tls_client_.set_tls_init_handler(bind(&Network::OnTlsInit, this, MOZILLA_MODERN, _1));
+			tls_client_.set_validate_handler(bind(&Network::OnValidate, this, _1));
 		}
 		else {
 			client_.init_asio(&io_);
@@ -595,6 +597,10 @@ namespace bubi {
 		return true;
 	}
 
+	bool Network::OnValidate(websocketpp::connection_hdl hdl) {
+		return true;
+	}
+
 	context_ptr Network::OnTlsInit(tls_mode mode, connection_hdl hdl) {
 		LOG_INFO("using TLS mode :%s ", (mode == MOZILLA_MODERN ? "Mozilla Modern" : "Mozilla Intermediate"));
 		context_ptr ctx = websocketpp::lib::make_shared<asio::ssl::context>(asio::ssl::context::tlsv12);
@@ -634,7 +640,7 @@ namespace bubi {
 			}
 		}
 		catch (std::exception& e) {
-			LOG_ERROR("Exception: %s " , e.what());
+			BUBI_EXIT("Exception: %s " , e.what());
 		}
 		return ctx;
 	}

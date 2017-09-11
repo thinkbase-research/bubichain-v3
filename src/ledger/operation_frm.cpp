@@ -59,11 +59,12 @@ namespace bubi {
 			const protocol::AccountPrivilege &priv = create_account.priv();
 			if (priv.master_weight() < 0 || priv.master_weight() > UINT32_MAX) {
 				result.set_code(protocol::ERRCODE_WEIGHT_NOT_VALID);
-				result.set_desc(utils::String::Format("Master weight(" FMT_I64 ") is larger than %u  or less 0", priv.master_weight(), UINT32_MAX));
+				result.set_desc(utils::String::Format("Master weight(" FMT_I64 ") is larger than %u or less 0", priv.master_weight(), UINT32_MAX));
 				break;
 			}
 
 			//for signers
+			std::set<std::string> duplicate_set;
 			bool shouldBreak = false;
 			for (int32_t i = 0; i < priv.signers_size(); i++) {
 				const protocol::Signer &signer = priv.signers(i);
@@ -74,7 +75,7 @@ namespace bubi {
 					break;
 				}
 
-				if (signer.address() == source_address) {
+				if (signer.address() == create_account.dest_address()) {
 					result.set_code(protocol::ERRCODE_INVALID_ADDRESS);
 					result.set_desc(utils::String::Format("Signer address(%s) can't be equal the source address", signer.address().c_str()));
 					shouldBreak = true;
@@ -87,6 +88,15 @@ namespace bubi {
 					shouldBreak = true;
 					break;
 				}
+
+				if (duplicate_set.find(signer.address()) != duplicate_set.end()) {
+					result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
+					result.set_desc(utils::String::Format("Signer address(%s) duplicated", signer.address().c_str()));
+					shouldBreak = true;
+					break;
+				} 
+
+				duplicate_set.insert(signer.address());
 			}
 			if (shouldBreak) break;
 
@@ -104,10 +114,11 @@ namespace bubi {
 				break;
 			}
 
+			std::set<int32_t> duplicate_type;
 			for (int32_t i = 0; i < threshold.type_thresholds_size(); i++) {
 				const protocol::OperationTypeThreshold  &type_thresholds = threshold.type_thresholds(i);
 				if (type_thresholds.type() > 100 || type_thresholds.type() <= 0) {
-					result.set_code(protocol::ERRCODE_THRESHOLD_NOT_VALID);
+					result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
 					result.set_desc(utils::String::Format("Operation type(%u) not support", type_thresholds.type()));
 					break;
 				}
@@ -117,6 +128,14 @@ namespace bubi {
 					result.set_desc(utils::String::Format("Operation type(%d) threshold(" FMT_I64 ") is less than 0", (int32_t)type_thresholds.type(), type_thresholds.threshold()));
 					break;
 				}
+
+				if (duplicate_type.find(type_thresholds.type()) != duplicate_type.end()) {
+					result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
+					result.set_desc(utils::String::Format("Operation type(%u) duplicated", type_thresholds.type()));
+					break;
+				} 
+				
+				duplicate_type.insert(type_thresholds.type());
 			}
 
 			///////////////////////////////////////////////////
@@ -127,6 +146,21 @@ namespace bubi {
 				if (!a.SourceCodeCheck(src, err_msg)){
 					result.set_code(protocol::ERRCODE_CONTRACT_SYNTAX_ERROR);
 					result.set_desc(err_msg);
+				}
+			}
+
+			for (uint32_t i = 0; i < create_account.metadatas_size(); i++){
+				const auto kp = create_account.metadatas(i);
+				if (kp.key().size() > General::METADATA_KEY_MAXSIZE){
+					result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
+					result.set_desc(utils::String::Format("Length of the key should be between [1, %d]. key=%s,key.length=%d",
+						General::METADATA_KEY_MAXSIZE, kp.key().c_str(), kp.key().length()));
+				}
+
+				if (kp.value().size() > General::METADATA_MAX_VALUE_SIZE){
+					result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
+					result.set_desc(utils::String::Format("Length of the value should be between [1, %d].key=%s,value.length=%d",
+						General::METADATA_MAX_VALUE_SIZE, kp.key().c_str(), kp.value().length()));
 				}
 			}
 			break;
@@ -194,14 +228,19 @@ namespace bubi {
 			std::string trim = set_metadata.key();
 			if (trim.size() == 0 || trim.size() > General::METADATA_KEY_MAXSIZE) {
 				result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
-				result.set_desc(utils::String::Format("metadata key length should between (0,%d]", General::METADATA_KEY_MAXSIZE));
+				result.set_desc(utils::String::Format("Length of the key should be between [1, %d]. key=%s,key.length=%d",
+					General::METADATA_KEY_MAXSIZE, trim.c_str(), trim.length()));
 				break;
 			}
-			if (set_metadata.value().size() > General::METADATA_MAXSIZE) {
+
+			if (set_metadata.value().size() == 0 || set_metadata.value().size() > General::METADATA_MAX_VALUE_SIZE) {
 				result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
-				result.set_desc(utils::String::Format("metadata data length should between (0,%d]", General::METADATA_MAXSIZE));
+				result.set_desc(utils::String::Format("Length of the value should be between [1, %d]. key=%s,value.length=%d",
+					General::METADATA_MAX_VALUE_SIZE, trim.c_str(), set_metadata.value().length()));
 				break;
 			}
+
+
 			break;
 		}
 		case protocol::Operation_Type_SET_SIGNER_WEIGHT:
@@ -209,7 +248,7 @@ namespace bubi {
 			const protocol::OperationSetSignerWeight &operation_setoptions = operation.set_signer_weight();
 			if (operation_setoptions.master_weight() < -1 || operation_setoptions.master_weight() > UINT32_MAX) {
 				result.set_code(protocol::ERRCODE_WEIGHT_NOT_VALID);
-				result.set_desc(utils::String::Format("Master weight(" FMT_I64 ") is larger than %u  or less -1", operation_setoptions.master_weight(), UINT32_MAX));
+				result.set_desc(utils::String::Format("Master weight(" FMT_I64 ") is larger than %u or less -1", operation_setoptions.master_weight(), UINT32_MAX));
 				break;
 			}
 
@@ -431,6 +470,12 @@ namespace bubi {
 			}
 			else {
 				int64_t amount = asset_e.amount() + ope.amount();
+				if (amount < asset_e.amount() || amount < ope.amount())
+				{
+					result_.set_code(protocol::ERRCODE_ACCOUNT_ASSET_AMOUNT_TOO_LARGE);
+					result_.set_desc(utils::String::Format("IssueAsset asset(%s:%s) overflow(" FMT_I64 " " FMT_I64 ")", ap.issuer().c_str(), ap.code().c_str(), asset_e.amount(), ope.amount()));
+					break;
+				}
 				asset_e.set_amount(amount);
 				source_account_->SetAsset(asset_e);
 			}
@@ -474,6 +519,12 @@ namespace bubi {
 				}
 				else {
 					int64_t receiver_amount = dest_asset_ptr.amount() + payment.asset().amount();
+					if (receiver_amount < dest_asset_ptr.amount() || receiver_amount < payment.asset().amount())
+					{
+						result_.set_code(protocol::ERRCODE_ACCOUNT_ASSET_AMOUNT_TOO_LARGE);
+						result_.set_desc(utils::String::Format("Payment asset(%s:%s) overflow(" FMT_I64 " " FMT_I64 ")", ap.issuer().c_str(), ap.code().c_str(), dest_asset_ptr.amount(), payment.asset().amount()));
+						break;
+					}
 					dest_asset_ptr.set_amount(receiver_amount);
 					dest_account->SetAsset(dest_asset_ptr);
 				}

@@ -31,11 +31,16 @@ const UInt64 Value::maxUInt64 = UInt64(-1);
 // helpers
 Json::Int64 decodeInt64( const char *number )
 {
-#if defined(WIN32) || defined(WIN64)
-	return (Json::Int64)_atoi64(number);
-#else
-	return (Json::Int64)atoll(number);
-#endif
+//#if defined(WIN32) || defined(WIN64)
+//	return (Json::Int64)_atoi64(number);
+//#else
+//	return (Json::Int64)atoll(number);
+//#endif
+
+//for more corret transalation
+//for more corret transalation
+	char* pEnd;
+	return strtoull(number, &pEnd, 10);
 }
 
 Json::UInt64 decodeUInt64( const char *number )

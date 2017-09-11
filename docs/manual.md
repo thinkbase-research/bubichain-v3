@@ -13,6 +13,7 @@ sudo apt-get install g++
 sudo apt-get install libssl-dev
 sudo apt-get install cmake
 sudo apt-get install libbz2-dev
+sudo apt-get install python
 ```
 - 编译
 ```bash
@@ -33,6 +34,11 @@ Windows 部署与 Linux 下部署基本类似，本示例以 Linux 为准。
 ```bash
 cd bubichain-v3
 make install
+```
+
+将 libSADK_Standard.so.3.4.0.3 库文件拷贝到 /usr/local/bubichain/bin/ 目录下，并创建软链接:
+```bash
+sudo ln -s /usr/local/bubichain/bin/libSADK_Standard.so.3.4.0.3 /usr/local/bubichain/bin/libSADK_Standard.so
 ```
 
 服务将安装在/usr/local/bubichain/目录下
@@ -156,6 +162,17 @@ make install
     }
 ```
 
+##### 监控配置
+
+```json
+    "monitor": {
+		"id" : "3736F393B4CB4D69BC9B0FD01E985F45", // 监控惟一标识
+        "center": "127.0.0.1:19336",  // 监控中心URL
+		"disk_path":"/,/mnt/", // 所检测的磁盘分区
+		"enabled" : true // 是否启动监控
+    },
+```
+
 #### 多节点配置说明
 
 - 下面示例是配置多个节点在一条链上运行示例，配置多节点主要修改p2p、validation和ledger这三块的设置
@@ -219,6 +236,7 @@ make install
 |common_name | 通用名称
 | email | 联系邮箱 
 | domain | 域名
+| days | 证书有效期
 |private_password | 证书私钥（明文）
 
 ```bash
@@ -256,6 +274,13 @@ local hardware address (0bc9143ba7ccc951cf257948af2d02ff)
 |private_password | 证书私钥（明文）
 | hardware_address |硬件地址（由上一步获取）
 | node_id | 节点id，可不填
+
+注意: hardware_address需要设置为*的话，需要输入\*，如下：
+```bash
+./bin/bubi --request-cert /usr/local/bubichain/config node bubi bubi@bubi.cn bubitest \*
+```
+
+- 具体操作如下 ：
 
 ```bash
 [root@localhost bubichain]# ./bin/bubi --request-cert
@@ -295,19 +320,17 @@ the request certificate information:
  
 | 名称 | 描述
 |:--- | --- 
-|filepath |生成路径 
-|common_name |节点名称 
-|organization |  组织机构名称 
-| email | 联系邮箱 
-|private_password | 证书私钥（明文）
-| hardware_address |硬件地址（由上一步获取）
-| node_id | 节点id，可不填
+|root_ca_file_path | 根证书文件绝对路径 
+|root_private_file_path | 根密钥证书文件绝对路径 
+|root_private_password | 根密钥证书的访问口令 
+| request_file_path | 用户请求证书绝对路径
+|days | 有效期
 
 ```bash
 [root@localhost bubichain]# ./bin/bubi_ca --entity
-error: missing parameter, need 6 parameter (root_ca_file_path, root_private_file_path, root_private_password, request_file_path, days, ca_enable(must be number, 1 or 0)
+error: missing parameter, need 5 parameter (root_ca_file_path, root_private_file_path, root_private_password, request_file_path, days
 
-[root@localhost bubichain]# ./bin/bubi_ca --entity /usr/local/bubichain/config/ca.crt /usr/local/bubichain/config/ca.pem root /usr/local/bubichain/config/node_bubi.csr 365 1
+[root@localhost bubichain]# ./bin/bubi_ca --entity /usr/local/bubichain/config/ca.crt /usr/local/bubichain/config/ca.pem root /usr/local/bubichain/config/node_bubi.csr 365
 
 make user certificate successfully
 user certificate file: /usr/local/bubichain/config/node_bubi.crt
@@ -385,5 +408,38 @@ user certificate file: /usr/local/bubichain/config/node_bubi.crt
 ```bash
 bubichain/bin/bubi --dropdb
 ```
+### 创建硬分叉
+```bash
+bubichain/bin/bubi --create-hardfork
+bubichain/bin/bubi --clear-consensus-status
+```
+当已经加入其他区块链网络的节点想单独运行一条链时，可以执行以上命令创建硬分叉
+执行后，新的区块链网络只有一个验证节点为本节点。
+- 执行硬分叉命令后获取到如下Hash值
+
+Create hard fork ledger successful, seq(20), consensus value hash(**7aa332f05748e6ce9ad3d059c959a50675109bcaf0a4ba2c5c6adc6418960197**)
+
+- 把上述 Hash 值配置到本节点或者同步节点的 bubi.json 的hardfork_points
+
+```json
+    "ledger": {
+       	"genesis_account": "a0025e6de5a793da4b5b00715b7774916c06e9a72b7c18",
+        "base_fee": 1000,
+        "base_reserve": 10000000,
+        "hash_type": 0, // 0 : SHA256 1: SM3
+        "max_trans_per_ledger": 1000,
+        "max_ledger_per_message": 5,
+        "max_trans_in_memory": 2000,
+        "max_apply_ledger_per_round": 3,
+        "hardfork_points" : 
+        [
+        	"7aa332f05748e6ce9ad3d059c959a50675109bcaf0a4ba2c5c6adc6418960197"
+        ]
+    },
+```
+
+- 启动节点服务即可生效
+
+
 ### 数据库存储
 布比区块链存储的数据默认是存放在 bubichain/data 目录下，如有需要可修改配置文件中数据存储部分

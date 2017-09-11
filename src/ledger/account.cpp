@@ -116,7 +116,7 @@ namespace bubi {
 	}
 
 	bool AccountFrm::UpdateTypeThreshold(const protocol::Operation::Type type, int64_t threshold) {
-		threshold = threshold & UINT16_MAX;
+		threshold = threshold & UINT64_MAX;
 		if (threshold > 0) {
 			protocol::AccountThreshold *thresholds = account_info_.mutable_priv()->mutable_thresholds();
 			bool found = false;

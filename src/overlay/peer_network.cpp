@@ -29,6 +29,7 @@ namespace bubi {
 	PeerNetwork::PeerNetwork(const SslParameter &ssl_parameter_) :Network(ssl_parameter_),
 		context_(asio::ssl::context::tlsv12),
 		cert_enabled_(false),
+		cert_is_valid_(false),
 		broadcast_(this) {
 		check_interval_ = 5 * utils::MICRO_UNITS_PER_SEC;
 		dns_seed_inited_ = false;  
@@ -726,13 +727,18 @@ namespace bubi {
 		X509* cert = X509_STORE_CTX_get_current_cert(ctx.native_handle());
 		bubi::CAManager ca;
 		char out_msg[256] = { 0 };
-		utils::CAStatusMap ca_list;
+		bubi::CAStatusMap ca_list;
 		bubi::SSLConfigure& ssl_configure = bubi::Configure::Instance().p2p_configure_.ssl_configure_;
 		std::string verify_file = ssl_configure.verify_file_;
 		std::string chain_file = ssl_configure.chain_file_;
 		if (false == (preverified = ca.VerifyCertificate(cert, verify_file.c_str(), chain_file.c_str(), &ca_list, out_msg))) {
 			LOG_ERROR("%s", out_msg);
 		}
+		cert_is_valid_ = preverified;
 		return preverified;
+	}
+
+	bool PeerNetwork::OnValidate(websocketpp::connection_hdl hdl) {
+		return cert_is_valid_;
 	}
 }

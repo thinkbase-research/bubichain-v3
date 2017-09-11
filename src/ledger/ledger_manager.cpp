@@ -491,7 +491,7 @@ namespace bubi {
 
 		int64_t time0 = utils::Timestamp().HighResolution();
 		tree_->time_ = 0;
-		Environment::time_ = 0;
+	
 		closing_ledger_->Apply(consensus_value);
 		closing_ledger_->Commit(tree_);
 
@@ -567,7 +567,7 @@ namespace bubi {
 		tree_->batch_ = std::make_shared<WRITE_BATCH>();
 		tree_->FreeMemory(4);
 		LOG_INFO("ledger closed (" FMT_I64 ") txcount(" FMT_I64 ")  hash=%s  apply="  FMT_I64_EX(-8) " calc_hash="  FMT_I64_EX(-8) " addtodb = " FMT_I64_EX(-8)
-			" total=" FMT_I64_EX(-8) " LoadValue=" FMT_I64 " AccountFromDB=" FMT_I64,
+			" total=" FMT_I64_EX(-8) " LoadValue=" FMT_I64 ,
 			closing_ledger_->GetProtoHeader().seq(),
 			closing_ledger_->GetTxCount(),
 			utils::String::Bin4ToHexString(closing_ledger_->GetProtoHeader().hash()).c_str(),
@@ -575,8 +575,7 @@ namespace bubi {
 			time2 - time1,
 			time3 - time2,
 			time3 - time0,
-			tree_->time_,
-			Environment::time_);
+			tree_->time_);
 
 		// notice
 		for (int i = 0; i < ledger.transaction_envs_size(); i++) {
@@ -744,7 +743,7 @@ namespace bubi {
 	ExprCondition::~ExprCondition() {}
 
 	void ExprCondition::RegisterFunctions() {
-		utils::OneCommonArgumentFunctions["ledger"] = DoLedger;
+		//utils::OneCommonArgumentFunctions["ledger"] = DoLedger;
 		utils::OneCommonArgumentFunctions["account"] = DoAccount;
 		utils::TwoCommonArgumentFunctions["jsonpath"] = DoJsonPath;
 	}
@@ -884,7 +883,7 @@ namespace bubi {
 
 			transaction_stack_.push(txfrm);
 			if (txfrm->ValidForParameter()){
-				txfrm->Apply(LedgerManager::Instance().closing_ledger_.get(), true);
+				txfrm->Apply(LedgerManager::Instance().closing_ledger_.get(), back->environment_, true);
 			}
 
 			protocol::TransactionEnvStore tx_store;
@@ -896,6 +895,7 @@ namespace bubi {
 
 			if (txfrm->GetResult().code() == protocol::ERRCODE_SUCCESS){
 				back->instructions_.insert(back->instructions_.end(), txfrm->instructions_.begin(), txfrm->instructions_.end());
+				txfrm->environment_->Commit();
 			}
 			transaction_stack_.pop();
 

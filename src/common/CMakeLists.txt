@@ -2,7 +2,7 @@
 
 set(LIB_BUBI_COMMON bubi_common)
 set(COMMON_SRC
-    configure_base.cpp general.cpp storage.cpp private_key.cpp
+    configure_base.cpp general.cpp storage.cpp private_key.cpp ca.cpp
     daemon.cpp ca_manager.cpp argument.cpp pb2json.cpp cfca.cpp network.cpp data_secret_key.cpp
 )
 

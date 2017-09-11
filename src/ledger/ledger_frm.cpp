@@ -39,10 +39,17 @@ namespace bubi {
 
 		bubi::KeyValueDb *db = bubi::Storage::Instance().ledger_db();
 		std::string ledger_header;
-		db->Get(ComposePrefix(General::LEDGER_PREFIX, ledger_seq), ledger_header);
-		ledger_.mutable_header()->ParseFromString(ledger_header);
+		int32_t ret = db->Get(ComposePrefix(General::LEDGER_PREFIX, ledger_seq), ledger_header);
+		if (ret > 0) {
+			ledger_.mutable_header()->ParseFromString(ledger_header);
+			return true;
+		}
+		else if (ret < 0) {
+			LOG_ERROR("Get ledger failed, error desc(%s)", db->error_desc().c_str());
+			return false;
+		}
 
-		return true;
+		return false;
 	}
 
 
@@ -121,18 +128,19 @@ namespace bubi {
 	{
 		value_ = std::make_shared<protocol::ConsensusValue>(request);
 		uint32_t success_count = 0;
-		environment_ = std::make_shared<Environment>();
+		environment_ = std::make_shared<Environment>(nullptr);
 
 		for (int i = 0; i < request.txset().txs_size(); i++) {
 			auto txproto = request.txset().txs(i);
-			TransactionFrm::pointer tx_frm = std::make_shared<TransactionFrm>(txproto, environment_);
+			
+			TransactionFrm::pointer tx_frm = std::make_shared<TransactionFrm>(txproto);
 			LedgerManager::Instance().transaction_stack_.push(tx_frm);
 
-			if (!tx_frm->ValidForApply()){
+			if (!tx_frm->ValidForApply(environment_)){
 				continue;
 			}
 
-			if (!tx_frm->Apply(this)){
+			if (!tx_frm->Apply(this, environment_)){
 				LOG_ERROR("transaction(%s) apply failed. %s",
 					utils::String::BinToHexString(tx_frm->GetContentHash()).c_str(), tx_frm->GetResult().desc().c_str());
 			}
@@ -161,7 +169,14 @@ namespace bubi {
 
 	bool LedgerFrm::Commit(KVTrie* trie) {
 		auto batch = trie->batch_;
-		for (auto it = environment_->entries_.begin(); it != environment_->entries_.end(); it++) {
+		for (auto it = environment_->entries_.begin(); it != environment_->entries_.end(); it++){
+			std::shared_ptr<AccountFrm> account = it->second;
+			account->UpdateHash(batch);
+			std::string ss = account->Serializer();
+			std::string index = utils::String::HexStringToBin(it->first);
+			trie->Set(index, ss);
+		}
+	/*	for (auto it = environment_->entries_.begin(); it != environment_->entries_.end(); it++) {
 			auto &r = it->second;
 			switch (r.action_) {
 			case utils::ChangeAction::DEL:{
@@ -180,7 +195,7 @@ namespace bubi {
 			default:
 				break;
 			}
-		}
+		}*/
 		return true;
 	}
 }

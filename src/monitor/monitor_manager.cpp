@@ -1,16 +1,16 @@
-/*
-Copyright Bubi Technologies Co., Ltd. 2017 All Rights Reserved.
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
-http://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-*/
-
+///*
+//Copyright Bubi Technologies Co., Ltd. 2017 All Rights Reserved.
+//Licensed under the Apache License, Version 2.0 (the "License");
+//you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
+//http://www.apache.org/licenses/LICENSE-2.0
+//Unless required by applicable law or agreed to in writing, software
+//distributed under the License is distributed on an "AS IS" BASIS,
+//WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//See the License for the specific language governing permissions and
+//limitations under the License.
+//*/
+//
 #include <utils/headers.h>
 #include <common/general.h>
 #include <main/configure.h>
@@ -25,10 +25,8 @@ limitations under the License.
 namespace bubi {
 	MonitorManager::MonitorManager() : Network(SslParameter()) {
 		connect_interval_ = 120 * utils::MICRO_UNITS_PER_SEC;
-		last_connect_time_ = 0;
 		check_alert_interval_ = connect_interval_ = 5 * utils::MICRO_UNITS_PER_SEC;
 		last_connect_time_ = 0;
-		is_connected_ = false;
 
 		request_methods_[monitor::MONITOR_MSGTYPE_REGISTER] = std::bind(&MonitorManager::OnMonitorRegister, this, std::placeholders::_1, std::placeholders::_2);
 		request_methods_[monitor::MONITOR_MSGTYPE_BUBI] = std::bind(&MonitorManager::OnBubiStatus, this, std::placeholders::_1, std::placeholders::_2);
@@ -36,7 +34,6 @@ namespace bubi {
 		request_methods_[monitor::MONITOR_MSGTYPE_SYSTEM] = std::bind(&MonitorManager::OnSystemStatus, this, std::placeholders::_1, std::placeholders::_2);
 
 		thread_ptr_ = NULL;
-		init_ = false;
 	}
 
 	MonitorManager::~MonitorManager() {
@@ -54,7 +51,6 @@ namespace bubi {
 			return false;
 		}
 
-		init_ = true;
 		StatusModule::RegisterModule(this);
 		TimerNotify::RegisterModule(this);
 		LOG_INFO("monitor manager initialized");
@@ -68,12 +64,10 @@ namespace bubi {
 	}
 
 	void MonitorManager::Run(utils::Thread *thread) {
-		Start(utils::InetAddress::None());
+		Start(utils::InetAddress("127.0.0.1:1227"));
 	}
 
 	bool MonitorManager::OnConnectOpen(Connection *conn) {
-		is_connected_ = true;
-
 		std::error_code ignore_ec;
 		Monitor *monitor = (Monitor*)conn;
 		monitor::Hello hello;
@@ -94,23 +88,27 @@ namespace bubi {
 	}
 
 	void MonitorManager::OnDisconnect(Connection *conn) {
-		is_connected_ = false;
+		Monitor *monitor = (Monitor *)conn;
+		monitor->SetActiveTime(0);
 	}
 
 	bool MonitorManager::SendMonitor(int64_t type, const std::string &data) {
-		bool bret = true;
-		utils::MutexGuard guard(conns_list_lock_);
-		for (auto item : connections_) {
-			std::error_code ignore_ec;
-			Connection *peer = item.second;
-			if (!peer->InBound()) {
-				if (!peer->SendRequest(type, data, ignore_ec)) {
-					bret = false;
-					LOG_ERROR("Send monitor(type: %d) from ip(%s) failed (%d:%s)", type, peer->GetPeerAddress().ToIpPort().c_str(),
-						ignore_ec.value(), ignore_ec.message().c_str());
-				}
+		bool bret = false;
+		do {
+			Monitor *monitor = (Monitor *)GetClientConnection();
+			if (NULL == monitor || !monitor->IsActive()) {
+				break;
 			}
-		}
+
+			std::error_code ignore_ec;
+			if (!monitor->SendRequest(type, data, ignore_ec)) {
+				LOG_ERROR("Send monitor(type: %d) from ip(%s) failed (%d:%s)", type, monitor->GetPeerAddress().ToIpPort().c_str(),
+					ignore_ec.value(), ignore_ec.message().c_str());
+				break;
+			}
+			bret = true;
+		} while (false);
+		
 		return bret;
 	}
 
@@ -209,7 +207,7 @@ namespace bubi {
 		utils::MutexGuard guard(conns_list_lock_);
 		for (auto item : connections_) {
 			Monitor *peer = (Monitor *)item.second;
-			if (peer->IsActive() && !peer->InBound()) {
+			if (!peer->InBound()) {
 				monitor = peer;
 				break;
 			}
@@ -232,7 +230,8 @@ namespace bubi {
 	void MonitorManager::OnTimer(int64_t current_time) {
 		// reconnect if disconnect
 		if (current_time - last_connect_time_ > connect_interval_) {
-			if (!is_connected_ && init_) {
+			Monitor *monitor = (Monitor *)GetClientConnection();
+			if (NULL == monitor) {
 				std::string url = utils::String::Format("ws://%s", Configure::Instance().monitor_configure_.center_.c_str());
 				Connect(url);
 			}
@@ -241,9 +240,11 @@ namespace bubi {
 	}
 
 	void MonitorManager::OnSlowTimer(int64_t current_time) {
-		if (!is_connected_) {
+		Monitor *monitor = (Monitor *)GetClientConnection();
+		if (monitor == NULL || !monitor->IsActive()) {
 			return;
 		}
+
 		system_manager_.OnSlowTimer(current_time);
 
 		// send alert
@@ -257,8 +258,7 @@ namespace bubi {
 
 			bool bret = true;
 			std::error_code ignore_ec;
-			Connection *monitor = GetClientConnection();
-			if (monitor != NULL && !monitor->SendRequest(monitor::MONITOR_MSGTYPE_ALERT, alert_status.SerializeAsString(), ignore_ec)) {
+			if (!monitor->SendRequest(monitor::MONITOR_MSGTYPE_ALERT, alert_status.SerializeAsString(), ignore_ec)) {
 				bret = false;
 				LOG_ERROR("Send alert status from ip(%s) failed (%d:%s)", monitor->GetPeerAddress().ToIpPort().c_str(),
 					ignore_ec.value(), ignore_ec.message().c_str());

@@ -20,8 +20,8 @@ namespace bubi_ca {
 				sprintf(out_msg, "Create File(%s) Error", cert_file);
 				break;
 			}
-			utils::CA ca;
-			utils::stuSUBJECT *root_subject = (utils::stuSUBJECT *)root_info;
+			bubi::CA ca;
+			bubi::stuSUBJECT *root_subject = (bubi::stuSUBJECT *)root_info;
 			if (!ca.mkRoot(root_subject, &x509, &rsa, &pkey, 2048, days, out_msg)) {
 				break;
 			}
@@ -66,7 +66,7 @@ namespace bubi_ca {
 				root_cert_file_path = utils::String::Format("%s/%s", utils::File::GetBinHome().c_str(), root_cert_file_path.c_str());
 			}
 
-			utils::CA ca;
+			bubi::CA ca;
 			if (!ca.GetRootCode(root_cert_file_path.c_str(), root_code, len, out_msg)) {
 				break;
 			}
@@ -88,8 +88,8 @@ namespace bubi_ca {
 				req_file_path = utils::String::Format("%s/%s", utils::File::GetBinHome().c_str(), req_file_path.c_str());
 			}
 			// get request certificate content
-			utils::CA ca;
-			utils::stuSUBJECT req_info;
+			bubi::CA ca;
+			bubi::stuSUBJECT req_info;
 			if (!ca.GetReqContent(req_file_path.c_str(), req_info, out_msg)) {
 				break;
 			}
@@ -131,7 +131,7 @@ namespace bubi_ca {
 			}
 
 			// check root certificate
-			utils::CA ca;
+			bubi::CA ca;
 			std::string root_private_pem = root_private_file;
 			if (!utils::File::IsAbsolute(root_private_pem)){
 				root_private_pem = utils::String::Format("%s/%s", utils::File::GetBinHome().c_str(), root_private_pem.c_str());
@@ -159,8 +159,8 @@ namespace bubi_ca {
 				}
 				std::string user_ca_crt = request_csr.substr(0, request_csr.rfind(".")) + ".crt";
 				int cn_len = 0;
-				utils::stuKEYUSAGE key_usage;
-				utils::stuEKEYUSAGE ekey_usage;
+				bubi::stuKEYUSAGE key_usage;
+				bubi::stuEKEYUSAGE ekey_usage;
 				char serial[128] = { 0 };
 				char common_name[24] = { 0 };
 				char organization[96] = { 0 };
@@ -176,10 +176,10 @@ namespace bubi_ca {
 
 				// get hardware address and node id
 				char hard_address[33] = { 0 };
-				char node_id[50] = { 0 };
+				char node_id[4096] = { 0 };
 				if (!ca.GetHDAndDA(request_csr.c_str(), hard_address, sizeof(hard_address), node_id, sizeof(node_id), szmsg)) {
 					sprintf(out_msg, "get hardware address and node id failed, because %s", szmsg);
-					//db.Close();
+					utils::File::Delete(user_ca_crt);
 					break;
 				}
 				printf("\n\nmake user certificate successfully\nuser certificate file: %s\n\n\n", user_ca_crt.c_str());

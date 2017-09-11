@@ -12,9 +12,10 @@ limitations under the License.
 */
 
 #include "ca.h"
-#include "strings.h"
-#include "file.h"
-#include "crypto.h"
+#include "general.h"
+#include <utils/strings.h>
+#include <utils/file.h>
+#include <utils/crypto.h>
 #include <openssl/rand.h>
 #include <openssl/x509v3.h>
 #include <openssl/pkcs12.h>
@@ -27,13 +28,13 @@ limitations under the License.
 #define EXT_COPY_ADD    1
 #define EXT_COPY_ALL    2
 
-namespace utils {
+namespace bubi {
 
 bool CA::mkRootCode(stuSUBJECT *rootInfo, char *not_before, char *not_after, std::string& root_code) {
 	bool bret = false;
 	do {
-		const std::string code_one = "0BAED4FBA6604DFE875D95761A137199757D7369CAF44E67B1BF8C4DE86BE288";
-		const std::string code_two = "E1F58B5221B346578C415876384F596F83FC186580F2443F9E33A0B63AB7FB2F";
+		const std::string code_one = GetDataSecuretKey();
+		const std::string code_two = GetDataSecuretKey();
 		std::string src = code_one + (char*)rootInfo->CN + (char*)rootInfo->MAIL + code_two + (char*)rootInfo->OU + not_before + not_after;
 		root_code = utils::String::BinToHexString(utils::Sha256::Crypto(src));
 		bret = true;
@@ -1391,7 +1392,7 @@ bool CA::CheckRootCert(X509 *x509, char *root_ext_code, int root_ext_len, char *
 		mkRootCode(&root_info, not_before, not_after, root_code);
 
 		if (root_code.compare(root_ext_code) != 0) {
-			sprintf(err_msg, "the value of the extension (1.12.30663.195.6325) is invalid");
+			sprintf(err_msg, "this root certificate is not match with this version of bubi, please contact the bubi official!");
 			break;
 		}
 
@@ -1612,7 +1613,7 @@ bool CA::GetHDAndDA(X509_REQ *req, char *hardware_address, int hard_len, char *n
 				uint32_t data_len = strlen((char *)&octet_str->data[2]);
 				if ((unsigned)id_len < data_len) {
 					bsuccess = false;
-					sprintf(out_msg, "the length of hardware address buffer is too small");
+					sprintf(out_msg, "node id is invalid");
 					break;
 				}
 				strcpy(node_id, (char *)&octet_str->data[2]);
@@ -1622,7 +1623,7 @@ bool CA::GetHDAndDA(X509_REQ *req, char *hardware_address, int hard_len, char *n
 				uint32_t data_len = strlen((char *)&octet_str->data[2]);
 				if ((unsigned)hard_len < data_len) {
 					bsuccess = false;
-					sprintf(out_msg, "the length of node id buffer is too small");
+					sprintf(out_msg, "hardware address is invalid");
 					break;
 				}
 				strcpy(hardware_address, (char *)&octet_str->data[2]);

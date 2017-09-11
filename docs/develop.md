@@ -297,10 +297,10 @@ POST /submitTransaction
 
 |参数|描述
 |:--- | --- 
-|source_address | 交易发起人地址， required
-|nonce| 交易序号,required
-|expr_condition|表达式字段, optional
-|metadata|交易的元数据, optional
+|source_address | 交易发起人地址， 必填
+|nonce| 交易序号, 必填
+|expr_condition|表达式字段, 可选
+|metadata|交易的备注数据, 用户自定义, 可选, 必须为16进制表示
 
 ### expr_condtion 表达式规则
 该表达式字段，用于自定义交易有效规则，比如设置交易在某个账户的master_weight 大于 100 有效，则填：
@@ -322,23 +322,21 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 
 |参数|描述
 |:--- | --- 
-|source_address| 指哪个账号做此操作,若为空或不填写，默认与交易发起者相同， optional
-|type|表示该操作的类型， required
-|metadata|操作的 metadata 值，16进制表示， optional
-|expr_condition|操作的表达式限制， optional
+|source_address| 指哪个账号做此操作,若为空或不填写，默认与交易发起者相同， 可选
+|type|表示该操作的类型， 必填
+|metadata|操作的备注数据,用户自定义,必须16进制表示， 可选
+|expr_condition|操作的表达式限制， 可选
 
 
 #### 操作类型
-操作类型代码 | 操作类型名称 | 说明
-|:--- | --- | --- |
-1 | 创建帐号 | 用来新建帐号
-2 | 发行资产 | 
-3 | 转移资产 | 调用此接口可以将自定义资产转给另一个帐号
-4 | 设置metadata     |  设置账号属性 key / value 值
-5 | 设置Signer Weight | 设置账号权重，包括master 和 signer
-6 | 设置Threshold | 设置门限值，包括默认门限或具体操作门限
-7 | 调用合约
-
+|代码|名称|说明
+|:--|--|--
+|1| 创建帐号 | 用来新建帐号
+|2| 发行资产 | 用来发行一笔资产
+|3| 转移资产 | 调用此接口可以将自定义资产转给另一个帐号
+|4| 设置metadata     |  设置账号属性 key / value 值
+|5| 设置Signer Weight | 设置账号权重，包括master 和 signer
+|6| 设置Threshold | 设置门限值，包括默认门限或具体操作门限
 
 #### 1. 创建账号
 
@@ -401,6 +399,12 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 ```
 
 #### 2. 发行资产
+发行一笔资产，这笔资产的发行方就是本操作的source_address。
+
+|参数|描述
+|:--- | --- 
+|amount |  发行的数量
+|code|  资产代码
 
 ```json
 
@@ -419,6 +423,13 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 该操作先把指定的资产转给目标账号，然后调用目标账号的合约代码并以input作为入参。
 若目标账号没有合约代码，则只进行转移资产操作。
 
+|参数|描述
+|:--- | --- 
+|payment.dest_address |  目标账户
+|payment.asset.property.issuer|  资产发行方
+|payment.asset.property.code|  资产代码
+|payment.asset.amount|  要转移的数量
+|payment.input|  触发合约调用的入参
 ```json
 
 {
@@ -446,11 +457,9 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
 
 |参数|描述
 |:--- | --- 
-| key  |required，length:(0, 256]
-| value  |optional，length:(0, 1048576]
-| version |optional，default 0, 0：不限制版本，>0 : 当前 value 的版本必须为该值， <0 : 非法
-
-每次可设置多个。
+| set_metadata.key  |required，length:(0, 256]
+| set_metadata.value  |optional，length:(0, 1048576]
+| set_metadata.version |optional，default 0, 0：不限制版本，>0 : 当前 value 的版本必须为该值， <0 : 非法
 
 ```json
 {
@@ -541,7 +550,8 @@ function main(input)
 ```
 
 系统提供了几个全局函数, 这些函数可以获取区块链的一些信息，也可驱动账号发起交易
-
+### 注意，自定义的函数和变量不要与内置变量和全局函数重名，否则会造成不可控的数据错误。 ###
+## 内置函数
 ### 1. 获取账号信息(不包含metada和资产)
 
 callBackGetAccountInfo(address);
@@ -608,16 +618,8 @@ var bar = callBackGetAccountAsset('a0025e6de5a793da4b5b00715b7774916c06e9a72b7c1
 */
 ```
 
-### 4.  获取交易
-callBackGetTransactionInfo(hash);
-- hash: 交易hash
 
-例如
-```javascript
-var tx = callBackGetTransactionInfo('ea565a904d568368f4ab556bb20c3f3933411f72ef487e8f73eddbc6d7b84565');
-```
-
-### 5. 获取区块信息
+### 4. 获取区块信息
 callBackGetLedgerInfo(ledger_seq);
 - ledger_seq: 区块号
 
@@ -643,36 +645,10 @@ ledger具有如下格式
 
 ```
 
-### 6.  该合约账号的地址
-全局变量  ThisAddress
-
-全局变量ThisAddress的值等于该合约账号的地址。
-
-例如账号x发起了一笔交易调用合约Y，本次执行过程中，ThisAddress的值就是Y合约账号的地址。
-
-```javascript
-var bar = ThisAddress;
-/*
-bar的值是Y合约的账号地址。
-*/
-```
-
-### 7.  调用者的地址
-全局变量  Sender
-
-全局变量Sender的值等于本次调用该合约的账号。
-
-例如某账号发起了一笔交易，该交易中有个操作是调用合约Y（该操作的source_address是x），那么合约Y执行过程中，Sender的值就是x账号的地址。
-
-```javascript
-var bar = Sender;
-/*
-那么bar的值是x的账号地址。
-*/
-```
 
 
-### 8.  做交易
+
+### 5.  做交易
 令合约账号做一笔交易，即里面的任意一个操作的source_address都会自动变成合约账号。
 所以source_address是不需要填写的，即使填写也无用。
 
@@ -702,7 +678,7 @@ var transaction =
 var result = callBackDoOperation(transaction);
 ```
 
-### 9.  设置本合约账号的metadata
+### 6.  设置本合约账号的metadata
 callBackSetAccountMetaData(KeyPair);
 - KeyPair: 要设置的内容
 返回:true/false
@@ -746,6 +722,76 @@ var result = callBackDoOperation(transaction);
 - 如果version有值且不为0，其值需要和当前的version匹配才能设置成功。
 - 如果不填写或version为0，那么系统不需要匹配当前version即可设置成功。
 
+## 内置变量
+### 1.  该合约账号的地址
+thisAddress
+
+全局变量```thisAddress```的值等于该合约账号的地址。
+
+例如账号x发起了一笔交易调用合约Y，本次执行过程中，thisAddress的值就是Y合约账号的地址。
+
+```javascript
+var bar = thisAddress;
+/*
+bar的值是Y合约的账号地址。
+*/
+```
+
+### 2.  调用者的地址
+sender
+
+```sender```的值等于本次调用该合约的账号。
+
+例如某账号发起了一笔交易，该交易中有个操作是调用合约Y（该操作的source_address是x），那么合约Y执行过程中，sender的值就是x账号的地址。
+
+```javascript
+var bar = sender;
+/*
+那么bar的值是x的账号地址。
+*/
+```
+
+### 3.  触发本次合约的交易hash
+trigger
+
+```trigger```的值等于触发本次合约的交易。
+
+例如某账号A发起了一笔交易tx0，tx0中有一个操作是给某个合约账户转移资产(调用合约), 那么```trigger```的值就是交易tx0。
+
+```javascript
+var bar = trigger;
+/*
+那么bar的值是触发本次合约的交易。
+*/
+```
+
+### 4.  触发本次合约调用的操作的序号
+triggerIndex
+
+```triggerIndex```的值等于触发本次合约的操作的序号。
+
+例如某账号A发起了一笔交易tx0，tx0中第0（从0开始计数）个操作是给某个合约账户转移资产(调用合约), 那么```triggerIndex```的值就是0。
+
+```javascript
+var bar = triggerIndex;
+/* bar 是一个非负整数*/
+```
+
+### 5.  本次共识数据
+consensusValue
+
+```consensusValue```当前块(正在生成的块)的共识数据。
+consensusValue的数据结构可以在src/proto/chain.proto中找到ConsensusValue。
+ConsensusValue是一个protobuffer对象，根据protobuffer对象转为json格式的标准方法转换，即是```consensusValue```的值。
+
+```javascript
+var bar = consensusValue;
+/*consensusValue结构比较复杂，常用的数据有以下几个:*/
+consensusValue.close_time;	/*当前时间*/
+consensusValue.ledger_seq; 	/*当前区块序号*/
+consensusValue.previous_ledger_hash; /*上一个区块hash*/
+```
+
 ## __错误码__
 错误由两部分构成:
 - error_code : 错误码，大概的错误分类
@@ -755,48 +801,41 @@ var result = callBackDoOperation(transaction);
 
 error_code | enum | error_desc
 |:--- | --- | --- |
-0  | ERRCODE_SUCCESS | 操作成功
-1  | ERRCODE_INTERNAL_ERROR | 服务内部错误
-2  | ERRCODE_INVALID_PARAMETER | 参数错误
-3  | ERRCODE_ALREADY_EXIST | 对象已存在， 如重复提交交易
-4  | ERRCODE_NOT_EXIST | 对象不存在，如查询不到账号、TX、区块等
-5  | ERRCODE_TX_TIMEOUT | TX 超时，指该 TX 已经被当前节点从 TX 缓存队列去掉，==但并不代表这个一定不能被执行==
-20  | ERRCODE_EXPR_CONDITION_RESULT_FALSE | 指表达式执行结果为 false，意味着该 TX 当前没有执行成功，==但这并不代表在以后的区块不能成功==
-21  | ERRCODE_EXPR_CONDITION_SYNTAX_ERROR | 指表达式语法分析错误，代表该 TX 一定会失败
-90  | ERRCODE_INVALID_PUBKEY | 公钥非法 
-91  | ERRCODE_INVALID_PRIKEY | 私钥非法
-92  | ERRCODE_ASSET_INVALID | 资产issue 地址非法，或者 code 长度不在有效范围内
-93  | ERRCODE_INVALID_SIGNATURE | 签名权重不够，达不到操作的门限值
-94  | ERRCODE_INVALID_ADDRESS | 地址非法
-95  | ERRCODE_TIME_NOT_IN_RANGE | 不在有效时间范围内
-96  | ERRCODE_NO_NETWORK_CONSENSUS | 
-97  | ERRCODE_MISSING_OPERATIONS | TX 确实操作
-98  | ERRCODE_LAGER_OPERATIONS | 
-99  | ERRCODE_BAD_SEQUENCE | 序列号错误
-100 | ERRCODE_ACCOUNT_LOW_RESERVE | 
-101 | ERRCODE_ACCOUNT_SOURCEDEST_EQUAL | 源目的账号相等
-102 | ERRCODE_ACCOUNT_DEST_EXIST | 创建账号操作，目标账号已存在
-103 | ERRCODE_ACCOUNT_NOT_EXIST | 账户不存在
-104 | ERRCODE_ACCOUNT_ASSET_LOW_RESERVE | 支付操作，资产余额不足
-105 | ERRCODE_ACCOUNT_ASSET_AMOUNT_TOO_LARGE |
-110 | ERRCODE_SEQNUMBER_NOT_MATCH | 
-114 | ERRCODE_OUT_OF_TXCACHE |  TX 缓存队列已满
-120 | ERRCODE_WEIGHT_NOT_VALID | 权重值不在有效范围内
-121 | ERRCODE_THRESHOLD_NOT_VALID | 门限值不在有效范围内
-131 | ERRCODE_INPUT_NOT_EXIST |
-144 | ERRCODE_INVALID_DATAVERSION | version 版本号不与账号匹配
-150 | ERRCODE_CONTRACT_EXISTS |
-151 | ERRCODE_CONTRACT_EXECUTE_FAIL | 合约执行失败
-152 | ERRCODE_CONTRACT_SYNTAX_ERROR | 合约语法分析失败
+|0  | ERRCODE_SUCCESS | 操作成功
+|1  | ERRCODE_INTERNAL_ERROR | 服务内部错误
+|2  | ERRCODE_INVALID_PARAMETER | 参数错误
+|3  | ERRCODE_ALREADY_EXIST | 对象已存在， 如重复提交交易
+|4  | ERRCODE_NOT_EXIST | 对象不存在，如查询不到账号、TX、区块等
+|5  | ERRCODE_TX_TIMEOUT | TX 超时，指该 TX 已经被当前节点从 TX 缓存队列去掉，==但并不代表这个一定不能被执行==
+|20 | ERRCODE_EXPR_CONDITION_RESULT_FALSE | 指表达式执行结果为 false，意味着该 TX 当前没有执行成功，==但这并不代表在以后的区块不能成功==
+|21 | ERRCODE_EXPR_CONDITION_SYNTAX_ERROR | 指表达式语法分析错误，代表该 TX 一定会失败
+|90 | ERRCODE_INVALID_PUBKEY | 公钥非法 
+|91 | ERRCODE_INVALID_PRIKEY | 私钥非法
+|92 | ERRCODE_ASSET_INVALID | 资产issue 地址非法，或者 code 长度不在有效范围内
+|93 | ERRCODE_INVALID_SIGNATURE | 签名权重不够，达不到操作的门限值
+|94 | ERRCODE_INVALID_ADDRESS | 地址非法
+|97 | ERRCODE_MISSING_OPERATIONS | TX 缺失操作
+|99 | ERRCODE_BAD_SEQUENCE | 序列号错误
+|100| ERRCODE_ACCOUNT_LOW_RESERVE | 余额不足
+|101| ERRCODE_ACCOUNT_SOURCEDEST_EQUAL | 源目的账号相等
+|102| ERRCODE_ACCOUNT_DEST_EXIST | 创建账号操作，目标账号已存在
+|103| ERRCODE_ACCOUNT_NOT_EXIST | 账户不存在
+|104| ERRCODE_ACCOUNT_ASSET_LOW_RESERVE | 支付操作，资产余额不足
+|105| ERRCODE_ACCOUNT_ASSET_AMOUNT_TOO_LARGE |
+|114| ERRCODE_OUT_OF_TXCACHE |  TX 缓存队列已满
+|120| ERRCODE_WEIGHT_NOT_VALID | 权重值不在有效范围内
+|121| ERRCODE_THRESHOLD_NOT_VALID | 门限值不在有效范围内
+|144| ERRCODE_INVALID_DATAVERSION | version 版本号不与账号匹配
+|151| ERRCODE_CONTRACT_EXECUTE_FAIL | 合约执行失败
+|152| ERRCODE_CONTRACT_SYNTAX_ERROR | 合约语法分析失败
 
-## __交易码__
+## __操作码__
 
-type | enum | 交易说明
+|代码 | 枚举名 | 说明
 |:--- | --- | --- |
-1  | CREATE_ACCOUNT | 创建账号
-2  | ISSUE_ASSET | 发行资产
-3  | PAYMENT | 转移资产
-4  | SET_METADATA | 设置metadata
-5  | SET_SIGNER_WEIGHT | 设置signerweight
-6  | SET_THRESHOLD | 设置threshold
-7  | INVOKE_CONTRACT | 调用合约
+|1  | CREATE_ACCOUNT | 创建账号
+|2  | ISSUE_ASSET | 发行资产
+|3  | PAYMENT | 转移资产
+|4  | SET_METADATA | 设置metadata
+|5  | SET_SIGNER_WEIGHT | 设置signerweight
+|6  | SET_THRESHOLD | 设置threshold

@@ -49,8 +49,9 @@ namespace bubi {
 			Result result;
 			result.set_code(protocol::ERRCODE_SUCCESS);
 			result.set_desc("");
+
+			protocol::TransactionEnv tran_env;
 			do {
-				protocol::TransactionEnv tran_env;
 				if (json_item.isMember("transaction_blob")) {
 					if (!json_item.isMember("signatures")) {
 						result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
@@ -117,8 +118,12 @@ namespace bubi {
 				}
 				else {
 					protocol::Transaction *tran = tran_env.mutable_transaction();
-		
-					Json2Proto(json_item["transaction_json"], *tran);
+					std::string error_msg;
+					if (!Json2Proto(json_item["transaction_json"], *tran, error_msg)){
+						result.set_code(protocol::ERRCODE_INVALID_PARAMETER);
+						result.set_desc(error_msg);
+						break;
+					}
 	
 
 					std::string content = tran->SerializeAsString();
@@ -159,13 +164,14 @@ namespace bubi {
 					break;
 				}
 
-				if (result.code() == protocol::ERRCODE_SUCCESS) {
-					success_count++;
-					TransactionFrm::pointer ptr = std::make_shared<TransactionFrm>(tran_env);
-					GlueManager::Instance().OnTransaction(ptr, result);
-					PeerManager::Instance().Broadcast(protocol::OVERLAY_MSGTYPE_TRANSACTION, tran_env.SerializeAsString());
-				}
 			} while (false);
+
+			if (result.code() == protocol::ERRCODE_SUCCESS) {
+				TransactionFrm::pointer ptr = std::make_shared<TransactionFrm>(tran_env);
+				GlueManager::Instance().OnTransaction(ptr, result);
+				PeerManager::Instance().Broadcast(protocol::OVERLAY_MSGTYPE_TRANSACTION, tran_env.SerializeAsString());
+				if (result.code() == protocol::ERRCODE_SUCCESS) success_count++;
+			}
 			result_item["error_code"] = result.code();
 			result_item["error_desc"] = result.desc();
 		}

@@ -38,7 +38,7 @@ namespace bubi {
 	}
 
 
-	TransactionFrm::TransactionFrm(const protocol::TransactionEnv &env, std::shared_ptr<Environment> envir) :
+	TransactionFrm::TransactionFrm(const protocol::TransactionEnv &env) :
 		apply_time_(0),
 		result_(),
 		transaction_env_(env),
@@ -47,7 +47,6 @@ namespace bubi {
 		incoming_time_(utils::Timestamp::HighResolution()){
 		Initialize();
 		utils::AtomicInc(&bubi::General::tx_new_count);
-		environment_ = std::make_shared<Environment>(envir);
 	}
 
 	TransactionFrm::~TransactionFrm() {
@@ -111,7 +110,7 @@ namespace bubi {
 	}
 
 
-	bool TransactionFrm::ValidForApply(/*std::shared_ptr<Environment> environment*/) {
+	bool TransactionFrm::ValidForApply(std::shared_ptr<Environment> environment) {
 		do
 		{
 			if (!ValidForParameter())
@@ -120,7 +119,7 @@ namespace bubi {
 			std::string str_address = transaction_env_.transaction().source_address();
 			AccountFrm::pointer source_account;
 
-			if (!environment_->GetEntry(str_address, source_account)) {
+			if (!environment->GetEntry(str_address, source_account)) {
 				LOG_ERROR("Source account(%s) does not exists", str_address.c_str());
 				result_.set_code(protocol::ERRCODE_ACCOUNT_NOT_EXIST);
 				break;
@@ -215,9 +214,12 @@ namespace bubi {
 			return check_valid;
 		}
 
-		if (tran.metadata().size() > General::METADATA_MAXSIZE) {
+		if (tran.metadata().size() > General::METADATA_MAX_VALUE_SIZE) {
 			result_.set_code(protocol::ERRCODE_INVALID_PARAMETER);
-			result_.set_desc("Tx's metadata too long");
+			//result_.set_desc("Transaction metadata too long");
+			result_.set_desc(utils::String::Format("Length of the metadata from transaction exceeds the limit(%d).",
+				General::METADATA_MAX_VALUE_SIZE));
+
 			LOG_ERROR("%s", result_.desc().c_str());
 			check_valid = false;
 			return check_valid;
@@ -239,10 +241,11 @@ namespace bubi {
 			}
 
 			if (ope.metadata().size() > 0) {
-				if (ope.metadata().size() > General::METADATA_MAXSIZE) {
+				if (ope.metadata().size() > General::METADATA_MAX_VALUE_SIZE) {
 					check_valid = false;
 					result_.set_code(protocol::ERRCODE_INVALID_PARAMETER);
-					result_.set_desc("Tx's metadata too long");
+					result_.set_desc(utils::String::Format("Length of the metadata from operation(%d) exceeds the limit(%d).",
+						i, General::METADATA_MAX_VALUE_SIZE));
 					LOG_ERROR("%s", result_.desc().c_str());
 					break;
 				}
@@ -397,20 +400,19 @@ namespace bubi {
 		return false;
 	}
 
-	bool TransactionFrm::Apply(LedgerFrm* ledger_frm, bool bool_contract) {
+	bool TransactionFrm::Apply(LedgerFrm* ledger_frm, std::shared_ptr<Environment> parent, bool bool_contract) {
 		ledger_ = ledger_frm;
-		std::string str_address = GetSourceAddress();
 		AccountFrm::pointer source_account;
-		if (!environment_->GetEntry(str_address, source_account)) {
+		std::string str_address = GetSourceAddress();
+		if (!parent->GetEntry(str_address, source_account)) {
 			LOG_ERROR("Source account(%s) does not exists", str_address.c_str());
 			result_.set_code(protocol::ERRCODE_ACCOUNT_NOT_EXIST);
 			return false;
 		}
-
 		source_account->NonceIncrease();
 
-		environment_->Commit();
-
+		environment_ = std::make_shared<Environment>(parent.get());
+		
 		bool bSucess = true;
 		const protocol::Transaction &tran = transaction_env_.transaction();
 		for (processing_operation_ = 0; processing_operation_ < tran.operations_size(); processing_operation_++) {

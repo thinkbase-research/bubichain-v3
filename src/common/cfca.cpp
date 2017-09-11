@@ -256,6 +256,18 @@ namespace cfca {
 			return false;
 		} 
 
+		// check publickey is or not a base64 character string
+		if (!IsBase64String(publickey)) {
+			LOG_ERROR("public key is invalid, please check!");
+			return false;
+		}
+
+		// check sign is or not a base64 character string
+		if (!IsBase64String(sig)) {
+			LOG_ERROR("sign data is invalid, please check!");
+			return false;
+		}
+
 		char szAlgorithm[8] = { 0 };
 		if (!GetAlgorithm((char*)publickey.c_str(), szAlgorithm)) {
 			LOG_ERROR("GetAlgorithm failed");
@@ -279,6 +291,28 @@ namespace cfca {
 		cfca_functions_.FreeMemory(pszP7DetachedBase64SignCertContent);
 		pszP7DetachedBase64SignCertContent = NULL;
 
+		return true;
+	}
+
+	bool CFCA::IsBase64String(std::string msg) {
+		// check publickey is or not a base64 character string
+		if (msg.length() == 0 || msg.length() % 4 != 0) {
+			return false;
+		}
+
+		int length = msg.find('=');
+		if (length == -1) {
+			length = msg.length();
+		}
+		for (int i = 0; i < length; i++) {
+			char key = msg[i];
+			if ((key >= 'a' && key <= 'z') || (key >= 'A' && key <= 'Z') || (key >= '0' && key <= '9') || key == '/' || key == '+') {
+				continue;
+			}
+			else {
+				return false;
+			}
+		}
 		return true;
 	}
 

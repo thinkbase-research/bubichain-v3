@@ -61,9 +61,6 @@ namespace bubi {
 		Connection * GetClientConnection();
 
 	private:
-
-		bool init_;
-		bool is_connected_;
 		utils::Thread *thread_ptr_;
 
 		std::string monitor_id_;

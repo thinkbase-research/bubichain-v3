@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 
 project(bubi)
-add_compile_options("-g")
+add_compile_options(-g -O2)
 add_definitions(-DSVNVERSION=\"${SVNVERSION}\")
 message(STATUS "-DSVNVERSION="${SVNVERSION})
 
@@ -12,7 +12,7 @@ set(LIBRARY_OUTPUT_PATH ${BUBI_ROOT_DIR}/lib)
 set(EXECUTABLE_OUTPUT_PATH ${BUBI_ROOT_DIR}/bin)
 set(BUBI_LINKER_FLAGS "-Wl,-dy -lpthread -lrt -ldl")
 
-execute_process(COMMAND make all -j8 WORKING_DIRECTORY ${BUBI_SRC_DIR}/3rd)
+execute_process(COMMAND make all WORKING_DIRECTORY ${BUBI_SRC_DIR}/3rd)
 
 include_directories(
     ${BUBI_SRC_DIR}
@@ -96,6 +96,7 @@ file(APPEND ${SUPPLEMENT} "\tsudo ln -s -f /etc/init.d/bubid /etc/rc2.d/S50bubid
 file(APPEND ${SUPPLEMENT} "\tsudo ln -s -f /etc/init.d/bubid /etc/rc3.d/S50bubid;\\\n")
 file(APPEND ${SUPPLEMENT} "\tsudo ln -s -f /etc/init.d/bubid /etc/rc4.d/S50bubid;\\\n")
 file(APPEND ${SUPPLEMENT} "\tsudo ln -s -f /etc/init.d/bubid /etc/rc5.d/S50bubid;\\\n")
+file(APPEND ${SUPPLEMENT} "\tsudo mkdir -p ${FIX_DIR}/data;\n")
 
 file(APPEND ${SUPPLEMENT} "\nuninstall:\n")
 file(APPEND ${SUPPLEMENT} "\trm -f /etc/rc1.d/S99bubi;\\\n")
