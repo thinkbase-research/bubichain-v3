@@ -227,7 +227,7 @@ GET /getTransactionHistory?hash=ad545bfc26c440e324076fbbe1d8affbd8a2277858dc3592
 ## __配置验证节点__
 
 ```http
-POST /confValidator?add=a00252641e461a28e0f2d19e01fa9ce4ba89af24d5f0c6&&del=a0027fb6fd8e8ffbf64cf10efebd9278735d5e39a6325e
+POST /confValidator?add=a00252641e461a28e0f2d19e01fa9ce4ba89af24d5f0c6&del=a0027fb6fd8e8ffbf64cf10efebd9278735d5e39a6325e
 ```
 
 |参数|描述
