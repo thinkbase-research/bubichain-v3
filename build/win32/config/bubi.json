@@ -2,8 +2,7 @@
 	"db": {
 		"account_path": "data/account.db",
 		"ledger_path": "data/ledger.db",
-		"keyvalue_path": "data/keyvalue.db",
-		"tmp_path": "tmp"
+		"keyvalue_path": "data/keyvalue.db"
 	},
 	"monitor": {
 		"id": "123123123123123",

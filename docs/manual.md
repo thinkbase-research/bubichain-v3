@@ -72,10 +72,9 @@ sudo ln -s /usr/local/bubichain/bin/libSADK_Standard.so.3.4.0.3 /usr/local/bubic
 
 ```json
     "db":{
-        "ledger_path":"data/ledger.db",
-        "keyvalue_path":"data/keyvalue.db",
-        "rational_db_type":"pgsql",
-        "tmp_path":"tmp"
+		"account_path": "data/account.db",
+		"ledger_path": "data/ledger.db",
+		"keyvalue_path": "data/keyvalue.db"
     }
 ```
 ##### 节点间网络通信
