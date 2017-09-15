@@ -23,7 +23,7 @@ namespace bubi {
 	const uint32_t General::LEDGER_VERSION = 3000;
 	const uint32_t General::LEDGER_MIN_VERSION = 3000;
 	const uint32_t General::MONITOR_VERSION = 3000;
-	const char *General::BUBI_VERSION = "3.0.0.0";
+	const char *General::BUBI_VERSION = "3.0.0.1";
 
 #ifdef WIN32
 	const char *General::DEFAULT_KEYVALUE_DB_PATH = "data/keyvalue.db";
