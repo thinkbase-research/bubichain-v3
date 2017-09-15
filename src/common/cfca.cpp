@@ -319,63 +319,58 @@ namespace cfca {
 	void Error::PrintError(int error_code) {
 		switch (error_code) {
 		case 0x80070057:
-			LOG_ERROR("error: 0x%08x, 参数错误", error_code);
+			LOG_ERROR("error: 0x%08x, parameter error", error_code);
 			break;
 		case 0x8007006E:
-			LOG_ERROR("error: 0x%08x, Base64编码失败", error_code);
+			LOG_ERROR("error: 0x%08x, Base64 encoding failed", error_code);
 			break;
 		case 0xA0071005:
-			LOG_ERROR("error: 0x%08x, Base64解码失败", error_code);
+			LOG_ERROR("error: 0x%08x, Base64 decoding failed", error_code);
 			break;
 		case 0xA0071031:
-			LOG_ERROR("error: 0x%08x, 证书链中某个证书时间无效", error_code);
+			LOG_ERROR("error: 0x%08x, invalid time for a certificate in the certificate chain", error_code);
 			break;
 		case 0xA0071032:
-			LOG_ERROR("error: 0x%08x, 证书已经被吊销", error_code);
+			LOG_ERROR("error: 0x%08x, the certificate has been revoked", error_code);
 			break;
 		case 0xA0071033:
-			LOG_ERROR("error: 0x%08x, 证书链不完整", error_code);
+			LOG_ERROR("error: 0x%08x, the certificate chain is incomplete", error_code);
 			break;
 		case 0xA0072021:
-			LOG_ERROR("error: 0x%08x, 证书链不完整", error_code);
-			//LOG_ERROR("error: 0x%08x, 无效的证书用途", error_code);
+			LOG_ERROR("error: 0x%08x, invalid certificate use", error_code);
 			break;
 		case 0xA0071101:
-			LOG_ERROR("error: 0x%08x, 证书链不完整", error_code);
-			//LOG_ERROR("error: 0x%08x, 数据大小超过最大限制", error_code);
+			LOG_ERROR("error: 0x%08x, the data size exceeds the maximum limit", error_code);
 			break;
 		case 0xA0071102:
-			LOG_ERROR("error: 0x%08x, 证书链不完整", error_code);
-			//LOG_ERROR("error: 0x%08x, 递归深度超过最大限制", error_code);
+			LOG_ERROR("error: 0x%08x, recursive depth exceeds maximum limit", error_code);
 			break;
 		case 0xA0071103:
-			LOG_ERROR("error: 0x%08x, 证书链不完整", error_code);
-			//LOG_ERROR("error: 0x%08x, SM2文件证书解析错误", error_code);
+			LOG_ERROR("error: 0x%08x, SM2 file certificate parsing error", error_code);
 			break;
 		case 0xA0071104:
-			LOG_ERROR("error: 0x%08x, 无效的PKCS#7签名格式", error_code);
+			LOG_ERROR("error: 0x%08x, invalid PKCS#7 signature format", error_code);
 			break;
 		case 0xA0071105:
-			LOG_ERROR("error: 0x%08x, 证书链不完整", error_code);
-			//LOG_ERROR("error: 0x%08x, 无效的数字信封格式", error_code);
+			LOG_ERROR("error: 0x%08x, invalid digital envelope format", error_code);
 			break;
 		case 0xA0071106:
-			LOG_ERROR("error: 0x%08x, 未找到匹配的SM2解密证书", error_code);
+			LOG_ERROR("error: 0x%08x, the matching SM2 decryption certificate was not found", error_code);
 			break;
 		case 0xA0071107:
-			LOG_ERROR("error: 0x%08x, 签名失败", error_code);
+			LOG_ERROR("error: 0x%08x, signature failed", error_code);
 			break;
 		case 0xA0071108:
-			LOG_ERROR("error: 0x%08x, 解密SM2文件证书失败", error_code);
+			LOG_ERROR("error: 0x%08x, failed to decrypt the SM2 file certificate", error_code);
 			break;
 		case 0xA0071109:
-			LOG_ERROR("error: 0x%08x, 验证证书失败", error_code);
+			LOG_ERROR("error: 0x%08x, failed to validate the certificate", error_code);
 			break;
 		case 0xA0071110:
-			LOG_ERROR("error: 0x%08x, 获取证书信息失败", error_code);
+			LOG_ERROR("error: 0x%08x, failed to obtain certificate information", error_code);
 			break;
 		case 0xFFFFFFFF:
-			LOG_ERROR("error: 0x%08x, 操作失败（具体原因请查看工具包日志文件）", error_code);
+			LOG_ERROR("error: 0x%08x, the operation failed (see the toolkit log file for specific reasons)", error_code);
 			break;
 		default:
 			break;
