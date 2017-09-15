@@ -77,7 +77,7 @@ X509 *CA::LoadCert(const char *cert, int certlen, char *out_msg) {
 	X509 *x509 = NULL;
 	if (certlen == 0) {
 		if ((in = BIO_new_file(cert, "r")) == NULL) {
-			sprintf(out_msg, "open CA certificate file(%s) failed", cert);
+			sprintf(out_msg, "open certificate file(%s) failed", cert);
 			return NULL;
 		}
 	}
@@ -141,7 +141,7 @@ EVP_PKEY *CA::LoadKey(const char *key, int keylen, const char *pass, char *out_m
 		OpenSSL_add_all_algorithms();
 		if (keylen == 0) {// in file
 			if ((in = BIO_new_file(key, "r")) == NULL) {
-				sprintf(out_msg, "open CA certificate file(%s) failed", key);
+				sprintf(out_msg, "open certificate file(%s) failed", key);
 				break;
 			}
 		}
@@ -1273,15 +1273,19 @@ bool CA::mkRoot(stuSUBJECT *rootInfo, X509 **x509p, RSA **rsa, EVP_PKEY **ppkey,
 		struct tm tm_not_before;
 		char not_before[20] = { 0 };
 		if (asn1_time_to_tm(&tm_not_before, not_before_time) == 1) {
+			int hour = (1 == tm_not_before.tm_isdst) ? (tm_not_before.tm_hour + 7 >= 24 ? (tm_not_before.tm_hour - 17) : (tm_not_before.tm_hour + 7))
+				: (tm_not_before.tm_hour + 8 >= 24 ? (tm_not_before.tm_hour - 16) : (tm_not_before.tm_hour + 8));
 			sprintf(not_before, "%04d%02d%02d%02d%02d%02d", tm_not_before.tm_year + 1900, tm_not_before.tm_mon + 1, tm_not_before.tm_mday,
-				(tm_not_before.tm_hour + 8 >= 24 ? (tm_not_before.tm_hour - 16) : (tm_not_before.tm_hour + 8)), tm_not_before.tm_min, tm_not_before.tm_sec);
+				hour, tm_not_before.tm_min, tm_not_before.tm_sec);
 		}
 		ASN1_TIME* not_after_time = X509_gmtime_adj(X509_get_notAfter(x), (long)SECS_PER_DAY * days);
 		struct tm tm_not_after;
 		char not_after[20] = { 0 };
 		if (asn1_time_to_tm(&tm_not_after, not_after_time) == 1) {
+			int hour = (1 == tm_not_after.tm_isdst) ? (tm_not_after.tm_hour + 7 >= 24 ? (tm_not_after.tm_hour - 17) : (tm_not_after.tm_hour + 7))
+				: (tm_not_after.tm_hour + 8 >= 24 ? (tm_not_after.tm_hour - 16) : (tm_not_after.tm_hour + 8));
 			sprintf(not_after, "%04d%02d%02d%02d%02d%02d", tm_not_after.tm_year + 1900, tm_not_after.tm_mon + 1, tm_not_after.tm_mday,
-				(tm_not_after.tm_hour + 8 >= 24 ? (tm_not_after.tm_hour - 16) : (tm_not_after.tm_hour + 8)), tm_not_after.tm_min, tm_not_after.tm_sec);
+				hour, tm_not_after.tm_min, tm_not_after.tm_sec);
 		}
 
 		X509_set_pubkey(x, pk);
@@ -1619,7 +1623,6 @@ bool CA::GetHDAndDA(X509_REQ *req, char *hardware_address, int hard_len, char *n
 				strcpy(node_id, (char *)&octet_str->data[2]);
 			}
 			else if (OBJ_obj2nid(ext->object) == nid_hard_addr) {
-				printf("%s\n", (char *)&octet_str->data[2]);
 				uint32_t data_len = strlen((char *)&octet_str->data[2]);
 				if ((unsigned)hard_len < data_len) {
 					bsuccess = false;
@@ -1749,39 +1752,41 @@ bool CA::CheckCertValidity(X509 *x509, char *not_before, char *not_after, char *
 		}
 
 		ASN1_TIME* not_before_time = X509_get_notBefore(x509);
+		if (X509_cmp_current_time(not_before_time) > 0) {
+			sprintf(out_msg, "the begin time of the certificate can not later than the current time");
+			break;
+		}
+
+		ASN1_TIME* not_after_time = X509_get_notAfter(x509);
+		if (X509_cmp_current_time(not_after_time) < 0) {
+			sprintf(out_msg, "the end time of the certificate can not earlier than the current time");
+			break;
+		}
+
 		struct tm tm_not_before;
 		if (asn1_time_to_tm(&tm_not_before, not_before_time) != 1) {
 			sprintf(out_msg, "parse begin time failed, maybe the certificate is broken");
 			break;
 		}
 
-		ASN1_TIME* not_after_time = X509_get_notAfter(x509);
 		struct tm tm_not_after;
 		if (asn1_time_to_tm(&tm_not_after, not_after_time) != 1) {
 			sprintf(out_msg, "parse end time failed, maybe the certificate is broken");
 			break;
 		}
 
-		time_t now = time(NULL);
-		time_t before = mktime(&tm_not_before);
-		time_t after = mktime(&tm_not_after);
-		if (now <= before) {
-			sprintf(out_msg, "the begin time of the certificate can not later than the current time");
-			break;
-		}
-		if (now >= after) {
-			sprintf(out_msg, "the end time of the certificate can not earlier than the current time");
-			break;
-		}
-
 		if (not_before != NULL) {
+			int hour = (1 == tm_not_before.tm_isdst) ? (tm_not_before.tm_hour + 7 >= 24 ? (tm_not_before.tm_hour - 17) : (tm_not_before.tm_hour + 7))
+				: (tm_not_before.tm_hour + 8 >= 24 ? (tm_not_before.tm_hour - 16) : (tm_not_before.tm_hour + 8));
 			sprintf(not_before, "%04d%02d%02d%02d%02d%02d", tm_not_before.tm_year + 1900, tm_not_before.tm_mon + 1, tm_not_before.tm_mday,
-				(tm_not_before.tm_hour + 8 >= 24 ? (tm_not_before.tm_hour - 16) : (tm_not_before.tm_hour + 8)), tm_not_before.tm_min, tm_not_before.tm_sec);
+				hour, tm_not_before.tm_min, tm_not_before.tm_sec);
 		}
 		
 		if (not_after != NULL) {
+			int hour = (1 == tm_not_after.tm_isdst) ? (tm_not_after.tm_hour + 7 >= 24 ? (tm_not_after.tm_hour - 17) : (tm_not_after.tm_hour + 7))
+				: (tm_not_after.tm_hour + 8 >= 24 ? (tm_not_after.tm_hour - 16) : (tm_not_after.tm_hour + 8));
 			sprintf(not_after, "%04d%02d%02d%02d%02d%02d", tm_not_after.tm_year + 1900, tm_not_after.tm_mon + 1, tm_not_after.tm_mday,
-				(tm_not_after.tm_hour + 8 >= 24 ? (tm_not_after.tm_hour - 16) : (tm_not_after.tm_hour + 8)), tm_not_after.tm_min, tm_not_after.tm_sec);
+				hour, tm_not_after.tm_min, tm_not_after.tm_sec);
 		}
 
 		bret = true;
