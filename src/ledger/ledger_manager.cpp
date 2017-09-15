@@ -891,12 +891,15 @@ namespace bubi {
 			auto trigger = tx_store.mutable_transaction_env()->mutable_trigger();
 			trigger->mutable_transaction()->set_hash(back->GetContentHash());
 			trigger->mutable_transaction()->set_index(back->processing_operation_);
-			back->instructions_.push_back(tx_store);
+			
 
 			if (txfrm->GetResult().code() == protocol::ERRCODE_SUCCESS){
 				back->instructions_.insert(back->instructions_.end(), txfrm->instructions_.begin(), txfrm->instructions_.end());
 				txfrm->environment_->Commit();
 			}
+			tx_store.set_error_code(txfrm->GetResult().code());
+			tx_store.set_error_desc(txfrm->GetResult().desc());
+			back->instructions_.push_back(tx_store);
 			transaction_stack_.pop();
 
 			return txfrm->GetResult().code() == protocol::ERRCODE_SUCCESS;
