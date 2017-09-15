@@ -10,7 +10,7 @@ set(BUBI_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 set(BUBI_ROOT_DIR ${BUBI_SRC_DIR}/..)
 set(LIBRARY_OUTPUT_PATH ${BUBI_ROOT_DIR}/lib)
 set(EXECUTABLE_OUTPUT_PATH ${BUBI_ROOT_DIR}/bin)
-set(BUBI_LINKER_FLAGS "-Wl,-dy -lpthread -lrt -ldl")
+set(BUBI_LINKER_FLAGS "-static-libstdc++ -Wl,-dy -lpthread -lrt -ldl")
 
 execute_process(COMMAND make all WORKING_DIRECTORY ${BUBI_SRC_DIR}/3rd)
 
