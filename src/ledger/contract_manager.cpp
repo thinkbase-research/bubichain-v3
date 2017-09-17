@@ -42,40 +42,40 @@ namespace bubi{
 
 		// Store the request pointer in the JavaScript wrapper.
 
-		if (global_.IsEmpty()) {
-			v8::Local<v8::ObjectTemplate>  global = v8::ObjectTemplate::New(isolate_);
+		//if (global_.IsEmpty()) {
+			//v8::Local<v8::ObjectTemplate>  global = v8::ObjectTemplate::New(isolate_);
+			global_ = v8::ObjectTemplate::New(isolate_);
 
-
-			global->Set(
+			global_->Set(
 				v8::String::NewFromUtf8(isolate_, "callBackLog", v8::NewStringType::kNormal)
 				.ToLocalChecked(),
 				v8::FunctionTemplate::New(isolate_, ContractManager::CallBackLog, v8::External::New(isolate_, this)));
 
 
-			global->Set(
+			global_->Set(
 				v8::String::NewFromUtf8(isolate_, "callBackGetAccountInfo", v8::NewStringType::kNormal)
 				.ToLocalChecked(),
 				v8::FunctionTemplate::New(isolate_, ContractManager::CallBackGetAccountInfo, v8::External::New(isolate_, this)));
 
 
-			global->Set(
+			global_->Set(
 				v8::String::NewFromUtf8(isolate_, "callBackGetAccountAsset", v8::NewStringType::kNormal)
 				.ToLocalChecked(),
 				v8::FunctionTemplate::New(isolate_, ContractManager::CallBackGetAccountAsset, v8::External::New(isolate_, this)));
 
 
-			global->Set(
+			global_->Set(
 				v8::String::NewFromUtf8(isolate_, "callBackGetAccountMetaData", v8::NewStringType::kNormal)
 				.ToLocalChecked(),
 				v8::FunctionTemplate::New(isolate_, ContractManager::CallBackGetAccountMetaData, v8::External::New(isolate_, this)));
 
 
-			global->Set(
+			global_->Set(
 				v8::String::NewFromUtf8(isolate_, "callBackSetAccountMetaData", v8::NewStringType::kNormal)
 				.ToLocalChecked(),
 				v8::FunctionTemplate::New(isolate_, ContractManager::CallBackSetAccountMetaData, v8::External::New(isolate_, this)));
 
-			global->Set(
+			global_->Set(
 				v8::String::NewFromUtf8(isolate_, "callBackGetLedgerInfo", v8::NewStringType::kNormal)
 				.ToLocalChecked(),
 				v8::FunctionTemplate::New(isolate_, ContractManager::CallBackGetLedgerInfo, v8::External::New(isolate_, this)));
@@ -87,22 +87,23 @@ namespace bubi{
 						v8::FunctionTemplate::New(isolate_, ContractManager::CallBackGetTransactionInfo, v8::External::New(isolate_, this)));*/
 
 
-			global->Set(
+			global_->Set(
 				v8::String::NewFromUtf8(isolate_, "callBackDoOperation", v8::NewStringType::kNormal)
 				.ToLocalChecked(),
 				v8::FunctionTemplate::New(isolate_, ContractManager::CallBackDoOperation, v8::External::New(isolate_, this)));
 
-			global->Set(
+			global_->Set(
 				v8::String::NewFromUtf8(isolate_, "include", v8::NewStringType::kNormal)
 				.ToLocalChecked(),
 				v8::FunctionTemplate::New(isolate_, ContractManager::Include, v8::External::New(isolate_, this)));
 
-			global_.Reset(isolate_, global);
-		}
+		//	global_.Reset(isolate_, global);
+		//}
 	}
 
 	ContractManager::~ContractManager(){
-
+		isolate_->Dispose();
+		isolate_ = NULL;
 	}
 
 

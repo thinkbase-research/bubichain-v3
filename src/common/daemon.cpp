@@ -19,6 +19,7 @@ namespace utils {
 	Daemon::Daemon() {
 		last_write_time_ = 0;
 		timer_name_ = "Daemon";
+		shared = NULL;
 	}
 
 	Daemon::~Daemon() {}
@@ -45,7 +46,7 @@ namespace utils {
 		shmid = shmget((key_t)key, sizeof(int64_t), 0666 | IPC_CREAT);
 		if (shmid == -1) {
 			LOG_ERROR("shmget failed");
-			return false;
+			return true;
 		}
 		//将共享内存连接到当前进程的地址空间
 		shm = shmat(shmid, (void*)0, 0);
@@ -81,7 +82,7 @@ namespace utils {
 #else
 		if (current_time - last_write_time_ > 500000) {
 			pthread_mutex_lock(mptr);
-			*shared = current_time;
+			if (shared) *shared = current_time;
 			last_write_time_ = current_time;
 			pthread_mutex_unlock(mptr);
 		}

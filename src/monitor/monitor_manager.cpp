@@ -25,7 +25,7 @@
 namespace bubi {
 	MonitorManager::MonitorManager() : Network(SslParameter()) {
 		connect_interval_ = 120 * utils::MICRO_UNITS_PER_SEC;
-		check_alert_interval_ = connect_interval_ = 5 * utils::MICRO_UNITS_PER_SEC;
+		check_alert_interval_ = 5 * utils::MICRO_UNITS_PER_SEC;
 		last_connect_time_ = 0;
 
 		request_methods_[monitor::MONITOR_MSGTYPE_REGISTER] = std::bind(&MonitorManager::OnMonitorRegister, this, std::placeholders::_1, std::placeholders::_2);

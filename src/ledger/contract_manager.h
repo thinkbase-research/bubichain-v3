@@ -28,8 +28,7 @@ namespace bubi{
 	{
 		v8::Isolate* isolate_;
 		v8::Global<v8::Context> g_context_;
-		v8::Global<v8::ObjectTemplate> global_;
-		
+		v8::Local<v8::ObjectTemplate> global_;
 
 	    static std::map<std::string, std::string> jslib_sources;
 		static const std::string sender_name_ ;

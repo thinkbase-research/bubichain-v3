@@ -227,7 +227,7 @@ GET /getTransactionHistory?hash=ad545bfc26c440e324076fbbe1d8affbd8a2277858dc3592
 ## __配置验证节点__
 
 ```http
-POST /confValidator?add=a00252641e461a28e0f2d19e01fa9ce4ba89af24d5f0c6&&del=a0027fb6fd8e8ffbf64cf10efebd9278735d5e39a6325e
+POST /confValidator?add=a00252641e461a28e0f2d19e01fa9ce4ba89af24d5f0c6&del=a0027fb6fd8e8ffbf64cf10efebd9278735d5e39a6325e
 ```
 
 |参数|描述
@@ -356,7 +356,7 @@ jsonpath(account(\"bubiV8i6mtcDN5a1X7PbRPuaZuo63QRrHxHGr98s\"), \".priv.master_w
      "contract" : //optional
      {
        "contract_id" : "something identify this contract",
-       "payload" : "function Main(input) {  var a = callBackGetAccountInfo('a0025e6de5a793da4b5b00715b7774916c06e9a72b7c18');  if (a) callBackLog(a);  var b = callBackGetAccountMetaData('a0025e6de5a793da4b5b00715b7774916c06e9a72b7c18', input['key']);  if (b) callBackLog(b);  var tx = { 'operations' : [{ 'type' : 'ISSUE_ASSET', 'source_address' : 'a0025e6de5a793da4b5b00715b7774916c06e9a72b7c18', 'issue_asset' : {  'code' : 'cny',  'amount' : input.amount }  } ]  };  callBackDoOperation(tx); } "
+       "payload" : "function main(input) {  var a = callBackGetAccountInfo('a0025e6de5a793da4b5b00715b7774916c06e9a72b7c18');  if (a) callBackLog(a);  var b = callBackGetAccountMetaData('a0025e6de5a793da4b5b00715b7774916c06e9a72b7c18', input['key']);  if (b) callBackLog(b);  var tx = { 'operations' : [{ 'type' : 'ISSUE_ASSET', 'source_address' : 'a0025e6de5a793da4b5b00715b7774916c06e9a72b7c18', 'issue_asset' : {  'code' : 'cny',  'amount' : input.amount }  } ]  };  callBackDoOperation(tx); } "
      },
      "metadatas" : [
         {
