@@ -463,6 +463,11 @@ namespace bubi {
 	}
 
 	bool PeerNetwork::CreatePeerIfNotExist(const utils::InetAddress &address) {
+		if (address.IsAny() || address.GetPort() == 0) {
+			LOG_ERROR("Peer address(%s) not valid", address.ToIpPort().c_str());
+			return false;
+		} 
+
 		protocol::Peers peers;
 		int32_t peer_count = QueryItem(address, peers);
 		if (peer_count < 0) {

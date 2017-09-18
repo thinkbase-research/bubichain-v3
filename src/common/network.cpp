@@ -497,21 +497,33 @@ namespace bubi {
 		connection_hdl handle;
 		if (ssl_parameter_.enable_) {
 			tls_con = tls_client_.get_connection(uri, ec);
-			tls_con->set_open_handler(bind(&Network::OnClientOpen, this, _1));
-			tls_con->set_close_handler(bind(&Network::OnClose, this, _1));
-			tls_con->set_message_handler(bind(&Network::OnMessage, this, _1, _2));
-			tls_con->set_fail_handler(bind(&Network::OnFailed, this, _1));
-			tls_con->set_pong_handler(bind(&Network::OnPong, this, _1, _2));
-			handle = tls_con->get_handle();
+			if (tls_con) {
+				tls_con->set_open_handler(bind(&Network::OnClientOpen, this, _1));
+				tls_con->set_close_handler(bind(&Network::OnClose, this, _1));
+				tls_con->set_message_handler(bind(&Network::OnMessage, this, _1, _2));
+				tls_con->set_fail_handler(bind(&Network::OnFailed, this, _1));
+				tls_con->set_pong_handler(bind(&Network::OnPong, this, _1, _2));
+				handle = tls_con->get_handle();
+			}
+			else {
+				LOG_ERROR("Get uri(%s) initialization error(%s)", uri.c_str(), ec.message().c_str());
+				return false;
+			}
 		}
 		else {
 			con = client_.get_connection(uri, ec);
-			con->set_open_handler(bind(&Network::OnClientOpen, this, _1));
-			con->set_close_handler(bind(&Network::OnClose, this, _1));
-			con->set_message_handler(bind(&Network::OnMessage, this, _1, _2));
-			con->set_fail_handler(bind(&Network::OnFailed, this, _1));
-			con->set_pong_handler(bind(&Network::OnPong, this, _1, _2));
-			handle = con->get_handle();
+			if (con) {
+				con->set_open_handler(bind(&Network::OnClientOpen, this, _1));
+				con->set_close_handler(bind(&Network::OnClose, this, _1));
+				con->set_message_handler(bind(&Network::OnMessage, this, _1, _2));
+				con->set_fail_handler(bind(&Network::OnFailed, this, _1));
+				con->set_pong_handler(bind(&Network::OnPong, this, _1, _2));
+				handle = con->get_handle();
+			}
+			else {
+				LOG_ERROR("Get uri(%s) initialization error(%s)", uri.c_str(), ec.message().c_str());
+				return false;
+			}
 		}
 
 		if (ec) {
