@@ -39,7 +39,6 @@ void protobuf_AssignDesc_monitor_2eproto();
 void protobuf_ShutdownFile_monitor_2eproto();
 
 class AlertStatus;
-class BubiAttack;
 class BubiStatus;
 class CPU;
 class ErrorMessage;
@@ -115,95 +114,6 @@ inline bool MONITOR_ERROR_Parse(
 }
 // ===================================================================
 
-class BubiAttack : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:monitor.BubiAttack) */ {
- public:
-  BubiAttack();
-  virtual ~BubiAttack();
-
-  BubiAttack(const BubiAttack& from);
-
-  inline BubiAttack& operator=(const BubiAttack& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const BubiAttack& default_instance();
-
-  void Swap(BubiAttack* other);
-
-  // implements Message ----------------------------------------------
-
-  inline BubiAttack* New() const { return New(NULL); }
-
-  BubiAttack* New(::google::protobuf::Arena* arena) const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const BubiAttack& from);
-  void MergeFrom(const BubiAttack& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
-      bool deterministic, ::google::protobuf::uint8* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const {
-    return InternalSerializeWithCachedSizesToArray(false, output);
-  }
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  void InternalSwap(BubiAttack* other);
-  private:
-  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
-    return _internal_metadata_.arena();
-  }
-  inline void* MaybeArenaPtr() const {
-    return _internal_metadata_.raw_arena_ptr();
-  }
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // optional uint32 bubi_attack_time = 1;
-  void clear_bubi_attack_time();
-  static const int kBubiAttackTimeFieldNumber = 1;
-  ::google::protobuf::uint32 bubi_attack_time() const;
-  void set_bubi_attack_time(::google::protobuf::uint32 value);
-
-  // optional uint32 bubi_attack_counts = 2;
-  void clear_bubi_attack_counts();
-  static const int kBubiAttackCountsFieldNumber = 2;
-  ::google::protobuf::uint32 bubi_attack_counts() const;
-  void set_bubi_attack_counts(::google::protobuf::uint32 value);
-
-  // @@protoc_insertion_point(class_scope:monitor.BubiAttack)
- private:
-
-  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  bool _is_default_instance_;
-  ::google::protobuf::uint32 bubi_attack_time_;
-  ::google::protobuf::uint32 bubi_attack_counts_;
-  mutable int _cached_size_;
-  friend void  protobuf_AddDesc_monitor_2eproto();
-  friend void protobuf_AssignDesc_monitor_2eproto();
-  friend void protobuf_ShutdownFile_monitor_2eproto();
-
-  void InitAsDefaultInstance();
-  static BubiAttack* default_instance_;
-};
-// -------------------------------------------------------------------
-
 class Hello : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:monitor.Hello) */ {
  public:
   Hello();
@@ -264,37 +174,21 @@ class Hello : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
 
   // accessors -------------------------------------------------------
 
-  // optional string id = 1;
-  void clear_id();
-  static const int kIdFieldNumber = 1;
-  const ::std::string& id() const;
-  void set_id(const ::std::string& value);
-  void set_id(const char* value);
-  void set_id(const char* value, size_t size);
-  ::std::string* mutable_id();
-  ::std::string* release_id();
-  void set_allocated_id(::std::string* id);
+  // optional uint32 service_version = 1;
+  void clear_service_version();
+  static const int kServiceVersionFieldNumber = 1;
+  ::google::protobuf::uint32 service_version() const;
+  void set_service_version(::google::protobuf::uint32 value);
 
-  // optional string blockchain_version = 2;
-  void clear_blockchain_version();
-  static const int kBlockchainVersionFieldNumber = 2;
-  const ::std::string& blockchain_version() const;
-  void set_blockchain_version(const ::std::string& value);
-  void set_blockchain_version(const char* value);
-  void set_blockchain_version(const char* value, size_t size);
-  ::std::string* mutable_blockchain_version();
-  ::std::string* release_blockchain_version();
-  void set_allocated_blockchain_version(::std::string* blockchain_version);
+  // optional uint32 connection_timeout = 2;
+  void clear_connection_timeout();
+  static const int kConnectionTimeoutFieldNumber = 2;
+  ::google::protobuf::uint32 connection_timeout() const;
+  void set_connection_timeout(::google::protobuf::uint32 value);
 
-  // optional int64 data_version = 3;
-  void clear_data_version();
-  static const int kDataVersionFieldNumber = 3;
-  ::google::protobuf::int64 data_version() const;
-  void set_data_version(::google::protobuf::int64 value);
-
-  // optional int64 timestamp = 4;
+  // optional int64 timestamp = 3;
   void clear_timestamp();
-  static const int kTimestampFieldNumber = 4;
+  static const int kTimestampFieldNumber = 3;
   ::google::protobuf::int64 timestamp() const;
   void set_timestamp(::google::protobuf::int64 value);
 
@@ -303,9 +197,8 @@ class Hello : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
-  ::google::protobuf::internal::ArenaStringPtr id_;
-  ::google::protobuf::internal::ArenaStringPtr blockchain_version_;
-  ::google::protobuf::int64 data_version_;
+  ::google::protobuf::uint32 service_version_;
+  ::google::protobuf::uint32 connection_timeout_;
   ::google::protobuf::int64 timestamp_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_monitor_2eproto();
@@ -377,42 +270,48 @@ class Register : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // accessors -------------------------------------------------------
 
-  // optional string rand_id = 1;
-  void clear_rand_id();
-  static const int kRandIdFieldNumber = 1;
-  const ::std::string& rand_id() const;
-  void set_rand_id(const ::std::string& value);
-  void set_rand_id(const char* value);
-  void set_rand_id(const char* value, size_t size);
-  ::std::string* mutable_rand_id();
-  ::std::string* release_rand_id();
-  void set_allocated_rand_id(::std::string* rand_id);
+  // optional string id = 1;
+  void clear_id();
+  static const int kIdFieldNumber = 1;
+  const ::std::string& id() const;
+  void set_id(const ::std::string& value);
+  void set_id(const char* value);
+  void set_id(const char* value, size_t size);
+  ::std::string* mutable_id();
+  ::std::string* release_id();
+  void set_allocated_id(::std::string* id);
 
-  // optional string session_id = 2;
-  void clear_session_id();
-  static const int kSessionIdFieldNumber = 2;
-  const ::std::string& session_id() const;
-  void set_session_id(const ::std::string& value);
-  void set_session_id(const char* value);
-  void set_session_id(const char* value, size_t size);
-  ::std::string* mutable_session_id();
-  ::std::string* release_session_id();
-  void set_allocated_session_id(::std::string* session_id);
+  // optional string session = 2;
+  void clear_session();
+  static const int kSessionFieldNumber = 2;
+  const ::std::string& session() const;
+  void set_session(const ::std::string& value);
+  void set_session(const char* value);
+  void set_session(const char* value, size_t size);
+  ::std::string* mutable_session();
+  ::std::string* release_session();
+  void set_allocated_session(::std::string* session);
 
-  // optional string version = 3;
-  void clear_version();
-  static const int kVersionFieldNumber = 3;
-  const ::std::string& version() const;
-  void set_version(const ::std::string& value);
-  void set_version(const char* value);
-  void set_version(const char* value, size_t size);
-  ::std::string* mutable_version();
-  ::std::string* release_version();
-  void set_allocated_version(::std::string* version);
+  // optional string blockchain_version = 3;
+  void clear_blockchain_version();
+  static const int kBlockchainVersionFieldNumber = 3;
+  const ::std::string& blockchain_version() const;
+  void set_blockchain_version(const ::std::string& value);
+  void set_blockchain_version(const char* value);
+  void set_blockchain_version(const char* value, size_t size);
+  ::std::string* mutable_blockchain_version();
+  ::std::string* release_blockchain_version();
+  void set_allocated_blockchain_version(::std::string* blockchain_version);
 
-  // optional int64 timestamp = 4;
+  // optional int64 data_version = 4;
+  void clear_data_version();
+  static const int kDataVersionFieldNumber = 4;
+  ::google::protobuf::int64 data_version() const;
+  void set_data_version(::google::protobuf::int64 value);
+
+  // optional int64 timestamp = 5;
   void clear_timestamp();
-  static const int kTimestampFieldNumber = 4;
+  static const int kTimestampFieldNumber = 5;
   ::google::protobuf::int64 timestamp() const;
   void set_timestamp(::google::protobuf::int64 value);
 
@@ -421,9 +320,10 @@ class Register : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   bool _is_default_instance_;
-  ::google::protobuf::internal::ArenaStringPtr rand_id_;
-  ::google::protobuf::internal::ArenaStringPtr session_id_;
-  ::google::protobuf::internal::ArenaStringPtr version_;
+  ::google::protobuf::internal::ArenaStringPtr id_;
+  ::google::protobuf::internal::ArenaStringPtr session_;
+  ::google::protobuf::internal::ArenaStringPtr blockchain_version_;
+  ::google::protobuf::int64 data_version_;
   ::google::protobuf::int64 timestamp_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_monitor_2eproto();
@@ -1687,143 +1587,37 @@ class AlertStatus : public ::google::protobuf::Message /* @@protoc_insertion_poi
 // ===================================================================
 
 #if !PROTOBUF_INLINE_NOT_IN_HEADERS
-// BubiAttack
-
-// optional uint32 bubi_attack_time = 1;
-inline void BubiAttack::clear_bubi_attack_time() {
-  bubi_attack_time_ = 0u;
-}
-inline ::google::protobuf::uint32 BubiAttack::bubi_attack_time() const {
-  // @@protoc_insertion_point(field_get:monitor.BubiAttack.bubi_attack_time)
-  return bubi_attack_time_;
-}
-inline void BubiAttack::set_bubi_attack_time(::google::protobuf::uint32 value) {
-  
-  bubi_attack_time_ = value;
-  // @@protoc_insertion_point(field_set:monitor.BubiAttack.bubi_attack_time)
-}
-
-// optional uint32 bubi_attack_counts = 2;
-inline void BubiAttack::clear_bubi_attack_counts() {
-  bubi_attack_counts_ = 0u;
-}
-inline ::google::protobuf::uint32 BubiAttack::bubi_attack_counts() const {
-  // @@protoc_insertion_point(field_get:monitor.BubiAttack.bubi_attack_counts)
-  return bubi_attack_counts_;
-}
-inline void BubiAttack::set_bubi_attack_counts(::google::protobuf::uint32 value) {
-  
-  bubi_attack_counts_ = value;
-  // @@protoc_insertion_point(field_set:monitor.BubiAttack.bubi_attack_counts)
-}
-
-// -------------------------------------------------------------------
-
 // Hello
 
-// optional string id = 1;
-inline void Hello::clear_id() {
-  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// optional uint32 service_version = 1;
+inline void Hello::clear_service_version() {
+  service_version_ = 0u;
 }
-inline const ::std::string& Hello::id() const {
-  // @@protoc_insertion_point(field_get:monitor.Hello.id)
-  return id_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline ::google::protobuf::uint32 Hello::service_version() const {
+  // @@protoc_insertion_point(field_get:monitor.Hello.service_version)
+  return service_version_;
 }
-inline void Hello::set_id(const ::std::string& value) {
+inline void Hello::set_service_version(::google::protobuf::uint32 value) {
   
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:monitor.Hello.id)
-}
-inline void Hello::set_id(const char* value) {
-  
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:monitor.Hello.id)
-}
-inline void Hello::set_id(const char* value, size_t size) {
-  
-  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:monitor.Hello.id)
-}
-inline ::std::string* Hello::mutable_id() {
-  
-  // @@protoc_insertion_point(field_mutable:monitor.Hello.id)
-  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* Hello::release_id() {
-  // @@protoc_insertion_point(field_release:monitor.Hello.id)
-  
-  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void Hello::set_allocated_id(::std::string* id) {
-  if (id != NULL) {
-    
-  } else {
-    
-  }
-  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
-  // @@protoc_insertion_point(field_set_allocated:monitor.Hello.id)
+  service_version_ = value;
+  // @@protoc_insertion_point(field_set:monitor.Hello.service_version)
 }
 
-// optional string blockchain_version = 2;
-inline void Hello::clear_blockchain_version() {
-  blockchain_version_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// optional uint32 connection_timeout = 2;
+inline void Hello::clear_connection_timeout() {
+  connection_timeout_ = 0u;
 }
-inline const ::std::string& Hello::blockchain_version() const {
-  // @@protoc_insertion_point(field_get:monitor.Hello.blockchain_version)
-  return blockchain_version_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline ::google::protobuf::uint32 Hello::connection_timeout() const {
+  // @@protoc_insertion_point(field_get:monitor.Hello.connection_timeout)
+  return connection_timeout_;
 }
-inline void Hello::set_blockchain_version(const ::std::string& value) {
+inline void Hello::set_connection_timeout(::google::protobuf::uint32 value) {
   
-  blockchain_version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:monitor.Hello.blockchain_version)
-}
-inline void Hello::set_blockchain_version(const char* value) {
-  
-  blockchain_version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:monitor.Hello.blockchain_version)
-}
-inline void Hello::set_blockchain_version(const char* value, size_t size) {
-  
-  blockchain_version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:monitor.Hello.blockchain_version)
-}
-inline ::std::string* Hello::mutable_blockchain_version() {
-  
-  // @@protoc_insertion_point(field_mutable:monitor.Hello.blockchain_version)
-  return blockchain_version_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* Hello::release_blockchain_version() {
-  // @@protoc_insertion_point(field_release:monitor.Hello.blockchain_version)
-  
-  return blockchain_version_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void Hello::set_allocated_blockchain_version(::std::string* blockchain_version) {
-  if (blockchain_version != NULL) {
-    
-  } else {
-    
-  }
-  blockchain_version_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), blockchain_version);
-  // @@protoc_insertion_point(field_set_allocated:monitor.Hello.blockchain_version)
+  connection_timeout_ = value;
+  // @@protoc_insertion_point(field_set:monitor.Hello.connection_timeout)
 }
 
-// optional int64 data_version = 3;
-inline void Hello::clear_data_version() {
-  data_version_ = GOOGLE_LONGLONG(0);
-}
-inline ::google::protobuf::int64 Hello::data_version() const {
-  // @@protoc_insertion_point(field_get:monitor.Hello.data_version)
-  return data_version_;
-}
-inline void Hello::set_data_version(::google::protobuf::int64 value) {
-  
-  data_version_ = value;
-  // @@protoc_insertion_point(field_set:monitor.Hello.data_version)
-}
-
-// optional int64 timestamp = 4;
+// optional int64 timestamp = 3;
 inline void Hello::clear_timestamp() {
   timestamp_ = GOOGLE_LONGLONG(0);
 }
@@ -1841,139 +1635,153 @@ inline void Hello::set_timestamp(::google::protobuf::int64 value) {
 
 // Register
 
-// optional string rand_id = 1;
-inline void Register::clear_rand_id() {
-  rand_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// optional string id = 1;
+inline void Register::clear_id() {
+  id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Register::rand_id() const {
-  // @@protoc_insertion_point(field_get:monitor.Register.rand_id)
-  return rand_id_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline const ::std::string& Register::id() const {
+  // @@protoc_insertion_point(field_get:monitor.Register.id)
+  return id_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Register::set_rand_id(const ::std::string& value) {
+inline void Register::set_id(const ::std::string& value) {
   
-  rand_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:monitor.Register.rand_id)
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:monitor.Register.id)
 }
-inline void Register::set_rand_id(const char* value) {
+inline void Register::set_id(const char* value) {
   
-  rand_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:monitor.Register.rand_id)
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:monitor.Register.id)
 }
-inline void Register::set_rand_id(const char* value, size_t size) {
+inline void Register::set_id(const char* value, size_t size) {
   
-  rand_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:monitor.Register.rand_id)
+  // @@protoc_insertion_point(field_set_pointer:monitor.Register.id)
 }
-inline ::std::string* Register::mutable_rand_id() {
+inline ::std::string* Register::mutable_id() {
   
-  // @@protoc_insertion_point(field_mutable:monitor.Register.rand_id)
-  return rand_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:monitor.Register.id)
+  return id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Register::release_rand_id() {
-  // @@protoc_insertion_point(field_release:monitor.Register.rand_id)
+inline ::std::string* Register::release_id() {
+  // @@protoc_insertion_point(field_release:monitor.Register.id)
   
-  return rand_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Register::set_allocated_rand_id(::std::string* rand_id) {
-  if (rand_id != NULL) {
+inline void Register::set_allocated_id(::std::string* id) {
+  if (id != NULL) {
     
   } else {
     
   }
-  rand_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), rand_id);
-  // @@protoc_insertion_point(field_set_allocated:monitor.Register.rand_id)
+  id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), id);
+  // @@protoc_insertion_point(field_set_allocated:monitor.Register.id)
 }
 
-// optional string session_id = 2;
-inline void Register::clear_session_id() {
-  session_id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// optional string session = 2;
+inline void Register::clear_session() {
+  session_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Register::session_id() const {
-  // @@protoc_insertion_point(field_get:monitor.Register.session_id)
-  return session_id_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline const ::std::string& Register::session() const {
+  // @@protoc_insertion_point(field_get:monitor.Register.session)
+  return session_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Register::set_session_id(const ::std::string& value) {
+inline void Register::set_session(const ::std::string& value) {
   
-  session_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:monitor.Register.session_id)
+  session_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:monitor.Register.session)
 }
-inline void Register::set_session_id(const char* value) {
+inline void Register::set_session(const char* value) {
   
-  session_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:monitor.Register.session_id)
+  session_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:monitor.Register.session)
 }
-inline void Register::set_session_id(const char* value, size_t size) {
+inline void Register::set_session(const char* value, size_t size) {
   
-  session_id_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  session_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:monitor.Register.session_id)
+  // @@protoc_insertion_point(field_set_pointer:monitor.Register.session)
 }
-inline ::std::string* Register::mutable_session_id() {
+inline ::std::string* Register::mutable_session() {
   
-  // @@protoc_insertion_point(field_mutable:monitor.Register.session_id)
-  return session_id_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:monitor.Register.session)
+  return session_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Register::release_session_id() {
-  // @@protoc_insertion_point(field_release:monitor.Register.session_id)
+inline ::std::string* Register::release_session() {
+  // @@protoc_insertion_point(field_release:monitor.Register.session)
   
-  return session_id_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return session_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Register::set_allocated_session_id(::std::string* session_id) {
-  if (session_id != NULL) {
+inline void Register::set_allocated_session(::std::string* session) {
+  if (session != NULL) {
     
   } else {
     
   }
-  session_id_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), session_id);
-  // @@protoc_insertion_point(field_set_allocated:monitor.Register.session_id)
+  session_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), session);
+  // @@protoc_insertion_point(field_set_allocated:monitor.Register.session)
 }
 
-// optional string version = 3;
-inline void Register::clear_version() {
-  version_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// optional string blockchain_version = 3;
+inline void Register::clear_blockchain_version() {
+  blockchain_version_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline const ::std::string& Register::version() const {
-  // @@protoc_insertion_point(field_get:monitor.Register.version)
-  return version_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+inline const ::std::string& Register::blockchain_version() const {
+  // @@protoc_insertion_point(field_get:monitor.Register.blockchain_version)
+  return blockchain_version_.GetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Register::set_version(const ::std::string& value) {
+inline void Register::set_blockchain_version(const ::std::string& value) {
   
-  version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:monitor.Register.version)
+  blockchain_version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:monitor.Register.blockchain_version)
 }
-inline void Register::set_version(const char* value) {
+inline void Register::set_blockchain_version(const char* value) {
   
-  version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:monitor.Register.version)
+  blockchain_version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:monitor.Register.blockchain_version)
 }
-inline void Register::set_version(const char* value, size_t size) {
+inline void Register::set_blockchain_version(const char* value, size_t size) {
   
-  version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  blockchain_version_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:monitor.Register.version)
+  // @@protoc_insertion_point(field_set_pointer:monitor.Register.blockchain_version)
 }
-inline ::std::string* Register::mutable_version() {
+inline ::std::string* Register::mutable_blockchain_version() {
   
-  // @@protoc_insertion_point(field_mutable:monitor.Register.version)
-  return version_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:monitor.Register.blockchain_version)
+  return blockchain_version_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::std::string* Register::release_version() {
-  // @@protoc_insertion_point(field_release:monitor.Register.version)
+inline ::std::string* Register::release_blockchain_version() {
+  // @@protoc_insertion_point(field_release:monitor.Register.blockchain_version)
   
-  return version_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return blockchain_version_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline void Register::set_allocated_version(::std::string* version) {
-  if (version != NULL) {
+inline void Register::set_allocated_blockchain_version(::std::string* blockchain_version) {
+  if (blockchain_version != NULL) {
     
   } else {
     
   }
-  version_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), version);
-  // @@protoc_insertion_point(field_set_allocated:monitor.Register.version)
+  blockchain_version_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), blockchain_version);
+  // @@protoc_insertion_point(field_set_allocated:monitor.Register.blockchain_version)
 }
 
-// optional int64 timestamp = 4;
+// optional int64 data_version = 4;
+inline void Register::clear_data_version() {
+  data_version_ = GOOGLE_LONGLONG(0);
+}
+inline ::google::protobuf::int64 Register::data_version() const {
+  // @@protoc_insertion_point(field_get:monitor.Register.data_version)
+  return data_version_;
+}
+inline void Register::set_data_version(::google::protobuf::int64 value) {
+  
+  data_version_ = value;
+  // @@protoc_insertion_point(field_set:monitor.Register.data_version)
+}
+
+// optional int64 timestamp = 5;
 inline void Register::clear_timestamp() {
   timestamp_ = GOOGLE_LONGLONG(0);
 }
@@ -3124,8 +2932,6 @@ inline void AlertStatus::set_allocated_system(::monitor::SystemStatus* system) {
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

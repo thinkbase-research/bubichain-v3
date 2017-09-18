@@ -52,6 +52,7 @@ namespace bubi {
 			bubi::connection_hdl con, const std::string &uri, int64_t id);
 
 		// Handlers
+		bool OnMonitorHello(protocol::WsMessage &message, int64_t conn_id);
 		bool OnMonitorRegister(protocol::WsMessage &message, int64_t conn_id);
 		bool OnBubiStatus(protocol::WsMessage &message, int64_t conn_id);
 		bool OnLedgerStatus(protocol::WsMessage &message, int64_t conn_id);
