@@ -634,9 +634,15 @@ namespace bubi {
 			return;
 		}
 
+		size_t con_size = 0;
+		do {
+			utils::MutexGuard guard(conns_list_lock_);
+			con_size = connections_.size();
+		} while (false);
+
 		//start to connect peers
-		if (connections_.size() < p2p_configure.target_peer_connection_) {
-			ConnectToPeers(p2p_configure.target_peer_connection_ - connections_.size());
+		if (con_size < p2p_configure.target_peer_connection_) {
+			ConnectToPeers(p2p_configure.target_peer_connection_ - con_size);
 		}
 
 		broadcast_.OnTimer();

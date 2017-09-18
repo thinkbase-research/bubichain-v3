@@ -86,6 +86,7 @@ namespace bubi {
 	bool MonitorManager::SendMonitor(int64_t type, const std::string &data) {
 		bool bret = false;
 		do {
+			utils::MutexGuard guard(conns_list_lock_);
 			Monitor *monitor = (Monitor *)GetClientConnection();
 			if (NULL == monitor || !monitor->IsActive()) {
 				break;
@@ -93,7 +94,7 @@ namespace bubi {
 
 			std::error_code ignore_ec;
 			if (!monitor->SendRequest(type, data, ignore_ec)) {
-				LOG_ERROR("Send monitor(type: %d) from ip(%s) failed (%d:%s)", type, monitor->GetPeerAddress().ToIpPort().c_str(),
+				LOG_ERROR("Send monitor(type: " FMT_I64 ") from ip(%s) failed (%d:%s)", type, monitor->GetPeerAddress().ToIpPort().c_str(),
 					ignore_ec.value(), ignore_ec.message().c_str());
 				break;
 			}
@@ -155,8 +156,8 @@ namespace bubi {
 				break;
 			}
 
-			LOG_INFO("Receive register from center (ip: %s, session_id:%s timestamp: %lld)", monitor->GetPeerAddress().ToIpPort().c_str(),
-				reg.session(), reg.timestamp());
+			LOG_INFO("Receive register from center (ip: %s, session_id:%s timestamp: " FMT_I64 ")", monitor->GetPeerAddress().ToIpPort().c_str(),
+				reg.session().c_str(), reg.timestamp());
 			bret = true;
 		} while (false);
 
@@ -204,6 +205,8 @@ namespace bubi {
 
 		bool bret = true;
 		std::error_code ignore_ec;
+
+		utils::MutexGuard guard(conns_list_lock_);
 		Connection *monitor = GetConnection(conn_id);
 		if (NULL == monitor || !monitor->SendResponse(message, system_status->SerializeAsString(), ignore_ec)) {
 			bret = false;
@@ -219,7 +222,6 @@ namespace bubi {
 
 	Connection * MonitorManager::GetClientConnection() {
 		bubi::Connection* monitor = NULL;
-		utils::MutexGuard guard(conns_list_lock_);
 		for (auto item : connections_) {
 			Monitor *peer = (Monitor *)item.second;
 			if (!peer->InBound()) {
@@ -245,6 +247,7 @@ namespace bubi {
 	void MonitorManager::OnTimer(int64_t current_time) {
 		// reconnect if disconnect
 		if (current_time - last_connect_time_ > connect_interval_) {
+			utils::MutexGuard guard(conns_list_lock_);
 			Monitor *monitor = (Monitor *)GetClientConnection();
 			if (NULL == monitor) {
 				std::string url = utils::String::Format("ws://%s", Configure::Instance().monitor_configure_.center_.c_str());
@@ -255,10 +258,6 @@ namespace bubi {
 	}
 
 	void MonitorManager::OnSlowTimer(int64_t current_time) {
-		Monitor *monitor = (Monitor *)GetClientConnection();
-		if (monitor == NULL || !monitor->IsActive()) {
-			return;
-		}
 
 		system_manager_.OnSlowTimer(current_time);
 
@@ -273,6 +272,9 @@ namespace bubi {
 
 			bool bret = true;
 			std::error_code ignore_ec;
+
+			utils::MutexGuard guard(conns_list_lock_);
+			Monitor *monitor = (Monitor *)GetClientConnection();
 			if (NULL == monitor || !monitor->SendRequest(monitor::MONITOR_MSGTYPE_ALERT, alert_status.SerializeAsString(), ignore_ec)) {
 				bret = false;
 				LOG_ERROR("Send alert status from ip(%s) failed (%d:%s)", monitor->GetPeerAddress().ToIpPort().c_str(),
@@ -296,16 +298,15 @@ namespace bubi {
 		monitor::PeerManager *peer_manager = bubi_status.mutable_peer_manager();
 		peer_manager->set_peer_id(PeerManager::Instance().GetPeerNodeAddress());
 
-		bubi::ConnectionMap connections = PeerManager::Instance().ConsensusNetwork().GetPeers();
-		for (auto &item : connections) {
+		Json::Value connections;
+		PeerManager::Instance().ConsensusNetwork().GetPeers(connections);
+		for (size_t i = 0; i < connections.size(); i++) {
 			monitor::Peer *peer = peer_manager->add_peer();
-			bubi::Peer *conn = (bubi::Peer *)item.second;
-			if (conn->IsActive()) {
-				peer->set_id(conn->GetPeerNodeAddress());
-				peer->set_delay(conn->GetDelay());
-				peer->set_ip_address(conn->GetPeerAddress().ToIpPort());
-				peer->set_active(conn->IsActive());
-			}
+			const Json::Value &item = connections[i];
+			peer->set_id(item["node_address"].asString());
+			peer->set_delay(item["delay"].asInt64());
+			peer->set_ip_address(item["ip_address"].asString());
+			peer->set_active(item["active"].asBool());
 		}
 		return true;
 	}

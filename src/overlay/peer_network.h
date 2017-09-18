@@ -98,7 +98,6 @@ namespace bubi {
 		void BroadcastMsg(int64_t type, const std::string &data);
 		bool ReceiveBroadcastMsg(int64_t type, const std::string &data, int64_t peer_id);
 
-		const ConnectionMap &GetPeers() const { return connections_; };
 		void GetPeers(Json::Value &peers);
 
 		virtual void OnTimer(int64_t current_time) override;
