@@ -64,7 +64,7 @@ namespace bubi {
 	}
 
 	void MonitorManager::Run(utils::Thread *thread) {
-		Start(utils::InetAddress("127.0.0.1:1227"));
+		Start(utils::InetAddress::None());
 	}
 
 	bool MonitorManager::OnConnectOpen(Connection *conn) {

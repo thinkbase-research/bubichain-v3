@@ -430,6 +430,7 @@ namespace bubi {
 			}
 			enabled_ = true;
 
+			asio::io_service::work work(io_);
 			// Start the ASIO io_service run loop
 			int64_t last_check_time = 0;
 			while (enabled_) {
