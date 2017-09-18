@@ -52,9 +52,9 @@ namespace bubi{
 		}
 	}
 
-	int KVTrie::LeafCount(){
-		return 0;
-	}
+	//int KVTrie::LeafCount(){
+	//	return 0;
+	//}
 
 	bool KVTrie::AddToDB(){
 		bool b = mdb_->WriteBatch(*batch_);

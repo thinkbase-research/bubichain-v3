@@ -30,7 +30,7 @@ namespace bubi{
 		~KVTrie();
 		bool Init(bubi::KeyValueDb* db, std::shared_ptr<WRITE_BATCH>, const std::string& prefix, int depth);
 
-		int LeafCount();
+		//int LeafCount();
 		bool AddToDB();
 	private:
 		void Load(NodeFrm::POINTER node, int depth);

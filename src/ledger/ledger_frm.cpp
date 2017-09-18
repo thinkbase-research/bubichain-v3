@@ -167,35 +167,21 @@ namespace bubi {
 		return ledger_;
 	}
 
-	bool LedgerFrm::Commit(KVTrie* trie) {
+	bool LedgerFrm::Commit(KVTrie* trie, int64_t& new_count, int64_t& change_count) {
 		auto batch = trie->batch_;
 		for (auto it = environment_->entries_.begin(); it != environment_->entries_.end(); it++){
 			std::shared_ptr<AccountFrm> account = it->second;
 			account->UpdateHash(batch);
 			std::string ss = account->Serializer();
 			std::string index = utils::String::HexStringToBin(it->first);
-			trie->Set(index, ss);
+			bool is_new = trie->Set(index, ss);
+			if (is_new){
+				new_count++;
+			}
+			else{
+				change_count++;
+			}
 		}
-	/*	for (auto it = environment_->entries_.begin(); it != environment_->entries_.end(); it++) {
-			auto &r = it->second;
-			switch (r.action_) {
-			case utils::ChangeAction::DEL:{
-				break;
-			}
-			case utils::ChangeAction::ADD:
-			case utils::ChangeAction::MOD:
-			case utils::ChangeAction::KEEP:{
-				std::shared_ptr<AccountFrm> account = it->second.value_;
-				account->UpdateHash(batch);
-				std::string ss = account->Serializer();
-				std::string index = utils::String::HexStringToBin(it->first);
-				trie->Set(index, ss);
-				break;
-			}
-			default:
-				break;
-			}
-		}*/
 		return true;
 	}
 }

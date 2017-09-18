@@ -53,7 +53,7 @@ namespace bubi {
 
 		Json::Value ToJson();
 
-		bool Commit(KVTrie* trie);
+		bool Commit(KVTrie* trie, int64_t& new_count, int64_t& change_count);
 	private:
 		int64_t id_;
 		protocol::Ledger ledger_;

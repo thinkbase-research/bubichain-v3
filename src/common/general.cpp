@@ -35,6 +35,7 @@ namespace bubi {
 	const char *General::MONITOR_CONFIG_FILE = "config/monitor.json";
 	const char *General::CA_CONFIG_FILE = "config/ca.json";
 	const char *General::LOGGER_FILE = "log/bubi.log";
+	const char *General::STATISTICS = "statistics";
 
 #else
 	const char *General::DEFAULT_KEYVALUE_DB_PATH = "data/keyvalue.db";

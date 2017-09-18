@@ -79,6 +79,10 @@ namespace bubi {
 			seq_kvdb = 1;
 		}
 
+		std::string str;
+		if (kvdb->Get(General::STATISTICS, str)){
+			statistics_.fromString(str);
+		}
 		//avoid dead lock
 		utils::WriteLockGuard guard(lcl_header_mutex_);
 		lcl_header_ = last_closed_ledger_->GetProtoHeader();
@@ -129,7 +133,7 @@ namespace bubi {
 
 	int LedgerManager::GetAccountNum() {
 		utils::MutexGuard guard(gmutex_);
-		return tree_->LeafCount();
+		return statistics_["account_count"].asInt();
 	}
 
 	void LedgerManager::OnTimer(int64_t current_time) {
@@ -212,7 +216,7 @@ namespace bubi {
 	bool LedgerManager::CreateGenesisAccount() {
 		LOG_INFO("There is no ledger exist,then create a init ledger");
 		//set global hash caculate
-
+		statistics_["account_count"] = 1;
 		protocol::Account acc;
 		acc.set_address(Configure::Instance().ledger_configure_.genesis_account_);
 		acc.set_nonce(0);
@@ -262,6 +266,7 @@ namespace bubi {
 			BUBI_EXIT("AddToDb failed");
 		}
 
+		batch->Put(General::STATISTICS, statistics_.toFastString());
 		if (!Storage::Instance().account_db()->WriteBatch(*batch)) {
 			BUBI_EXIT("Write account batch failed, %s", Storage::Instance().account_db()->error_desc().c_str());
 		}
@@ -455,7 +460,7 @@ namespace bubi {
 		int64_t begin_time = utils::Timestamp::HighResolution();
 		data["name"] = "ledger_manager";
 		data["tx_count"] = GetLastClosedLedger().tx_count();
-		data["account_count"] = tree_->LeafCount();
+		data["account_count"] = GetAccountNum();
 		data["ledger_sequence"] = GetLastClosedLedger().seq();
 		data["time"] = utils::String::Format(FMT_I64 " ms",
 			(utils::Timestamp::HighResolution() - begin_time) / utils::MICRO_UNITS_PER_MILLI);
@@ -493,7 +498,9 @@ namespace bubi {
 		tree_->time_ = 0;
 	
 		closing_ledger_->Apply(consensus_value);
-		closing_ledger_->Commit(tree_);
+		int64_t new_count = 0, change_count = 0;
+		closing_ledger_->Commit(tree_, new_count, change_count);
+		statistics_["account_count"] = statistics_["account_count"].asInt64() + new_count;
 
 		int64_t time1 = utils::Timestamp().HighResolution();
 
@@ -537,6 +544,7 @@ namespace bubi {
 		validators_ = new_set;
 
 		account_db_batch->Put(bubi::General::LAST_PROOF, proof);
+		account_db_batch->Put(bubi::General::STATISTICS, statistics_.toFastString());
 		proof_ = proof;
 
 		//consensus value

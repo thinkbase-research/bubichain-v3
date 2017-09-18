@@ -72,7 +72,7 @@ namespace bubi {
 
 	public:
 		utils::Mutex gmutex_;
-
+		Json::Value statistics_;
 		LedgerFrm::pointer closing_ledger_;
 		//std::shared_ptr<TransactionFrm> execute_transaction_;
 		std::stack<std::shared_ptr<TransactionFrm>> transaction_stack_;

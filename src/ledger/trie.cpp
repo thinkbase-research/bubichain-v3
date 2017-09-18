@@ -261,7 +261,7 @@ namespace bubi{
 
 		if (location1 == location){
 			node->SetValue(data);
-			return true;
+			return false;
 		}
 
 		Location common = CommonPrefix(location1, location);
@@ -386,8 +386,7 @@ namespace bubi{
 
 	bool Trie::Set(const std::string& key, const std::string &value){
 		Location location = Key2Location(key);
-		SetItem(root_, location, value, 0);
-		return true;
+		return SetItem(root_, location, value, 0);
 	}
 
 	bool Trie::Get(const std::string& key, std::string& value){

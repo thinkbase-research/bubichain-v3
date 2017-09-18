@@ -58,6 +58,7 @@ namespace bubi {
 		const static char *CA_CONFIG_FILE;
 		const static char *LOGGER_FILE;
 
+		const static char* STATISTICS;
 		const static char *CONSENSUS_PREFIX;
 
 		const static char *LEDGER_PREFIX;
