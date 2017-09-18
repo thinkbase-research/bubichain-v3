@@ -184,198 +184,19 @@ public final class Monitor {
     // @@protoc_insertion_point(enum_scope:monitor.MONITOR_MESSAGE_TYPE)
   }
 
-  /**
-   * Protobuf enum {@code monitor.MONITOR_ERROR}
-   */
-  public enum MONITOR_ERROR
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>MONITOR_INTERNAL_ERROR = 0;</code>
-     */
-    MONITOR_INTERNAL_ERROR(0),
-    /**
-     * <code>MONITOR_MESSAGE_NOT_EXIST = 1;</code>
-     */
-    MONITOR_MESSAGE_NOT_EXIST(1),
-    /**
-     * <code>MONITOR_MISSING_PARAMETER = 2;</code>
-     */
-    MONITOR_MISSING_PARAMETER(2),
-    /**
-     * <code>MONITOR_ID_NOT_EXIST = 3;</code>
-     */
-    MONITOR_ID_NOT_EXIST(3),
-    /**
-     * <code>MONITOR_ID_ALREAD_EXIST = 4;</code>
-     */
-    MONITOR_ID_ALREAD_EXIST(4),
-    /**
-     * <code>MONITOR_CENTER_INVALID = 5;</code>
-     */
-    MONITOR_CENTER_INVALID(5),
-    /**
-     * <code>MONITOR_AGENT_INVALID = 6;</code>
-     */
-    MONITOR_AGENT_INVALID(6),
-    /**
-     * <code>MONITOR_NOT_LOGIN = 7;</code>
-     */
-    MONITOR_NOT_LOGIN(7),
-    /**
-     * <code>MONITOR_BUBI_MESSAGE_ERROR = 8;</code>
-     */
-    MONITOR_BUBI_MESSAGE_ERROR(8),
-    /**
-     * <code>MONITOR_SYSTEM_MESSAGE_ERROR = 9;</code>
-     */
-    MONITOR_SYSTEM_MESSAGE_ERROR(9),
-    /**
-     * <code>MONITOR_LEDGER_MESSAGE_ERROR = 10;</code>
-     */
-    MONITOR_LEDGER_MESSAGE_ERROR(10),
-    UNRECOGNIZED(-1),
-    ;
-
-    /**
-     * <code>MONITOR_INTERNAL_ERROR = 0;</code>
-     */
-    public static final int MONITOR_INTERNAL_ERROR_VALUE = 0;
-    /**
-     * <code>MONITOR_MESSAGE_NOT_EXIST = 1;</code>
-     */
-    public static final int MONITOR_MESSAGE_NOT_EXIST_VALUE = 1;
-    /**
-     * <code>MONITOR_MISSING_PARAMETER = 2;</code>
-     */
-    public static final int MONITOR_MISSING_PARAMETER_VALUE = 2;
-    /**
-     * <code>MONITOR_ID_NOT_EXIST = 3;</code>
-     */
-    public static final int MONITOR_ID_NOT_EXIST_VALUE = 3;
-    /**
-     * <code>MONITOR_ID_ALREAD_EXIST = 4;</code>
-     */
-    public static final int MONITOR_ID_ALREAD_EXIST_VALUE = 4;
-    /**
-     * <code>MONITOR_CENTER_INVALID = 5;</code>
-     */
-    public static final int MONITOR_CENTER_INVALID_VALUE = 5;
-    /**
-     * <code>MONITOR_AGENT_INVALID = 6;</code>
-     */
-    public static final int MONITOR_AGENT_INVALID_VALUE = 6;
-    /**
-     * <code>MONITOR_NOT_LOGIN = 7;</code>
-     */
-    public static final int MONITOR_NOT_LOGIN_VALUE = 7;
-    /**
-     * <code>MONITOR_BUBI_MESSAGE_ERROR = 8;</code>
-     */
-    public static final int MONITOR_BUBI_MESSAGE_ERROR_VALUE = 8;
-    /**
-     * <code>MONITOR_SYSTEM_MESSAGE_ERROR = 9;</code>
-     */
-    public static final int MONITOR_SYSTEM_MESSAGE_ERROR_VALUE = 9;
-    /**
-     * <code>MONITOR_LEDGER_MESSAGE_ERROR = 10;</code>
-     */
-    public static final int MONITOR_LEDGER_MESSAGE_ERROR_VALUE = 10;
-
-
-    public final int getNumber() {
-      if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
-            "Can't get the number of an unknown enum value.");
-      }
-      return value;
-    }
-
-    /**
-     * @deprecated Use {@link #forNumber(int)} instead.
-     */
-    @java.lang.Deprecated
-    public static MONITOR_ERROR valueOf(int value) {
-      return forNumber(value);
-    }
-
-    public static MONITOR_ERROR forNumber(int value) {
-      switch (value) {
-        case 0: return MONITOR_INTERNAL_ERROR;
-        case 1: return MONITOR_MESSAGE_NOT_EXIST;
-        case 2: return MONITOR_MISSING_PARAMETER;
-        case 3: return MONITOR_ID_NOT_EXIST;
-        case 4: return MONITOR_ID_ALREAD_EXIST;
-        case 5: return MONITOR_CENTER_INVALID;
-        case 6: return MONITOR_AGENT_INVALID;
-        case 7: return MONITOR_NOT_LOGIN;
-        case 8: return MONITOR_BUBI_MESSAGE_ERROR;
-        case 9: return MONITOR_SYSTEM_MESSAGE_ERROR;
-        case 10: return MONITOR_LEDGER_MESSAGE_ERROR;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<MONITOR_ERROR>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static final com.google.protobuf.Internal.EnumLiteMap<
-        MONITOR_ERROR> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<MONITOR_ERROR>() {
-            public MONITOR_ERROR findValueByNumber(int number) {
-              return MONITOR_ERROR.forNumber(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      return getDescriptor().getValues().get(ordinal());
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return cn.bubi.blockchain.adapter3.Monitor.getDescriptor().getEnumTypes().get(1);
-    }
-
-    private static final MONITOR_ERROR[] VALUES = values();
-
-    public static MONITOR_ERROR valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      if (desc.getIndex() == -1) {
-        return UNRECOGNIZED;
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int value;
-
-    private MONITOR_ERROR(int value) {
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:monitor.MONITOR_ERROR)
-  }
-
   public interface HelloOrBuilder extends
       // @@protoc_insertion_point(interface_extends:monitor.Hello)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional uint32 service_version = 1;</code>
+     * <code>optional int64 service_version = 1;</code>
      */
-    int getServiceVersion();
+    long getServiceVersion();
 
     /**
-     * <code>optional uint32 connection_timeout = 2;</code>
+     * <code>optional int64 connection_timeout = 2;</code>
      */
-    int getConnectionTimeout();
+    long getConnectionTimeout();
 
     /**
      * <code>optional int64 timestamp = 3;</code>
@@ -394,8 +215,8 @@ public final class Monitor {
       super(builder);
     }
     private Hello() {
-      serviceVersion_ = 0;
-      connectionTimeout_ = 0;
+      serviceVersion_ = 0L;
+      connectionTimeout_ = 0L;
       timestamp_ = 0L;
     }
 
@@ -426,12 +247,12 @@ public final class Monitor {
             }
             case 8: {
 
-              serviceVersion_ = input.readUInt32();
+              serviceVersion_ = input.readInt64();
               break;
             }
             case 16: {
 
-              connectionTimeout_ = input.readUInt32();
+              connectionTimeout_ = input.readInt64();
               break;
             }
             case 24: {
@@ -463,20 +284,20 @@ public final class Monitor {
     }
 
     public static final int SERVICE_VERSION_FIELD_NUMBER = 1;
-    private int serviceVersion_;
+    private long serviceVersion_;
     /**
-     * <code>optional uint32 service_version = 1;</code>
+     * <code>optional int64 service_version = 1;</code>
      */
-    public int getServiceVersion() {
+    public long getServiceVersion() {
       return serviceVersion_;
     }
 
     public static final int CONNECTION_TIMEOUT_FIELD_NUMBER = 2;
-    private int connectionTimeout_;
+    private long connectionTimeout_;
     /**
-     * <code>optional uint32 connection_timeout = 2;</code>
+     * <code>optional int64 connection_timeout = 2;</code>
      */
-    public int getConnectionTimeout() {
+    public long getConnectionTimeout() {
       return connectionTimeout_;
     }
 
@@ -501,11 +322,11 @@ public final class Monitor {
 
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (serviceVersion_ != 0) {
-        output.writeUInt32(1, serviceVersion_);
+      if (serviceVersion_ != 0L) {
+        output.writeInt64(1, serviceVersion_);
       }
-      if (connectionTimeout_ != 0) {
-        output.writeUInt32(2, connectionTimeout_);
+      if (connectionTimeout_ != 0L) {
+        output.writeInt64(2, connectionTimeout_);
       }
       if (timestamp_ != 0L) {
         output.writeInt64(3, timestamp_);
@@ -517,13 +338,13 @@ public final class Monitor {
       if (size != -1) return size;
 
       size = 0;
-      if (serviceVersion_ != 0) {
+      if (serviceVersion_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, serviceVersion_);
+          .computeInt64Size(1, serviceVersion_);
       }
-      if (connectionTimeout_ != 0) {
+      if (connectionTimeout_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(2, connectionTimeout_);
+          .computeInt64Size(2, connectionTimeout_);
       }
       if (timestamp_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
@@ -562,9 +383,11 @@ public final class Monitor {
       int hash = 41;
       hash = (19 * hash) + getDescriptorForType().hashCode();
       hash = (37 * hash) + SERVICE_VERSION_FIELD_NUMBER;
-      hash = (53 * hash) + getServiceVersion();
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getServiceVersion());
       hash = (37 * hash) + CONNECTION_TIMEOUT_FIELD_NUMBER;
-      hash = (53 * hash) + getConnectionTimeout();
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getConnectionTimeout());
       hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getTimestamp());
@@ -686,9 +509,9 @@ public final class Monitor {
       }
       public Builder clear() {
         super.clear();
-        serviceVersion_ = 0;
+        serviceVersion_ = 0L;
 
-        connectionTimeout_ = 0;
+        connectionTimeout_ = 0L;
 
         timestamp_ = 0L;
 
@@ -758,10 +581,10 @@ public final class Monitor {
 
       public Builder mergeFrom(cn.bubi.blockchain.adapter3.Monitor.Hello other) {
         if (other == cn.bubi.blockchain.adapter3.Monitor.Hello.getDefaultInstance()) return this;
-        if (other.getServiceVersion() != 0) {
+        if (other.getServiceVersion() != 0L) {
           setServiceVersion(other.getServiceVersion());
         }
-        if (other.getConnectionTimeout() != 0) {
+        if (other.getConnectionTimeout() != 0L) {
           setConnectionTimeout(other.getConnectionTimeout());
         }
         if (other.getTimestamp() != 0L) {
@@ -793,54 +616,54 @@ public final class Monitor {
         return this;
       }
 
-      private int serviceVersion_ ;
+      private long serviceVersion_ ;
       /**
-       * <code>optional uint32 service_version = 1;</code>
+       * <code>optional int64 service_version = 1;</code>
        */
-      public int getServiceVersion() {
+      public long getServiceVersion() {
         return serviceVersion_;
       }
       /**
-       * <code>optional uint32 service_version = 1;</code>
+       * <code>optional int64 service_version = 1;</code>
        */
-      public Builder setServiceVersion(int value) {
+      public Builder setServiceVersion(long value) {
         
         serviceVersion_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional uint32 service_version = 1;</code>
+       * <code>optional int64 service_version = 1;</code>
        */
       public Builder clearServiceVersion() {
         
-        serviceVersion_ = 0;
+        serviceVersion_ = 0L;
         onChanged();
         return this;
       }
 
-      private int connectionTimeout_ ;
+      private long connectionTimeout_ ;
       /**
-       * <code>optional uint32 connection_timeout = 2;</code>
+       * <code>optional int64 connection_timeout = 2;</code>
        */
-      public int getConnectionTimeout() {
+      public long getConnectionTimeout() {
         return connectionTimeout_;
       }
       /**
-       * <code>optional uint32 connection_timeout = 2;</code>
+       * <code>optional int64 connection_timeout = 2;</code>
        */
-      public Builder setConnectionTimeout(int value) {
+      public Builder setConnectionTimeout(long value) {
         
         connectionTimeout_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>optional uint32 connection_timeout = 2;</code>
+       * <code>optional int64 connection_timeout = 2;</code>
        */
       public Builder clearConnectionTimeout() {
         
-        connectionTimeout_ = 0;
+        connectionTimeout_ = 0L;
         onChanged();
         return this;
       }
@@ -934,32 +757,22 @@ public final class Monitor {
         getIdBytes();
 
     /**
-     * <code>optional string session = 2;</code>
-     */
-    java.lang.String getSession();
-    /**
-     * <code>optional string session = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getSessionBytes();
-
-    /**
-     * <code>optional string blockchain_version = 3;</code>
+     * <code>optional string blockchain_version = 2;</code>
      */
     java.lang.String getBlockchainVersion();
     /**
-     * <code>optional string blockchain_version = 3;</code>
+     * <code>optional string blockchain_version = 2;</code>
      */
     com.google.protobuf.ByteString
         getBlockchainVersionBytes();
 
     /**
-     * <code>optional int64 data_version = 4;</code>
+     * <code>optional int64 data_version = 3;</code>
      */
     long getDataVersion();
 
     /**
-     * <code>optional int64 timestamp = 5;</code>
+     * <code>optional int64 timestamp = 4;</code>
      */
     long getTimestamp();
   }
@@ -976,7 +789,6 @@ public final class Monitor {
     }
     private Register() {
       id_ = "";
-      session_ = "";
       blockchainVersion_ = "";
       dataVersion_ = 0L;
       timestamp_ = 0L;
@@ -1016,21 +828,15 @@ public final class Monitor {
             case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
-              session_ = s;
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
               blockchainVersion_ = s;
               break;
             }
-            case 32: {
+            case 24: {
 
               dataVersion_ = input.readInt64();
               break;
             }
-            case 40: {
+            case 32: {
 
               timestamp_ = input.readInt64();
               break;
@@ -1092,44 +898,10 @@ public final class Monitor {
       }
     }
 
-    public static final int SESSION_FIELD_NUMBER = 2;
-    private volatile java.lang.Object session_;
-    /**
-     * <code>optional string session = 2;</code>
-     */
-    public java.lang.String getSession() {
-      java.lang.Object ref = session_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        session_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>optional string session = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getSessionBytes() {
-      java.lang.Object ref = session_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        session_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int BLOCKCHAIN_VERSION_FIELD_NUMBER = 3;
+    public static final int BLOCKCHAIN_VERSION_FIELD_NUMBER = 2;
     private volatile java.lang.Object blockchainVersion_;
     /**
-     * <code>optional string blockchain_version = 3;</code>
+     * <code>optional string blockchain_version = 2;</code>
      */
     public java.lang.String getBlockchainVersion() {
       java.lang.Object ref = blockchainVersion_;
@@ -1144,7 +916,7 @@ public final class Monitor {
       }
     }
     /**
-     * <code>optional string blockchain_version = 3;</code>
+     * <code>optional string blockchain_version = 2;</code>
      */
     public com.google.protobuf.ByteString
         getBlockchainVersionBytes() {
@@ -1160,19 +932,19 @@ public final class Monitor {
       }
     }
 
-    public static final int DATA_VERSION_FIELD_NUMBER = 4;
+    public static final int DATA_VERSION_FIELD_NUMBER = 3;
     private long dataVersion_;
     /**
-     * <code>optional int64 data_version = 4;</code>
+     * <code>optional int64 data_version = 3;</code>
      */
     public long getDataVersion() {
       return dataVersion_;
     }
 
-    public static final int TIMESTAMP_FIELD_NUMBER = 5;
+    public static final int TIMESTAMP_FIELD_NUMBER = 4;
     private long timestamp_;
     /**
-     * <code>optional int64 timestamp = 5;</code>
+     * <code>optional int64 timestamp = 4;</code>
      */
     public long getTimestamp() {
       return timestamp_;
@@ -1193,17 +965,14 @@ public final class Monitor {
       if (!getIdBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, id_);
       }
-      if (!getSessionBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, session_);
-      }
       if (!getBlockchainVersionBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, blockchainVersion_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, blockchainVersion_);
       }
       if (dataVersion_ != 0L) {
-        output.writeInt64(4, dataVersion_);
+        output.writeInt64(3, dataVersion_);
       }
       if (timestamp_ != 0L) {
-        output.writeInt64(5, timestamp_);
+        output.writeInt64(4, timestamp_);
       }
     }
 
@@ -1215,19 +984,16 @@ public final class Monitor {
       if (!getIdBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, id_);
       }
-      if (!getSessionBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, session_);
-      }
       if (!getBlockchainVersionBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, blockchainVersion_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, blockchainVersion_);
       }
       if (dataVersion_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(4, dataVersion_);
+          .computeInt64Size(3, dataVersion_);
       }
       if (timestamp_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, timestamp_);
+          .computeInt64Size(4, timestamp_);
       }
       memoizedSize = size;
       return size;
@@ -1247,8 +1013,6 @@ public final class Monitor {
       boolean result = true;
       result = result && getId()
           .equals(other.getId());
-      result = result && getSession()
-          .equals(other.getSession());
       result = result && getBlockchainVersion()
           .equals(other.getBlockchainVersion());
       result = result && (getDataVersion()
@@ -1267,8 +1031,6 @@ public final class Monitor {
       hash = (19 * hash) + getDescriptorForType().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
       hash = (53 * hash) + getId().hashCode();
-      hash = (37 * hash) + SESSION_FIELD_NUMBER;
-      hash = (53 * hash) + getSession().hashCode();
       hash = (37 * hash) + BLOCKCHAIN_VERSION_FIELD_NUMBER;
       hash = (53 * hash) + getBlockchainVersion().hashCode();
       hash = (37 * hash) + DATA_VERSION_FIELD_NUMBER;
@@ -1397,8 +1159,6 @@ public final class Monitor {
         super.clear();
         id_ = "";
 
-        session_ = "";
-
         blockchainVersion_ = "";
 
         dataVersion_ = 0L;
@@ -1428,7 +1188,6 @@ public final class Monitor {
       public cn.bubi.blockchain.adapter3.Monitor.Register buildPartial() {
         cn.bubi.blockchain.adapter3.Monitor.Register result = new cn.bubi.blockchain.adapter3.Monitor.Register(this);
         result.id_ = id_;
-        result.session_ = session_;
         result.blockchainVersion_ = blockchainVersion_;
         result.dataVersion_ = dataVersion_;
         result.timestamp_ = timestamp_;
@@ -1475,10 +1234,6 @@ public final class Monitor {
         if (other == cn.bubi.blockchain.adapter3.Monitor.Register.getDefaultInstance()) return this;
         if (!other.getId().isEmpty()) {
           id_ = other.id_;
-          onChanged();
-        }
-        if (!other.getSession().isEmpty()) {
-          session_ = other.session_;
           onChanged();
         }
         if (!other.getBlockchainVersion().isEmpty()) {
@@ -1586,78 +1341,9 @@ public final class Monitor {
         return this;
       }
 
-      private java.lang.Object session_ = "";
-      /**
-       * <code>optional string session = 2;</code>
-       */
-      public java.lang.String getSession() {
-        java.lang.Object ref = session_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          session_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string session = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getSessionBytes() {
-        java.lang.Object ref = session_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          session_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string session = 2;</code>
-       */
-      public Builder setSession(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        session_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string session = 2;</code>
-       */
-      public Builder clearSession() {
-        
-        session_ = getDefaultInstance().getSession();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string session = 2;</code>
-       */
-      public Builder setSessionBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        session_ = value;
-        onChanged();
-        return this;
-      }
-
       private java.lang.Object blockchainVersion_ = "";
       /**
-       * <code>optional string blockchain_version = 3;</code>
+       * <code>optional string blockchain_version = 2;</code>
        */
       public java.lang.String getBlockchainVersion() {
         java.lang.Object ref = blockchainVersion_;
@@ -1672,7 +1358,7 @@ public final class Monitor {
         }
       }
       /**
-       * <code>optional string blockchain_version = 3;</code>
+       * <code>optional string blockchain_version = 2;</code>
        */
       public com.google.protobuf.ByteString
           getBlockchainVersionBytes() {
@@ -1688,7 +1374,7 @@ public final class Monitor {
         }
       }
       /**
-       * <code>optional string blockchain_version = 3;</code>
+       * <code>optional string blockchain_version = 2;</code>
        */
       public Builder setBlockchainVersion(
           java.lang.String value) {
@@ -1701,7 +1387,7 @@ public final class Monitor {
         return this;
       }
       /**
-       * <code>optional string blockchain_version = 3;</code>
+       * <code>optional string blockchain_version = 2;</code>
        */
       public Builder clearBlockchainVersion() {
         
@@ -1710,7 +1396,7 @@ public final class Monitor {
         return this;
       }
       /**
-       * <code>optional string blockchain_version = 3;</code>
+       * <code>optional string blockchain_version = 2;</code>
        */
       public Builder setBlockchainVersionBytes(
           com.google.protobuf.ByteString value) {
@@ -1726,13 +1412,13 @@ public final class Monitor {
 
       private long dataVersion_ ;
       /**
-       * <code>optional int64 data_version = 4;</code>
+       * <code>optional int64 data_version = 3;</code>
        */
       public long getDataVersion() {
         return dataVersion_;
       }
       /**
-       * <code>optional int64 data_version = 4;</code>
+       * <code>optional int64 data_version = 3;</code>
        */
       public Builder setDataVersion(long value) {
         
@@ -1741,7 +1427,7 @@ public final class Monitor {
         return this;
       }
       /**
-       * <code>optional int64 data_version = 4;</code>
+       * <code>optional int64 data_version = 3;</code>
        */
       public Builder clearDataVersion() {
         
@@ -1752,13 +1438,13 @@ public final class Monitor {
 
       private long timestamp_ ;
       /**
-       * <code>optional int64 timestamp = 5;</code>
+       * <code>optional int64 timestamp = 4;</code>
        */
       public long getTimestamp() {
         return timestamp_;
       }
       /**
-       * <code>optional int64 timestamp = 5;</code>
+       * <code>optional int64 timestamp = 4;</code>
        */
       public Builder setTimestamp(long value) {
         
@@ -1767,7 +1453,7 @@ public final class Monitor {
         return this;
       }
       /**
-       * <code>optional int64 timestamp = 5;</code>
+       * <code>optional int64 timestamp = 4;</code>
        */
       public Builder clearTimestamp() {
         
@@ -1819,665 +1505,6 @@ public final class Monitor {
     }
 
     public cn.bubi.blockchain.adapter3.Monitor.Register getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ErrorMessageOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:monitor.ErrorMessage)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional .monitor.MONITOR_ERROR error_code = 1;</code>
-     */
-    int getErrorCodeValue();
-    /**
-     * <code>optional .monitor.MONITOR_ERROR error_code = 1;</code>
-     */
-    cn.bubi.blockchain.adapter3.Monitor.MONITOR_ERROR getErrorCode();
-
-    /**
-     * <code>optional string desception = 2;</code>
-     */
-    java.lang.String getDesception();
-    /**
-     * <code>optional string desception = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getDesceptionBytes();
-
-    /**
-     * <code>optional int64 timestamp = 3;</code>
-     */
-    long getTimestamp();
-  }
-  /**
-   * Protobuf type {@code monitor.ErrorMessage}
-   */
-  public  static final class ErrorMessage extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:monitor.ErrorMessage)
-      ErrorMessageOrBuilder {
-    // Use ErrorMessage.newBuilder() to construct.
-    private ErrorMessage(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ErrorMessage() {
-      errorCode_ = 0;
-      desception_ = "";
-      timestamp_ = 0L;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private ErrorMessage(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-              int rawValue = input.readEnum();
-
-              errorCode_ = rawValue;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              desception_ = s;
-              break;
-            }
-            case 24: {
-
-              timestamp_ = input.readInt64();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return cn.bubi.blockchain.adapter3.Monitor.internal_static_monitor_ErrorMessage_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return cn.bubi.blockchain.adapter3.Monitor.internal_static_monitor_ErrorMessage_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              cn.bubi.blockchain.adapter3.Monitor.ErrorMessage.class, cn.bubi.blockchain.adapter3.Monitor.ErrorMessage.Builder.class);
-    }
-
-    public static final int ERROR_CODE_FIELD_NUMBER = 1;
-    private int errorCode_;
-    /**
-     * <code>optional .monitor.MONITOR_ERROR error_code = 1;</code>
-     */
-    public int getErrorCodeValue() {
-      return errorCode_;
-    }
-    /**
-     * <code>optional .monitor.MONITOR_ERROR error_code = 1;</code>
-     */
-    public cn.bubi.blockchain.adapter3.Monitor.MONITOR_ERROR getErrorCode() {
-      cn.bubi.blockchain.adapter3.Monitor.MONITOR_ERROR result = cn.bubi.blockchain.adapter3.Monitor.MONITOR_ERROR.valueOf(errorCode_);
-      return result == null ? cn.bubi.blockchain.adapter3.Monitor.MONITOR_ERROR.UNRECOGNIZED : result;
-    }
-
-    public static final int DESCEPTION_FIELD_NUMBER = 2;
-    private volatile java.lang.Object desception_;
-    /**
-     * <code>optional string desception = 2;</code>
-     */
-    public java.lang.String getDesception() {
-      java.lang.Object ref = desception_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        desception_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>optional string desception = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getDesceptionBytes() {
-      java.lang.Object ref = desception_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        desception_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int TIMESTAMP_FIELD_NUMBER = 3;
-    private long timestamp_;
-    /**
-     * <code>optional int64 timestamp = 3;</code>
-     */
-    public long getTimestamp() {
-      return timestamp_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (errorCode_ != cn.bubi.blockchain.adapter3.Monitor.MONITOR_ERROR.MONITOR_INTERNAL_ERROR.getNumber()) {
-        output.writeEnum(1, errorCode_);
-      }
-      if (!getDesceptionBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, desception_);
-      }
-      if (timestamp_ != 0L) {
-        output.writeInt64(3, timestamp_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (errorCode_ != cn.bubi.blockchain.adapter3.Monitor.MONITOR_ERROR.MONITOR_INTERNAL_ERROR.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(1, errorCode_);
-      }
-      if (!getDesceptionBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, desception_);
-      }
-      if (timestamp_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, timestamp_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof cn.bubi.blockchain.adapter3.Monitor.ErrorMessage)) {
-        return super.equals(obj);
-      }
-      cn.bubi.blockchain.adapter3.Monitor.ErrorMessage other = (cn.bubi.blockchain.adapter3.Monitor.ErrorMessage) obj;
-
-      boolean result = true;
-      result = result && errorCode_ == other.errorCode_;
-      result = result && getDesception()
-          .equals(other.getDesception());
-      result = result && (getTimestamp()
-          == other.getTimestamp());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
-      hash = (37 * hash) + ERROR_CODE_FIELD_NUMBER;
-      hash = (53 * hash) + errorCode_;
-      hash = (37 * hash) + DESCEPTION_FIELD_NUMBER;
-      hash = (53 * hash) + getDesception().hashCode();
-      hash = (37 * hash) + TIMESTAMP_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getTimestamp());
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static cn.bubi.blockchain.adapter3.Monitor.ErrorMessage parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static cn.bubi.blockchain.adapter3.Monitor.ErrorMessage parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static cn.bubi.blockchain.adapter3.Monitor.ErrorMessage parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static cn.bubi.blockchain.adapter3.Monitor.ErrorMessage parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static cn.bubi.blockchain.adapter3.Monitor.ErrorMessage parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static cn.bubi.blockchain.adapter3.Monitor.ErrorMessage parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static cn.bubi.blockchain.adapter3.Monitor.ErrorMessage parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static cn.bubi.blockchain.adapter3.Monitor.ErrorMessage parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static cn.bubi.blockchain.adapter3.Monitor.ErrorMessage parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static cn.bubi.blockchain.adapter3.Monitor.ErrorMessage parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(cn.bubi.blockchain.adapter3.Monitor.ErrorMessage prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code monitor.ErrorMessage}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:monitor.ErrorMessage)
-        cn.bubi.blockchain.adapter3.Monitor.ErrorMessageOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return cn.bubi.blockchain.adapter3.Monitor.internal_static_monitor_ErrorMessage_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return cn.bubi.blockchain.adapter3.Monitor.internal_static_monitor_ErrorMessage_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                cn.bubi.blockchain.adapter3.Monitor.ErrorMessage.class, cn.bubi.blockchain.adapter3.Monitor.ErrorMessage.Builder.class);
-      }
-
-      // Construct using cn.bubi.blockchain.adapter3.Monitor.ErrorMessage.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        errorCode_ = 0;
-
-        desception_ = "";
-
-        timestamp_ = 0L;
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return cn.bubi.blockchain.adapter3.Monitor.internal_static_monitor_ErrorMessage_descriptor;
-      }
-
-      public cn.bubi.blockchain.adapter3.Monitor.ErrorMessage getDefaultInstanceForType() {
-        return cn.bubi.blockchain.adapter3.Monitor.ErrorMessage.getDefaultInstance();
-      }
-
-      public cn.bubi.blockchain.adapter3.Monitor.ErrorMessage build() {
-        cn.bubi.blockchain.adapter3.Monitor.ErrorMessage result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public cn.bubi.blockchain.adapter3.Monitor.ErrorMessage buildPartial() {
-        cn.bubi.blockchain.adapter3.Monitor.ErrorMessage result = new cn.bubi.blockchain.adapter3.Monitor.ErrorMessage(this);
-        result.errorCode_ = errorCode_;
-        result.desception_ = desception_;
-        result.timestamp_ = timestamp_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof cn.bubi.blockchain.adapter3.Monitor.ErrorMessage) {
-          return mergeFrom((cn.bubi.blockchain.adapter3.Monitor.ErrorMessage)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(cn.bubi.blockchain.adapter3.Monitor.ErrorMessage other) {
-        if (other == cn.bubi.blockchain.adapter3.Monitor.ErrorMessage.getDefaultInstance()) return this;
-        if (other.errorCode_ != 0) {
-          setErrorCodeValue(other.getErrorCodeValue());
-        }
-        if (!other.getDesception().isEmpty()) {
-          desception_ = other.desception_;
-          onChanged();
-        }
-        if (other.getTimestamp() != 0L) {
-          setTimestamp(other.getTimestamp());
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        cn.bubi.blockchain.adapter3.Monitor.ErrorMessage parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (cn.bubi.blockchain.adapter3.Monitor.ErrorMessage) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int errorCode_ = 0;
-      /**
-       * <code>optional .monitor.MONITOR_ERROR error_code = 1;</code>
-       */
-      public int getErrorCodeValue() {
-        return errorCode_;
-      }
-      /**
-       * <code>optional .monitor.MONITOR_ERROR error_code = 1;</code>
-       */
-      public Builder setErrorCodeValue(int value) {
-        errorCode_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .monitor.MONITOR_ERROR error_code = 1;</code>
-       */
-      public cn.bubi.blockchain.adapter3.Monitor.MONITOR_ERROR getErrorCode() {
-        cn.bubi.blockchain.adapter3.Monitor.MONITOR_ERROR result = cn.bubi.blockchain.adapter3.Monitor.MONITOR_ERROR.valueOf(errorCode_);
-        return result == null ? cn.bubi.blockchain.adapter3.Monitor.MONITOR_ERROR.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>optional .monitor.MONITOR_ERROR error_code = 1;</code>
-       */
-      public Builder setErrorCode(cn.bubi.blockchain.adapter3.Monitor.MONITOR_ERROR value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        errorCode_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional .monitor.MONITOR_ERROR error_code = 1;</code>
-       */
-      public Builder clearErrorCode() {
-        
-        errorCode_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object desception_ = "";
-      /**
-       * <code>optional string desception = 2;</code>
-       */
-      public java.lang.String getDesception() {
-        java.lang.Object ref = desception_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          desception_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string desception = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getDesceptionBytes() {
-        java.lang.Object ref = desception_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          desception_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string desception = 2;</code>
-       */
-      public Builder setDesception(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        desception_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string desception = 2;</code>
-       */
-      public Builder clearDesception() {
-        
-        desception_ = getDefaultInstance().getDesception();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string desception = 2;</code>
-       */
-      public Builder setDesceptionBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        desception_ = value;
-        onChanged();
-        return this;
-      }
-
-      private long timestamp_ ;
-      /**
-       * <code>optional int64 timestamp = 3;</code>
-       */
-      public long getTimestamp() {
-        return timestamp_;
-      }
-      /**
-       * <code>optional int64 timestamp = 3;</code>
-       */
-      public Builder setTimestamp(long value) {
-        
-        timestamp_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int64 timestamp = 3;</code>
-       */
-      public Builder clearTimestamp() {
-        
-        timestamp_ = 0L;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:monitor.ErrorMessage)
-    }
-
-    // @@protoc_insertion_point(class_scope:monitor.ErrorMessage)
-    private static final cn.bubi.blockchain.adapter3.Monitor.ErrorMessage DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new cn.bubi.blockchain.adapter3.Monitor.ErrorMessage();
-    }
-
-    public static cn.bubi.blockchain.adapter3.Monitor.ErrorMessage getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ErrorMessage>
-        PARSER = new com.google.protobuf.AbstractParser<ErrorMessage>() {
-      public ErrorMessage parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new ErrorMessage(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<ErrorMessage> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ErrorMessage> getParserForType() {
-      return PARSER;
-    }
-
-    public cn.bubi.blockchain.adapter3.Monitor.ErrorMessage getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -7265,7 +6292,7 @@ public final class Monitor {
     long getTotal();
 
     /**
-     * <code>optional double usedPercent = 3;</code>
+     * <code>optional double used_percent = 3;</code>
      */
     double getUsedPercent();
 
@@ -7384,10 +6411,10 @@ public final class Monitor {
       return total_;
     }
 
-    public static final int USEDPERCENT_FIELD_NUMBER = 3;
+    public static final int USED_PERCENT_FIELD_NUMBER = 3;
     private double usedPercent_;
     /**
-     * <code>optional double usedPercent = 3;</code>
+     * <code>optional double used_percent = 3;</code>
      */
     public double getUsedPercent() {
       return usedPercent_;
@@ -7515,7 +6542,7 @@ public final class Monitor {
       hash = (37 * hash) + TOTAL_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getTotal());
-      hash = (37 * hash) + USEDPERCENT_FIELD_NUMBER;
+      hash = (37 * hash) + USED_PERCENT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           java.lang.Double.doubleToLongBits(getUsedPercent()));
       hash = (37 * hash) + DESCRIPTION_FIELD_NUMBER;
@@ -7806,13 +6833,13 @@ public final class Monitor {
 
       private double usedPercent_ ;
       /**
-       * <code>optional double usedPercent = 3;</code>
+       * <code>optional double used_percent = 3;</code>
        */
       public double getUsedPercent() {
         return usedPercent_;
       }
       /**
-       * <code>optional double usedPercent = 3;</code>
+       * <code>optional double used_percent = 3;</code>
        */
       public Builder setUsedPercent(double value) {
         
@@ -7821,7 +6848,7 @@ public final class Monitor {
         return this;
       }
       /**
-       * <code>optional double usedPercent = 3;</code>
+       * <code>optional double used_percent = 3;</code>
        */
       public Builder clearUsedPercent() {
         
@@ -8754,7 +7781,7 @@ public final class Monitor {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional double usedPercent = 1;</code>
+     * <code>optional double used_percent = 1;</code>
      */
     double getUsedPercent();
   }
@@ -8826,10 +7853,10 @@ public final class Monitor {
               cn.bubi.blockchain.adapter3.Monitor.CPU.class, cn.bubi.blockchain.adapter3.Monitor.CPU.Builder.class);
     }
 
-    public static final int USEDPERCENT_FIELD_NUMBER = 1;
+    public static final int USED_PERCENT_FIELD_NUMBER = 1;
     private double usedPercent_;
     /**
-     * <code>optional double usedPercent = 1;</code>
+     * <code>optional double used_percent = 1;</code>
      */
     public double getUsedPercent() {
       return usedPercent_;
@@ -8891,7 +7918,7 @@ public final class Monitor {
       }
       int hash = 41;
       hash = (19 * hash) + getDescriptorForType().hashCode();
-      hash = (37 * hash) + USEDPERCENT_FIELD_NUMBER;
+      hash = (37 * hash) + USED_PERCENT_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           java.lang.Double.doubleToLongBits(getUsedPercent()));
       hash = (29 * hash) + unknownFields.hashCode();
@@ -9109,13 +8136,13 @@ public final class Monitor {
 
       private double usedPercent_ ;
       /**
-       * <code>optional double usedPercent = 1;</code>
+       * <code>optional double used_percent = 1;</code>
        */
       public double getUsedPercent() {
         return usedPercent_;
       }
       /**
-       * <code>optional double usedPercent = 1;</code>
+       * <code>optional double used_percent = 1;</code>
        */
       public Builder setUsedPercent(double value) {
         
@@ -9124,7 +8151,7 @@ public final class Monitor {
         return this;
       }
       /**
-       * <code>optional double usedPercent = 1;</code>
+       * <code>optional double used_percent = 1;</code>
        */
       public Builder clearUsedPercent() {
         
@@ -10328,30 +9355,30 @@ public final class Monitor {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>optional int64 ledger_sequence = 2;</code>
+     * <code>optional int64 ledger_sequence = 1;</code>
      */
     long getLedgerSequence();
 
     /**
-     * <code>optional string node_id = 3;</code>
+     * <code>optional string node_id = 2;</code>
      */
     java.lang.String getNodeId();
     /**
-     * <code>optional string node_id = 3;</code>
+     * <code>optional string node_id = 2;</code>
      */
     com.google.protobuf.ByteString
         getNodeIdBytes();
 
     /**
-     * <code>optional .monitor.SystemStatus system = 4;</code>
+     * <code>optional .monitor.SystemStatus system = 3;</code>
      */
     boolean hasSystem();
     /**
-     * <code>optional .monitor.SystemStatus system = 4;</code>
+     * <code>optional .monitor.SystemStatus system = 3;</code>
      */
     cn.bubi.blockchain.adapter3.Monitor.SystemStatus getSystem();
     /**
-     * <code>optional .monitor.SystemStatus system = 4;</code>
+     * <code>optional .monitor.SystemStatus system = 3;</code>
      */
     cn.bubi.blockchain.adapter3.Monitor.SystemStatusOrBuilder getSystemOrBuilder();
   }
@@ -10396,18 +9423,18 @@ public final class Monitor {
               }
               break;
             }
-            case 16: {
+            case 8: {
 
               ledgerSequence_ = input.readInt64();
               break;
             }
-            case 26: {
+            case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
               nodeId_ = s;
               break;
             }
-            case 34: {
+            case 26: {
               cn.bubi.blockchain.adapter3.Monitor.SystemStatus.Builder subBuilder = null;
               if (system_ != null) {
                 subBuilder = system_.toBuilder();
@@ -10443,19 +9470,19 @@ public final class Monitor {
               cn.bubi.blockchain.adapter3.Monitor.AlertStatus.class, cn.bubi.blockchain.adapter3.Monitor.AlertStatus.Builder.class);
     }
 
-    public static final int LEDGER_SEQUENCE_FIELD_NUMBER = 2;
+    public static final int LEDGER_SEQUENCE_FIELD_NUMBER = 1;
     private long ledgerSequence_;
     /**
-     * <code>optional int64 ledger_sequence = 2;</code>
+     * <code>optional int64 ledger_sequence = 1;</code>
      */
     public long getLedgerSequence() {
       return ledgerSequence_;
     }
 
-    public static final int NODE_ID_FIELD_NUMBER = 3;
+    public static final int NODE_ID_FIELD_NUMBER = 2;
     private volatile java.lang.Object nodeId_;
     /**
-     * <code>optional string node_id = 3;</code>
+     * <code>optional string node_id = 2;</code>
      */
     public java.lang.String getNodeId() {
       java.lang.Object ref = nodeId_;
@@ -10470,7 +9497,7 @@ public final class Monitor {
       }
     }
     /**
-     * <code>optional string node_id = 3;</code>
+     * <code>optional string node_id = 2;</code>
      */
     public com.google.protobuf.ByteString
         getNodeIdBytes() {
@@ -10486,22 +9513,22 @@ public final class Monitor {
       }
     }
 
-    public static final int SYSTEM_FIELD_NUMBER = 4;
+    public static final int SYSTEM_FIELD_NUMBER = 3;
     private cn.bubi.blockchain.adapter3.Monitor.SystemStatus system_;
     /**
-     * <code>optional .monitor.SystemStatus system = 4;</code>
+     * <code>optional .monitor.SystemStatus system = 3;</code>
      */
     public boolean hasSystem() {
       return system_ != null;
     }
     /**
-     * <code>optional .monitor.SystemStatus system = 4;</code>
+     * <code>optional .monitor.SystemStatus system = 3;</code>
      */
     public cn.bubi.blockchain.adapter3.Monitor.SystemStatus getSystem() {
       return system_ == null ? cn.bubi.blockchain.adapter3.Monitor.SystemStatus.getDefaultInstance() : system_;
     }
     /**
-     * <code>optional .monitor.SystemStatus system = 4;</code>
+     * <code>optional .monitor.SystemStatus system = 3;</code>
      */
     public cn.bubi.blockchain.adapter3.Monitor.SystemStatusOrBuilder getSystemOrBuilder() {
       return getSystem();
@@ -10520,13 +9547,13 @@ public final class Monitor {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       if (ledgerSequence_ != 0L) {
-        output.writeInt64(2, ledgerSequence_);
+        output.writeInt64(1, ledgerSequence_);
       }
       if (!getNodeIdBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, nodeId_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, nodeId_);
       }
       if (system_ != null) {
-        output.writeMessage(4, getSystem());
+        output.writeMessage(3, getSystem());
       }
     }
 
@@ -10537,14 +9564,14 @@ public final class Monitor {
       size = 0;
       if (ledgerSequence_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, ledgerSequence_);
+          .computeInt64Size(1, ledgerSequence_);
       }
       if (!getNodeIdBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, nodeId_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, nodeId_);
       }
       if (system_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getSystem());
+          .computeMessageSize(3, getSystem());
       }
       memoizedSize = size;
       return size;
@@ -10826,13 +9853,13 @@ public final class Monitor {
 
       private long ledgerSequence_ ;
       /**
-       * <code>optional int64 ledger_sequence = 2;</code>
+       * <code>optional int64 ledger_sequence = 1;</code>
        */
       public long getLedgerSequence() {
         return ledgerSequence_;
       }
       /**
-       * <code>optional int64 ledger_sequence = 2;</code>
+       * <code>optional int64 ledger_sequence = 1;</code>
        */
       public Builder setLedgerSequence(long value) {
         
@@ -10841,7 +9868,7 @@ public final class Monitor {
         return this;
       }
       /**
-       * <code>optional int64 ledger_sequence = 2;</code>
+       * <code>optional int64 ledger_sequence = 1;</code>
        */
       public Builder clearLedgerSequence() {
         
@@ -10852,7 +9879,7 @@ public final class Monitor {
 
       private java.lang.Object nodeId_ = "";
       /**
-       * <code>optional string node_id = 3;</code>
+       * <code>optional string node_id = 2;</code>
        */
       public java.lang.String getNodeId() {
         java.lang.Object ref = nodeId_;
@@ -10867,7 +9894,7 @@ public final class Monitor {
         }
       }
       /**
-       * <code>optional string node_id = 3;</code>
+       * <code>optional string node_id = 2;</code>
        */
       public com.google.protobuf.ByteString
           getNodeIdBytes() {
@@ -10883,7 +9910,7 @@ public final class Monitor {
         }
       }
       /**
-       * <code>optional string node_id = 3;</code>
+       * <code>optional string node_id = 2;</code>
        */
       public Builder setNodeId(
           java.lang.String value) {
@@ -10896,7 +9923,7 @@ public final class Monitor {
         return this;
       }
       /**
-       * <code>optional string node_id = 3;</code>
+       * <code>optional string node_id = 2;</code>
        */
       public Builder clearNodeId() {
         
@@ -10905,7 +9932,7 @@ public final class Monitor {
         return this;
       }
       /**
-       * <code>optional string node_id = 3;</code>
+       * <code>optional string node_id = 2;</code>
        */
       public Builder setNodeIdBytes(
           com.google.protobuf.ByteString value) {
@@ -10923,13 +9950,13 @@ public final class Monitor {
       private com.google.protobuf.SingleFieldBuilderV3<
           cn.bubi.blockchain.adapter3.Monitor.SystemStatus, cn.bubi.blockchain.adapter3.Monitor.SystemStatus.Builder, cn.bubi.blockchain.adapter3.Monitor.SystemStatusOrBuilder> systemBuilder_;
       /**
-       * <code>optional .monitor.SystemStatus system = 4;</code>
+       * <code>optional .monitor.SystemStatus system = 3;</code>
        */
       public boolean hasSystem() {
         return systemBuilder_ != null || system_ != null;
       }
       /**
-       * <code>optional .monitor.SystemStatus system = 4;</code>
+       * <code>optional .monitor.SystemStatus system = 3;</code>
        */
       public cn.bubi.blockchain.adapter3.Monitor.SystemStatus getSystem() {
         if (systemBuilder_ == null) {
@@ -10939,7 +9966,7 @@ public final class Monitor {
         }
       }
       /**
-       * <code>optional .monitor.SystemStatus system = 4;</code>
+       * <code>optional .monitor.SystemStatus system = 3;</code>
        */
       public Builder setSystem(cn.bubi.blockchain.adapter3.Monitor.SystemStatus value) {
         if (systemBuilder_ == null) {
@@ -10955,7 +9982,7 @@ public final class Monitor {
         return this;
       }
       /**
-       * <code>optional .monitor.SystemStatus system = 4;</code>
+       * <code>optional .monitor.SystemStatus system = 3;</code>
        */
       public Builder setSystem(
           cn.bubi.blockchain.adapter3.Monitor.SystemStatus.Builder builderForValue) {
@@ -10969,7 +9996,7 @@ public final class Monitor {
         return this;
       }
       /**
-       * <code>optional .monitor.SystemStatus system = 4;</code>
+       * <code>optional .monitor.SystemStatus system = 3;</code>
        */
       public Builder mergeSystem(cn.bubi.blockchain.adapter3.Monitor.SystemStatus value) {
         if (systemBuilder_ == null) {
@@ -10987,7 +10014,7 @@ public final class Monitor {
         return this;
       }
       /**
-       * <code>optional .monitor.SystemStatus system = 4;</code>
+       * <code>optional .monitor.SystemStatus system = 3;</code>
        */
       public Builder clearSystem() {
         if (systemBuilder_ == null) {
@@ -11001,7 +10028,7 @@ public final class Monitor {
         return this;
       }
       /**
-       * <code>optional .monitor.SystemStatus system = 4;</code>
+       * <code>optional .monitor.SystemStatus system = 3;</code>
        */
       public cn.bubi.blockchain.adapter3.Monitor.SystemStatus.Builder getSystemBuilder() {
         
@@ -11009,7 +10036,7 @@ public final class Monitor {
         return getSystemFieldBuilder().getBuilder();
       }
       /**
-       * <code>optional .monitor.SystemStatus system = 4;</code>
+       * <code>optional .monitor.SystemStatus system = 3;</code>
        */
       public cn.bubi.blockchain.adapter3.Monitor.SystemStatusOrBuilder getSystemOrBuilder() {
         if (systemBuilder_ != null) {
@@ -11020,7 +10047,7 @@ public final class Monitor {
         }
       }
       /**
-       * <code>optional .monitor.SystemStatus system = 4;</code>
+       * <code>optional .monitor.SystemStatus system = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           cn.bubi.blockchain.adapter3.Monitor.SystemStatus, cn.bubi.blockchain.adapter3.Monitor.SystemStatus.Builder, cn.bubi.blockchain.adapter3.Monitor.SystemStatusOrBuilder> 
@@ -11095,11 +10122,6 @@ public final class Monitor {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_monitor_Register_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_monitor_ErrorMessage_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_monitor_ErrorMessage_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_monitor_Peer_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -11164,56 +10186,45 @@ public final class Monitor {
   static {
     java.lang.String[] descriptorData = {
       "\n\rmonitor.proto\022\007monitor\032\013chain.proto\"O\n" +
-      "\005Hello\022\027\n\017service_version\030\001 \001(\r\022\032\n\022conne" +
-      "ction_timeout\030\002 \001(\r\022\021\n\ttimestamp\030\003 \001(\003\"l" +
-      "\n\010Register\022\n\n\002id\030\001 \001(\t\022\017\n\007session\030\002 \001(\t\022" +
-      "\032\n\022blockchain_version\030\003 \001(\t\022\024\n\014data_vers" +
-      "ion\030\004 \001(\003\022\021\n\ttimestamp\030\005 \001(\003\"a\n\014ErrorMes" +
-      "sage\022*\n\nerror_code\030\001 \001(\0162\026.monitor.MONIT" +
-      "OR_ERROR\022\022\n\ndesception\030\002 \001(\t\022\021\n\ttimestam" +
-      "p\030\003 \001(\003\"E\n\004Peer\022\n\n\002id\030\001 \001(\t\022\r\n\005delay\030\002 \001" +
-      "(\003\022\016\n\006active\030\003 \001(\010\022\022\n\nip_address\030\004 \001(\t\"Y",
-      "\n\013GlueManager\022\033\n\023system_current_time\030\001 \001" +
-      "(\t\022\026\n\016process_uptime\030\002 \001(\t\022\025\n\rsystem_upt" +
-      "ime\030\003 \001(\t\";\n\013PeerManager\022\017\n\007peer_id\030\001 \001(" +
-      "\t\022\033\n\004peer\030\002 \003(\0132\r.monitor.Peer\"d\n\nBubiSt" +
-      "atus\022*\n\014glue_manager\030\001 \001(\0132\024.monitor.Glu" +
-      "eManager\022*\n\014peer_manager\030\002 \001(\0132\024.monitor" +
-      ".PeerManager\"\201\001\n\014LedgerStatus\022-\n\rledger_" +
-      "header\030\001 \001(\0132\026.protocol.LedgerHeader\022\030\n\020" +
-      "transaction_size\030\002 \001(\003\022\025\n\raccount_count\030" +
-      "\003 \001(\003\022\021\n\ttimestamp\030\004 \001(\003\"]\n\016SystemProper",
-      "ty\022\021\n\thost_name\030\001 \001(\t\022\022\n\nos_version\030\002 \001(" +
-      "\t\022\024\n\014startup_time\030\003 \001(\003\022\016\n\006os_bit\030\004 \001(\t\"" +
-      "\\\n\016SystemResource\022\021\n\tavailable\030\001 \001(\003\022\r\n\005" +
-      "total\030\002 \001(\003\022\023\n\013usedPercent\030\003 \001(\001\022\023\n\013desc" +
-      "ription\030\004 \001(\t\"L\n\tPartition\022\023\n\013total_byte" +
-      "s\030\001 \001(\003\022*\n\tpartition\030\002 \003(\0132\027.monitor.Sys" +
-      "temResource\"\032\n\003CPU\022\023\n\013usedPercent\030\001 \001(\001\"" +
-      "\245\001\n\014SystemStatus\022)\n\010property\030\001 \001(\0132\027.mon" +
-      "itor.SystemProperty\022\'\n\006memory\030\002 \001(\0132\027.mo" +
-      "nitor.SystemResource\022\031\n\003cpu\030\003 \001(\0132\014.moni",
-      "tor.CPU\022&\n\npartitions\030\004 \001(\0132\022.monitor.Pa" +
-      "rtition\"^\n\013AlertStatus\022\027\n\017ledger_sequenc" +
-      "e\030\002 \001(\003\022\017\n\007node_id\030\003 \001(\t\022%\n\006system\030\004 \001(\013" +
-      "2\025.monitor.SystemStatus*\264\002\n\024MONITOR_MESS" +
-      "AGE_TYPE\022\030\n\024MONITOR_MSGTYPE_NONE\020\000\022\031\n\025MO" +
-      "NITOR_MSGTYPE_HELLO\020\036\022\034\n\030MONITOR_MSGTYPE" +
-      "_REGISTER\020\037\022\030\n\024MONITOR_MSGTYPE_BUBI\020 \022\032\n" +
-      "\026MONITOR_MSGTYPE_LEDGER\020!\022\032\n\026MONITOR_MSG" +
-      "TYPE_SYSTEM\020\"\022\031\n\025MONITOR_MSGTYPE_ALERT\020#" +
-      "\022\032\n\026MONITOR_MSGTYPE_NOTICE\020$\022%\n!MONITOR_",
-      "MSGTYPE_ACCOUNT_EXCEPTION\020%\022\031\n\025MONITOR_M" +
-      "SGTYPE_ERROR\020\'*\322\002\n\rMONITOR_ERROR\022\032\n\026MONI" +
-      "TOR_INTERNAL_ERROR\020\000\022\035\n\031MONITOR_MESSAGE_" +
-      "NOT_EXIST\020\001\022\035\n\031MONITOR_MISSING_PARAMETER" +
-      "\020\002\022\030\n\024MONITOR_ID_NOT_EXIST\020\003\022\033\n\027MONITOR_" +
-      "ID_ALREAD_EXIST\020\004\022\032\n\026MONITOR_CENTER_INVA" +
-      "LID\020\005\022\031\n\025MONITOR_AGENT_INVALID\020\006\022\025\n\021MONI" +
-      "TOR_NOT_LOGIN\020\007\022\036\n\032MONITOR_BUBI_MESSAGE_" +
-      "ERROR\020\010\022 \n\034MONITOR_SYSTEM_MESSAGE_ERROR\020" +
-      "\t\022 \n\034MONITOR_LEDGER_MESSAGE_ERROR\020\nB\035\n\033c",
-      "n.bubi.blockchain.adapter3b\006proto3"
+      "\005Hello\022\027\n\017service_version\030\001 \001(\003\022\032\n\022conne" +
+      "ction_timeout\030\002 \001(\003\022\021\n\ttimestamp\030\003 \001(\003\"[" +
+      "\n\010Register\022\n\n\002id\030\001 \001(\t\022\032\n\022blockchain_ver" +
+      "sion\030\002 \001(\t\022\024\n\014data_version\030\003 \001(\003\022\021\n\ttime" +
+      "stamp\030\004 \001(\003\"E\n\004Peer\022\n\n\002id\030\001 \001(\t\022\r\n\005delay" +
+      "\030\002 \001(\003\022\016\n\006active\030\003 \001(\010\022\022\n\nip_address\030\004 \001" +
+      "(\t\"Y\n\013GlueManager\022\033\n\023system_current_time" +
+      "\030\001 \001(\t\022\026\n\016process_uptime\030\002 \001(\t\022\025\n\rsystem" +
+      "_uptime\030\003 \001(\t\";\n\013PeerManager\022\017\n\007peer_id\030",
+      "\001 \001(\t\022\033\n\004peer\030\002 \003(\0132\r.monitor.Peer\"d\n\nBu" +
+      "biStatus\022*\n\014glue_manager\030\001 \001(\0132\024.monitor" +
+      ".GlueManager\022*\n\014peer_manager\030\002 \001(\0132\024.mon" +
+      "itor.PeerManager\"\201\001\n\014LedgerStatus\022-\n\rled" +
+      "ger_header\030\001 \001(\0132\026.protocol.LedgerHeader" +
+      "\022\030\n\020transaction_size\030\002 \001(\003\022\025\n\raccount_co" +
+      "unt\030\003 \001(\003\022\021\n\ttimestamp\030\004 \001(\003\"]\n\016SystemPr" +
+      "operty\022\021\n\thost_name\030\001 \001(\t\022\022\n\nos_version\030" +
+      "\002 \001(\t\022\024\n\014startup_time\030\003 \001(\003\022\016\n\006os_bit\030\004 " +
+      "\001(\t\"]\n\016SystemResource\022\021\n\tavailable\030\001 \001(\003",
+      "\022\r\n\005total\030\002 \001(\003\022\024\n\014used_percent\030\003 \001(\001\022\023\n" +
+      "\013description\030\004 \001(\t\"L\n\tPartition\022\023\n\013total" +
+      "_bytes\030\001 \001(\003\022*\n\tpartition\030\002 \003(\0132\027.monito" +
+      "r.SystemResource\"\033\n\003CPU\022\024\n\014used_percent\030" +
+      "\001 \001(\001\"\245\001\n\014SystemStatus\022)\n\010property\030\001 \001(\013" +
+      "2\027.monitor.SystemProperty\022\'\n\006memory\030\002 \001(" +
+      "\0132\027.monitor.SystemResource\022\031\n\003cpu\030\003 \001(\0132" +
+      "\014.monitor.CPU\022&\n\npartitions\030\004 \001(\0132\022.moni" +
+      "tor.Partition\"^\n\013AlertStatus\022\027\n\017ledger_s" +
+      "equence\030\001 \001(\003\022\017\n\007node_id\030\002 \001(\t\022%\n\006system",
+      "\030\003 \001(\0132\025.monitor.SystemStatus*\264\002\n\024MONITO" +
+      "R_MESSAGE_TYPE\022\030\n\024MONITOR_MSGTYPE_NONE\020\000" +
+      "\022\031\n\025MONITOR_MSGTYPE_HELLO\020\036\022\034\n\030MONITOR_M" +
+      "SGTYPE_REGISTER\020\037\022\030\n\024MONITOR_MSGTYPE_BUB" +
+      "I\020 \022\032\n\026MONITOR_MSGTYPE_LEDGER\020!\022\032\n\026MONIT" +
+      "OR_MSGTYPE_SYSTEM\020\"\022\031\n\025MONITOR_MSGTYPE_A" +
+      "LERT\020#\022\032\n\026MONITOR_MSGTYPE_NOTICE\020$\022%\n!MO" +
+      "NITOR_MSGTYPE_ACCOUNT_EXCEPTION\020%\022\031\n\025MON" +
+      "ITOR_MSGTYPE_ERROR\020\'B\035\n\033cn.bubi.blockcha" +
+      "in.adapter3b\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -11239,75 +10250,69 @@ public final class Monitor {
     internal_static_monitor_Register_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_monitor_Register_descriptor,
-        new java.lang.String[] { "Id", "Session", "BlockchainVersion", "DataVersion", "Timestamp", });
-    internal_static_monitor_ErrorMessage_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_monitor_ErrorMessage_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_monitor_ErrorMessage_descriptor,
-        new java.lang.String[] { "ErrorCode", "Desception", "Timestamp", });
+        new java.lang.String[] { "Id", "BlockchainVersion", "DataVersion", "Timestamp", });
     internal_static_monitor_Peer_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_monitor_Peer_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_monitor_Peer_descriptor,
         new java.lang.String[] { "Id", "Delay", "Active", "IpAddress", });
     internal_static_monitor_GlueManager_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_monitor_GlueManager_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_monitor_GlueManager_descriptor,
         new java.lang.String[] { "SystemCurrentTime", "ProcessUptime", "SystemUptime", });
     internal_static_monitor_PeerManager_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_monitor_PeerManager_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_monitor_PeerManager_descriptor,
         new java.lang.String[] { "PeerId", "Peer", });
     internal_static_monitor_BubiStatus_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_monitor_BubiStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_monitor_BubiStatus_descriptor,
         new java.lang.String[] { "GlueManager", "PeerManager", });
     internal_static_monitor_LedgerStatus_descriptor =
-      getDescriptor().getMessageTypes().get(7);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_monitor_LedgerStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_monitor_LedgerStatus_descriptor,
         new java.lang.String[] { "LedgerHeader", "TransactionSize", "AccountCount", "Timestamp", });
     internal_static_monitor_SystemProperty_descriptor =
-      getDescriptor().getMessageTypes().get(8);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_monitor_SystemProperty_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_monitor_SystemProperty_descriptor,
         new java.lang.String[] { "HostName", "OsVersion", "StartupTime", "OsBit", });
     internal_static_monitor_SystemResource_descriptor =
-      getDescriptor().getMessageTypes().get(9);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_monitor_SystemResource_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_monitor_SystemResource_descriptor,
         new java.lang.String[] { "Available", "Total", "UsedPercent", "Description", });
     internal_static_monitor_Partition_descriptor =
-      getDescriptor().getMessageTypes().get(10);
+      getDescriptor().getMessageTypes().get(9);
     internal_static_monitor_Partition_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_monitor_Partition_descriptor,
         new java.lang.String[] { "TotalBytes", "Partition", });
     internal_static_monitor_CPU_descriptor =
-      getDescriptor().getMessageTypes().get(11);
+      getDescriptor().getMessageTypes().get(10);
     internal_static_monitor_CPU_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_monitor_CPU_descriptor,
         new java.lang.String[] { "UsedPercent", });
     internal_static_monitor_SystemStatus_descriptor =
-      getDescriptor().getMessageTypes().get(12);
+      getDescriptor().getMessageTypes().get(11);
     internal_static_monitor_SystemStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_monitor_SystemStatus_descriptor,
         new java.lang.String[] { "Property", "Memory", "Cpu", "Partitions", });
     internal_static_monitor_AlertStatus_descriptor =
-      getDescriptor().getMessageTypes().get(13);
+      getDescriptor().getMessageTypes().get(12);
     internal_static_monitor_AlertStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_monitor_AlertStatus_descriptor,

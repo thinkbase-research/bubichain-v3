@@ -45,7 +45,6 @@ namespace bubi {
 		virtual void Run(utils::Thread *thread) override;
 
 	private:
-		virtual bool OnConnectOpen(Connection *conn);
 		virtual void OnDisconnect(Connection *conn);
 		virtual bubi::Connection *CreateConnectObject(bubi::server *server_h, bubi::client *client_,
 			bubi::tls_server *tls_server_h, bubi::tls_client *tls_client_h,

@@ -18,23 +18,16 @@ enum MONITOR_MESSAGE_TYPE{
 }
 
 message Hello {
-	uint32 service_version  = 1;
-	uint32 connection_timeout = 2;
+	int64 service_version  = 1;
+	int64 connection_timeout = 2;
 	int64 timestamp = 3;
 }
 
 message Register {
 	string id = 1;
-	string session = 2;
-	string blockchain_version = 3;
-	int64 data_version = 4;
-	int64 timestamp = 5;
-}
-
-message ErrorMessage {
-	MONITOR_ERROR error_code = 1;
-	string desception = 2;
-	int64 timestamp = 3;
+	string blockchain_version = 2;
+	int64 data_version = 3;
+	int64 timestamp = 4;
 }
 
 message Peer {
@@ -77,7 +70,7 @@ message SystemProperty {
 message SystemResource {
 	int64 available = 1;
 	int64 total = 2;
-	double usedPercent = 3;
+	double used_percent = 3;
 	string description = 4;
 }
 
@@ -87,7 +80,7 @@ message Partition {
 }
 
 message CPU {
-	double usedPercent = 1;
+	double used_percent = 1;
 }
 
 message SystemStatus {
@@ -98,21 +91,7 @@ message SystemStatus {
 }
 
 message AlertStatus {
-	int64 ledger_sequence = 2;
-	string node_id = 3;
-	SystemStatus system = 4;
-}
-
-enum MONITOR_ERROR{
-	MONITOR_INTERNAL_ERROR = 0;
-	MONITOR_MESSAGE_NOT_EXIST = 1;
-	MONITOR_MISSING_PARAMETER = 2;
-	MONITOR_ID_NOT_EXIST = 3;
-	MONITOR_ID_ALREAD_EXIST = 4;
-	MONITOR_CENTER_INVALID = 5;
-	MONITOR_AGENT_INVALID = 6;
-	MONITOR_NOT_LOGIN = 7;
-	MONITOR_BUBI_MESSAGE_ERROR = 8;
-	MONITOR_SYSTEM_MESSAGE_ERROR = 9;
-	MONITOR_LEDGER_MESSAGE_ERROR = 10;
+	int64 ledger_sequence = 1;
+	string node_id = 2;
+	SystemStatus system = 3;
 }

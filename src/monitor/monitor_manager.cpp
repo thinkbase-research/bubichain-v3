@@ -68,11 +68,6 @@ namespace bubi {
 		Start(utils::InetAddress::None());
 	}
 
-	bool MonitorManager::OnConnectOpen(Connection *conn) {
-		
-		return true;
-	}
-
 	bubi::Connection * MonitorManager::CreateConnectObject(bubi::server *server_h, bubi::client *client_, bubi::tls_server *tls_server_h, 
 		bubi::tls_client *tls_client_h, bubi::connection_hdl con, const std::string &uri, int64_t id) {
 		return new Monitor(server_h, client_, tls_server_h, tls_client_h, con, uri, id);
@@ -122,6 +117,8 @@ namespace bubi {
 				break;
 			}
 
+			connect_time_out_ = hello.connection_timeout();
+
 			LOG_INFO("Receive hello from center (ip: %s, version: %d, timestamp: %lld)", monitor->GetPeerAddress().ToIpPort().c_str(), 
 				hello.service_version(), hello.timestamp());
 
@@ -156,8 +153,9 @@ namespace bubi {
 				break;
 			}
 
-			LOG_INFO("Receive register from center (ip: %s, session_id:%s timestamp: " FMT_I64 ")", monitor->GetPeerAddress().ToIpPort().c_str(),
-				reg.session().c_str(), reg.timestamp());
+			monitor->SetActiveTime(utils::Timestamp::HighResolution());
+
+			LOG_INFO("Receive register from center (ip: %s, timestamp: " FMT_I64 ")", monitor->GetPeerAddress().ToIpPort().c_str(), reg.timestamp());
 			bret = true;
 		} while (false);
 
@@ -258,6 +256,11 @@ namespace bubi {
 	}
 
 	void MonitorManager::OnSlowTimer(int64_t current_time) {
+		utils::MutexGuard guard(conns_list_lock_);
+		Monitor *monitor = (Monitor *)GetClientConnection();
+		if (monitor == NULL || !monitor->IsActive()) {
+			return;
+		}
 
 		system_manager_.OnSlowTimer(current_time);
 
@@ -273,8 +276,6 @@ namespace bubi {
 			bool bret = true;
 			std::error_code ignore_ec;
 
-			utils::MutexGuard guard(conns_list_lock_);
-			Monitor *monitor = (Monitor *)GetClientConnection();
 			if (NULL == monitor || !monitor->SendRequest(monitor::MONITOR_MSGTYPE_ALERT, alert_status.SerializeAsString(), ignore_ec)) {
 				bret = false;
 				LOG_ERROR("Send alert status from ip(%s) failed (%d:%s)", monitor->GetPeerAddress().ToIpPort().c_str(),

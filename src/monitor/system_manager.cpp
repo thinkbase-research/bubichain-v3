@@ -54,7 +54,7 @@ namespace bubi {
 			monitor::SystemResource *memory = system_status->mutable_memory();
 			memory->set_available(physical_memory.available_bytes_);
 			memory->set_total(physical_memory.total_bytes_);
-			memory->set_usedpercent(physical_memory.usage_percent_);
+			memory->set_used_percent(physical_memory.usage_percent_);
 		}
 		
 		uint64_t total_bytes = 0;
@@ -90,7 +90,7 @@ namespace bubi {
 							monitor::SystemResource *part = disk->add_partition();
 							part->set_total(item.total_bytes_);
 							part->set_available(item.available_bytes_);
-							part->set_usedpercent(item.usage_percent_);
+							part->set_used_percent(item.usage_percent_);
 							part->set_description(item.describe_);
 							total_bytes += item.total_bytes_;
 						}
@@ -106,7 +106,7 @@ namespace bubi {
 							monitor::SystemResource *part = disk->add_partition();
 							part->set_total(item.total_bytes_);
 							part->set_available(item.available_bytes_);
-							part->set_usedpercent(item.usage_percent_);
+							part->set_used_percent(item.usage_percent_);
 							part->set_description(item.describe_);
 							total_bytes += item.total_bytes_;
 							break;
@@ -120,7 +120,7 @@ namespace bubi {
 			}
 		}
 
-		system_status->mutable_cpu()->set_usedpercent(cpu_used_percent_);
+		system_status->mutable_cpu()->set_used_percent(cpu_used_percent_);
 
 		return true;
 	}
