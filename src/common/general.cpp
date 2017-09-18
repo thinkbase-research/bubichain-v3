@@ -35,7 +35,6 @@ namespace bubi {
 	const char *General::MONITOR_CONFIG_FILE = "config/monitor.json";
 	const char *General::CA_CONFIG_FILE = "config/ca.json";
 	const char *General::LOGGER_FILE = "log/bubi.log";
-	const char *General::STATISTICS = "statistics";
 
 #else
 	const char *General::DEFAULT_KEYVALUE_DB_PATH = "data/keyvalue.db";
@@ -59,6 +58,7 @@ namespace bubi {
 	volatile long General::trans_low_new_count = 0;
 	volatile long General::trans_low_delete_count = 0;
 
+	const char *General::STATISTICS = "statistics";
 	const char *General::KEY_LEDGER_SEQ = "max_seq";
 	const char *General::KEY_GENE_ACCOUNT = "genesis_account";
 	const char *General::VALIDATORS = "validators";
